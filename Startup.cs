@@ -30,7 +30,7 @@ namespace Hostelapp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<AppDbContext>(options => {
-                options.UseInMemoryDatabase("supermarket-api-in-memory");
+                options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
 
             services.AddScoped<ICategoryService, CategoryService>();
