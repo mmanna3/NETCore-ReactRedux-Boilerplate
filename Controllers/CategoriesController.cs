@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Hostelapp.Controllers.Resources;
 using Hostelapp.Domain.Models;
 using Hostelapp.Domain.Services;
 using Hostelapp.Extensions;
-using Hostelapp.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hostelapp.Controllers

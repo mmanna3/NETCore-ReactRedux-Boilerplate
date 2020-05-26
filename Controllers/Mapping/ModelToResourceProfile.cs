@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using Hostelapp.Controllers.Resources;
 using Hostelapp.Domain.Models;
 using Hostelapp.Extensions;
-using Hostelapp.Resources;
 
-namespace Hostelapp.Mapping
+namespace Hostelapp.Controllers.Mapping
 {
     public class ModelToResourceProfile : Profile
     {

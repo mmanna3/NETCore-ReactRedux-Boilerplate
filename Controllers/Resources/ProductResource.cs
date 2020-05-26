@@ -1,4 +1,4 @@
-﻿namespace Hostelapp.Resources
+﻿namespace Hostelapp.Controllers.Resources
 {
     public class ProductResource
     {
