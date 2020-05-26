@@ -33,6 +33,13 @@ namespace Hostelapp
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
 
+            AddScopedForDependencyInjection(services);
+
+            services.AddAutoMapper(typeof(Startup));
+        }
+
+        private static void AddScopedForDependencyInjection(IServiceCollection services)
+        {
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
 
@@ -40,8 +47,6 @@ namespace Hostelapp
             services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
