@@ -22,10 +22,5 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
 
 </Project>
