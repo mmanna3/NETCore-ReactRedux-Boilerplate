@@ -14,8 +14,6 @@ environment:
     secure: qbUfDe0ngl5+/7mkQxs8ByxZ6QB93c59/494w4lEpOai3cgh5bDAiRBRYeOt7hQQ7JkG1kD6wV2IigmoKDvZHD4lsSg4IrSwWOWLSPJCyCI=
   deploy_website_test:
     secure: L4aPGohGkV1xWMMxniWVZryvAIvbB4zCKIDM5WvUh9k=
-install:
-  - ps: nuget restore Liga\LigaSoft.sln
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
