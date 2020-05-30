@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Hostelapp.Tests
+namespace Api.Tests
 {
     public class Tests
     {
