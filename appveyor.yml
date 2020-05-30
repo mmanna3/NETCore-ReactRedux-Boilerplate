@@ -21,7 +21,11 @@ build:
   project: ./Backend/Api.sln
   publish_wap: true
   parallel: true
-  verbosity: minimal      
+  verbosity: minimal
+after_build:
+  - cmd: dotnet publish Backend\Api --output %appveyor_build_folder%\dist
+  artifacts:
+  - path: dist      
 deploy:
   - provider: WebDeploy
     remove_files: true
