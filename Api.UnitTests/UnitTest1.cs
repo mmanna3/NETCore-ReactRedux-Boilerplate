@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Api.Tests
+namespace Api.UnitTests
 {
     public class Tests
     {
