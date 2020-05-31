@@ -23,7 +23,7 @@ build:
   parallel: true
   verbosity: minimal
 after_build:
-  - cmd: dotnet publish --framework netcoreapp3.1 --self-contained true Backend\Api --output %appveyor_build_folder%\dist
+  - cmd: dotnet publish --framework netcoreapp3.1 --runtime portable --self-contained true Backend\Api --output %appveyor_build_folder%\dist
 artifacts:
   - path: dist      
 deploy:
