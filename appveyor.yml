@@ -8,12 +8,22 @@ environment:
     secure: ZumRpgIeGcRgW3H7yXK0bQ==
   deploy_password:
     secure: SFAvHfsz398LTl83QbS5gw==
-  DefaultConnection-Web.config Connection String: 
-    secure: XCd88qxQ5JDVfoGcLQeYQWrGCU6u6B3IXhiH9F16yEkP5FfTLoWEup0h3mer2aJEMQ3v3eNLGNoG1bGa6EE+gF5ivVxkL4ekjni2H+qCAsOJVQasYy1mhFIqoW7nMtp3FJFhhv8SLhi9Z7xF2updx+Qrmy3d57ZRIi3LQ6p2DmI=
-  deploy_server_test:
+  deploy_server:
     secure: qbUfDe0ngl5+/7mkQxs8ByxZ6QB93c59/494w4lEpOai3cgh5bDAiRBRYeOt7hQQ7JkG1kD6wV2IigmoKDvZHD4lsSg4IrSwWOWLSPJCyCI=
-  deploy_website_test:
+  deploy_website:
     secure: L4aPGohGkV1xWMMxniWVZryvAIvbB4zCKIDM5WvUh9k=
+  db_server:
+    secure: K3tw1JJQqsF0zSckjLdOJg==
+  db_name:
+    secure: brW8T5uSR6U3FKhXPrQJ3w==
+  db_username:
+    secure: fViNusck/3ewKyAw1iVOVQ==
+  db_password:
+    secure: 4y9U8rtIudL2GAfDA3JfbQ==
+install:
+  - ps: >-
+      $file = "$($env:appveyor_build_folder)\Backend\Api\appsettings.Production.json"
+      (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password) | Set-Content $file      
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
@@ -23,15 +33,15 @@ build:
   parallel: true
   verbosity: minimal
 after_build:
-  - cmd: dotnet publish --framework netcoreapp3.1 --runtime win10-x64 --self-contained true Backend\Api --output %appveyor_build_folder%\dist
+  - cmd: dotnet publish --framework netcoreapp3.1 --self-contained true --runtine win-x64 Backend\Api --output %appveyor_build_folder%\dist
 artifacts:
-  - path: dist      
+  - path: dist
 deploy:
   - provider: WebDeploy
     remove_files: true
     skip_dirs: \\App_Data;\\Imagenes;\\logs;\\aspnet_client;
-    server: $(deploy_server_test)
-    website: $(deploy_website_test)
+    server: $(deploy_server)
+    website: $(deploy_website)
     username: $(deploy_username)
     password: $(deploy_password)
     ntlm: false
