@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from './todosSlice'
+import styles from './AddTodo.module.css';
 
 const mapDispatch = { addTodo }
 
@@ -10,9 +11,9 @@ const AddTodo = ({ addTodo }) => {
   const onChange = e => {
     console.log('asdasd');
     fetch('api/categories')
-    .then(response => response.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+      .then(response => response.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
 
     setTodoText(e.target.value);
   }
@@ -30,7 +31,7 @@ const AddTodo = ({ addTodo }) => {
         }}
       >
         <input value={todoText} onChange={onChange} />
-        <button type="submit">Add Todo</button>
+        <button className={styles.button} type="submit">Add Todo</button>
       </form>
     </div>
   )
