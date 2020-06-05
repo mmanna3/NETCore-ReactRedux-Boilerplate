@@ -27,6 +27,11 @@ install:
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
+  - cd Frontend
+  - npm install
+  - npm run build
+  - ps: >-
+      Copy-Item -Path "./Frontend/build" -Destination "./Backend/Api/ClientApp/build" -Recurse
 build:
   project: ./Backend/Api.sln
   publish_wap: true
