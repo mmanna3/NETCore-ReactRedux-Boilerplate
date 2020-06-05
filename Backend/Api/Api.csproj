@@ -22,11 +22,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <Target Name="ContentsBeforeBuild" AfterTargets="BeforeBuild">
-    <ItemGroup>
-      <Content Include="ClientApp\build\**" />
-    </ItemGroup>
-  </Target>
+  <ItemGroup> 
+    <Content Include="ClientApp\build\**"> 
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
+    </Content> 
+</ItemGroup>
 
 </Project>
