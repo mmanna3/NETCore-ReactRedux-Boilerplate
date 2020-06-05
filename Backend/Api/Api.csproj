@@ -23,14 +23,10 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup> 
-    <Content Include="ClientApp\build\**"> 
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
-    </Content> 
-  </ItemGroup>
-  <Target Name="CreateClientAppBuildFolder" AfterTargets="AfterPublish">
-    <MakeDir Directories="$(PublishDir)ClientApp/build" Condition="!Exists('$(PublishDir)ClientApp/build')" /> 
+  <Target Name="ContentsBeforeBuild" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <Content Include="ClientApp\build\**" />
+    </ItemGroup>
   </Target>
-
 
 </Project>
