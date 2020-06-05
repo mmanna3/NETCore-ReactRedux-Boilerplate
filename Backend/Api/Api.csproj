@@ -23,5 +23,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <Target Name="CreateClientAppBuildFolder" AfterTargets="AfterPublish">
+    <MakeDir Directories="$(PublishDir)ClientApp/build" Condition="!Exists('$(PublishDir)ClientApp/build')" /> 
+  </Target>
+
 
 </Project>
