@@ -30,10 +30,10 @@ before_build:
   - cd Frontend
   - npm install
   - npm run build
-  - ls build
-  - cd ..
+  - cd ..  
   - ps: >-
       Copy-Item -Path "./Frontend/build" -Destination "./Backend/Api/ClientApp/build" -Recurse
+  - ls ./Backend/Api/ClientApp/build
 build:
   project: ./Backend/Api.sln
   publish_wap: true
