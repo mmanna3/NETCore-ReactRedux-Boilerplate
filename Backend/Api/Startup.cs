@@ -31,7 +31,7 @@ namespace Api
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "dist";
+                configuration.RootPath = "ClientApp/build";
             });
 
             services.AddDbContext<AppDbContext>(options => {
@@ -60,6 +60,14 @@ namespace Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                app.UseCors(builder =>
+                    builder
+                        .WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                );
             }
 
             app.UseHttpsRedirection();
@@ -79,7 +87,7 @@ namespace Api
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "dist";
+                spa.Options.SourcePath = "ClientApp/build";
             });
         }
     }

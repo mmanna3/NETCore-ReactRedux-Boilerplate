@@ -7,7 +7,15 @@ const mapDispatch = { addTodo }
 const AddTodo = ({ addTodo }) => {
   const [todoText, setTodoText] = useState('')
 
-  const onChange = e => setTodoText(e.target.value)
+  const onChange = e => {
+    console.log('asdasd');
+    fetch('api/categories')
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+
+    setTodoText(e.target.value);
+  }
 
   return (
     <div>

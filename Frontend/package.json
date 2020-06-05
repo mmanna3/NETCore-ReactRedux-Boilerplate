@@ -2,6 +2,7 @@
   "name": "rtk-convert-todos-example",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
     "react": "^16.9.0",
