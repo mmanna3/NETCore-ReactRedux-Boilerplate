@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Api.Controllers.Resources;
+using Api.Controllers.Resources.Usuario;
 using Api.Domain.Models;
 
 namespace Api.Controllers.Mapping
@@ -9,6 +10,7 @@ namespace Api.Controllers.Mapping
         public ResourceToModelProfile()
         {
             CreateMap<SaveCategoryResource, Category>();
+            CreateMap<RegistroResource, Usuario>();
         }
     }
 }

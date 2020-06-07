@@ -51,6 +51,9 @@ namespace Api
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
