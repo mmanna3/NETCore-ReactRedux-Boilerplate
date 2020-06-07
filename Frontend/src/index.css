@@ -67,13 +67,6 @@ section h1 {
   font-size: 1.5rem;
 }
 
-.comment {
-  background: #f0f0f0;
-  border-radius: 4px;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0;
-}
-
 .button {
   display: inline-block;
   background: #ea3546;
