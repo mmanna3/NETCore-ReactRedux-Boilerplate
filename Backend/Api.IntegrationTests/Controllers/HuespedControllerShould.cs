@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
-namespace Api.IntegrationTests
+namespace Api.IntegrationTests.Controllers
 {
     public class HuespedControllerShould
     {
