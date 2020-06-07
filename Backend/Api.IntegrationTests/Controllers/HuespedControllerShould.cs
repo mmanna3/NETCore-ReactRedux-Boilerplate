@@ -13,32 +13,8 @@ using NUnit.Framework;
 
 namespace Api.IntegrationTests.Controllers
 {
-    public class HuespedControllerShould
+    public class HuespedControllerShould : BaseControllerTest
     {
-        private TestServer _server;
-        private HttpClient _httpClient;
-        
-        [SetUp]
-        public void Setup()
-        {
-            var projectDir = Directory.GetCurrentDirectory();
-            var configPath = Path.Combine(projectDir, "appsettings.json");
-            var webHostBuilder = WebHost.CreateDefaultBuilder().UseStartup<Startup>().ConfigureAppConfiguration((context, conf) =>
-            {
-                conf.AddJsonFile(configPath);
-            });
-
-            _server = new TestServer(webHostBuilder);
-
-            using (var scope = _server.Services.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<AppDbContext>())
-            {
-                context.Database.EnsureCreated();
-            }
-
-            _httpClient = _server.CreateClient();
-        }
-
         [Test]
         public async Task ReturnAll()
         {
