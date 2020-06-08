@@ -35,5 +35,15 @@ namespace Api.IntegrationTests
 
             _httpClient = _server.CreateClient();
         }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            using (var scope = _server.Services.CreateScope())
+            using (var context = scope.ServiceProvider.GetService<AppDbContext>())
+            {
+                context.Database.EnsureDeleted();
+            }
+        }
     }
 }
