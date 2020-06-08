@@ -21,53 +21,41 @@ namespace Api.Services
             _unitOfWork = unitOfWork;
         }
 
-        //public Usuario Autenticar(string username, string password)
-        //{
-        //    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-        //        return null;
+        public async Task<UsuarioResponse> Autenticar(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return null;
 
-        //    var user = _context.Users.SingleOrDefault(x => x.Username == username);
+            var usuario = await _usuarioRepository.FindByUsernameAsync(username);
 
-        //    // check if username exists
-        //    if (user == null)
-        //        return null;
+            if (usuario == null)
+                return new UsuarioResponse("Usuario inexistente");
 
-        //    // check if password is correct
-        //    if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-        //        return null;
+            if (!VerifyPasswordHash(password, usuario.PasswordHash, usuario.PasswordSalt))
+                return new UsuarioResponse("Clave incorrecta");
 
-        //    // authentication successful
-        //    return user;
-        //}
+            return new UsuarioResponse(usuario);
+        }
 
         public async Task<UsuarioResponse> AddAsync(Usuario usuario, string password)
         {
-            // validation
             if (string.IsNullOrWhiteSpace(password))
-                throw new AppException("Password is required");
+                throw new AppException("El password es requerido");
 
             var usuarioConElMismoUsername = await _usuarioRepository.FindByUsernameAsync(usuario.Username);
 
             if (usuarioConElMismoUsername != null)
-                throw new AppException($@"Username '{usuario.Username}' is already taken");
+                throw new AppException($@"Ya existe un usuario '{usuario.Username}'");
 
             CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
             usuario.PasswordHash = passwordHash;
             usuario.PasswordSalt = passwordSalt;
 
-            try
-            {
-                await _usuarioRepository.AddAsync(usuario);
-                await _unitOfWork.CompleteAsync();
+            await _usuarioRepository.AddAsync(usuario);
+            await _unitOfWork.CompleteAsync();
 
-                return new UsuarioResponse(usuario);
-            }
-            catch (Exception ex)
-            {
-                // Do some logging stuff
-                return new UsuarioResponse($"An error occurred when saving the category: {ex.Message}");
-            }
+            return new UsuarioResponse(usuario);
         }
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

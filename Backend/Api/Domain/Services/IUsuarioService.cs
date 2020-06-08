@@ -6,7 +6,7 @@ namespace Api.Domain.Services
 {
     public interface IUsuarioService
     {
-        //Usuario Autenticar(string username, string password);
+        Task<UsuarioResponse> Autenticar(string username, string password);
         Task<UsuarioResponse> AddAsync(Usuario usuario, string password);
     }
 }

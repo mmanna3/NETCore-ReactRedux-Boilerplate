@@ -37,6 +37,9 @@ namespace Api
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
+            
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
 
             AddScopedForDependencyInjection(services);
 
