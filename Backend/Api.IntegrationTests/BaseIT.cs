@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
-namespace Api.IntegrationTests.Controllers
+namespace Api.IntegrationTests
 {
-    public class BaseControllerTest
+    public class BaseIT
     {
         protected TestServer _server;
         protected HttpClient _httpClient;

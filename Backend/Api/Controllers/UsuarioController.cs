@@ -16,7 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     [ApiController]
     public class UsuarioController : BaseController
     {
