@@ -1,9 +1,5 @@
 using AutoMapper;
-using Api.Domain.Repositories;
-using Api.Domain.Services;
 using Api.Persistence.Contexts;
-using Api.Persistence.Repositories;
-using Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +12,7 @@ namespace Api
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,7 +20,6 @@ namespace Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -41,26 +37,11 @@ namespace Api
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
-            AddScopedForDependencyInjection(services);
+            DependencyInjector.AddScopedForDependencyInjection(services);
 
             services.AddAutoMapper(typeof(Startup));
         }
 
-        private static void AddScopedForDependencyInjection(IServiceCollection services)
-        {
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-
-            services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

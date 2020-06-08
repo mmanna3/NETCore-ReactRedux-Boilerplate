@@ -1,9 +1,5 @@
 using Api.Controllers;
-using Api.Domain.Repositories;
-using Api.Domain.Services;
 using Api.Persistence.Contexts;
-using Api.Persistence.Repositories;
-using Api.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,23 +27,9 @@ namespace Api.IntegrationTests
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
 
-            AddScopedForDependencyInjection(services);
+            DependencyInjector.AddScopedForDependencyInjection(services);
 
             services.AddAutoMapper(typeof(Startup));
-        }
-
-        private static void AddScopedForDependencyInjection(IServiceCollection services)
-        {
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-
-            services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

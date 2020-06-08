@@ -18,7 +18,7 @@ namespace Api.IntegrationTests
             {
                 nombre = "Jackson",
                 apellido = "Watmore",
-                username = "jackson",
+                username = "jackson2",
                 password = "my-super-secret-password"
             };
 
