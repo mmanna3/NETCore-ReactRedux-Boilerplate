@@ -19,7 +19,7 @@ namespace Api.IntegrationTests
         [Test]
         public async Task RegistraUnUsuarioLuegoAutenticaYLuegoAccedeConSuToken()
         {
-            var registroResponse = await RegistraUnUsuario();
+            await RegistraUnUsuario();
 
             var autenticacionResponse = await AutenticarUsuarioRegistrado();
 
@@ -29,7 +29,7 @@ namespace Api.IntegrationTests
             await AccederConTokenACualquierMetodoAutenticado(token);
         }
 
-        private async Task<HttpResponseMessage> RegistraUnUsuario()
+        private async Task RegistraUnUsuario()
         {
             var body = new
             {
@@ -45,8 +45,6 @@ namespace Api.IntegrationTests
             var response = await _httpClient.PostAsync("/api/usuario/registrar", stringContent);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-            return response;
         }
 
         private async Task<HttpResponseMessage> AutenticarUsuarioRegistrado()

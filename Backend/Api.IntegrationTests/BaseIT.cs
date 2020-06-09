@@ -45,7 +45,13 @@ namespace Api.IntegrationTests
             using (var scope = _server.Services.CreateScope())
             await using (var context = scope.ServiceProvider.GetService<AppDbContext>())
             {
-                var checkpoint = new Checkpoint();
+                var checkpoint = new Checkpoint
+                {
+                    TablesToIgnore = new[]
+                    {
+                        "__EFMigrationsHistory",
+                    }
+                };
                 await checkpoint.Reset(context.Database.GetDbConnection().ConnectionString);
             }
 

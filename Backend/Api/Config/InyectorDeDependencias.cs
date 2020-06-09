@@ -4,11 +4,11 @@ using Api.Persistence.Repositories;
 using Api.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Api
+namespace Api.Config
 {
-    public class DependencyInjector
+    public class InyectorDeDependencias
     {
-        public static void AddScopedForDependencyInjection(IServiceCollection services)
+        public static void Inyectar(IServiceCollection services)
         {
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();

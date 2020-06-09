@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Api.Config;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Microsoft.Extensions.Options;
