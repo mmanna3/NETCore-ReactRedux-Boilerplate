@@ -1,12 +1,15 @@
 using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Api.Persistence.Contexts;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using Respawn;
 
 namespace Api.IntegrationTests
 {
@@ -30,20 +33,23 @@ namespace Api.IntegrationTests
             using (var scope = _server.Services.CreateScope())
             using (var context = scope.ServiceProvider.GetService<AppDbContext>())
             {
-                context.Database.EnsureCreated();
+                context.Database.Migrate();
             }
 
             _httpClient = _server.CreateClient();
         }
 
         [OneTimeTearDown]
-        public void TearDown()
+        public async Task TearDown()
         {
             using (var scope = _server.Services.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<AppDbContext>())
+            await using (var context = scope.ServiceProvider.GetService<AppDbContext>())
             {
-                context.Database.EnsureDeleted();
+                var checkpoint = new Checkpoint();
+                await checkpoint.Reset(context.Database.GetDbConnection().ConnectionString);
             }
+
+
         }
     }
 }
