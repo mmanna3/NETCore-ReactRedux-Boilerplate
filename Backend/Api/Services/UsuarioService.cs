@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using Api.Config;
 using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Repositories;
 using Api.Domain.Services;
 using Api.Services.Communication;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Services
 {
@@ -14,9 +20,11 @@ namespace Api.Services
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly AppSettings _appSettings;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IUnitOfWork unitOfWork)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IUnitOfWork unitOfWork, IOptions<AppSettings> appSettings)
         {
+            _appSettings = appSettings.Value;
             _usuarioRepository = usuarioRepository;
             _unitOfWork = unitOfWork;
         }
@@ -35,6 +43,24 @@ namespace Api.Services
                 return new UsuarioResponse("Clave incorrecta");
 
             return new UsuarioResponse(usuario);
+        }
+
+        public string ObtenerToken(int usuarioId)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, usuarioId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            
+            return tokenHandler.WriteToken(token);
         }
 
         public async Task<UsuarioResponse> AddAsync(Usuario usuario, string password)

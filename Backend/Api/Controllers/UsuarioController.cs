@@ -23,13 +23,11 @@ namespace Api.Controllers
     {
         private readonly IUsuarioService _userService;
         private readonly IMapper _mapper;
-        private readonly AppSettings _appSettings;
 
-        public UsuarioController(IUsuarioService userService, IMapper mapper, IOptions<AppSettings> appSettings)
+        public UsuarioController(IUsuarioService userService, IMapper mapper)
         {
             _userService = userService;
             _mapper = mapper;
-            _appSettings = appSettings.Value;
         }
 
         [AllowAnonymous]
@@ -41,19 +39,7 @@ namespace Api.Controllers
             if (usuarioResponse == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, usuarioResponse.Usuario.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var token = _userService.ObtenerToken(usuarioResponse.Usuario.Id);
 
             return Ok(new
             {
@@ -61,7 +47,7 @@ namespace Api.Controllers
                 Username = usuarioResponse.Usuario.Username,
                 FirstName = usuarioResponse.Usuario.Nombre,
                 LastName = usuarioResponse.Usuario.Apellido,
-                Token = tokenString
+                Token = token
             });
         }
 
