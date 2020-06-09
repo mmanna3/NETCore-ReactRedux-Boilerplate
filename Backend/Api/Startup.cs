@@ -37,7 +37,7 @@ namespace Api
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
-            
+
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
@@ -86,8 +86,10 @@ namespace Api
             services.AddAutoMapper(typeof(Startup));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext dataContext)
         {
+            dataContext.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
