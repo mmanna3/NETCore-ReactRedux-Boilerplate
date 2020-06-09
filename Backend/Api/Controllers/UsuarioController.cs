@@ -16,8 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Controllers
 {
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     [ApiController]
     public class UsuarioController : BaseController
     {
@@ -82,13 +81,12 @@ namespace Api.Controllers
             return Ok(usuarioResource);
         }
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var users = _userService.GetAll();
-        //    var model = _mapper.Map<IList<UserModel>>(users);
-        //    return Ok(model);
-        //}
+        [HttpGet]
+        [HttpGet("okbro")]
+        public IActionResult GetAll()
+        {
+            return Ok("OK bro");
+        }
 
         //[HttpGet("{id}")]
         //public IActionResult GetById(int id)

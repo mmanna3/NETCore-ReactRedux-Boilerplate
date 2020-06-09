@@ -58,6 +58,12 @@ namespace Api.Services
             return new UsuarioResponse(usuario);
         }
 
+        public async Task<UsuarioResponse> GetById(int id)
+        {
+            var usuario = await _usuarioRepository.GetById(id);
+            return new UsuarioResponse(usuario);
+        }
+
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             if (password == null) throw new ArgumentNullException("password");

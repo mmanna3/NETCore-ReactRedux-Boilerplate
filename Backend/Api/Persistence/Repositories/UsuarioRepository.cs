@@ -21,5 +21,10 @@ namespace Api.Persistence.Repositories
         {
             return await _context.Usuarios.SingleOrDefaultAsync(x => x.Username == username);
         }
+
+        public async Task<Usuario> GetById(int id)
+        {
+            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

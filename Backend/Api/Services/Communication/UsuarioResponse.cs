@@ -11,6 +11,7 @@ namespace Api.Services.Communication
             Usuario = usuario;
         }
 
+        //Si el usuario es nulo debería poner success en false
         public UsuarioResponse(Usuario usuario) : this(true, string.Empty, usuario)
         { }
 

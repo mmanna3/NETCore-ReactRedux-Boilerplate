@@ -8,5 +8,6 @@ namespace Api.Domain.Services
     {
         Task<UsuarioResponse> Autenticar(string username, string password);
         Task<UsuarioResponse> AddAsync(Usuario usuario, string password);
+        Task<UsuarioResponse> GetById(int id);
     }
 }
