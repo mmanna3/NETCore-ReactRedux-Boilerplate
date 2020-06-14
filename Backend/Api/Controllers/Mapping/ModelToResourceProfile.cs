@@ -12,7 +12,7 @@ namespace Api.Controllers.Mapping
         {
             CreateMap<Category, CategoryResource>();
 
-            CreateMap<Usuario, RegistroResource>();
+            CreateMap<Usuario, RegistrarUsuarioDTO>();
 
             CreateMap<Product, ProductResource>()
                 .ForMember(src => src.UnitOfMeasurement,

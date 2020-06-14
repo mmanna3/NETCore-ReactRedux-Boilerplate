@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Controllers.Resources.Usuario
 {
-    public class RegistroResource
+    public class RegistrarUsuarioDTO
     {
         [Required]
         public string Nombre { get; set; }

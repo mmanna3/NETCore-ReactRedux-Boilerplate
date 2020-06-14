@@ -44,7 +44,7 @@ namespace Api.UnitTests.Services
 
             var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
 
-            usuarioRegistroResponse.Success.Should().Be(true);
+            usuarioRegistroResponse.Should().NotBe(null);
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Api.UnitTests.Services
         {
             DadoUnUsuario();
             var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
-            _mockRepo.Setup(repo => repo.FindByUsernameAsync(USERNAME)).ReturnsAsync(usuarioRegistroResponse.Usuario);
+            _mockRepo.Setup(repo => repo.FindByUsernameAsync(USERNAME)).ReturnsAsync(_unUsuario);
         }
     }
 }

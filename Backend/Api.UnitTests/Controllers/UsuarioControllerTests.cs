@@ -4,7 +4,6 @@ using Api.Controllers.Resources.Usuario;
 using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Services;
-using Api.Services.Communication;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,7 @@ namespace Api.UnitTests.Controllers
         private IMapper _mapper;
 
         private Usuario _unUsuario;
-        private RegistroResource _unRegistroResource;
+        private RegistrarUsuarioDTO _unRegistrarUsuarioDto;
 
         [SetUp]
         public void Inicializar()
@@ -46,10 +45,10 @@ namespace Api.UnitTests.Controllers
             DadoUnUsuario();
             DadoQueElServicioDevuelveUnUsuario();
 
-            var resultado = await _controller.Registrar(_unRegistroResource);
+            var resultado = await _controller.Registrar(_unRegistrarUsuarioDto);
 
             var okObjectResult = resultado.Should().BeOfType<OkObjectResult>().Subject;
-            okObjectResult.Value.Should().BeAssignableTo<RegistroResource>();
+            okObjectResult.Value.Should().BeAssignableTo<RegistrarUsuarioDTO>();
         }
 
         [Test]
@@ -59,7 +58,7 @@ namespace Api.UnitTests.Controllers
             DadoUnUsuario();
             DadoQueElServicioDevuelveUnaExcepcion();
 
-            var resultado = await _controller.Registrar(_unRegistroResource);
+            var resultado = await _controller.Registrar(_unRegistrarUsuarioDto);
 
             resultado.Should().BeOfType<BadRequestObjectResult>();
         }
@@ -71,13 +70,12 @@ namespace Api.UnitTests.Controllers
 
         private void DadoQueElServicioDevuelveUnUsuario()
         {
-            _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>()))
-                .ReturnsAsync(new UsuarioResponse(_unUsuario));
+            _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>())).ReturnsAsync(_unUsuario);
         }
 
         private void DadoUnRegistroResource()
         {
-            _unRegistroResource = new RegistroResource
+            _unRegistrarUsuarioDto = new RegistrarUsuarioDTO
             {
                 Nombre = "Jackson",
                 Apellido = "Watmore",

@@ -61,7 +61,7 @@ namespace Api.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<UsuarioResponse> AddAsync(Usuario usuario, string password)
+        public async Task<Usuario> AddAsync(Usuario usuario, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("El password es requerido");
@@ -79,7 +79,7 @@ namespace Api.Services
             await _usuarioRepository.AddAsync(usuario);
             await _unitOfWork.CompleteAsync();
 
-            return new UsuarioResponse(usuario);
+            return usuario;
         }
 
         public async Task<UsuarioResponse> GetById(int id)

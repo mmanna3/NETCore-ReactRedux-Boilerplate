@@ -10,7 +10,7 @@ namespace Api.Controllers.Mapping
         public ResourceToModelProfile()
         {
             CreateMap<SaveCategoryResource, Category>();
-            CreateMap<RegistroResource, Usuario>();
+            CreateMap<RegistrarUsuarioDTO, Usuario>();
         }
     }
 }

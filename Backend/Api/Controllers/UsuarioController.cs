@@ -48,17 +48,17 @@ namespace Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("registrar")]
-        public async Task<IActionResult> Registrar([FromBody] RegistroResource resource)
+        public async Task<IActionResult> Registrar([FromBody] RegistrarUsuarioDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             try
             {
-                var usuario = _mapper.Map<RegistroResource, Usuario>(resource);
-                var result = await _userService.AddAsync(usuario, resource.Password);
-                var usuarioResource = _mapper.Map<Usuario, RegistroResource>(result.Usuario);
-                return Ok(usuarioResource);
+                var usuario = _mapper.Map<RegistrarUsuarioDTO, Usuario>(dto);
+                var result = await _userService.AddAsync(usuario, dto.Password);
+                var usuarioDTO = _mapper.Map<Usuario, RegistrarUsuarioDTO>(result);
+                return Ok(usuarioDTO);
             }
             catch (AppException e)
             {
