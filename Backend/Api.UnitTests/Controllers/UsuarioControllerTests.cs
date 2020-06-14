@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Api.Controllers;
 using Api.Controllers.Resources.Usuario;
+using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Services.Communication;
@@ -49,6 +50,23 @@ namespace Api.UnitTests.Controllers
 
             var okObjectResult = resultado.Should().BeOfType<OkObjectResult>().Subject;
             okObjectResult.Value.Should().BeAssignableTo<RegistroResource>();
+        }
+
+        [Test]
+        public async Task Registra_BadRequest_PorqueServicioArrojaExcepcion()
+        {
+            DadoUnRegistroResource();
+            DadoUnUsuario();
+            DadoQueElServicioDevuelveUnaExcepcion();
+
+            var resultado = await _controller.Registrar(_unRegistroResource);
+
+            resultado.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+        private void DadoQueElServicioDevuelveUnaExcepcion()
+        {
+            _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>())).Throws<AppException>();
         }
 
         private void DadoQueElServicioDevuelveUnUsuario()

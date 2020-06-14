@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Api.Controllers.Resources.Usuario;
+using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Extensions;
@@ -51,14 +53,17 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var usuario = _mapper.Map<RegistroResource, Usuario>(resource);
-            var result = await _userService.AddAsync(usuario, resource.Password);
-
-            if (!result.Success)
-                return BadRequest(result.Message);
-
-            var usuarioResource = _mapper.Map<Usuario, RegistroResource>(result.Usuario);
-            return Ok(usuarioResource);
+            try
+            {
+                var usuario = _mapper.Map<RegistroResource, Usuario>(resource);
+                var result = await _userService.AddAsync(usuario, resource.Password);
+                var usuarioResource = _mapper.Map<Usuario, RegistroResource>(result.Usuario);
+                return Ok(usuarioResource);
+            }
+            catch (AppException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("okbro")]
