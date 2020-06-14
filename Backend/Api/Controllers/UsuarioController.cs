@@ -68,7 +68,6 @@ namespace Api.Controllers
             return Ok(usuarioResource);
         }
 
-        [HttpGet]
         [HttpGet("okbro")]
         public IActionResult GetAll()
         {

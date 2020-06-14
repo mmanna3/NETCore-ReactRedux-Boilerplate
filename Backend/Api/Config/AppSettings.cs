@@ -2,6 +2,6 @@ namespace Api.Config
 {
     public class AppSettings
     {
-        public string Secret { get; set; }
+        public virtual string Secret { get; set; }  //Virtual para poder mockearlo
     }
 }

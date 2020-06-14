@@ -1,16 +1,11 @@
-using System.Net;
 using System.Threading.Tasks;
-using Api.Controllers;
-using Api.Controllers.Resources.Usuario;
+using Api.Config;
 using Api.Domain.Models;
 using Api.Domain.Repositories;
-using Api.Domain.Services;
-using Api.Persistence.Contexts;
-using Api.Persistence.Repositories;
+using Api.Domain;
 using Api.Services;
-using Api.Services.Communication;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 
@@ -18,29 +13,71 @@ namespace Api.UnitTests
 {
     public class UsuarioServiceTests
     {
-        [Test]
-        public async Task DeberiaAutenticarConExito()
+        private const string USERNAME = "Elliot";
+        private const string PASSWORD = "Alderson";
+
+        private UsuarioService _service;
+        private Usuario _unUsuario;
+        
+        private Mock<IUsuarioRepository> _mockRepo;
+        private Mock<IUnitOfWork> _mockUnitOfWork;
+        private Mock<IOptions<AppSettings>> _mockAppSettingsOption;
+
+        [SetUp]
+        public void Inicializar()
         {
-            const string username = "pedro";
-            const string password = "picapiedra";
+            _mockRepo = new Mock<IUsuarioRepository>();
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
+            _mockAppSettingsOption = new Mock<IOptions<AppSettings>>();
 
-            var usuario = new Usuario
-            {
-                Username = username
-            };
+            var mockAppSettings = new Mock<AppSettings>();
+            mockAppSettings.SetupGet(x => x.Secret).Returns("this is my custom Secret key for authentication");
+            _mockAppSettingsOption.Setup(mock => mock.Value).Returns(mockAppSettings.Object);
 
-            var mockRepo = new Mock<IUsuarioRepository>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var service = new UsuarioService(mockRepo.Object, mockUnitOfWork.Object);
+            _service = new UsuarioService(_mockRepo.Object, _mockUnitOfWork.Object, _mockAppSettingsOption.Object);
+        }
+        
+        [Test]
+        public async Task Registra_Ok()
+        {
+            DadoUnUsuario();
 
-            var usuarioRegistroResponse = await service.AddAsync(usuario, password);
-            mockRepo.Setup(repo => repo.FindByUsernameAsync(username)).ReturnsAsync(usuarioRegistroResponse.Usuario);
+            var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
 
+            usuarioRegistroResponse.Success.Should().Be(true);
+        }
 
-            var result = await service.Autenticar(username, password);
+        [Test]
+        public async Task Registra_ConErrorPorqueUsuarioYaExiste()
+        {
+            await DadoUnUsuarioRegistrado();
+
+            Assert.That(() => _service.AddAsync(_unUsuario, PASSWORD), Throws.Exception.TypeOf<AppException>());
+        }
+
+        [Test]
+        public async Task AutenticaLuegoDeRegistrar_Ok()
+        {
+            await DadoUnUsuarioRegistrado();
+
+            var result = await _service.Autenticar(USERNAME, PASSWORD);
 
             result.Success.Should().Be(true);
-            mockRepo.Verify();
+        }
+
+        private void DadoUnUsuario()
+        {
+            _unUsuario = new Usuario
+            {
+                Username = USERNAME
+            };
+        }
+
+        private async Task DadoUnUsuarioRegistrado()
+        {
+            DadoUnUsuario();
+            var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
+            _mockRepo.Setup(repo => repo.FindByUsernameAsync(USERNAME)).ReturnsAsync(usuarioRegistroResponse.Usuario);
         }
     }
 }
