@@ -48,11 +48,19 @@ namespace Api.UnitTests
         }
 
         [Test]
-        public async Task Registra_ConErrorPorqueUsuarioYaExiste()
+        public async Task Registra_YDaError_PorqueUsuarioYaExiste()
         {
             await DadoUnUsuarioRegistrado();
 
             Assert.That(() => _service.AddAsync(_unUsuario, PASSWORD), Throws.Exception.TypeOf<AppException>());
+        }
+
+        [Test]
+        public async Task Registra_YDaError_PorquePasswordEstaVacio()
+        {
+            await DadoUnUsuarioRegistrado();
+
+            Assert.That(() => _service.AddAsync(_unUsuario, ""), Throws.Exception.TypeOf<AppException>());
         }
 
         [Test]
