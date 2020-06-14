@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 
-namespace Api.UnitTests
+namespace Api.UnitTests.Controllers
 {
     public class UsuarioControllerTests
     {

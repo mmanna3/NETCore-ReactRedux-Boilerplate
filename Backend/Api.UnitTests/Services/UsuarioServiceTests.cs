@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 using Api.Config;
+using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Repositories;
-using Api.Domain;
 using Api.Services;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 
-namespace Api.UnitTests
+namespace Api.UnitTests.Services
 {
     public class UsuarioServiceTests
     {

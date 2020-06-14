@@ -1,6 +1,6 @@
 ﻿using Api.Controllers.Mapping;
 
-namespace Api.UnitTests
+namespace Api.UnitTests.Controllers
 {
     public class ResourceToModelTestProfile : ResourceToModelProfile
     {

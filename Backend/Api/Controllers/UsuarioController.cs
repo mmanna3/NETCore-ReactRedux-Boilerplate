@@ -1,18 +1,11 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Api.Config;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Microsoft.Extensions.Options;
 using Api.Controllers.Resources.Usuario;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Extensions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
 
 
 namespace Api.Controllers
