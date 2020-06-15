@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Api.Controllers.Resources.Usuario
+namespace Api.Controllers.DTOs.Usuario
 {
     public class AutenticarDTO
     {

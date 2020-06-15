@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Api.Controllers;
-using Api.Controllers.Resources.Usuario;
+using Api.Controllers.DTOs.Usuario;
 using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Services;

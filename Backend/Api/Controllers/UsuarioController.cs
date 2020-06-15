@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Api.Controllers.DTOs.Usuario;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Api.Controllers.Resources.Usuario;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Extensions;

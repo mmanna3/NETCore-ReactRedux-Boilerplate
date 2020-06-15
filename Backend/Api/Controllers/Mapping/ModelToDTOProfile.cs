@@ -1,6 +1,6 @@
-﻿using AutoMapper;
+﻿using Api.Controllers.DTOs.Usuario;
+using AutoMapper;
 using Api.Controllers.Resources;
-using Api.Controllers.Resources.Usuario;
 using Api.Domain.Models;
 using Api.Extensions;
 
