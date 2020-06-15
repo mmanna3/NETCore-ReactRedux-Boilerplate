@@ -1,4 +1,4 @@
-namespace Api.Config
+namespace Api.Core
 {
     public class AppSettings
     {

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Api.Core;
 using Api.Core.Repositories;
 using Api.Core.Services;
 using Api.Persistence.Repositories;

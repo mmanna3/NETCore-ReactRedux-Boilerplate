@@ -1,7 +1,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Api.Persistence.Contexts;
+using Api.Persistence.Config;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;

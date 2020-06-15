@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.Controllers.Otros;
 using AutoMapper;
 using Api.Controllers.Resources;
 using Api.Core.Models;
 using Api.Core.Services;
-using Api.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers

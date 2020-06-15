@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Core.Repositories;
-using Api.Persistence.Contexts;
+using Api.Persistence.Config;
 
 namespace Api.Persistence.Repositories
 {

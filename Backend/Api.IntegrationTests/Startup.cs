@@ -1,7 +1,6 @@
-using System.Text;
 using Api.Config;
 using Api.Controllers;
-using Api.Persistence.Contexts;
+using Api.Persistence.Config;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

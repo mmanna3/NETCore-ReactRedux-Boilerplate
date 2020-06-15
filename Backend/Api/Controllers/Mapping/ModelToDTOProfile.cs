@@ -1,8 +1,8 @@
 ﻿using Api.Controllers.DTOs.Usuario;
+using Api.Controllers.Otros;
 using AutoMapper;
 using Api.Controllers.Resources;
 using Api.Core.Models;
-using Api.Extensions;
 
 namespace Api.Controllers.Mapping
 {

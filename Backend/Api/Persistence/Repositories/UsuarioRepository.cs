@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
-using Api.Persistence.Contexts;
+using Api.Persistence.Config;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Persistence.Repositories

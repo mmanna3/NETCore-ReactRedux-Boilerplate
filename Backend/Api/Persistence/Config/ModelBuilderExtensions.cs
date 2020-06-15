@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Api.Extensions
+namespace Api.Persistence.Config
 {
     public static class ModelBuilderExtensions
     {

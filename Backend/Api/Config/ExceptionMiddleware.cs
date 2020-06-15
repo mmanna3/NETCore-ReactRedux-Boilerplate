@@ -4,7 +4,7 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Api.Core.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json;
 
 namespace Api.Config
 {
@@ -42,6 +42,17 @@ namespace Api.Config
                 StatusCode = context.Response.StatusCode,
                 Mensaje = "Error interno"
             }.ToString());
+        }
+    }
+
+    public class Error
+    {
+        public int StatusCode { get; set; }
+        public string Mensaje { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

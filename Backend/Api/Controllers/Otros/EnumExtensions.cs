@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Api.Extensions
+namespace Api.Controllers.Otros
 {
     public static class EnumExtensions
     {
