@@ -31,26 +31,13 @@ namespace Api
 
             services.AddDbContext<AppDbContext>(options => { options.UseSqlServer(Configuration["ConnectionStrings:Default"]); });
 
-            ConfigurarAppSettingsComoObjetoTipado(services);
+            services.ConfigurarAppSettingsComoObjetoTipado(Configuration);
 
-            var secret = ObtenerSecret();
-            ConfiguradorDeAutentitacionJWT.Configurar(services, secret);
+            services.ConfigurarAutenticacionJWT(Configuration);
 
-            InyectorDeDependencias.Inyectar(services);
+            services.ConfigurarInyeccionDeDependecias();
 
             services.AddAutoMapper(typeof(Startup));
-        }
-
-        private byte[] ObtenerSecret()
-        {
-            var appSettings = Configuration.GetSection("AppSettings").Get<AppSettings>();
-            return Encoding.ASCII.GetBytes(appSettings.Secret);
-        }
-
-        private void ConfigurarAppSettingsComoObjetoTipado(IServiceCollection services)
-        {
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext dbContext)
@@ -72,7 +59,7 @@ namespace Api
                 );
             }
 
-            app.ConfigureCustomExceptionMiddleware();
+            app.ConfigurarExceptionMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
