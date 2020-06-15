@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Api.Domain.Models
+namespace Api.Core.Models
 {
     public enum EUnitOfMeasurement : byte
     {

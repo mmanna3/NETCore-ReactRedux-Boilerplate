@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Api.Domain.Models
+namespace Api.Core.Models
 {
     public class Product
     {

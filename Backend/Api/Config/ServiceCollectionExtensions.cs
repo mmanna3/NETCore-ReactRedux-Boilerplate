@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using Api.Domain.Repositories;
-using Api.Domain.Services;
+using Api.Core.Repositories;
+using Api.Core.Services;
 using Api.Persistence.Repositories;
 using Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Api.Controllers;
 using Api.Controllers.DTOs.Usuario;
-using Api.Domain;
-using Api.Domain.Models;
-using Api.Domain.Services;
+using Api.Core;
+using Api.Core.Models;
+using Api.Core.Services;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;

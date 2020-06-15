@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Domain.Repositories;
+using Api.Core.Repositories;
 using Api.Persistence.Contexts;
 
 namespace Api.Persistence.Repositories

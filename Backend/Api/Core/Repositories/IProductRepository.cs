@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Api.Domain.Models;
+using Api.Core.Models;
 
-namespace Api.Domain.Services
+namespace Api.Core.Repositories
 {
-    public interface IProductService
+    public interface IProductRepository
     {
         Task<IEnumerable<Product>> ListAsync();
     }

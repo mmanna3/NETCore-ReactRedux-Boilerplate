@@ -1,7 +1,7 @@
 ﻿using Api.Controllers.DTOs.Usuario;
 using AutoMapper;
 using Api.Controllers.Resources;
-using Api.Domain.Models;
+using Api.Core.Models;
 using Api.Extensions;
 
 namespace Api.Controllers.Mapping

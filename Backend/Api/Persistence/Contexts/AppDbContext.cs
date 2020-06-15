@@ -1,4 +1,4 @@
-﻿using Api.Domain.Models;
+﻿using Api.Core.Models;
 using Api.Extensions;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Api.Domain.Models;
+using Api.Core.Models;
 using Api.Services.Communication;
 
-namespace Api.Domain.Repositories
+namespace Api.Core.Repositories
 {
     public interface IUsuarioRepository
     {

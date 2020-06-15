@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Domain.Models;
+using Api.Core.Models;
 
 namespace Api.Services.Communication
 {

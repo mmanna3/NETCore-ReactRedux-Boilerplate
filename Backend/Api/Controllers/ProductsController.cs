@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Api.Controllers.Resources;
-using Api.Domain.Models;
-using Api.Domain.Services;
+using Api.Core.Models;
+using Api.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers

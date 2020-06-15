@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Api.Domain.Models;
-using Api.Domain.Repositories;
-using Api.Domain.Services;
+using Api.Core.Models;
+using Api.Core.Repositories;
+using Api.Core.Services;
 
 namespace Api.Services
 {

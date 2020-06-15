@@ -1,4 +1,4 @@
-﻿using Api.Domain.Services;
+﻿using Api.Core.Services;
 using NLog;
 
 namespace Api.Services

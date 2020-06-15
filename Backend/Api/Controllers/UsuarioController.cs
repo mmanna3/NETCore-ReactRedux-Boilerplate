@@ -2,8 +2,8 @@
 using Api.Controllers.DTOs.Usuario;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Api.Domain.Models;
-using Api.Domain.Services;
+using Api.Core.Models;
+using Api.Core.Services;
 using Api.Extensions;
 using Microsoft.AspNetCore.Authorization;
 

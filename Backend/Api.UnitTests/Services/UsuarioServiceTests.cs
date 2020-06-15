@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Api.Config;
-using Api.Domain;
-using Api.Domain.Models;
-using Api.Domain.Repositories;
+using Api.Core;
+using Api.Core.Models;
+using Api.Core.Repositories;
 using Api.Services;
 using FluentAssertions;
 using Microsoft.Extensions.Options;

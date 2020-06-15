@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using Api.Domain.Services;
+using Api.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
