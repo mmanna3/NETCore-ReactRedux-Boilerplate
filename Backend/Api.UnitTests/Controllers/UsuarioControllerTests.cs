@@ -51,23 +51,6 @@ namespace Api.UnitTests.Controllers
             okObjectResult.Value.Should().BeAssignableTo<RegistrarUsuarioDTO>();
         }
 
-        [Test]
-        public async Task Registra_BadRequest_PorqueServicioArrojaExcepcion()
-        {
-            DadoUnRegistroResource();
-            DadoUnUsuario();
-            DadoQueElServicioDevuelveUnaExcepcion();
-
-            var resultado = await _controller.Registrar(_unRegistrarUsuarioDto);
-
-            resultado.Should().BeOfType<BadRequestObjectResult>();
-        }
-
-        private void DadoQueElServicioDevuelveUnaExcepcion()
-        {
-            _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>())).Throws<AppException>();
-        }
-
         private void DadoQueElServicioDevuelveUnUsuario()
         {
             _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>())).ReturnsAsync(_unUsuario);

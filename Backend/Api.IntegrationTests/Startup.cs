@@ -51,6 +51,8 @@ namespace Api.IntegrationTests
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext dbContext)
         {
             dbContext.Database.Migrate();
+            
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseRouting();
 

@@ -19,7 +19,7 @@ namespace Api.IntegrationTests
         protected HttpClient _httpClient;
         
         [OneTimeSetUp]
-        public void Setup()
+        public void OneTimeSetup()
         {
             var projectDir = Directory.GetCurrentDirectory();
             var configPath = Path.Combine(projectDir, "appsettings.json");
@@ -39,8 +39,19 @@ namespace Api.IntegrationTests
             _httpClient = _server.CreateClient();
         }
 
+        [SetUp]
+        public async Task Setup()
+        {
+            await ResetearBaseDeDatos();
+        }
+
         [OneTimeTearDown]
         public async Task TearDown()
+        {
+            await ResetearBaseDeDatos();
+        }
+
+        private async Task ResetearBaseDeDatos()
         {
             using (var scope = _server.Services.CreateScope())
             await using (var context = scope.ServiceProvider.GetService<AppDbContext>())
@@ -54,8 +65,6 @@ namespace Api.IntegrationTests
                 };
                 await checkpoint.Reset(context.Database.GetDbConnection().ConnectionString);
             }
-
-
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public async Task Registra_YDaError_PorqueUsuarioYaExiste()
+        public async Task Registra_YDaError_DadoQueUsuarioYaExiste()
         {
             await DadoUnUsuarioRegistrado();
 
@@ -56,7 +56,7 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public async Task Registra_YDaError_PorquePasswordEstaVacio()
+        public async Task Registra_YDaError_DadoUnPasswordVacio()
         {
             await DadoUnUsuarioRegistrado();
 
@@ -64,7 +64,7 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public async Task AutenticaLuegoDeRegistrar_Ok()
+        public async Task Autentica_Ok_DadoQueEstaRegistrado()
         {
             await DadoUnUsuarioRegistrado();
 

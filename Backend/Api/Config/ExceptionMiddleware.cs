@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Api.Domain.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Api.Config
 {
@@ -32,13 +34,13 @@ namespace Api.Config
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            context.Response.ContentType = "application/json";
+            context.Response.ContentType = MediaTypeNames.Application.Json;
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             return context.Response.WriteAsync(new Error()
             {
                 StatusCode = context.Response.StatusCode,
-                Mensaje = "Error interno."
+                Mensaje = "Error interno"
             }.ToString());
         }
     }
