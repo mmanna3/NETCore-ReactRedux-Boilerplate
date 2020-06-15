@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
-using Api.Core.Services;
-using Api.Services.Communication;
+using Api.Core.Services.Communication;
+using Api.Core.Services.Interfaces;
 
-namespace Api.Services
+namespace Api.Core.Services
 {
     public class CategoryService : ICategoryService
     {

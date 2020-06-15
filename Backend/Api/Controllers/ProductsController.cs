@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Api.Controllers.Resources;
 using Api.Core.Models;
-using Api.Core.Services;
+using Api.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers

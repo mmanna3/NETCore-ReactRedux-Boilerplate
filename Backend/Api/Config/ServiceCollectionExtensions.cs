@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Api.Core;
 using Api.Core.Repositories;
-using Api.Core.Services;
+using Api.Core.Services.Interfaces;
 using Api.Persistence.Repositories;
-using Api.Services;
+using Api.Core.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

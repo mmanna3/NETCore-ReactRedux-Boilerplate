@@ -3,7 +3,7 @@ using Api.Config;
 using Api.Core;
 using Api.Core.Models;
 using Api.Core.Repositories;
-using Api.Services;
+using Api.Core.Services;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Moq;

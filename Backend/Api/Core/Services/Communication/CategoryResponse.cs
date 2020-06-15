@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.Core.Models;
 
-namespace Api.Services.Communication
+namespace Api.Core.Services.Communication
 {
     public class CategoryResponse : BaseResponse
     {

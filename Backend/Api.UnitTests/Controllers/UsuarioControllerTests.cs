@@ -3,7 +3,7 @@ using Api.Controllers;
 using Api.Controllers.DTOs.Usuario;
 using Api.Core;
 using Api.Core.Models;
-using Api.Core.Services;
+using Api.Core.Services.Interfaces;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;

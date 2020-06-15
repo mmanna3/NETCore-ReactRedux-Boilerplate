@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using Api.Core.Services;
+using Api.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 

@@ -7,12 +7,12 @@ using Api.Config;
 using Api.Core;
 using Api.Core.Models;
 using Api.Core.Repositories;
-using Api.Core.Services;
-using Api.Services.Communication;
+using Api.Core.Services.Interfaces;
+using Api.Core.Services.Communication;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Api.Services
+namespace Api.Core.Services
 {
     public class UsuarioService : IUsuarioService
     {

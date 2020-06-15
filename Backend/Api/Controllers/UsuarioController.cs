@@ -4,7 +4,7 @@ using Api.Controllers.Otros;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Api.Core.Models;
-using Api.Core.Services;
+using Api.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 
 

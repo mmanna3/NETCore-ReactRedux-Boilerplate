@@ -1,4 +1,4 @@
-﻿namespace Api.Core.Services
+﻿namespace Api.Core.Services.Interfaces
 {
     public interface ILoggerService
     {

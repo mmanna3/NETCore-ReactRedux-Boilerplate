@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Api.Core.Models;
 
-namespace Api.Core.Services
+namespace Api.Core.Services.Interfaces
 {
     public interface IProductService
     {

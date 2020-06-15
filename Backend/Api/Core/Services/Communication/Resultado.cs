@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Services.Communication
+namespace Api.Core.Services.Communication
 {
     public class Resultado<T>
     {

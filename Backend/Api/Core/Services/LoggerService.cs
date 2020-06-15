@@ -1,7 +1,7 @@
-﻿using Api.Core.Services;
+﻿using Api.Core.Services.Interfaces;
 using NLog;
 
-namespace Api.Services
+namespace Api.Core.Services
 {
     public class LoggerService : ILoggerService
     {

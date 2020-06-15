@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
-using Api.Core.Services;
+using Api.Core.Services.Interfaces;
 
-namespace Api.Services
+namespace Api.Core.Services
 {
     public class ProductService : IProductService
     {

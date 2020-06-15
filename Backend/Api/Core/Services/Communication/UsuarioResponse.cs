@@ -1,6 +1,6 @@
 ﻿using Api.Core.Models;
 
-namespace Api.Services.Communication
+namespace Api.Core.Services.Communication
 {
     public class UsuarioResponse : BaseResponse
     {
