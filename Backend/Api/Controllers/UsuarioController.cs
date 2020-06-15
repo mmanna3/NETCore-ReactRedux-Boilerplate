@@ -53,17 +53,10 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            try
-            {
-                var usuario = _mapper.Map<RegistrarUsuarioDTO, Usuario>(dto);
-                var result = await _userService.AddAsync(usuario, dto.Password);
-                var usuarioDTO = _mapper.Map<Usuario, RegistrarUsuarioDTO>(result);
-                return Ok(usuarioDTO);
-            }
-            catch (AppException e)
-            {
-                return BadRequest(e.Message);
-            }
+            var usuario = _mapper.Map<RegistrarUsuarioDTO, Usuario>(dto);
+            var result = await _userService.AddAsync(usuario, dto.Password);
+            var usuarioDTO = _mapper.Map<Usuario, RegistrarUsuarioDTO>(result);
+            return Ok(usuarioDTO);
         }
 
         [HttpGet("okbro")]
