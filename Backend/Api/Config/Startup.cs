@@ -1,7 +1,4 @@
-using System;
 using System.IO;
-using System.Text;
-using Api.Config;
 using Api.Persistence.Config;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 
-namespace Api
+namespace Api.Config
 {
     public class Startup
     {

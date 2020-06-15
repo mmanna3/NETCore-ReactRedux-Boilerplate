@@ -5,14 +5,20 @@ using Api.Core.Services.Interfaces;
 using Api.Persistence.Repositories;
 using Api.Core.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Config
 {
-    public static class ServiceCollectionExtensions
+    public static class StartupExtensionMethods
     {
+        public static void ConfigurarExceptionMiddleware(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<ExceptionMiddleware>();
+        }
+
         public static void ConfigurarAutenticacionJWT(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(x =>
