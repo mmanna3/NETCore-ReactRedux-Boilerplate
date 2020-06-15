@@ -70,7 +70,7 @@ namespace Api.UnitTests.Services
 
             var result = await _service.Autenticar(USERNAME, PASSWORD);
 
-            result.Success.Should().Be(true);
+            result.Should().BeOfType<Usuario>();
         }
 
         private void DadoUnUsuario()

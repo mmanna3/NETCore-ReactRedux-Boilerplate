@@ -6,13 +6,13 @@ using Api.Extensions;
 
 namespace Api.Controllers.Mapping
 {
-    public class ModelToResourceProfile : Profile
+    public class ModelToDTOProfile : Profile
     {
-        public ModelToResourceProfile()
+        public ModelToDTOProfile()
         {
             CreateMap<Category, CategoryResource>();
 
-            CreateMap<Usuario, RegistrarUsuarioDTO>();
+            CreateMap<Usuario, RegistrarDTO>();
 
             CreateMap<Product, ProductResource>()
                 .ForMember(src => src.UnitOfMeasurement,

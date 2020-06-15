@@ -27,20 +27,20 @@ namespace Api.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UsuarioResponse> Autenticar(string username, string password)
+        public async Task<Usuario> Autenticar(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-                return null;
+                throw new AppException("El password es requerido");
 
             var usuario = await _usuarioRepository.FindByUsernameAsync(username);
 
             if (usuario == null)
-                return new UsuarioResponse("Usuario inexistente");
+                throw new AppException("Usuario inexistente");
 
             if (!VerifyPasswordHash(password, usuario.PasswordHash, usuario.PasswordSalt))
-                return new UsuarioResponse("Clave incorrecta");
+                throw new AppException("Clave incorrecta");
 
-            return new UsuarioResponse(usuario);
+            return usuario;
         }
 
         public string ObtenerToken(int usuarioId)
@@ -82,10 +82,10 @@ namespace Api.Services
             return usuario;
         }
 
-        public async Task<UsuarioResponse> GetById(int id)
+        public async Task<Usuario> GetById(int id)
         {
             var usuario = await _usuarioRepository.GetById(id);
-            return new UsuarioResponse(usuario);
+            return usuario;
         }
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

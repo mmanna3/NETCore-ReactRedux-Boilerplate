@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Api.Controllers.Resources.Usuario;
-using Api.Domain;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Extensions;
@@ -27,35 +25,32 @@ namespace Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("autenticar")]
-        public async Task<IActionResult> Autenticar([FromBody] AutenticarResource model)
+        public async Task<IActionResult> Autenticar([FromBody] AutenticarDTO model)
         {
-            var usuarioResponse = await _userService.Autenticar(model.Username, model.Password);
+            var usuario = await _userService.Autenticar(model.Username, model.Password);
 
-            if (usuarioResponse == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-
-            var token = _userService.ObtenerToken(usuarioResponse.Usuario.Id);
+            var token = _userService.ObtenerToken(usuario.Id);
 
             return Ok(new
             {
-                Id = usuarioResponse.Usuario.Id,
-                Username = usuarioResponse.Usuario.Username,
-                FirstName = usuarioResponse.Usuario.Nombre,
-                LastName = usuarioResponse.Usuario.Apellido,
+                Id = usuario.Id,
+                Username = usuario.Username,
+                FirstName = usuario.Nombre,
+                LastName = usuario.Apellido,
                 Token = token
             });
         }
 
         [AllowAnonymous]
         [HttpPost("registrar")]
-        public async Task<IActionResult> Registrar([FromBody] RegistrarUsuarioDTO dto)
+        public async Task<IActionResult> Registrar([FromBody] RegistrarDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var usuario = _mapper.Map<RegistrarUsuarioDTO, Usuario>(dto);
+            var usuario = _mapper.Map<RegistrarDTO, Usuario>(dto);
             var result = await _userService.AddAsync(usuario, dto.Password);
-            var usuarioDTO = _mapper.Map<Usuario, RegistrarUsuarioDTO>(result);
+            var usuarioDTO = _mapper.Map<Usuario, RegistrarDTO>(result);
             return Ok(usuarioDTO);
         }
 

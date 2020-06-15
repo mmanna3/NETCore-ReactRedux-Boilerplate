@@ -2,11 +2,11 @@
 
 namespace Api.UnitTests.Controllers
 {
-    public class ResourceToModelTestProfile : ResourceToModelProfile
+    public class DtoToModelTestProfile : DTOToModelProfile
     {
     }
 
-    public class ModelToResourceTestProfile : ModelToResourceProfile
+    public class ModelToDtoTestProfile : ModelToDTOProfile
     {
     }
 }

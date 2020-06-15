@@ -22,15 +22,15 @@ namespace Api.UnitTests.Controllers
         private IMapper _mapper;
 
         private Usuario _unUsuario;
-        private RegistrarUsuarioDTO _unRegistrarUsuarioDto;
+        private RegistrarDTO _unRegistrarDto;
 
         [SetUp]
         public void Inicializar()
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new ResourceToModelTestProfile());
-                cfg.AddProfile(new ModelToResourceTestProfile());
+                cfg.AddProfile(new DtoToModelTestProfile());
+                cfg.AddProfile(new ModelToDtoTestProfile());
             });
             
             _mapper = new Mapper(configuration);
@@ -45,10 +45,10 @@ namespace Api.UnitTests.Controllers
             DadoUnUsuario();
             DadoQueElServicioDevuelveUnUsuario();
 
-            var resultado = await _controller.Registrar(_unRegistrarUsuarioDto);
+            var resultado = await _controller.Registrar(_unRegistrarDto);
 
             var okObjectResult = resultado.Should().BeOfType<OkObjectResult>().Subject;
-            okObjectResult.Value.Should().BeAssignableTo<RegistrarUsuarioDTO>();
+            okObjectResult.Value.Should().BeAssignableTo<RegistrarDTO>();
         }
 
         private void DadoQueElServicioDevuelveUnUsuario()
@@ -58,7 +58,7 @@ namespace Api.UnitTests.Controllers
 
         private void DadoUnRegistroResource()
         {
-            _unRegistrarUsuarioDto = new RegistrarUsuarioDTO
+            _unRegistrarDto = new RegistrarDTO
             {
                 Nombre = "Jackson",
                 Apellido = "Watmore",

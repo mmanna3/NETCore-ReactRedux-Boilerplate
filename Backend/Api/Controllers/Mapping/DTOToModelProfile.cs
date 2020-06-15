@@ -5,12 +5,12 @@ using Api.Domain.Models;
 
 namespace Api.Controllers.Mapping
 {
-    public class ResourceToModelProfile : Profile
+    public class DTOToModelProfile : Profile
     {
-        public ResourceToModelProfile()
+        public DTOToModelProfile()
         {
             CreateMap<SaveCategoryResource, Category>();
-            CreateMap<RegistrarUsuarioDTO, Usuario>();
+            CreateMap<RegistrarDTO, Usuario>();
         }
     }
 }

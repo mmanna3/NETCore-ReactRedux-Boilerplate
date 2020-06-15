@@ -22,8 +22,8 @@ namespace Api.Config
                         {
                             var userService = context.HttpContext.RequestServices.GetRequiredService<IUsuarioService>();
                             var userId = int.Parse(context.Principal.Identity.Name);
-                            var usuarioResponse = await userService.GetById(userId);
-                            if (!usuarioResponse.Success)
+                            var usuario = await userService.GetById(userId);
+                            if (usuario == null)
                             {
                                 context.Fail("Usuario no autorizado");
                             }
