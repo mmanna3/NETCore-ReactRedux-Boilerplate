@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Api.Domain.Services;
 using Microsoft.AspNetCore.Http;
 
 namespace Api.Config
@@ -10,12 +9,11 @@ namespace Api.Config
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        //private readonly ILoggerManager _logger;
+        private readonly ILoggerService _logger;
 
-        //public ExceptionMiddleware(RequestDelegate next, ILoggerManager logger)
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILoggerService logger)
         {
-            //_logger = logger;
+            _logger = logger;
             _next = next;
         }
 
@@ -27,7 +25,7 @@ namespace Api.Config
             }
             catch (Exception ex)
             {
-                //_logger.LogError($"Something went wrong: {ex}");
+                _logger.Error($"Algo salió mal, amigo: {ex}");
                 await HandleExceptionAsync(httpContext, ex);
             }
         }

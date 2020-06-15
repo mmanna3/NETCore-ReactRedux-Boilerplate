@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Text;
 using Api.Config;
 using AutoMapper;
@@ -8,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
 
 namespace Api
 {
@@ -52,6 +55,8 @@ namespace Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext dbContext)
         {
+            LogManager.LoadConfiguration($"{Directory.GetCurrentDirectory()}/nlog.config");
+
             dbContext.Database.Migrate();
 
             if (env.IsDevelopment())

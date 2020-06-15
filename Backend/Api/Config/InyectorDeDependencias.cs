@@ -20,6 +20,7 @@ namespace Api.Config
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<ILoggerService, LoggerService>();
         }
     }
 }
