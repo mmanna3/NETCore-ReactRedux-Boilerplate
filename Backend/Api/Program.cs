@@ -1,3 +1,4 @@
+using Api.Config;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
