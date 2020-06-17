@@ -76,6 +76,9 @@ namespace Api.Config
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
+            services.AddScoped<IHabitacionService, HabitacionService>();
+            services.AddScoped<IHabitacionRepository, HabitacionRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<ILoggerService, LoggerService>();
         }
