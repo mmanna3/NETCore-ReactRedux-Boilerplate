@@ -8,8 +8,7 @@ namespace Api.Core.Repositories
     {
         Task<IEnumerable<Habitacion>> ListarAsync();
         void Crear(Habitacion habitacion);
-
-        //Task<Habitacion> BuscarPorIdAsync(int id);
-        //void Actualizar(Habitacion habitacion);
+        Task<Habitacion> BuscarPorIdAsync(int id);
+        void Modificar(Habitacion original, Habitacion actual);
     }
 }

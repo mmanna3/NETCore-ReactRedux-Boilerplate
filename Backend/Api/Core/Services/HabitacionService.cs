@@ -29,16 +29,17 @@ namespace Api.Core.Services
             return habitacion.Id;
         }
 
-        //public async Task ModificarAsync(int id, Habitacion habitacion) //Y si recibe DTO y mapea?
-        //{
-        //    var habitacionAModificar = await _habitacionRepository.BuscarPorIdAsync(id);
+        public async Task ModificarAsync(int id, Habitacion habitacion)
+        {
+            var habitacionAModificar = await _habitacionRepository.BuscarPorIdAsync(id);
 
-        //    if (habitacionAModificar == null)
-        //        throw new AppException($"No se encontró la habitación de id:{id}");
+            if (habitacionAModificar == null)
+                throw new AppException($"No se encontró la habitación de id:{id}");
 
-        //    //Debería haber un mapeo acá
-
-        //    _habitacionRepository.Actualizar(habitacion);
-        //}
+            habitacion.Id = habitacionAModificar.Id;
+            _habitacionRepository.Modificar(habitacionAModificar, habitacion);
+            
+            await _unitOfWork.CompleteAsync();
+        }
     }
 }

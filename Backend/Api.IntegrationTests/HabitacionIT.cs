@@ -2,12 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 using Api.Controllers.DTOs;
 using FluentAssertions;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Api.IntegrationTests
@@ -28,6 +25,32 @@ namespace Api.IntegrationTests
 
             habitaciones.Count().Should().Be(1);
             habitaciones.ToList().First().CamasMatrimoniales.Should().Be(CAMAS_MATRIMONIALES);
+        }
+
+        [Test]
+        public async Task ModificaHabitacionCorrectamente()
+        {
+            var response = await CrearUnaHabitacion();
+            var id = await response.Content.ReadAsAsync<int>();
+
+            var body = new HabitacionDTO
+            {
+                Nombre = "Roja",
+                CamasIndividuales = 1,
+                CamasMatrimoniales = CAMAS_MATRIMONIALES,
+                CamasMarineras = 3,
+            };
+
+            var responseModificar = await _httpClient.PutAsJsonAsync($"/api/habitacion/{id}", body);
+            responseModificar.StatusCode.Should().Be(HttpStatusCode.OK);
+
+
+            var consultarHabitacionesResponse = await ListarHabitaciones();
+            consultarHabitacionesResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
+
+            habitaciones.Count().Should().Be(1);
+            habitaciones.ToList().First().Nombre.Should().Be("Roja");
         }
 
         private async Task<HttpResponseMessage> CrearUnaHabitacion()

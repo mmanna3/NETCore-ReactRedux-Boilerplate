@@ -3,14 +3,12 @@ using System.Threading.Tasks;
 using Api.Controllers.DTOs;
 using Api.Controllers.Otros;
 using AutoMapper;
-using Api.Controllers.Resources;
 using Api.Core.Models;
 using Api.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [ApiController]
     public class HabitacionController : ApiAutenticadoController
     {
         private readonly IHabitacionService _habitacionService;
@@ -43,20 +41,16 @@ namespace Api.Controllers
             return Ok(id);
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCategoryResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Modificar(int id, [FromBody] HabitacionDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
 
-        //    var category = _mapper.Map<SaveCategoryResource, Category>(resource);
-        //    var result = await _categoryService.UpdateAsync(id, category);
+            var habitacion = _mapper.Map<Habitacion>(dto);
+            await _habitacionService.ModificarAsync(id, habitacion);
 
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
-
-        //    var categoryResource = _mapper.Map<Category, CategoryResource>(result.Category);
-        //    return Ok(categoryResource);
-        //}
+            return Ok();
+        }
     }
 }

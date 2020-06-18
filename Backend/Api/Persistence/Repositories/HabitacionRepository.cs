@@ -23,14 +23,14 @@ namespace Api.Persistence.Repositories
             _context.Habitaciones.Add(habitacion);
         }
 
-        //public async Task<Habitacion> BuscarPorIdAsync(int id)
-        //{
-        //    return await _context.Habitaciones.FindAsync(id);
-        //}
+        public async Task<Habitacion> BuscarPorIdAsync(int id)
+        {
+            return await _context.Habitaciones.FindAsync(id);
+        }
 
-        //public void Actualizar(Habitacion habitacion)
-        //{
-        //    _context.Habitaciones.Update(habitacion);
-        //}
+        public void Modificar(Habitacion original, Habitacion actual)
+        {
+            _context.Entry(original).CurrentValues.SetValues(actual);
+        }
     }
 }
