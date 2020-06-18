@@ -16,8 +16,6 @@ namespace Api.IntegrationTests
     {
         private const byte CAMAS_MATRIMONIALES = 2;
 
-        //CreaHabitacionAutenticado
-
         [Test]
         public async Task CreaHabitacionCorrectamente()
         {
@@ -27,7 +25,7 @@ namespace Api.IntegrationTests
             var consultarHabitacionesResponse = await ListarHabitaciones();
             consultarHabitacionesResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
-            
+
             habitaciones.Count().Should().Be(1);
             habitaciones.ToList().First().CamasMatrimoniales.Should().Be(CAMAS_MATRIMONIALES);
         }
@@ -42,11 +40,7 @@ namespace Api.IntegrationTests
                 CamasMarineras = 3,
             };
 
-            var json = JsonConvert.SerializeObject(body);
-            var stringContent = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
-
-            var response = await _httpClient.PostAsync("/api/habitacion/crear", stringContent);
-            return response;
+            return await _httpClient.PostAsJsonAsync("/api/habitacion/crear", body);
         }
 
         private async Task<HttpResponseMessage> ListarHabitaciones()

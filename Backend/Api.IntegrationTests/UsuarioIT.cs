@@ -18,6 +18,18 @@ namespace Api.IntegrationTests
         private const string USERNAME = "jackson2";
         private const string PASSWORD = "my-super-secret-password";
 
+        [SetUp]
+        public override async Task Setup()
+        {
+            await ResetearBaseDeDatosExcluyendoMigraciones();
+        }
+
+        protected override async Task InicializarHttpClientAutenticado()
+        {
+            _httpClient = _server.CreateClient();
+            await Task.CompletedTask;
+        }
+
         [Test]
         public async Task RegistraUnUsuario()
         {
