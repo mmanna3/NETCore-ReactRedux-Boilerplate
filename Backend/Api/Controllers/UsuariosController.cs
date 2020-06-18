@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
-    public class UsuarioController : ApiAutenticadoController
+    public class UsuariosController : ApiAutenticadoController
     {
         private readonly IUsuarioService _userService;
         private readonly IMapper _mapper;
 
-        public UsuarioController(IUsuarioService userService, IMapper mapper)
+        public UsuariosController(IUsuarioService userService, IMapper mapper)
         {
             _userService = userService;
             _mapper = mapper;

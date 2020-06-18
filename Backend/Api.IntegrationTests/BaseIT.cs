@@ -122,7 +122,7 @@ namespace Api.IntegrationTests
                 Password = PASSWORD
             };
 
-            await _httpClient.PostAsJsonAsync("/api/usuario/registrar", body);
+            await _httpClient.PostAsJsonAsync("/api/usuarios/registrar", body);
         }
 
         private async Task<HttpResponseMessage> AutenticarUnUsuario()
@@ -133,7 +133,7 @@ namespace Api.IntegrationTests
                 password = PASSWORD
             };
 
-            return await _httpClient.PostAsJsonAsync("/api/usuario/autenticar", body);
+            return await _httpClient.PostAsJsonAsync("/api/usuarios/autenticar", body);
         }
     }
 }
