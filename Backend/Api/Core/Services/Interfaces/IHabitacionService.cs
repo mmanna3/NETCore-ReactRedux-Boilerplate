@@ -8,7 +8,7 @@ namespace Api.Core.Services.Interfaces
     public interface IHabitacionService
     {
         Task<IEnumerable<Habitacion>> ListarAsync();
-        Task<int> AgregarAsync(Habitacion category);
-        Task ModificarAsync(int id, Habitacion category);
+        Task<int> CrearAsync(Habitacion category);
+        //Task ModificarAsync(int id, Habitacion category);
     }
 }

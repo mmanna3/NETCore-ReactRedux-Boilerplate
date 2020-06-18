@@ -18,19 +18,19 @@ namespace Api.Persistence.Repositories
             return await _context.Habitaciones.ToListAsync();
         }
 
-        public void Agregar(Habitacion habitacion)
+        public void Crear(Habitacion habitacion)
         {
             _context.Habitaciones.Add(habitacion);
         }
 
-        public async Task<Habitacion> BuscarPorIdAsync(int id)
-        {
-            return await _context.Habitaciones.FindAsync(id);
-        }
+        //public async Task<Habitacion> BuscarPorIdAsync(int id)
+        //{
+        //    return await _context.Habitaciones.FindAsync(id);
+        //}
 
-        public void Actualizar(Habitacion habitacion)
-        {
-            _context.Habitaciones.Update(habitacion);
-        }
+        //public void Actualizar(Habitacion habitacion)
+        //{
+        //    _context.Habitaciones.Update(habitacion);
+        //}
     }
 }

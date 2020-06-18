@@ -1,4 +1,5 @@
-﻿using Api.Controllers.DTOs.Usuario;
+﻿using Api.Controllers.DTOs;
+using Api.Controllers.DTOs.Usuario;
 using Api.Controllers.Otros;
 using AutoMapper;
 using Api.Controllers.Resources;
@@ -10,7 +11,7 @@ namespace Api.Controllers.Mapping
     {
         public ModelToDTOProfile()
         {
-            CreateMap<Category, CategoryResource>();
+            CreateMap<Habitacion, HabitacionDTO>();
 
             CreateMap<Usuario, RegistrarDTO>();
 
