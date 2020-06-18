@@ -5,6 +5,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Api.Config;
+using Api.Controllers.DTOs.Usuario;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -64,12 +65,12 @@ namespace Api.IntegrationTests
 
         private async Task<HttpResponseMessage> RegistrarUnUsuario()
         {
-            var body = new
+            var body = new RegistrarDTO
             {
-                nombre = "Jackson",
-                apellido = "Watmore",
-                username = USERNAME,
-                password = PASSWORD
+                Nombre = "Jackson",
+                Apellido = "Watmore",
+                Username = USERNAME,
+                Password = PASSWORD
             };
 
             var json = JsonConvert.SerializeObject(body);
