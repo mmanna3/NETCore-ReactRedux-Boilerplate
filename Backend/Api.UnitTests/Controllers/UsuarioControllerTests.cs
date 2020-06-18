@@ -17,7 +17,7 @@ namespace Api.UnitTests.Controllers
         private const string USERNAME = "Elliot";
         private const string PASSWORD = "Alderson";
 
-        private UsuarioController _controller;
+        private UsuariosController _controller;
         private Mock<IUsuarioService> _mockService;
         private IMapper _mapper;
 
@@ -35,7 +35,7 @@ namespace Api.UnitTests.Controllers
             
             _mapper = new Mapper(configuration);
             _mockService = new Mock<IUsuarioService>();
-            _controller = new UsuarioController(_mockService.Object, _mapper);
+            _controller = new UsuariosController(_mockService.Object, _mapper);
         }
 
         [Test]
