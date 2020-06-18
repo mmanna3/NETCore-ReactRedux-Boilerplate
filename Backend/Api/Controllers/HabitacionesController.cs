@@ -9,18 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    public class HabitacionController : ApiAutenticadoController
+    public class HabitacionesController : ApiAutenticadoController
     {
         private readonly IHabitacionService _habitacionService;
         private readonly IMapper _mapper;
 
-        public HabitacionController(IMapper mapper, IHabitacionService habitacionService)
+        public HabitacionesController(IMapper mapper, IHabitacionService habitacionService)
         {
             _mapper = mapper;
             _habitacionService = habitacionService;
         }
 
-        [HttpGet("listar")]
+        [HttpGet]
         public async Task<IEnumerable<HabitacionDTO>> Listar()
         {
             var habitaciones = await _habitacionService.ListarAsync();
@@ -29,7 +29,7 @@ namespace Api.Controllers
             return habitacionesDTO;
         }
 
-        [HttpPost("crear")]
+        [HttpPost]
         public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
         {
             if (!ModelState.IsValid)

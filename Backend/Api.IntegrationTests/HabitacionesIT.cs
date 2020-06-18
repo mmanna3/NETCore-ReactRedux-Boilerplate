@@ -9,8 +9,9 @@ using NUnit.Framework;
 
 namespace Api.IntegrationTests
 {
-    public class HabitacionIT : BaseIT
+    public class HabitacionesIT : BaseIT
     {
+        private const string ENDPOINT = "/api/habitaciones";
         private const byte CAMAS_MATRIMONIALES = 2;
 
         [Test]
@@ -41,7 +42,7 @@ namespace Api.IntegrationTests
                 CamasMarineras = 3,
             };
 
-            var responseModificar = await _httpClient.PutAsJsonAsync($"/api/habitacion/{id}", body);
+            var responseModificar = await _httpClient.PutAsJsonAsync($"{ENDPOINT}/{id}", body);
             responseModificar.StatusCode.Should().Be(HttpStatusCode.OK);
 
 
@@ -63,12 +64,12 @@ namespace Api.IntegrationTests
                 CamasMarineras = 3,
             };
 
-            return await _httpClient.PostAsJsonAsync("/api/habitacion/crear", body);
+            return await _httpClient.PostAsJsonAsync(ENDPOINT, body);
         }
 
         private async Task<HttpResponseMessage> ListarHabitaciones()
         {
-            return await _httpClient.GetAsync("/api/habitacion/listar");
+            return await _httpClient.GetAsync(ENDPOINT);
         }
     }
 }
