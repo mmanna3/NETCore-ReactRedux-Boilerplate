@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [ApiController]
-    public class HabitacionController : BaseController
+    public class HabitacionController : ApiAutenticadoController
     {
         private readonly IHabitacionService _habitacionService;
         private readonly IMapper _mapper;

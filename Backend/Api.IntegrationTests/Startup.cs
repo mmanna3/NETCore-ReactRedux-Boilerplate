@@ -21,7 +21,7 @@ namespace Api.IntegrationTests
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddApplicationPart(typeof(BaseController).Assembly);
+            services.AddControllersWithViews().AddApplicationPart(typeof(ApiAutenticadoController).Assembly);
 
             services.AddDbContext<AppDbContext>(options => { options.UseSqlServer(Configuration["ConnectionStrings:Default"]); });
 

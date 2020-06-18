@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    public class ProductsController : BaseController
+    public class ProductsController : ApiAutenticadoController
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;

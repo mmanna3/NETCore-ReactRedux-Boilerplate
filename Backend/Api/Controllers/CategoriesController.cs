@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    public class CategoriesController : BaseController
+    public class CategoriesController : ApiAutenticadoController
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;

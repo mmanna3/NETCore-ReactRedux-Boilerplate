@@ -33,7 +33,7 @@ namespace Api.IntegrationTests
             dynamic response = await autenticacionResponse.Content.ReadAsAsync<JObject>();
             string token = response.token.ToString();
 
-            await AccederConTokenACualquierMetodoAutenticado(token);
+            await AccederConTokenAUnMetodoAutenticado(token);
         }
 
         [Test]
@@ -47,6 +47,14 @@ namespace Api.IntegrationTests
             var error = await response2.Content.ReadAsAsync<Error>();
             error.Mensaje.Should().Be("Error interno");
             error.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+        }
+
+        [Test]
+        public async Task Error401_AlIngresarSinTokenAUnMetodo()
+        {
+            var response = await AccederSinTokenAUnMetodoAutenticado();
+
+            response.StatusCode.Should().Be((int)HttpStatusCode.Unauthorized);
         }
 
         private async Task DadoQueHayUnUsuarioRegistrado()
@@ -67,11 +75,19 @@ namespace Api.IntegrationTests
             var json = JsonConvert.SerializeObject(body);
             var stringContent = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
 
-            var response = await _httpClient.PostAsync("/api/usuario/registrar", stringContent);
-            return response;
+            return await _httpClient.PostAsync("/api/usuario/registrar", stringContent);
         }
 
         private async Task<HttpResponseMessage> DadoQueElUsuarioRegistradoEstaAutenticado()
+        {
+            var response = await AutenticarUnUsuario();
+
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            return response;
+        }
+
+        private async Task<HttpResponseMessage> AutenticarUnUsuario()
         {
             var body = new
             {
@@ -82,14 +98,10 @@ namespace Api.IntegrationTests
             var json = JsonConvert.SerializeObject(body);
             var stringContent = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
 
-            var response = await _httpClient.PostAsync("/api/usuario/autenticar", stringContent);
-
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-            return response;
+            return await _httpClient.PostAsync("/api/usuario/autenticar", stringContent);
         }
 
-        private async Task<HttpResponseMessage> AccederConTokenACualquierMetodoAutenticado(string token)
+        private async Task<HttpResponseMessage> AccederConTokenAUnMetodoAutenticado(string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync("/api/usuario/okbro");
@@ -97,6 +109,11 @@ namespace Api.IntegrationTests
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             return response;
+        }
+
+        private async Task<HttpResponseMessage> AccederSinTokenAUnMetodoAutenticado()
+        {
+            return await _httpClient.GetAsync("/api/usuario/okbro");
         }
     }
 }
