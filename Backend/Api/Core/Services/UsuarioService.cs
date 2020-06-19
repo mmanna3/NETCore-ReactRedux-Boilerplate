@@ -3,12 +3,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Api.Config;
-using Api.Core;
 using Api.Core.Models;
 using Api.Core.Repositories;
 using Api.Core.Services.Interfaces;
-using Api.Core.Services.Communication;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
