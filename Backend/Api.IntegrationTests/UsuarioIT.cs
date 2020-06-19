@@ -1,19 +1,16 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 using Api.Config;
 using Api.Controllers.DTOs.Usuario;
 using FluentAssertions;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Api.IntegrationTests
 {
-    public class UsuarioIT : BaseIT
+    public class UsuarioIT : BaseAutenticadoIT
     {
         private const string USERNAME = "jackson2";
         private const string PASSWORD = "my-super-secret-password";
@@ -28,6 +25,23 @@ namespace Api.IntegrationTests
         {
             _httpClient = _server.CreateClient();
             await Task.CompletedTask;
+        }
+
+        [Test]
+        public async Task Error400_PorBodyIncorrectoEnRegistro()
+        {
+            var body = new RegistrarDTO
+            {
+                Nombre = "Jackson",
+                Apellido = "Watmore",
+                Password = PASSWORD
+            };
+
+            var response = await _httpClient.PostAsJsonAsync("/api/usuarios/registrar", body);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            responseContent.Should().Contain("Username");
         }
 
         [Test]
@@ -85,10 +99,7 @@ namespace Api.IntegrationTests
                 Password = PASSWORD
             };
 
-            var json = JsonConvert.SerializeObject(body);
-            var stringContent = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
-
-            return await _httpClient.PostAsync("/api/usuarios/registrar", stringContent);
+            return await _httpClient.PostAsJsonAsync("/api/usuarios/registrar", body);
         }
 
         private async Task<HttpResponseMessage> DadoQueElUsuarioRegistradoEstaAutenticado()
@@ -108,10 +119,7 @@ namespace Api.IntegrationTests
                 password = PASSWORD
             };
 
-            var json = JsonConvert.SerializeObject(body);
-            var stringContent = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
-
-            return await _httpClient.PostAsync("/api/usuarios/autenticar", stringContent);
+            return await _httpClient.PostAsJsonAsync("/api/usuarios/autenticar", body);
         }
 
         private async Task<HttpResponseMessage> AccederConTokenAUnMetodoAutenticado(string token)

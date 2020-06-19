@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace Api.IntegrationTests
 {
-    public class HabitacionesIT : BaseIT
+    public class HabitacionesIT : BaseAutenticadoIT
     {
         private const string ENDPOINT = "/api/habitaciones";
         private const byte CAMAS_MATRIMONIALES = 2;

@@ -43,12 +43,12 @@ namespace Api.Controllers
         [HttpPost("registrar")]
         public async Task<IActionResult> Registrar([FromBody] RegistrarDTO dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
-
             var usuario = _mapper.Map<RegistrarDTO, Usuario>(dto);
+
             var result = await _userService.AddAsync(usuario, dto.Password);
+            
             var usuarioDTO = _mapper.Map<Usuario, RegistrarDTO>(result);
+
             return Ok(usuarioDTO);
         }
 

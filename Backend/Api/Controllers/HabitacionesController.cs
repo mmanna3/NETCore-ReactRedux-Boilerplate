@@ -32,9 +32,6 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
-
             var habitacion = _mapper.Map<Habitacion>(dto);
             var id = await _habitacionService.CrearAsync(habitacion);
 
@@ -44,9 +41,6 @@ namespace Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Modificar(int id, [FromBody] HabitacionDTO dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
-
             var habitacion = _mapper.Map<Habitacion>(dto);
             await _habitacionService.ModificarAsync(id, habitacion);
 

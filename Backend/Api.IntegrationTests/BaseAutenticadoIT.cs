@@ -19,7 +19,7 @@ using Respawn;
 
 namespace Api.IntegrationTests
 {
-    public class BaseIT
+    public class BaseAutenticadoIT
     {
         protected TestServer _server;
         protected HttpClient _httpClient;
