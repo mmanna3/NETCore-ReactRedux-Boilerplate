@@ -7,6 +7,8 @@ import App from './App'
 import rootReducer from './slices'
 
 import './index.css'
+import '../node_modules/bulma/bulma.sass';
+
 
 const store = configureStore({ reducer: rootReducer })
 
