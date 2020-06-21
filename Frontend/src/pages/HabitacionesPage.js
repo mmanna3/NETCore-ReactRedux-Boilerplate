@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Tabla from '../components/Tabla'
 import { fetchHabitaciones, habitacionesSelector } from '../slices/habitaciones'
-import CrearModal from './CrearModal'
+import Modal from './Modal'
 
 const HabitacionesPage = () => {
   const columnas = [
@@ -23,14 +23,21 @@ const HabitacionesPage = () => {
     },
   ]
   
-  const [mostrar, togglearVisibilidad] = useState(false);  
+  const [modalEsVisible, togglearVisibilidadModal] = useState(false);  
 
   return (
     <div className="container">
-        <CrearModal mostrar={mostrar} />      
+        <Modal 
+            cerrar={() => togglearVisibilidadModal()} 
+            esVisible={modalEsVisible}
+            titulo="Example modal title"
+          >
+            <p>sdasdsadss sdas dsa</p>
+        </Modal>
+        
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
-          <button className="button is-primary" onClick={togglearVisibilidad}>Crear</button>
+          <button className="button is-primary" onClick={togglearVisibilidadModal}>Crear</button>
         </div>        
         <Tabla getData={fetchHabitaciones} selector={habitacionesSelector} columnas={columnas}/>
     </div>
