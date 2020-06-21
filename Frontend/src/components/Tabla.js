@@ -16,7 +16,7 @@ const Tabla = ({getData, selector, columnas}) => {
   )
 
   const columns = React.useMemo(
-    () => columnas, []
+    () => columnas, [columnas]
   )
 
   const {
