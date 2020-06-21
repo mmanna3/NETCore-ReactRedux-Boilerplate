@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CrearModal = ({show}) => {
+const CrearModal = ({mostrar}) => {
   
   let isActiveClass = "";
-  if (show)
+  if (mostrar)
     isActiveClass = "is-active";
 
 

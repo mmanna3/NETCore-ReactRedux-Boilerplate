@@ -50,7 +50,7 @@ const Tabla = ({getData, selector, columnas}) => {
   if (hasErrors) return <p>Unable to display posts.</p>
 
   return (
-    <table {...getTableProps()} className="table is-striped is-hoverable is-bordered">
+    <table {...getTableProps()} className="table is-striped is-hoverable is-bordered is-fullwidth">
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>

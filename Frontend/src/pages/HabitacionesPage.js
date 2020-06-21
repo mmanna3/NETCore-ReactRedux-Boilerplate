@@ -23,15 +23,17 @@ const HabitacionesPage = () => {
     },
   ]
   
-  const [show, toggleVisibility] = useState(false);  
+  const [mostrar, togglearVisibilidad] = useState(false);  
 
   return (
-    <section>
-      <CrearModal show={show} />
-      <h1>Habitaciones</h1>
-      <button className="button is-primary" onClick={toggleVisibility}>Crear</button>
-      <Tabla getData={fetchHabitaciones} selector={habitacionesSelector} columnas={columnas}/>
-    </section>
+    <div className="container">
+        <CrearModal mostrar={mostrar} />      
+        <h1 className="title is-1">Habitaciones</h1>
+        <div className="buttons is-fullwidth is-pulled-right">
+          <button className="button is-primary" onClick={togglearVisibilidad}>Crear</button>
+        </div>        
+        <Tabla getData={fetchHabitaciones} selector={habitacionesSelector} columnas={columnas}/>
+    </div>
   )
 }
 
