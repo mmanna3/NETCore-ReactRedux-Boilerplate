@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const initialState = {
   loading: false,
   hasErrors: false,
-  habitaciones: [],
+  datos: [],
 }
 
 const habitacionesSlice = createSlice({
@@ -14,7 +14,7 @@ const habitacionesSlice = createSlice({
       state.loading = true
     },
     getHabitacionesSuccess: (state, { payload }) => {
-      state.habitaciones = payload
+      state.datos = payload
       state.loading = false
       state.hasErrors = false
     },

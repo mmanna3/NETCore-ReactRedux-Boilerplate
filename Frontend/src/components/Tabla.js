@@ -4,7 +4,7 @@ import { useTable } from 'react-table'
 
 const Tabla = ({getData, selector}) => {
   const dispatch = useDispatch()
-  const { habitaciones, loading, hasErrors } = useSelector(selector)
+  const { datos, loading, hasErrors } = useSelector(selector)
 
   useEffect(() => {
     dispatch(getData())
@@ -12,7 +12,7 @@ const Tabla = ({getData, selector}) => {
 
 
   const data = React.useMemo(
-    () => habitaciones, [habitaciones]
+    () => datos, [datos]
   )
 
   const columns = React.useMemo(
