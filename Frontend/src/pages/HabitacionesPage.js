@@ -1,12 +1,12 @@
 import React from 'react'
-import HabitacionesTabla from '../components/HabitacionesTabla'
+import Tabla from '../components/Tabla'
 import { fetchHabitaciones, habitacionesSelector } from '../slices/habitaciones'
 
 const HabitacionesPage = () => {
   return (
     <section>
       <h1>Habitaciones</h1>
-      <HabitacionesTabla fetchHabitaciones={fetchHabitaciones} habitacionesSelector={habitacionesSelector}/>
+      <Tabla getData={fetchHabitaciones} selector={habitacionesSelector}/>
     </section>
   )
 }

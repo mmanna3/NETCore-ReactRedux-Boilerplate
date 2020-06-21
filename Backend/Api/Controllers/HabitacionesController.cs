@@ -5,10 +5,12 @@ using Api.Controllers.Otros;
 using AutoMapper;
 using Api.Core.Models;
 using Api.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [AllowAnonymous]
     public class HabitacionesController : ApiAutenticadoController
     {
         private readonly IHabitacionService _habitacionService;

@@ -2,52 +2,52 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTable } from 'react-table'
 
-const HabitacionesTabla = ({fetchHabitaciones, habitacionesSelector}) => {
+const Tabla = ({getData, selector}) => {
   const dispatch = useDispatch()
-  const { habitaciones, loading, hasErrors } = useSelector(habitacionesSelector)
+  const { habitaciones, loading, hasErrors } = useSelector(selector)
 
   useEffect(() => {
-    dispatch(fetchHabitaciones())
-  }, [dispatch])
+    dispatch(getData())
+  }, [dispatch, getData])
 
 
-const data = React.useMemo(
-  () => habitaciones, [habitaciones]
-)
+  const data = React.useMemo(
+    () => habitaciones, [habitaciones]
+  )
 
-const columns = React.useMemo(
-  () => [
-    {
-      Header: 'Id',
-      accessor: 'id',
-    },
-    {
-      Header: 'Nombre',
-      accessor: 'nombre',
-    },
-    {
-      Header: 'Camas matrimoniales',
-      accessor: 'camasMatrimoniales',
-    },
-    {
-      Header: 'Camas marineras',
-      accessor: 'camasMarineras',
-    },
-    {
-      Header: 'Camas individuales',
-      accessor: 'camasIndividuales',
-    },
-  ],
-  []
-)
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Id',
+        accessor: 'id',
+      },
+      {
+        Header: 'Nombre',
+        accessor: 'nombre',
+      },
+      {
+        Header: 'Camas matrimoniales',
+        accessor: 'camasMatrimoniales',
+      },
+      {
+        Header: 'Camas marineras',
+        accessor: 'camasMarineras',
+      },
+      {
+        Header: 'Camas individuales',
+        accessor: 'camasIndividuales',
+      },
+    ],
+    []
+  )
 
-const {
-  getTableProps,
-  getTableBodyProps,
-  headerGroups,
-  rows,
-  prepareRow,
-} = useTable({ columns, data })
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data })
 
     if (loading) return <p>Loading posts...</p>
     if (hasErrors) return <p>Unable to display posts.</p>
@@ -100,4 +100,4 @@ const {
     )  
 }
 
-export default HabitacionesTabla
+export default Tabla
