@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Tabla from '../components/Tabla'
-import { fetchHabitaciones, habitacionesSelector } from '../slices/habitaciones'
-import Modal from './Modal'
+import Tabla from '../../components/Tabla'
+import { fetchHabitaciones, habitacionesSelector } from './slice'
+import Modal from '../../components/Modal'
 
 const HabitacionesPage = () => {
   const columnas = [

@@ -10,7 +10,7 @@ import { Navbar } from './components/Navbar'
 import DashboardPage from './pages/DashboardPage'
 import PostsPage from './pages/PostsPage'
 import SinglePostPage from './pages/SinglePostPage'
-import HabitacionesPage from './pages/HabitacionesPage'
+import HabitacionesPage from './features/habitaciones/Page'
 
 const App = () => {
   return (
