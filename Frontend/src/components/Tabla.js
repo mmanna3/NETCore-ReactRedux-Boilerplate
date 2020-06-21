@@ -27,40 +27,44 @@ const Tabla = ({getData, selector, columnas}) => {
     prepareRow,
   } = useTable({ columns, data })
 
-    if (loading) return <p>Loading posts...</p>
-    if (hasErrors) return <p>Unable to display posts.</p>
-
-    return (
-      <table {...getTableProps()} className="table is-striped is-hoverable is-bordered">
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()} className="is-primary">
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row)
+  const bodyConDatos = 
+  (
+    <tbody {...getTableBodyProps()}>
+    {rows.map(row => {
+      prepareRow(row)
+      return (
+        <tr {...row.getRowProps()}>                
+          {row.cells.map(cell => {
             return (
-              <tr {...row.getRowProps()}>                
-                {row.cells.map(cell => {
-                  return (
-                    <td {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </td>
-                  )
-                })}
-              </tr>
+              <td {...cell.getCellProps()}>
+                {cell.render('Cell')}
+              </td>
             )
           })}
-        </tbody>
-      </table>
-    )  
+        </tr>
+      )
+    })}
+  </tbody>
+  ); 
+  
+  if (hasErrors) return <p>Unable to display posts.</p>
+
+  return (
+    <table {...getTableProps()} className="table is-striped is-hoverable is-bordered">
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()} className="is-primary">
+                {column.render('Header')}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      {( loading ? (<p> Loading...</p>) : bodyConDatos)}
+    </table>
+  )  
 }
 
 export default Tabla
