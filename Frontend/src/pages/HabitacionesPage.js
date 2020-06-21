@@ -5,10 +5,6 @@ import { fetchHabitaciones, habitacionesSelector } from '../slices/habitaciones'
 const HabitacionesPage = () => {
   const columnas = [
     {
-      Header: 'Id',
-      accessor: 'id',
-    },
-    {
       Header: 'Nombre',
       accessor: 'nombre',
     },

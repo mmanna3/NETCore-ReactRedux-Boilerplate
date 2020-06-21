@@ -31,20 +31,12 @@ const Tabla = ({getData, selector, columnas}) => {
     if (hasErrors) return <p>Unable to display posts.</p>
 
     return (
-      <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+      <table {...getTableProps()} className="table is-striped is-hoverable is-bordered">
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th
-                  {...column.getHeaderProps()}
-                  style={{
-                    borderBottom: 'solid 3px red',
-                    background: 'aliceblue',
-                    color: 'black',
-                    fontWeight: 'bold',
-                  }}
-                >
+                <th {...column.getHeaderProps()} className="is-primary">
                   {column.render('Header')}
                 </th>
               ))}
@@ -58,14 +50,7 @@ const Tabla = ({getData, selector, columnas}) => {
               <tr {...row.getRowProps()}>                
                 {row.cells.map(cell => {
                   return (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        padding: '10px',
-                        border: 'solid 1px gray',
-                        background: 'papayawhip',
-                      }}
-                    >
+                    <td {...cell.getCellProps()}>
                       {cell.render('Cell')}
                     </td>
                   )
