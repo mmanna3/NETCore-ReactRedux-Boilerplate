@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTable } from 'react-table'
 
-const Tabla = ({getData, selector}) => {
+const Tabla = ({getData, selector, columnas}) => {
   const dispatch = useDispatch()
   const { datos, loading, hasErrors } = useSelector(selector)
 
@@ -16,29 +16,7 @@ const Tabla = ({getData, selector}) => {
   )
 
   const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Id',
-        accessor: 'id',
-      },
-      {
-        Header: 'Nombre',
-        accessor: 'nombre',
-      },
-      {
-        Header: 'Camas matrimoniales',
-        accessor: 'camasMatrimoniales',
-      },
-      {
-        Header: 'Camas marineras',
-        accessor: 'camasMarineras',
-      },
-      {
-        Header: 'Camas individuales',
-        accessor: 'camasIndividuales',
-      },
-    ],
-    []
+    () => columnas, []
   )
 
   const {
