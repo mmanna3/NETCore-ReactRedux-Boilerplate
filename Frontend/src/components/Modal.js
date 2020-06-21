@@ -20,7 +20,7 @@ const Modal = ({children, cerrar, esVisible, titulo}) => {
           </div>      
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-success">Save changes</button>
+          <button className="button is-primary">Save changes</button>
           <button className="button" onClick={cerrar}>Cancel</button>
         </footer>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Tabla from '../../components/Tabla'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
-import Modal from '../../components/Modal'
+import Crear from './crear/modal'
 
 const HabitacionesPage = () => {
   const columnas = [
@@ -27,13 +27,7 @@ const HabitacionesPage = () => {
 
   return (
     <div className="container">
-        <Modal 
-            cerrar={() => togglearVisibilidadModal()} 
-            esVisible={modalEsVisible}
-            titulo="Example modal title"
-          >
-            <p>sdasdsadss sdas dsa</p>
-        </Modal>
+        <Crear esVisible={modalEsVisible} cerrar={togglearVisibilidadModal}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
