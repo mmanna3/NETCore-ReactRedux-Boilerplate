@@ -2,12 +2,14 @@ import React from 'react';
 import Modal from 'components/Modal';
 import Form from "components/Form";
 import { Input, SubmitButton } from "components/Input";
-import { useDispatch } from 'react-redux'
-import { crearHabitacion } from './slice';
+import { crearHabitacion, crearHabitacionSelector } from './slice';
+import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({esVisible, cerrar}) => {
 
-  const dispatch = useDispatch();    
+  const { loading, hasErrors } = useSelector(crearHabitacionSelector)
+
+  const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data));
 
   return (
@@ -24,8 +26,8 @@ const Crear = ({esVisible, cerrar}) => {
         <Input label="Camas marineras" name="camasMarineras" type="number" />
         
         {/* <Select name="sex" options={["female", "male"]} /> */}
-
-        <SubmitButton value="Submit" />
+        {( loading ? (<p> Loading...</p>) : <SubmitButton value="Submit" />)}
+        
       </Form>
 
     </Modal> 

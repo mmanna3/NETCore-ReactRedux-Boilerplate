@@ -9,7 +9,7 @@ export const initialState = {
 }
 
 const crearHabitacionSlice = createSlice({
-  name: 'habitaciones',
+  name: 'crearHabitacion',
   initialState,
   reducers: {
     post: (state, { requestData }) => {
