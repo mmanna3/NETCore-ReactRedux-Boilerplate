@@ -34,10 +34,11 @@ export function NumericInput({ register, label, name, ...otrosAtributos }) {
   )
 }
 
-export function SubmitButton({ label, ...otrosAtributos }) {
-  return (
-    <input className="button is-primary" type="submit" value={label} {...otrosAtributos} />    
-  )
+export function SubmitButton({ text, loading, ...otrosAtributos }) {
+  if (!loading)
+    return <button className="button is-primary" type="submit"{...otrosAtributos}>{text}</button>
+  else
+    return <button className="button is-primary is-loading" {...otrosAtributos}>{text}</button>
 }
 
 export function Select({ register, options, name, ...rest }) {

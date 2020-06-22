@@ -25,8 +25,7 @@ const Crear = ({esVisible, cerrar}) => {
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         
-        {/* <Select name="sex" options={["female", "male"]} /> */}
-        {( loading ? (<p> Loading...</p>) : <SubmitButton value="Submit" />)}
+        {<SubmitButton loading={loading} text="Guardar" />}
         
       </Form>
 
