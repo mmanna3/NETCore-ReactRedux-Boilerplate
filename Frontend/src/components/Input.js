@@ -4,9 +4,9 @@ export function Input({ register, label, name, ...otrosAtributos }) {
   return (
     <div className="field">
       <label className="label">{label}</label>
-      <div className="control has-icons-right">
+      <div className="control">
         <input className="input" name={name} ref={register} {...otrosAtributos} />
-        {/* <input class="input is-danger" name={name} ref={register} type="text"/>
+        {/* <input class="input is-danger has-icons-right" name={name} ref={register} type="text"/>
          <span class="icon is-small is-right">
           <i class="fas fa-exclamation-triangle"></i>           
         </span> */}
