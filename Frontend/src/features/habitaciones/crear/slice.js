@@ -4,18 +4,20 @@ import axios from 'axios'
 export const initialState = {
   loading: false,
   hasErrors: false,
-  datos: [],
+  requestData: '',
+  respuesta: '',
 }
 
 const crearHabitacionSlice = createSlice({
   name: 'crearHabitacion',
   initialState,
   reducers: {
-    postHabitacion: state => {
+    postHabitacion: (state, { requestData }) => {
       state.loading = true
+      state.requestData = requestData    
     },
-    postHabitacionSuccess: (state, { payload }) => {
-      state.datos = payload
+    postHabitacionSuccess: (state, { respuesta }) => {
+      state.respuesta = respuesta
       state.loading = false
       state.hasErrors = false
     },
@@ -31,14 +33,15 @@ export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
 export function crearHabitacion(data) {
+  
   return async dispatch => {
-    dispatch(postHabitacion())
+    dispatch(postHabitacion(data))
 
-    try {
+    try {      
       
       const response = await axios.post('/api/habitaciones', data);
-
       dispatch(postHabitacionSuccess(response))
+
     } catch (error) {
       dispatch(postHabitacionFailure())
     }
