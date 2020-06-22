@@ -22,7 +22,7 @@ namespace Api.Config
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
 

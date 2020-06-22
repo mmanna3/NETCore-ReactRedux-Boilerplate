@@ -17,10 +17,9 @@ const Crear = ({esVisible, cerrar}) => {
         titulo="Crear habitación"
     >
       
-
       <Form onSubmit={onSubmit}>
         <Input label="Nombre" name="nombre" />
-        {/* <Input label="Camas matrimoniales" name="camasMatrimoniales" /> */}
+        <Input label="Camas matrimoniales" name="camasMatrimoniales" type="number" />
         {/* <Select name="sex" options={["female", "male"]} /> */}
 
         <SubmitButton value="Submit" />
