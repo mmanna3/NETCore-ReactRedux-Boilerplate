@@ -1,11 +1,16 @@
 import React from 'react';
 import Modal from 'components/Modal';
 import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux'
+import { crearHabitacion } from './slice';
 
 const Crear = ({esVisible, cerrar}) => {
 
+  const dispatch = useDispatch();
+  
+  
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {console.log(data); dispatch(crearHabitacion())};
 
   console.log(watch("example")); // watch input value by passing the name of it
 
@@ -29,7 +34,7 @@ const Crear = ({esVisible, cerrar}) => {
         
         <input type="submit" />
       </form>
-      
+
     </Modal> 
   )
 }
