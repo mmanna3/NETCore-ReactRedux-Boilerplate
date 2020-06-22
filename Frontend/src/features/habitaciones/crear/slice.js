@@ -9,41 +9,41 @@ export const initialState = {
 }
 
 const crearHabitacionSlice = createSlice({
-  name: 'crearHabitacion',
+  name: 'habitaciones',
   initialState,
   reducers: {
-    postHabitacion: (state, { requestData }) => {
+    post: (state, { requestData }) => {
       state.loading = true
       state.requestData = requestData    
     },
-    postHabitacionSuccess: (state, { respuesta }) => {
+    postSuccess: (state, { respuesta }) => {
       state.respuesta = respuesta
       state.loading = false
       state.hasErrors = false
     },
-    postHabitacionFailure: state => {
+    postFailure: state => {
       state.loading = false
       state.hasErrors = true
     },
   },
 })
 
-export const { postHabitacion, postHabitacionSuccess, postHabitacionFailure } = crearHabitacionSlice.actions
+export const { post, postSuccess, postFailure } = crearHabitacionSlice.actions
 export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
 export function crearHabitacion(data) {
   
   return async dispatch => {
-    dispatch(postHabitacion(data))
+    dispatch(post(data));
 
     try {      
       
       const response = await axios.post('/api/habitaciones', data);
-      dispatch(postHabitacionSuccess(response))
+      dispatch(postSuccess(response));
 
     } catch (error) {
-      dispatch(postHabitacionFailure())
+      dispatch(postFailure());
     }
   }
 }
