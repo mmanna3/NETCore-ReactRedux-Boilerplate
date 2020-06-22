@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tabla from '../../components/Tabla'
+import Tabla from 'components/Tabla'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
 import Crear from './crear/Modal'
 
