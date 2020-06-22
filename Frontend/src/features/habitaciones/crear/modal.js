@@ -10,7 +10,7 @@ const Crear = ({esVisible, cerrar}) => {
   
   
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => {console.log(data); dispatch(crearHabitacion())};
+  const onSubmit = data => dispatch(crearHabitacion(data));
 
   console.log(watch("example")); // watch input value by passing the name of it
 
