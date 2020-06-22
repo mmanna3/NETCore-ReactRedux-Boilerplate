@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({esVisible, cerrar}) => {
 
-  const { loading, hasErrors } = useSelector(crearHabitacionSelector)
+  const { loading, hasErrors, hasSuccess } = useSelector(crearHabitacionSelector)
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data));
+
+  if (hasSuccess)
+    cerrar();
 
   return (
     <Modal
@@ -25,7 +28,7 @@ const Crear = ({esVisible, cerrar}) => {
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         
-        {<SubmitButton loading={loading} text="Guardar" />}
+        <SubmitButton loading={loading} text="Guardar" />
         
       </Form>
 

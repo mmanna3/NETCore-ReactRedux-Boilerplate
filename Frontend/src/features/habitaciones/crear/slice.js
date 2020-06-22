@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export const initialState = {
   loading: false,
+  hasSuccess: false,
   hasErrors: false,
   requestData: '',
   respuesta: '',
@@ -19,7 +20,7 @@ const crearHabitacionSlice = createSlice({
     postSuccess: (state, { respuesta }) => {
       state.respuesta = respuesta
       state.loading = false
-      state.hasErrors = false
+      state.hasSuccess = true
     },
     postFailure: state => {
       state.loading = false
