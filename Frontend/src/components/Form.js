@@ -7,29 +7,36 @@ export default function Form({ defaultValues, children, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {renderElementsWithChilds(children)}
+      {getElementsWithChilds(children)}
     </form>
   );
 
-  function renderElementsWithChilds(element) {
+  function getElementsWithChilds(element) {
+    
     if (Array.isArray(element))
       return element.map(child => {
-        return renderElement(child);
+        return getElementsWithChilds(child);
       })
+    else if (Array.isArray(element.props.children)) {
+      var newChildren = element.props.children.map(child => {
+        return getElementSinHijos(child);
+      });
+      return React.cloneElement(element, element.props, newChildren);
+    }
     else
-      return element;
+      return getElementSinHijos(element);
   }
 
-  function renderElement(child) {
-    if (child.props.name)
-      return React.createElement(child.type, {
+  function getElementSinHijos(element) {
+    if (element.props.name)
+      return React.createElement(element.type, {
               ...{
-                ...child.props,
+                ...element.props,
                 register: methods.register,
-                key: child.props.name
+                key: element.props.name
               }
             })
     else
-      return child;
+      return element;
   }
 }

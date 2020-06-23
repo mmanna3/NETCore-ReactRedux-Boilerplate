@@ -1,7 +1,8 @@
 import React from 'react'
+import Form from "components/Form";
 
-const Modal = ({children, cerrar, esVisible, titulo}) => {
-  
+export const ModalForm = ({defaultValues, children, cerrar, esVisible, titulo, onSubmit}) => {  
+
   if(!esVisible) {
     return null;
   }
@@ -14,18 +15,30 @@ const Modal = ({children, cerrar, esVisible, titulo}) => {
           <p className="modal-card-title">{titulo}</p>
           <button className="delete" aria-label="close" onClick={cerrar}></button>
         </header>
-        <section className="modal-card-body" style={{width: 'inherit'}}>
-          <div className="content">
-            {children}
-          </div>      
-        </section>
-        <footer className="modal-card-foot">
-          <button className="button is-primary">Save changes</button>
-          <button className="button" onClick={cerrar}>Cancel</button>
-        </footer>
+        <Form onSubmit={onSubmit}>
+          {children}
+        </Form>
       </div>
     </div>
   )
 }
 
-export default Modal
+export const ModalFooter = ({children}) => {
+  return (
+    <footer className="modal-card-foot">
+      {children}
+      {/* <button className="button is-primary">Save changes</button>
+      <button className="button" onClick={cerrar}>Cancel</button> */}
+    </footer>
+  );
+}
+
+export const ModalContent = ({children}) => {
+  return (
+    <section className="modal-card-body" style={{width: 'inherit'}}>
+      <div className="content">
+        {children}
+      </div>
+  </section>
+  );
+}
