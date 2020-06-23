@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({esVisible, cerrar}) => {
 
-  const { loading, hasErrors, hasSuccess } = useSelector(crearHabitacionSelector)
+  const { loading, hasSuccess } = useSelector(crearHabitacionSelector)
 
   const dispatch = useDispatch();
   const onSubmit = data => {console.log(1);dispatch(crearHabitacion(data));}
