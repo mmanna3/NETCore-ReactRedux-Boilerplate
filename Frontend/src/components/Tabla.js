@@ -47,7 +47,7 @@ const Tabla = ({getData, selector, columnas}) => {
   </tbody>
   ); 
   
-  if (hasErrors) return <p>Unable to display posts.</p>
+  if (hasErrors) return <p>Hubo un error.</p>
 
   return (
     <table {...getTableProps()} className="table is-striped is-hoverable is-bordered is-fullwidth">
@@ -62,7 +62,7 @@ const Tabla = ({getData, selector, columnas}) => {
           </tr>
         ))}
       </thead>
-      {( loading ? (<p> Loading...</p>) : bodyConDatos)}
+      {( loading ? (<p> Cargando...</p>) : bodyConDatos)}
     </table>
   )  
 }
