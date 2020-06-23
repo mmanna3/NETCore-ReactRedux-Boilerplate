@@ -7,17 +7,17 @@ export default function Form({ defaultValues, children, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {renderElementsWithChilds()}
+      {renderElementsWithChilds(children)}
     </form>
   );
 
-  function renderElementsWithChilds() {
-    if (Array.isArray(children))
-      return children.map(child => {
+  function renderElementsWithChilds(element) {
+    if (Array.isArray(element))
+      return element.map(child => {
         return renderElement(child);
       })
     else
-      return children;
+      return element;
   }
 
   function renderElement(child) {
