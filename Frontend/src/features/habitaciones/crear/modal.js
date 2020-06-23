@@ -9,7 +9,7 @@ const Crear = ({esVisible, cerrar}) => {
   const { loading, hasErrors, hasSuccess } = useSelector(crearHabitacionSelector)
 
   const dispatch = useDispatch();
-  const onSubmit = data => dispatch(crearHabitacion(data));
+  const onSubmit = data => {console.log(1);dispatch(crearHabitacion(data));}
 
   if (hasSuccess)
     cerrar();
@@ -29,7 +29,15 @@ const Crear = ({esVisible, cerrar}) => {
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
       </ModalContent>
       <ModalFooter>
-        <SubmitButton loading={loading} text="Guardar" />
+        {/* TODO: Crear ModalFooterAceptarCancelar */}
+        <div className="container">
+          <div className="buttons is-pulled-right">                          
+            
+            <button type="button" className="button" onClick={() => cerrar()}>Cancelar</button>
+            <SubmitButton loading={loading} text="Guardar" />
+
+          </div>
+        </div>
       </ModalFooter>
 
     </ModalForm> 

@@ -27,8 +27,6 @@ export const ModalFooter = ({children}) => {
   return (
     <footer className="modal-card-foot">
       {children}
-      {/* <button className="button is-primary">Save changes</button>
-      <button className="button" onClick={cerrar}>Cancel</button> */}
     </footer>
   );
 }
