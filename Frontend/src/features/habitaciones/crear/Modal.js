@@ -9,7 +9,9 @@ const Crear = ({esVisible, cerrar}) => {
   const { loading, hasSuccess } = useSelector(crearHabitacionSelector)
 
   const dispatch = useDispatch();
-  const onSubmit = data => {console.log(1);dispatch(crearHabitacion(data));}
+  const onSubmit = data => {console.log(data);dispatch(crearHabitacion(data));}
+
+  console.log('Atroden Modal Crear');
 
   if (hasSuccess)
     cerrar();

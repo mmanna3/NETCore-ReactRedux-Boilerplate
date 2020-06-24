@@ -34,14 +34,13 @@ export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
 export function crearHabitacion(data) {
-  
+
   return async dispatch => {
     dispatch(post(data));
 
-    try {      
-      
+    try {
       const response = await axios.post('/api/habitaciones', data);
-      dispatch(postSuccess(response));
+      dispatch(postSuccess(response.data));
 
     } catch (error) {
       dispatch(postFailure());
