@@ -10,14 +10,15 @@ export default function Form({ defaultValues, children, onSubmit }) {
     <form onSubmit={handleSubmit(onSubmit)}>
       {display(children)}
     </form>
-  );
-    
-  //Asumo que es array, si no es, probar
+  );    
 
   function display(formContent) {
-    return formContent.map(element => { //Por cada elemento de formContent, voy a iterar hasta el final y crear un nuevo objeto react
-      return iterar(element); //Termino devolvienro un nuevo array con elementos tuneados a React
-    });
+    if (Array.isArray(formContent)) {
+      return formContent.map(element => { //Por cada elemento de formContent, voy a iterar hasta el final y crear un nuevo objeto react
+        return iterar(element); //Termino devolvienro un nuevo array con elementos tuneados a React
+      });
+    } else
+      return iterar(formContent);
   }
 
   function iterar(element) {  //Tiene que llegar hasta el fondo y al hijo sin hijos ponerle el register

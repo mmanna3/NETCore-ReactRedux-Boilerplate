@@ -21,15 +21,14 @@ const Crear = ({esVisible, cerrar}) => {
         titulo="Crear habitación"
         onSubmit={onSubmit}
     >      
-      <div></div>
+      {/* <div></div>
       <ModalContent>
         
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
       </ModalContent>
-      <ModalFooter>
-        {/* TODO: Crear ModalFooterAceptarCancelar */}
+      <ModalFooter>        
         <div className="container">
           <div className="buttons is-pulled-right">                          
             
@@ -39,9 +38,12 @@ const Crear = ({esVisible, cerrar}) => {
           </div>
         </div>
       </ModalFooter>
+      <div> */}
       <div>
         <Input label="Nombre" name="nombre" />
+        <SubmitButton loading={loading} text="Guardar" />
       </div>
+      {/* </div> */}
 
     </ModalForm> 
   )
