@@ -26,7 +26,8 @@ const HabitacionesPage = () => {
     },
   ]
   
-  const [modalEsVisible, togglearVisibilidadModal] = useState(false);  
+  const [modalEsVisible, togglearVisibilidadModal] = useState(false);  //TODO: Cambiar esto a estado string y ponérselo al componente bulma. 
+                                                                        //Dos métodos: mostrar y ocultar
 
   function cerrarModalYRefrescarTabla() {
     togglearVisibilidadModal();
