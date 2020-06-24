@@ -62,7 +62,7 @@ const Tabla = ({getData, selector, columnas}) => {
           </tr>
         ))}
       </thead>
-      {( loading ? (<p> Cargando...</p>) : bodyConDatos)}
+      {( loading ? (<tbody><tr><td>Cargando...</td></tr></tbody>) : bodyConDatos)}
     </table>
   )  
 }
