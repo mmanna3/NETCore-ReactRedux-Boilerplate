@@ -8,7 +8,7 @@ export default function Form({ defaultValues, children, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* {display(children)} */}
+      {display(children)}
     </form>
   );
     
@@ -24,16 +24,18 @@ export default function Form({ defaultValues, children, onSubmit }) {
     if (tieneHijos(element)){
       
       if (tieneMasDeUnHijo(element)) {
-        element.props.children.forEach(element => {
-          iterar(element)
+        var nuevosHijos = element.props.children.map(element => {
+          return iterar(element);          
         })
+        return React.cloneElement(element, element.props, nuevosHijos);
       }
       else {
-        iterar(element.props.children);
+        var nuevoHijo = iterar(element.props.children);
+        return React.cloneElement(element, element.props, nuevoHijo);
       }
           
     } else {
-      console.log(element);
+      return getElementSinHijos(element);
     }
   }
   
