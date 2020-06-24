@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 export default function Form({ defaultValues, children, onSubmit }) {
   const methods = useForm({ defaultValues });
   const { handleSubmit } = methods;
+  console.log(procesarContenido(children));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -13,27 +14,31 @@ export default function Form({ defaultValues, children, onSubmit }) {
 
   function procesarContenido(contenido) {
     if (Array.isArray(contenido)) {
-      return contenido.map(element => {
-        return convertirElementosSinHijosEnInputsDelForm(element);
-      });
+      return procesarContenidoComoArray(contenido);
     } else
       return convertirElementosSinHijosEnInputsDelForm(contenido);
   }
 
-  function convertirElementosSinHijosEnInputsDelForm(e) {
+  function procesarContenidoComoArray(contenido){
+    return contenido.map((element,index) => {
+      return convertirElementosSinHijosEnInputsDelForm(element, index);
+    });
+  }
+
+  function convertirElementosSinHijosEnInputsDelForm(e, index) {
     if (tieneHijos(e)){
       
       if (tieneMasDeUnHijo(e)) {
         var nuevosHijos = e.props.children.map(element => {
-          return convertirElementosSinHijosEnInputsDelForm(element);          
+          return convertirElementosSinHijosEnInputsDelForm(element, index);
         })
-        return React.cloneElement(e, e.props, nuevosHijos);
+        return React.cloneElement(e, {...{...e.props, key: index}}, nuevosHijos);
       }
       else {
-        var nuevoHijo = convertirElementosSinHijosEnInputsDelForm(e.props.children);
-        return React.cloneElement(e, e.props, nuevoHijo);
+        var nuevoHijo = convertirElementosSinHijosEnInputsDelForm(e.props.children, index);
+        return React.cloneElement(e, {...{...e.props, key: index}}, nuevoHijo);
       }
-          
+
     } else {
       return convertirElementoEnInputsDelForm(e);
     }
