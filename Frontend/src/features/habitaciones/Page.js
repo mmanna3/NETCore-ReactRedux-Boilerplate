@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Tabla from 'components/Tabla'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
+import { useDispatch } from 'react-redux'
 import Crear from './crear/Modal'
 
 const HabitacionesPage = () => {
+  const dispatch = useDispatch();
+
   const columnas = [
     {
       Header: 'Nombre',
@@ -25,9 +28,14 @@ const HabitacionesPage = () => {
   
   const [modalEsVisible, togglearVisibilidadModal] = useState(false);  
 
+  function cerrarModalYRefrescarTabla() {
+    togglearVisibilidadModal();
+    dispatch(fetchHabitaciones());  //Probablemente esto corresponda hacerlo de alguna forma adentro de la tabla
+  }
+
   return (
     <div className="container">
-        <Crear esVisible={modalEsVisible} cerrar={togglearVisibilidadModal}></Crear>
+        <Crear esVisible={modalEsVisible} cerrarSinAcciones={togglearVisibilidadModal} cerrarConExito={cerrarModalYRefrescarTabla}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">

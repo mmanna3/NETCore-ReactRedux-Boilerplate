@@ -4,7 +4,7 @@ import { Input, NumericInput, SubmitButton } from "components/Input";
 import { crearHabitacion, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 
-const Crear = ({esVisible, cerrar}) => {
+const Crear = ({esVisible, cerrarSinAcciones, cerrarConExito}) => {
 
   const { loading, hasSuccess } = useSelector(crearHabitacionSelector)
 
@@ -14,11 +14,11 @@ const Crear = ({esVisible, cerrar}) => {
   console.log('Atroden Modal Crear');
 
   if (hasSuccess)
-    cerrar();
+    cerrarConExito();
 
   return (
     <ModalForm
-        cerrar={() => cerrar()} 
+        cerrar={() => cerrarSinAcciones()} 
         esVisible={esVisible}
         titulo="Crear habitación"
         onSubmit={onSubmit}
@@ -33,7 +33,7 @@ const Crear = ({esVisible, cerrar}) => {
       <ModalFooter>        
         <div className="container">
           <div className="buttons is-pulled-right">                                      
-            <button type="button" className="button" onClick={() => cerrar()}>Cancelar</button>
+            <button type="button" className="button" onClick={() => cerrarSinAcciones()}>Cancelar</button>
             <SubmitButton loading={loading} text="Guardar" />
           </div>
         </div>
