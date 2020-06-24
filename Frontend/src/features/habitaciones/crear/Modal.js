@@ -20,31 +20,22 @@ const Crear = ({esVisible, cerrar}) => {
         esVisible={esVisible}
         titulo="Crear habitación"
         onSubmit={onSubmit}
-    >      
-      {/* <div></div>
+    >
+
       <ModalContent>
-        
+        <Input label="Nombre" name="nombre" />
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
-        <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
+        <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />        
       </ModalContent>
       <ModalFooter>        
         <div className="container">
-          <div className="buttons is-pulled-right">                          
-            
+          <div className="buttons is-pulled-right">                                      
             <button type="button" className="button" onClick={() => cerrar()}>Cancelar</button>
             <SubmitButton loading={loading} text="Guardar" />
-
           </div>
         </div>
       </ModalFooter>
-      <div> */}
-      <div>
-        <Input label="Nombre" name="nombre" />
-        <SubmitButton loading={loading} text="Guardar" />
-      </div>
-      {/* </div> */}
-
     </ModalForm> 
   )
 }
