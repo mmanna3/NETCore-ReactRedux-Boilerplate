@@ -4,85 +4,59 @@ import { useForm } from "react-hook-form";
 export default function Form({ defaultValues, children, onSubmit }) {
   const methods = useForm({ defaultValues });
   const { handleSubmit } = methods;
-  console.log(display(children));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {display(children)}
+      {procesarContenido(children)}
     </form>
   );    
 
-  function display(formContent) {
-    if (Array.isArray(formContent)) {
-      return formContent.map(element => { //Por cada elemento de formContent, voy a iterar hasta el final y crear un nuevo objeto react
-        return iterar(element); //Termino devolvienro un nuevo array con elementos tuneados a React
+  function procesarContenido(contenido) {
+    if (Array.isArray(contenido)) {
+      return contenido.map(element => {
+        return convertirElementosSinHijosEnInputsDelForm(element);
       });
     } else
-      return iterar(formContent);
+      return convertirElementosSinHijosEnInputsDelForm(contenido);
   }
 
-  function iterar(element) {  //Tiene que llegar hasta el fondo y al hijo sin hijos ponerle el register
-    if (tieneHijos(element)){
+  function convertirElementosSinHijosEnInputsDelForm(e) {
+    if (tieneHijos(e)){
       
-      if (tieneMasDeUnHijo(element)) {
-        var nuevosHijos = element.props.children.map(element => {
-          return iterar(element);          
+      if (tieneMasDeUnHijo(e)) {
+        var nuevosHijos = e.props.children.map(element => {
+          return convertirElementosSinHijosEnInputsDelForm(element);          
         })
-        return React.cloneElement(element, element.props, nuevosHijos);
+        return React.cloneElement(e, e.props, nuevosHijos);
       }
       else {
-        var nuevoHijo = iterar(element.props.children);
-        return React.cloneElement(element, element.props, nuevoHijo);
+        var nuevoHijo = convertirElementosSinHijosEnInputsDelForm(e.props.children);
+        return React.cloneElement(e, e.props, nuevoHijo);
       }
           
     } else {
-      return getElementSinHijos(element);
+      return convertirElementoEnInputsDelForm(e);
     }
   }
   
-  function tieneMasDeUnHijo(element){
-    return Array.isArray(element.props.children);
+  function tieneMasDeUnHijo(e){
+    return Array.isArray(e.props.children);
   }
 
-  function tieneHijos(element){
-    return element.props && element.props.children;
+  function tieneHijos(e){
+    return e.props && e.props.children;
   }
 
-  // function display(formContent) {
-    
-  //   if (Array.isArray(formContent))
-  //     formContent = React.createElement("div", {}, formContent);
-    
-  //   return getElementsWithChilds(formContent);
-  // }  
-
-  function getElementsWithChilds(element) {
-    
-    if (Array.isArray(element.props.children)) {
-
-      var newChildren = element.props.children.map(child => {
-        return getElementSinHijos(child);
-      });            
-      return React.cloneElement(element, element.props, newChildren);
-
-    }
-    else{
-
-      return getElementSinHijos(element);
-
-    }      
-  }
-
-  function getElementSinHijos(element) {
-    if (element.props && element.props.name)
-      return React.createElement(element.type, {
+  function convertirElementoEnInputsDelForm(e) {
+    if (e.props && e.props.name)
+      return React.createElement(e.type, {
               ...{
-                ...element.props,
+                ...e.props,
                 register: methods.register,
-                key: element.props.name
+                key: e.props.name
               }
             })
     else
-      return element;
+      return e;
   }
 }
