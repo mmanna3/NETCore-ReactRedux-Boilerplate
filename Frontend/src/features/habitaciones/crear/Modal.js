@@ -21,9 +21,9 @@ const Crear = ({esVisible, cerrar}) => {
         titulo="Crear habitación"
         onSubmit={onSubmit}
     >      
-
+      <div></div>
       <ModalContent>
-        <Input label="Nombre" name="nombre" />
+        
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
@@ -39,6 +39,9 @@ const Crear = ({esVisible, cerrar}) => {
           </div>
         </div>
       </ModalFooter>
+      <div>
+        <Input label="Nombre" name="nombre" />
+      </div>
 
     </ModalForm> 
   )

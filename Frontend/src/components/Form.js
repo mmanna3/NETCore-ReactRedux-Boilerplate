@@ -4,31 +4,74 @@ import { useForm } from "react-hook-form";
 export default function Form({ defaultValues, children, onSubmit }) {
   const methods = useForm({ defaultValues });
   const { handleSubmit } = methods;
+  console.log(display(children));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {getElementsWithChilds(children)}
+      {/* {display(children)} */}
     </form>
   );
+    
+  //Asumo que es array, si no es, probar
+
+  function display(formContent) {
+    return formContent.map(element => { //Por cada elemento de formContent, voy a iterar hasta el final y crear un nuevo objeto react
+      return iterar(element); //Termino devolvienro un nuevo array con elementos tuneados a React
+    });
+  }
+
+  function iterar(element) {  //Tiene que llegar hasta el fondo y al hijo sin hijos ponerle el register
+    if (tieneHijos(element)){
+      
+      if (tieneMasDeUnHijo(element)) {
+        element.props.children.forEach(element => {
+          iterar(element)
+        })
+      }
+      else {
+        iterar(element.props.children);
+      }
+          
+    } else {
+      console.log(element);
+    }
+  }
+  
+  function tieneMasDeUnHijo(element){
+    return Array.isArray(element.props.children);
+  }
+
+  function tieneHijos(element){
+    return element.props && element.props.children;
+  }
+
+  // function display(formContent) {
+    
+  //   if (Array.isArray(formContent))
+  //     formContent = React.createElement("div", {}, formContent);
+    
+  //   return getElementsWithChilds(formContent);
+  // }  
 
   function getElementsWithChilds(element) {
     
-    if (Array.isArray(element))
-      return element.map(child => {
-        return getElementsWithChilds(child);
-      })
-    else if (Array.isArray(element.props.children)) {
+    if (Array.isArray(element.props.children)) {
+
       var newChildren = element.props.children.map(child => {
         return getElementSinHijos(child);
-      });
+      });            
       return React.cloneElement(element, element.props, newChildren);
+
     }
-    else
+    else{
+
       return getElementSinHijos(element);
+
+    }      
   }
 
   function getElementSinHijos(element) {
-    if (element.props.name)
+    if (element.props && element.props.name)
       return React.createElement(element.type, {
               ...{
                 ...element.props,
