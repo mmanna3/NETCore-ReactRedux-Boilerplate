@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Tabla from 'components/Tabla'
+import Table from 'components/Table'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
@@ -8,7 +8,7 @@ const HabitacionesPage = () => {
   const dispatch = useDispatch();
   const { datos, loading, hasErrors } = useSelector(habitacionesSelector);
 
-  useEffect(() => getData(), []);
+  useEffect(() => refreshTable(), []);
 
   const columnas = [
     {
@@ -33,7 +33,7 @@ const HabitacionesPage = () => {
 
   function closeModalAndRefreshTable() {
     hideModal();
-    dispatch(fetchHabitaciones());  //Probablemente esto corresponda hacerlo de alguna forma adentro de la tabla
+    refreshTable();
   }
 
   function hideModal(){
@@ -44,7 +44,7 @@ const HabitacionesPage = () => {
     setModalVisibility(true);
   }
   
-  function getData(){
+  function refreshTable(){
     dispatch(fetchHabitaciones());
   }
 
@@ -57,7 +57,7 @@ const HabitacionesPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <button className="button is-primary" onClick={showModal}>Crear</button>
         </div>        
-        <Tabla  getData={getData} 
+        <Table  getData={refreshTable} 
                 selector={habitacionesSelector} 
                 columnas={columnas}
                 datos={datos}
