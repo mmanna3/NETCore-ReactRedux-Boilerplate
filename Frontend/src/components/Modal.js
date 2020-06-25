@@ -2,16 +2,16 @@ import React from 'react'
 import Form from "components/Form";
 import {SubmitButton} from 'components/Input';
 
-export const Modal = ({children, cerrar, esVisible}) => {  
+export const Modal = ({children, hide, isVisible}) => {  
 
-  var visibilidad = {
+  var visibility = {
     true: 'is-active',
     false: ''
   };
 
   return (
-    <div className={`modal ${visibilidad[esVisible]}`}>
-      <div className="modal-background" onClick={cerrar}></div>
+    <div className={`modal ${visibility[isVisible]}`}>
+      <div className="modal-background" onClick={hide}></div>
       <div className="modal-card">
           {children}
       </div>
@@ -19,10 +19,10 @@ export const Modal = ({children, cerrar, esVisible}) => {
   )
 }
 
-export const ModalForm = ({children, cerrar, esVisible, titulo, onSubmit}) => {  
+export const ModalForm = ({children, hide, isVisible, title, onSubmit}) => {  
 
   return (
-    <Modal cerrar={cerrar} esVisible={esVisible} titulo={titulo}>
+    <Modal hide={hide} isVisible={isVisible} title={title}>
         <Form onSubmit={onSubmit}>
           {children}
         </Form>
@@ -30,11 +30,11 @@ export const ModalForm = ({children, cerrar, esVisible, titulo, onSubmit}) => {
   )
 }
 
-export const Header = ({titulo, cerrar}) => {
+export const Header = ({title, hide}) => {
   return (
     <header className="modal-card-head">
-    <p className="modal-card-title">{titulo}</p>
-    <button type="button" className="delete" aria-label="close" onClick={cerrar}></button>
+    <p className="modal-card-title">{title}</p>
+    <button type="button" className="delete" aria-label="close" onClick={hide}></button>
   </header>
   );
 }

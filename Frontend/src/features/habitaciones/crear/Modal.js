@@ -16,12 +16,11 @@ const Crear = ({isVisible, close, onSuccessfulSubmit}) => {
 
   return (
     <ModalForm
-        cerrar={close}
-        esVisible={isVisible}
-        titulo="Crear habitación"
+        hide={close}
+        isVisible={isVisible}
         onSubmit={onSubmit}
     >
-      <Header titulo="Crear habitación" cerrar={close} />
+      <Header title="Crear habitación" hide={close} />
       <Body>
         <Input label="Nombre" name="nombre" />
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
