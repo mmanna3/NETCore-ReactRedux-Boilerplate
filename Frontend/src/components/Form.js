@@ -2,8 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function Form({ defaultValues, children, onSubmit }) {
-  const methods = useForm({ defaultValues });
-  const { handleSubmit } = methods;
+  const { handleSubmit, register } = useForm({ defaultValues });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,7 +55,7 @@ export default function Form({ defaultValues, children, onSubmit }) {
       return React.createElement(e.type, {
               ...{
                 ...e.props,
-                register: methods.register,
+                register: register({ required: true }),
                 key: e.props.name
               }
             })
