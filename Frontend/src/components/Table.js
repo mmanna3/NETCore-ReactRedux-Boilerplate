@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useTable } from 'react-table'
 
-const Table = ({getData, columnas, datos, loading, hasErrors}) => {
+const Table = ({fetchData, columnas, datos, loading, hasErrors}) => {
 
-  useEffect(() => getData(), [getData]);
+  useEffect(() => fetchData(), [fetchData]);
 
   const data = React.useMemo(
     () => datos, [datos]

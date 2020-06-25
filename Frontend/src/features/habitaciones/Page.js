@@ -8,10 +8,9 @@ const HabitacionesPage = () => {
   const dispatch = useDispatch();
   const { datos, loading, hasErrors } = useSelector(habitacionesSelector);
 
-  // ✅ Wrap with useCallback to avoid change on every render
-  const getData = useCallback(() => {
+  const fetchData = useCallback(() => {
     dispatch(fetchHabitaciones());
-  }, [dispatch]); // ✅ All useCallback dependencies are specified
+  }, [dispatch]);
 
   const columnas = [
     {
@@ -36,7 +35,7 @@ const HabitacionesPage = () => {
 
   function closeModalAndRefreshTable() {
     hideModal();
-    getData();
+    fetchData();
   }
 
   function hideModal(){
@@ -55,7 +54,7 @@ const HabitacionesPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <button className="button is-primary" onClick={showModal}>Crear</button>
         </div>        
-        <Table  getData={getData} 
+        <Table  fetchData={fetchData} 
                 selector={habitacionesSelector} 
                 columnas={columnas}
                 datos={datos}
