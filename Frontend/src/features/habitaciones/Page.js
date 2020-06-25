@@ -43,7 +43,7 @@ const HabitacionesPage = () => {
 
   return (
     <div className="container">
-        <Crear esVisible={modalEsVisible} cerrarSinAcciones={ocultarModal} cerrarConExito={cerrarModalYRefrescarTabla}></Crear>
+        <Crear isVisible={modalEsVisible} close={ocultarModal} onSuccessfulSubmit={cerrarModalYRefrescarTabla}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
