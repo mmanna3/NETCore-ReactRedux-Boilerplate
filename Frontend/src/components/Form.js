@@ -4,55 +4,54 @@ import { useForm } from "react-hook-form";
 export default function Form({ defaultValues, children, onSubmit }) {
   const methods = useForm({ defaultValues });
   const { handleSubmit } = methods;
-  console.log('atroden del form');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {procesarContenido(children)}
+      {processContent(children)}
     </form>
   );    
 
-  function procesarContenido(contenido) {
+  function processContent(contenido) {
     if (Array.isArray(contenido)) {
-      return procesarContenidoComoArray(contenido);
+      return processContentAsArray(contenido);
     } else
-      return convertirEnInputSiCorresponde(contenido);
+      return processElement(contenido);
   }
 
-  function procesarContenidoComoArray(contenido){
+  function processContentAsArray(contenido){
     return contenido.map((element,index) => {
-      return convertirEnInputSiCorresponde(element, index);
+      return processElement(element, index);
     });
   }
 
-  function convertirEnInputSiCorresponde(e, index, innerIndex) {
-    if (tieneHijos(e)){
+  function processElement(e, index, innerIndex) {
+    if (hasChildren(e)){
       
-      if (tieneMasDeUnHijo(e)) {
-        var nuevosHijos = e.props.children.map((element, innerIndex) => {
-          return convertirEnInputSiCorresponde(element, index, innerIndex);
+      if (hasMoreThanOneChild(e)) {
+        var newChildren = e.props.children.map((element, innerIndex) => {
+          return processElement(element, index, innerIndex);
         })
-        return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, nuevosHijos);
+        return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);
       }
       else {
-        var nuevoHijo = convertirEnInputSiCorresponde(e.props.children, index);
-        return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}-i`}}, nuevoHijo);
+        var newChild = processElement(e.props.children, index);
+        return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}-i`}}, newChild);
       }
 
     } else {
-      return convertirElementoEnInputsDelForm(e);
+      return convertElementIntoFormInput(e);
     }
   }
   
-  function tieneMasDeUnHijo(e){
+  function hasMoreThanOneChild(e){
     return Array.isArray(e.props.children);
   }
 
-  function tieneHijos(e){
+  function hasChildren(e){
     return e.props && e.props.children;
   }
 
-  function convertirElementoEnInputsDelForm(e) {
+  function convertElementIntoFormInput(e) {
     if (e.props && e.props.name)
       return React.createElement(e.type, {
               ...{
