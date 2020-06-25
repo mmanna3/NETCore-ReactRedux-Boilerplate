@@ -1,5 +1,6 @@
 import React from 'react'
 import Form from "components/Form";
+import {SubmitButton} from 'components/Input';
 
 export const Modal = ({children, cerrar, esVisible}) => {  
 
@@ -41,8 +42,21 @@ export const Header = ({titulo, cerrar}) => {
 export const Footer = ({children}) => {
   return (
     <footer className="modal-card-foot">
-      {children}
+      <div className="container">
+        <div className="buttons is-pulled-right">
+          {children}
+        </div>
+      </div>
     </footer>
+  );
+}
+
+export const FooterAceptarCancelar = ({cancelar, loading}) => {
+  return (
+    <Footer>
+      <button type="button" className="button" onClick={cancelar}>Cancelar</button>
+      <SubmitButton loading={loading} text="Aceptar" />
+    </Footer>
   );
 }
 
