@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from "components/Form";
 
-export const ModalForm = ({defaultValues, children, cerrar, esVisible, titulo, onSubmit}) => {  
+export const Modal = ({children, cerrar, esVisible}) => {  
 
   var visibilidad = {
     true: 'is-active',
@@ -12,16 +12,30 @@ export const ModalForm = ({defaultValues, children, cerrar, esVisible, titulo, o
     <div className={`modal ${visibilidad[esVisible]}`}>
       <div className="modal-background" onClick={cerrar}></div>
       <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">{titulo}</p>
-          <button className="delete" aria-label="close" onClick={cerrar}></button>
-        </header>
-        <Form onSubmit={onSubmit}>
           {children}
-        </Form>
       </div>
     </div>
   )
+}
+
+export const ModalForm = ({children, cerrar, esVisible, titulo, onSubmit}) => {  
+
+  return (
+    <Modal cerrar={cerrar} esVisible={esVisible} titulo={titulo}>
+        <Form onSubmit={onSubmit}>
+          {children}
+        </Form>
+    </Modal>
+  )
+}
+
+export const ModalHeader = ({titulo, cerrar}) => {
+  return (
+    <header className="modal-card-head">
+    <p className="modal-card-title">{titulo}</p>
+    <button type="button" className="delete" aria-label="close" onClick={cerrar}></button>
+  </header>
+  );
 }
 
 export const ModalFooter = ({children}) => {
