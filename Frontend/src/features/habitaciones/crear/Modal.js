@@ -4,7 +4,7 @@ import { Input, NumericInput } from "components/Input";
 import { crearHabitacion, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 
-const Crear = ({isVisible, close, onSuccessfulSubmit}) => {
+const Crear = ({isVisible, hide, onSuccessfulSubmit}) => {
 
   const { loading, hasSuccess } = useSelector(crearHabitacionSelector)
 
@@ -16,18 +16,18 @@ const Crear = ({isVisible, close, onSuccessfulSubmit}) => {
 
   return (
     <ModalForm
-        hide={close}
+        hide={hide}
         isVisible={isVisible}
         onSubmit={onSubmit}
     >
-      <Header title="Crear habitación" hide={close} />
+      <Header title="Crear habitación" hide={hide} />
       <Body>
         <Input label="Nombre" name="nombre" />
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
       </Body>
-      <FooterAceptarCancelar cancelar={close} loading={loading} />
+      <FooterAceptarCancelar cancelar={hide} loading={loading} />
     </ModalForm> 
   )
 }

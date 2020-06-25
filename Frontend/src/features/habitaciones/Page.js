@@ -26,28 +26,28 @@ const HabitacionesPage = () => {
     },
   ]
   
-  const [IsModalVisible, setModalVisibility] = useState(false);                                                                     
+  const [IsModalVisible, setModalVisibility] = useState(false);
 
   function closeModalAndRefreshTable() {
-    ocultarModal();
+    hideModal();
     dispatch(fetchHabitaciones());  //Probablemente esto corresponda hacerlo de alguna forma adentro de la tabla
   }
 
-  function ocultarModal(){
+  function hideModal(){
     setModalVisibility(false);
   }
 
-  function mostrarModal(){
+  function showModal(){
     setModalVisibility(true);
   }
 
   return (
     <div className="container">
-        <Crear isVisible={IsModalVisible} close={ocultarModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
+        <Crear isVisible={IsModalVisible} hide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
-          <button className="button is-primary" onClick={mostrarModal}>Crear</button>
+          <button className="button is-primary" onClick={showModal}>Crear</button>
         </div>        
         <Tabla getData={fetchHabitaciones} selector={habitacionesSelector} columnas={columnas}/>
     </div>
