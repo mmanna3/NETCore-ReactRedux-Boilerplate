@@ -26,21 +26,28 @@ const HabitacionesPage = () => {
     },
   ]
   
-  const [modalEsVisible, togglearVisibilidadModal] = useState(false);  //TODO: Cambiar esto a estado string y ponérselo al componente bulma. 
-                                                                        //Dos métodos: mostrar y ocultar
+  const [modalEsVisible, setVisibilidadModal] = useState(false);                                                                     
 
   function cerrarModalYRefrescarTabla() {
-    togglearVisibilidadModal();
+    ocultarModal();
     dispatch(fetchHabitaciones());  //Probablemente esto corresponda hacerlo de alguna forma adentro de la tabla
+  }
+
+  function ocultarModal(){
+    setVisibilidadModal(false);
+  }
+
+  function mostrarModal(){
+    setVisibilidadModal(true);
   }
 
   return (
     <div className="container">
-        <Crear esVisible={modalEsVisible} cerrarSinAcciones={togglearVisibilidadModal} cerrarConExito={cerrarModalYRefrescarTabla}></Crear>
+        <Crear esVisible={modalEsVisible} cerrarSinAcciones={ocultarModal} cerrarConExito={cerrarModalYRefrescarTabla}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
-          <button className="button is-primary" onClick={togglearVisibilidadModal}>Crear</button>
+          <button className="button is-primary" onClick={mostrarModal}>Crear</button>
         </div>        
         <Tabla getData={fetchHabitaciones} selector={habitacionesSelector} columnas={columnas}/>
     </div>

@@ -3,12 +3,13 @@ import Form from "components/Form";
 
 export const ModalForm = ({defaultValues, children, cerrar, esVisible, titulo, onSubmit}) => {  
 
-  if(!esVisible) {
-    return null;
-  }
+  var visibilidad = {
+    true: 'is-active',
+    false: ''
+  };
 
   return (
-    <div className={"modal is-active"}>
+    <div className={`modal ${visibilidad[esVisible]}`}>
       <div className="modal-background" onClick={cerrar}></div>
       <div className="modal-card">
         <header className="modal-card-head">
