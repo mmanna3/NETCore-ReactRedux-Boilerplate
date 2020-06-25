@@ -40,6 +40,11 @@ const HabitacionesPage = () => {
   function showModal(){
     setModalVisibility(true);
   }
+  
+  function getData(){
+    dispatch(fetchHabitaciones());
+  }
+
 
   return (
     <div className="container">
@@ -49,7 +54,7 @@ const HabitacionesPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <button className="button is-primary" onClick={showModal}>Crear</button>
         </div>        
-        <Tabla getData={fetchHabitaciones} selector={habitacionesSelector} columnas={columnas}/>
+        <Tabla getData={getData} selector={habitacionesSelector} columnas={columnas}/>
     </div>
   )
 }

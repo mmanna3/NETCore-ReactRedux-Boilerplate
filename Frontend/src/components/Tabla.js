@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useTable } from 'react-table'
 
 const Tabla = ({getData, selector, columnas}) => {
-  const dispatch = useDispatch()
   const { datos, loading, hasErrors } = useSelector(selector)
 
   useEffect(() => {
-    dispatch(getData())
-  }, [dispatch, getData])
+    getData()
+  }, [getData])
 
 
   const data = React.useMemo(
