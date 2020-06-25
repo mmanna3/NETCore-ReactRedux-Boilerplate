@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import Table from 'components/Table'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,10 @@ const HabitacionesPage = () => {
   const dispatch = useDispatch();
   const { datos, loading, hasErrors } = useSelector(habitacionesSelector);
 
-  useEffect(() => refreshTable(), []);
+  // ✅ Wrap with useCallback to avoid change on every render
+  const getData = useCallback(() => {
+    dispatch(fetchHabitaciones());
+  }, [dispatch]); // ✅ All useCallback dependencies are specified
 
   const columnas = [
     {
@@ -33,7 +36,7 @@ const HabitacionesPage = () => {
 
   function closeModalAndRefreshTable() {
     hideModal();
-    refreshTable();
+    getData();
   }
 
   function hideModal(){
@@ -42,12 +45,7 @@ const HabitacionesPage = () => {
 
   function showModal(){
     setModalVisibility(true);
-  }
-  
-  function refreshTable(){
-    dispatch(fetchHabitaciones());
-  }
-
+  }  
 
   return (
     <div className="container">
@@ -57,7 +55,7 @@ const HabitacionesPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <button className="button is-primary" onClick={showModal}>Crear</button>
         </div>        
-        <Table  getData={refreshTable} 
+        <Table  getData={getData} 
                 selector={habitacionesSelector} 
                 columnas={columnas}
                 datos={datos}
