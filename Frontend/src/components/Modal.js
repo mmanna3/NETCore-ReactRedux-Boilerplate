@@ -29,7 +29,7 @@ export const ModalForm = ({children, cerrar, esVisible, titulo, onSubmit}) => {
   )
 }
 
-export const ModalHeader = ({titulo, cerrar}) => {
+export const Header = ({titulo, cerrar}) => {
   return (
     <header className="modal-card-head">
     <p className="modal-card-title">{titulo}</p>
@@ -38,7 +38,7 @@ export const ModalHeader = ({titulo, cerrar}) => {
   );
 }
 
-export const ModalFooter = ({children}) => {
+export const Footer = ({children}) => {
   return (
     <footer className="modal-card-foot">
       {children}
@@ -46,7 +46,7 @@ export const ModalFooter = ({children}) => {
   );
 }
 
-export const ModalContent = ({children}) => {
+export const Body = ({children}) => {
   return (
     <section className="modal-card-body" style={{width: 'inherit'}}>
       <div className="content">
