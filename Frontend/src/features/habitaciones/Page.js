@@ -51,7 +51,7 @@ const HabitacionesPage = () => {
 
   return (
     <div className="container">
-        <Crear isVisible={IsModalVisible} hide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
+        <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
