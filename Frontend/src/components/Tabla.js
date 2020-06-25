@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { useTable } from 'react-table'
 
-const Tabla = ({getData, selector, columnas}) => {
-  const { datos, loading, hasErrors } = useSelector(selector)
-
-  useEffect(() => {
-    getData()
-  }, [getData])
-
-
+const Tabla = ({getData, columnas, datos, loading, hasErrors}) => {    
+  
   const data = React.useMemo(
     () => datos, [datos]
   )
@@ -61,7 +54,8 @@ const Tabla = ({getData, selector, columnas}) => {
           </tr>
         ))}
       </thead>
-      {( loading ? (<tbody><tr><td>Cargando...</td></tr></tbody>) : bodyConDatos)}
+      {bodyConDatos}
+      
     </table>
   )  
 }

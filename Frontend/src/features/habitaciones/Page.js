@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tabla from 'components/Tabla'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
 
 const HabitacionesPage = () => {
   const dispatch = useDispatch();
+  const { datos, loading, hasErrors } = useSelector(habitacionesSelector);
+
+  useEffect(() => getData(), []);
 
   const columnas = [
     {
@@ -54,7 +57,13 @@ const HabitacionesPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <button className="button is-primary" onClick={showModal}>Crear</button>
         </div>        
-        <Tabla getData={getData} selector={habitacionesSelector} columnas={columnas}/>
+        <Tabla  getData={getData} 
+                selector={habitacionesSelector} 
+                columnas={columnas}
+                datos={datos}
+                loading={loading}
+                hasErrors={hasErrors}
+        />
     </div>
   )
 }
