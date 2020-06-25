@@ -26,24 +26,24 @@ const HabitacionesPage = () => {
     },
   ]
   
-  const [modalEsVisible, setVisibilidadModal] = useState(false);                                                                     
+  const [IsModalVisible, setModalVisibility] = useState(false);                                                                     
 
-  function cerrarModalYRefrescarTabla() {
+  function closeModalAndRefreshTable() {
     ocultarModal();
     dispatch(fetchHabitaciones());  //Probablemente esto corresponda hacerlo de alguna forma adentro de la tabla
   }
 
   function ocultarModal(){
-    setVisibilidadModal(false);
+    setModalVisibility(false);
   }
 
   function mostrarModal(){
-    setVisibilidadModal(true);
+    setModalVisibility(true);
   }
 
   return (
     <div className="container">
-        <Crear isVisible={modalEsVisible} close={ocultarModal} onSuccessfulSubmit={cerrarModalYRefrescarTabla}></Crear>
+        <Crear isVisible={IsModalVisible} close={ocultarModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
