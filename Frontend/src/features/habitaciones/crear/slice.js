@@ -27,17 +27,18 @@ const crearHabitacionSlice = createSlice({
       state.hasErrors = true
       state.validationErrors = payload?.errors
     },
-    postFinished: (state) => {
+    postReset: (state) => {
       state.loading = false
       state.hasSuccess = false
       state.hasErrors = false
       state.responseData = ''
       state.requestData = ''
+      state.validationErrors = undefined
     },
   },
 })
 
-export const { postInit, postSuccess, postFailure, postFinished } = crearHabitacionSlice.actions
+export const { postInit, postSuccess, postFailure, postReset } = crearHabitacionSlice.actions
 export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
@@ -53,8 +54,12 @@ export function crearHabitacion(data) {
       .catch((error) => {
           dispatch(postFailure(error.response.data));
       })
-      .then(() => {
-        dispatch(postFinished());
-      })
+  }
+}
+
+export function cleanState() {
+  
+  return async dispatch => {
+    dispatch(postReset());
   }
 }
