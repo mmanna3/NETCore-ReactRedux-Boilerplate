@@ -14,13 +14,17 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   if (hasSuccess)
     onSuccessfulSubmit();
 
+  function hide(){
+    onHide();
+  }
+
   return (
     <ModalForm
         isVisible={isVisible}
-        onHide={onHide}
+        onHide={hide}
         onSubmit={onSubmit}
     >
-      <Header title="Crear habitación" onHide={onHide} />
+      <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
@@ -28,7 +32,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
       </Body>
-      <FooterAceptarCancelar cancelar={onHide} loading={loading} />
+      <FooterAceptarCancelar cancelar={hide} loading={loading} />
     </ModalForm> 
   )
 }
