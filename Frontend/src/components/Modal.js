@@ -72,13 +72,12 @@ export const Body = ({children}) => {
 
 export const ValidationSummary = ({errors}) => {
     
-  function processErrors(){
+  function errorsList(){
     var result = [];
-    for (var key in errors) {
-      if (errors.hasOwnProperty(key)) {
-          result.push(<li key={key}>{errors[key]}</li>);
-      }
-    }
+
+    for (var key in errors)
+      result.push(<li key={key}>{errors[key]}</li>);
+
     return result;
   }
   
@@ -86,7 +85,7 @@ export const ValidationSummary = ({errors}) => {
     return (
         <div className="notification is-danger is-light">
           <div className="content">
-              {processErrors()}
+              {errorsList()}
           </div>
         </div>
     );
