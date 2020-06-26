@@ -19,10 +19,10 @@ export const Modal = ({children, onHide, isVisible}) => {
   )
 }
 
-export const ModalForm = ({children, onHide, isVisible, title, onSubmit}) => {  
+export const ModalForm = ({children, onHide, isVisible, onSubmit}) => {  
 
   return (
-    <Modal onHide={onHide} isVisible={isVisible} title={title}>
+    <Modal onHide={onHide} isVisible={isVisible}>
         <Form onSubmit={onSubmit}>
           {children}
         </Form>
