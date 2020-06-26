@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalForm, Body, Header, FooterAceptarCancelar, ValidationSummary } from 'components/Modal';
+import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
 import { Input, NumericInput } from "components/Input";
 import { crearHabitacion, cleanState, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,7 +30,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
       </Body>
-      <FooterAceptarCancelar cancelar={hide} loading={loading} />
+      <FooterAcceptCancel onCancel={hide} loading={loading} />
     </ModalForm> 
   )
 }

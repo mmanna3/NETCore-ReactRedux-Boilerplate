@@ -51,10 +51,10 @@ export const Footer = ({children}) => {
   );
 }
 
-export const FooterAceptarCancelar = ({cancelar, loading}) => {
+export const FooterAcceptCancel = ({onCancel, loading}) => {
   return (
     <Footer>
-      <button type="button" className="button" onClick={cancelar}>Cancelar</button>
+      <button type="button" className="button" onClick={onCancel}>Cancelar</button>
       <SubmitButton loading={loading} text="Aceptar" />
     </Footer>
   );
