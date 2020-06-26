@@ -10,36 +10,36 @@ const habitacionesSlice = createSlice({
   name: 'habitaciones',
   initialState,
   reducers: {
-    getHabitaciones: state => {
+    fetchInit: state => {
       state.loading = true
     },
-    getHabitacionesSuccess: (state, { payload }) => {
+    fetchSuccess: (state, { payload }) => {
       state.datos = payload
       state.loading = false
       state.hasErrors = false
     },
-    getHabitacionesFailure: state => {
+    fetchFailure: state => {
       state.loading = false
       state.hasErrors = true
     },
   },
 })
 
-export const { getHabitaciones, getHabitacionesSuccess, getHabitacionesFailure } = habitacionesSlice.actions
+export const { fetchInit, fetchSuccess, fetchFailure } = habitacionesSlice.actions
 export const habitacionesSelector = state => state.habitaciones
 export default habitacionesSlice.reducer
 
 export function fetchHabitaciones() {
   return async dispatch => {
-    dispatch(getHabitaciones())
+    dispatch(fetchInit())
 
     try {
       const response = await fetch('/api/habitaciones')
       const data = await response.json()
 
-      dispatch(getHabitacionesSuccess(data))
+      dispatch(fetchSuccess(data))
     } catch (error) {
-      dispatch(getHabitacionesFailure())
+      dispatch(fetchFailure())
     }
   }
 }
