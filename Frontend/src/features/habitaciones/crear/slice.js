@@ -37,14 +37,14 @@ const crearHabitacionSlice = createSlice({
   },
 })
 
-export const { postInit: post, postSuccess, postFailure, postFinished } = crearHabitacionSlice.actions
+export const { postInit, postSuccess, postFailure, postFinished } = crearHabitacionSlice.actions
 export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
 export function crearHabitacion(data) {
 
   return async dispatch => {
-    dispatch(post(data));
+    dispatch(postInit(data));
 
     axios.post('/api/habitaciones', data)
       .then((res) => {
