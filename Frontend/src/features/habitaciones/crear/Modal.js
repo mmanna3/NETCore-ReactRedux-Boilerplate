@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
-  const { loading, hasSuccess } = useSelector(crearHabitacionSelector)
+  const { loading, hasSuccess, hasErrors } = useSelector(crearHabitacionSelector)
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data));
@@ -19,6 +19,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         isVisible={isVisible}
         onHide={onHide}
         onSubmit={onSubmit}
+        hasErrors={hasErrors}
     >
       <Header title="Crear habitación" onHide={onHide} />
       <Body>

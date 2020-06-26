@@ -7,30 +7,40 @@ export const initialState = {
   hasErrors: false,
   hasFinished: false,
   requestData: '',
-  respuesta: '',
+  responseData: '',
+  validationErrors: []
 }
 
 const crearHabitacionSlice = createSlice({
   name: 'crearHabitacion',
   initialState,
   reducers: {
-    post: (state, { requestData }) => {
+    post: (state, { payload }) => {
       state.loading = true
       state.hasSuccess = false
       state.hasErrors = false
-      state.requestData = requestData    
+      state.hasFinished = false
+      state.responseData = ''
+      state.validationErrors = []
+      state.requestData = payload
     },
-    postSuccess: (state, { respuesta }) => {
-      state.respuesta = respuesta
+    postSuccess: state => {
+      state.loading = false
       state.hasSuccess = true
     },
-    postFailure: state => {
-      state.hasErrors = true
-    },
-    postFinished: state => {
+    postFailure: (state, {payload}) => {
       state.loading = false
-      state.hasErrors = false
+      state.hasErrors = true
+      state.validationErrors = payload?.errors
+    },
+    postFinished: (state) => {      
+      state.loading = false
       state.hasSuccess = false
+      state.hasErrors = false
+      state.hasFinished = true
+      state.responseData = ''
+      state.validationErrors = []
+      state.requestData = ''
     },
   },
 })
@@ -44,14 +54,15 @@ export function crearHabitacion(data) {
   return async dispatch => {
     dispatch(post(data));
 
-    try {
-      const response = await axios.post('/api/habitaciones', data);
-      dispatch(postSuccess(response.data));
-
-    } catch (error) {
-      dispatch(postFailure());
-    } finally {
-      dispatch(postFinished());
-    }
+    axios.post('/api/habitaciones', data)
+      .then((res) => {
+        dispatch(postSuccess(res.data));
+      })
+      .catch((error) => {
+          dispatch(postFailure(error.response.data));
+      })
+      .then(() => {
+        dispatch(postFinished());
+      })
   }
 }
