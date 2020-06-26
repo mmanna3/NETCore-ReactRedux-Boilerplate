@@ -5,7 +5,6 @@ export const initialState = {
   loading: false,
   hasSuccess: false,
   hasErrors: false,
-  hasFinished: false,
   requestData: '',
   responseData: '',
   validationErrors: []
@@ -17,11 +16,6 @@ const crearHabitacionSlice = createSlice({
   reducers: {
     post: (state, { payload }) => {
       state.loading = true
-      state.hasSuccess = false
-      state.hasErrors = false
-      state.hasFinished = false
-      state.responseData = ''
-      state.validationErrors = []
       state.requestData = payload
     },
     postSuccess: state => {
@@ -37,7 +31,6 @@ const crearHabitacionSlice = createSlice({
       state.loading = false
       state.hasSuccess = false
       state.hasErrors = false
-      state.hasFinished = true
       state.responseData = ''
       state.validationErrors = []
       state.requestData = ''
