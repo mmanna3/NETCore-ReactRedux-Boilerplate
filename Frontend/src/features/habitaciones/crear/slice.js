@@ -14,7 +14,7 @@ const crearHabitacionSlice = createSlice({
   name: 'crearHabitacion',
   initialState,
   reducers: {
-    post: (state, { payload }) => {
+    postInit: (state, { payload }) => {
       state.loading = true
       state.requestData = payload
     },
@@ -27,7 +27,7 @@ const crearHabitacionSlice = createSlice({
       state.hasErrors = true
       state.validationErrors = payload?.errors
     },
-    postFinished: (state) => {      
+    postFinished: (state) => {
       state.loading = false
       state.hasSuccess = false
       state.hasErrors = false
@@ -37,7 +37,7 @@ const crearHabitacionSlice = createSlice({
   },
 })
 
-export const { post, postSuccess, postFailure, postFinished } = crearHabitacionSlice.actions
+export const { postInit: post, postSuccess, postFailure, postFinished } = crearHabitacionSlice.actions
 export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
