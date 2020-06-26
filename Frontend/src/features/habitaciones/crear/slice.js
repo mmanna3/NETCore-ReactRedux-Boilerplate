@@ -58,7 +58,7 @@ export function crearHabitacion(data, onSuccess) {
   }
 }
 
-export function cleanState() {
+export function cleanErrors() {
   
   return async dispatch => {
     dispatch(postReset());

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
 import { Input, NumericInput } from "components/Input";
-import { crearHabitacion, cleanState, crearHabitacionSelector } from './slice';
+import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
@@ -13,7 +13,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
  
   function hide(){
     onHide();
-    dispatch(cleanState());
+    dispatch(cleanErrors());
   }
 
   return (
