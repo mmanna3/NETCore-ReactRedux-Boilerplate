@@ -55,7 +55,7 @@ export default function Form({ defaultValues, children, onSubmit }) {
       return React.createElement(e.type, {
               ...{
                 ...e.props,
-                register: register({ required: true }),
+                register: register(),
                 key: e.props.name
               }
             })
