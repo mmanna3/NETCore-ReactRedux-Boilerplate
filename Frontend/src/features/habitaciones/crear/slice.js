@@ -42,7 +42,7 @@ export const { postInit, postSuccess, postFailure, postReset } = crearHabitacion
 export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
-export function crearHabitacion(data) {
+export function crearHabitacion(data, onSuccess) {
 
   return async dispatch => {
     dispatch(postInit(data));
@@ -50,6 +50,7 @@ export function crearHabitacion(data) {
     axios.post('/api/habitaciones', data)
       .then((res) => {
         dispatch(postSuccess(res.data));
+        onSuccess();
       })
       .catch((error) => {
           dispatch(postFailure(error.response.data));

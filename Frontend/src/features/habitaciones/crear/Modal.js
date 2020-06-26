@@ -6,15 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
-  const { loading, hasSuccess, validationErrors } = useSelector(crearHabitacionSelector)
+  const { loading, validationErrors } = useSelector(crearHabitacionSelector)
 
   const dispatch = useDispatch();
-  const onSubmit = data => dispatch(crearHabitacion(data));
-  
-  if (hasSuccess) {
-    onSuccessfulSubmit();
-    dispatch(cleanState())
-  }
+  const onSubmit = data => dispatch(crearHabitacion(data, onSuccessfulSubmit));  
  
   function hide(){
     onHide();
