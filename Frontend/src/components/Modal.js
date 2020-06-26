@@ -19,11 +19,11 @@ export const Modal = ({children, onHide, isVisible}) => {
   )
 }
 
-export const ModalForm = ({children, onHide, isVisible, onSubmit}) => {  
+export const ModalForm = ({children, onHide, isVisible, onSubmit, resetOnChanged}) => {  
 
   return (
     <Modal onHide={onHide} isVisible={isVisible}>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} resetOnChanged={resetOnChanged}>
           {children}
         </Form>
     </Modal>

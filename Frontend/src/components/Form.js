@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function Form({ defaultValues, children, onSubmit }) {
-  const { handleSubmit, register } = useForm({ defaultValues });
+export default function Form({ defaultValues, children, onSubmit, resetOnChanged }) {
+  const { handleSubmit, register, reset } = useForm({ defaultValues });
+
+  useEffect(() => {
+    reset();
+  }, [resetOnChanged, reset]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {processContent(children)}
     </form>
-  );    
+  );
 
   function processContent(contenido) {
     if (Array.isArray(contenido)) {

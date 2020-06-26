@@ -6,12 +6,18 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
-  const { loading, validationErrors } = useSelector(crearHabitacionSelector)
+  const {loading, validationErrors} = useSelector(crearHabitacionSelector)
+  const [resetOnChanged, resetForm] = React.useState(0);
 
   const dispatch = useDispatch();
-  const onSubmit = data => dispatch(crearHabitacion(data, onSuccessfulSubmit));  
- 
-  function hide(){
+  const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
+  
+  function onSuccess() {
+    onSuccessfulSubmit();
+    resetForm(resetOnChanged+1);
+  }
+
+  function hide() {
     onHide();
     dispatch(cleanErrors());
   }
@@ -21,6 +27,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         isVisible={isVisible}
         onHide={hide}
         onSubmit={onSubmit}
+        resetOnChanged={resetOnChanged}
     >
       <Header title="Crear habitación" onHide={hide} />
       <Body>

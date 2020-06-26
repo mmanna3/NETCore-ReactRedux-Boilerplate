@@ -18,6 +18,7 @@ const crearHabitacionSlice = createSlice({
     },
     postSuccess: state => {
       state.loading = false
+      state.validationErrors = undefined
     },
     postFailure: (state, {payload}) => {
       state.loading = false
