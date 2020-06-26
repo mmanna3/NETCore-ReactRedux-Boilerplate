@@ -71,12 +71,12 @@ export const Body = ({children}) => {
 }
 
 export const ValidationSummary = ({errors}) => {
-  
-  var result = [];
-  function errorsToString(){
+    
+  function processErrors(){
+    var result = [];
     for (var key in errors) {
       if (errors.hasOwnProperty(key)) {
-          result.push(errors[key]);
+          result.push(<li key={key}>{errors[key]}</li>);
       }
     }
     return result;
@@ -85,8 +85,11 @@ export const ValidationSummary = ({errors}) => {
   if (errors !== undefined)
     return (
         <div className="notification is-danger is-light">
-          {errorsToString()}
+          <div className="content">
+              {processErrors()}
+          </div>
         </div>
     );
+    
   return null;
 }
