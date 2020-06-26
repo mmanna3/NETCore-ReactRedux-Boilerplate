@@ -7,7 +7,7 @@ export const initialState = {
   hasErrors: false,
   requestData: '',
   responseData: '',
-  validationErrors: []
+  validationErrors: undefined
 }
 
 const crearHabitacionSlice = createSlice({
@@ -32,7 +32,6 @@ const crearHabitacionSlice = createSlice({
       state.hasSuccess = false
       state.hasErrors = false
       state.responseData = ''
-      state.validationErrors = []
       state.requestData = ''
     },
   },

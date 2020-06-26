@@ -19,7 +19,7 @@ export const Modal = ({children, onHide, isVisible}) => {
   )
 }
 
-export const ModalForm = ({children, onHide, isVisible, title, onSubmit, hasErrors}) => {  
+export const ModalForm = ({children, onHide, isVisible, title, onSubmit}) => {  
 
   return (
     <Modal onHide={onHide} isVisible={isVisible} title={title}>
@@ -68,4 +68,25 @@ export const Body = ({children}) => {
       </div>
   </section>
   );
+}
+
+export const ValidationSummary = ({errors}) => {
+  
+  var result = [];
+  function errorsToString(){
+    for (var key in errors) {
+      if (errors.hasOwnProperty(key)) {
+          result.push(errors[key]);
+      }
+    }
+    return result;
+  }
+  
+  if (errors !== undefined)
+    return (
+        <div className="notification is-danger is-light">
+          {errorsToString()}
+        </div>
+    );
+  return null;
 }
