@@ -36,7 +36,13 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
-        <Select name="tipo">
+        <Select name="camas[0].tipo">
+          <option value="1">Individual</option>
+          <option value="2">Matrimonial</option>
+          <option value="3">Marinera</option>
+        </Select>
+        <NumericInput label="Camas" name="camas[0].cantidad" />
+        <Select name="camas[1].tipo">
           <option value="1">Individual</option>
           <option value="2">Matrimonial</option>
           <option value="3">Marinera</option>
