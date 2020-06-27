@@ -37,9 +37,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
                 key: e.props.name
               }
             })
-            }
-    
-    if (hasChildren(e)){
+    } else if (hasChildren(e)){
       
       if (hasMoreThanOneChild(e)) {
         var newChildren = e.props.children.map((element, innerIndex) => {
@@ -53,7 +51,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
       }
 
     } else {
-      return convertElementIntoFormInput(e);
+      return e;
     }
   }
   
@@ -63,20 +61,5 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
 
   function hasChildren(e){
     return e.props && e.props.children;
-  }
-
-  function convertElementIntoFormInput(e) {
-      
-    if (e.props && e.props.name) {
-      return React.createElement(e.type, {
-              ...{
-                ...e.props,
-                register: register(),
-                key: e.props.name
-              }
-            })
-            }
-    else
-      return e;
   }
 }
