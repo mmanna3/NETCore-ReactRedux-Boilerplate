@@ -6,7 +6,7 @@ namespace Api.Controllers.DTOs
     {
         public int Id { get; set; }
 
-        [Required, MaxLength(30)]
+        [YKNRequired, YKNStringLength(Maximo = 30)]
         public string Nombre { get; set; }
         
         public byte CamasIndividuales { get; set; }
