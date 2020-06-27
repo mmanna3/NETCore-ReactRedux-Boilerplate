@@ -8,9 +8,10 @@ namespace Api.Controllers.DTOs
 
         [YKNRequired, YKNStringLength(Maximo = 30)]
         public string Nombre { get; set; }
-        
+
+        [YKNRequired]
         public byte CamasIndividuales { get; set; }
-        
+
         public byte CamasMarineras { get; set; }
         
         public byte CamasMatrimoniales { get; set; }

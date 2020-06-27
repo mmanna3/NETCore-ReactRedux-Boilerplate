@@ -41,12 +41,12 @@ export function SubmitButton({ text, loading }) {
     return <button className="button is-primary is-loading" type="button">{text}</button>
 }
 
-export function Select({ register, options, name, ...rest }) {
+export function Select({ register, name, children }) {
   return (
-    <select name={name} ref={register} {...rest}>
-      {options.map(value => (
-        <option value={value}>{value}</option>
-      ))}
-    </select>
+    <div className="select">
+      <select name={name} ref={register}>
+        {children}
+      </select>
+    </div>
   );
 }

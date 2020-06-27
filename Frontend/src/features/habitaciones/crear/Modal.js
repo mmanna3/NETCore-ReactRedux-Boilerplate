@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
-import { Input, NumericInput } from "components/Input";
+import { Input, NumericInput, Select } from "components/Input";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -36,10 +36,20 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
+        <Select name="tipo">
+          <option value="1">Individual</option>
+          <option value="2">Matrimonial</option>
+          <option value="3">Marinera</option>
+        </Select>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
     </ModalForm> 
   )
 }
+
+
+// const SelectCama = ({}) => {
+
+// }
 
 export default Crear
