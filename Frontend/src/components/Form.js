@@ -31,7 +31,8 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (hasNameProperty(e))
       return convertir(e);
     
-
+    
+    
     if (typeof e.type === 'function'){        
       e = e.type(e.props);
     }
@@ -39,13 +40,13 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (e == null)
       return e;
 
-    if (hasNoChildren(e)) //Si no tengo hijos convierto.
+    if (hasNoChildren(e))
       return convertir(e);
 
     var children = getChildren(e);
 
-    var newChildren = children.map((element, innerIndex) => {
-      return procesar(element, index, innerIndex);
+    var newChildren = children.map((child, innerIndex) => {
+      return procesar(child, index, innerIndex);
     })
     
     return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);
