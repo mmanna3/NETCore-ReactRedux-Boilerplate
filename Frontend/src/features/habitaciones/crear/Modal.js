@@ -57,6 +57,27 @@ const SelectCama = ({index}) => {
                       </span>
                     </>
   };
+
+  const IdentificadorDosCamas = ({index}) => {
+    return <>
+      <span className="control">
+      <span className="button is-static">
+        Nº Abajo
+      </span>
+    </span>
+    <span className="control is-expanded">
+      <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
+    </span>
+    <span className="control">
+      <span className="button is-static">
+        Nº Arriba
+      </span>
+    </span>
+    <span className="control is-expanded">
+      <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
+    </span>
+  </>
+};
   
   const [esMarinera, setEsMarinera] = React.useState(false);
 
@@ -84,7 +105,7 @@ const SelectCama = ({index}) => {
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            {!esMarinera ? <IdentificadorUnaCama index={index}/>: (<></>)
+            {!esMarinera ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
             }
           </div>
         </div>
