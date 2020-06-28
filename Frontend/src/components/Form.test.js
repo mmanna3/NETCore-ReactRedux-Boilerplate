@@ -4,26 +4,71 @@ import { mount, configure } from 'enzyme';
 import Form from './Form';
 import {Input, Select} from './Input';
 import 'mutationobserver-shim';
+import { Modal, Body } from './Modal';
 
 global.MutationObserver = window.MutationObserver;
 configure({ adapter: new Adapter() });  //Necesario para hacer mount con componentes multinivel
 
-it('inputHtmlTag inside InputComponent has NAME and REGISTER props', () => {
+it('Being only child, ReactComponent has NAME prop, so add REGISTER prop', () => {
   
   var name = 'nombre';
   
   const jsx = (
-    <Form name="prueba">
-      <Input label="Nombre" name={name} />
+    <Form>
+      <Input name={name} />
     </Form>
   )
   
   const wrapper = mount(jsx);
     
-  var customInputComponent = wrapper.find(Input);
-  var htmlInputTag = customInputComponent.find('input');
+  var inputComponent = wrapper.find(Input);
+  var htmlInnerInputTag = inputComponent.find('input');
   
-  expect(typeof customInputComponent.prop('register')).toBe('function');
-  expect(typeof htmlInputTag.prop('register')).toBe('undefined');
-  expect(htmlInputTag.prop('name')).toBe(name);
+  expect(htmlInnerInputTag.prop('name')).toBe(name);
+  expect(inputComponent.prop('name')).toBe(name);
+  expect(typeof inputComponent.prop('register')).toBe('function');  
+});
+
+it('In multiLevel html simple elements tree, reactComponent has NAME prop, so add REGISTER prop', () => {
+  
+  var name = 'nombre';
+  
+  const jsx = (
+    <Form>
+      <div>
+        <div>
+          <Input name={name} />
+        </div>
+      </div>      
+    </Form>
+  )
+  
+  const wrapper = mount(jsx);
+    
+  var inputComponent = wrapper.find(Input);
+  
+  expect(inputComponent.prop('name')).toBe(name);
+  expect(typeof inputComponent.prop('register')).toBe('function');  
+});
+
+it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REGISTER prop', () => {
+  
+  var name = 'nombre';
+  
+  const jsx = (
+    <Form>
+      <Modal>
+        <Body>
+          <Input name={name} />
+        </Body>
+      </Modal>      
+    </Form>
+  )
+  
+  const wrapper = mount(jsx);
+    
+  var inputComponent = wrapper.find(Input);
+  
+  expect(inputComponent.prop('name')).toBe(name);
+  expect(typeof inputComponent.prop('register')).toBe('function');  
 });

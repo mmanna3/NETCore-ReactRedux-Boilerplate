@@ -29,7 +29,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         onSubmit={onSubmit}
         resetOnChanged={resetOnChanged}
     >
-      <Header title="Crear habitación" onHide={hide} />
+      {/* <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
@@ -48,7 +48,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           <option value="3">Marinera</option>
         </Select>
       </Body>
-      <FooterAcceptCancel onCancel={hide} loading={loading} />
+      <FooterAcceptCancel onCancel={hide} loading={loading} /> */}
+      <input name="asd"/>
     </ModalForm> 
   )
 }
