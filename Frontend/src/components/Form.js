@@ -18,48 +18,52 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (Array.isArray(contenido)) {
       return processContentAsArray(contenido);
     } else
-      return processElement(contenido);
+      return procesar(contenido);
   }
 
   function processContentAsArray(contenido){
     return contenido.map((element,index) => {
-      return processElement(element, index);
+      return procesar(element, index);
     });
   }
 
-  function processElement(e, index, innerIndex) {
-    
-    if (e.props && e.props.name) {
-      return React.createElement(e.type, {
-              ...{
-                ...e.props,
-                register: register(),
-                key: e.props.name
-              }
-            })
-    } else if (hasChildren(e)){
-      
-      if (hasMoreThanOneChild(e)) {
-        var newChildren = e.props.children.map((element, innerIndex) => {
-          return processElement(element, index, innerIndex);
-        })
-        return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);
-      }
-      else {
-        var newChild = processElement(e.props.children, index);
-        return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}-i`}}, newChild);
-      }
+  function procesar(e, index, innerIndex) {    
+    var a = e;
 
-    } else {
-      return e;
+    if (typeof e.type === 'function'){        
+      a = e.type(e.props);
     }
-  }
-  
-  function hasMoreThanOneChild(e){
-    return Array.isArray(e.props.children);
+
+    if (a == null)
+      return a;
+
+    if (!a.props || !a.props.children || e.props.name) //Si no tengo hijos convierto.
+      return convertir(e);
+
+    var children = [];
+    if (Array.isArray(a.props.children))
+      children = a.props.children;
+    else {
+      children.push(a.props.children);
+    }
+
+    var newChildren = children.map((element, innerIndex) => {
+      return procesar(element, index, innerIndex);
+    })
+    return React.cloneElement(a, {...{...a.props, key: `${index}-${innerIndex}`}}, newChildren);
+      
   }
 
-  function hasChildren(e){
-    return e.props && e.props.children;
+  function convertir(e){
+    if (e.props && e.props.name)
+      return React.createElement(e.type, {
+        ...{
+          ...e.props,
+          register: register(),
+          key: e.props.name
+        }
+      });
+    else
+      return e;
   }
 }

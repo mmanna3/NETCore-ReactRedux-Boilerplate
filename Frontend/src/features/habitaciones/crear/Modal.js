@@ -29,11 +29,15 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         onSubmit={onSubmit}
         resetOnChanged={resetOnChanged}
     >
-      {/* <Header title="Crear habitación" onHide={hide} />
+      <div>
+        <h1>a</h1>
+      </div>
+      <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
-        <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
+        <SelectCama />
+        {/* <NumericInput label="Camas matrimoniales" name="camasMatrimoniales" />
         <NumericInput label="Camas marineras" name="camasMarineras" type="number" />
         <NumericInput label="Camas individuales" name="camasIndividuales" type="number" />
         <Select name="camas[0].tipo">
@@ -46,17 +50,44 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           <option value="1">Individual</option>
           <option value="2">Matrimonial</option>
           <option value="3">Marinera</option>
-        </Select>
+        </Select> */}
       </Body>
-      <FooterAcceptCancel onCancel={hide} loading={loading} /> */}
-      <input name="asd"/>
+      <FooterAcceptCancel onCancel={hide} loading={loading} />
+      
     </ModalForm> 
   )
 }
 
 
-// const SelectCama = ({}) => {
-
-// }
+const SelectCama = () => {
+  return         <div className="field is-horizontal">
+  <div className="field-body">
+    <div className="field is-expanded">
+      <div className="field has-addons">
+        <p className="control">
+          <a className="button is-static">
+            Cama
+          </a>
+        </p>
+        <p className="control">
+        <Select name="cama">
+          <option value="1">Individual</option>
+          <option value="2">Matrimonial</option>
+          <option value="3">Marinera</option>
+        </Select>
+        </p>
+        <p className="control">
+          <a className="button is-static">
+            Nº
+          </a>
+        </p>
+        <p className="control is-expanded">
+          <input className="input" name="camas[0].cantidad" />    
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+}
 
 export default Crear

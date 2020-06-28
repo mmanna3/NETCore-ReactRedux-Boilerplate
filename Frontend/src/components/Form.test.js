@@ -27,7 +27,7 @@ it('Being only child, ReactComponent has NAME prop, so add REGISTER prop', () =>
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
 
-it('In multiLevel html simple elements tree, reactComponent has NAME prop, so add REGISTER prop', () => {
+it('In multiLevel html simple elements tree, InputComponent has NAME prop, so add REGISTER prop', () => {
   
   var name = 'nombre';
   
@@ -49,7 +49,7 @@ it('In multiLevel html simple elements tree, reactComponent has NAME prop, so ad
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
 
-it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REGISTER prop', () => {
+it('In multiLevel reactComponents tree, InputComponent has NAME prop, so add REGISTER prop', () => {
   
   var name = 'nombre';
   
@@ -71,20 +71,44 @@ it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REG
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
 
-
-const SelectCama = () => {
-  return <Select name='nombre'>
-          <option value="1">Individual</option>
-          <option value="2">Matrimonial</option>
-          <option value="3">Marinera</option>
-        </Select>
-       
-}
-
-
-it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REGISTER prop', () => {
+it('In multiLevel reactComponents tree, SelectComponent has NAME prop, so add REGISTER prop', () => {
   
   var name = 'nombre';
+  
+  const jsx = (
+    <Form>
+      <Modal>
+        <Body>
+          <Select name={name}>
+            <option>1</option>
+          </Select>
+        </Body>
+      </Modal>      
+    </Form>
+  )
+  
+  const wrapper = mount(jsx);
+
+  var selectComponent = wrapper.find(Select);
+  
+  expect(selectComponent.prop('name')).toBe(name);
+  expect(typeof selectComponent.prop('register')).toBe('function');
+});
+
+
+it('In multiLevel reactComponents tree, SelectComponent is wrapped in another Component and has NAME prop, so add REGISTER prop', () => {
+  
+  var name = 'nombre';
+
+  const SelectCama = () => {
+    return <div>
+            <Select name={name}>
+              <option value="1">Individual</option>
+              <option value="2">Matrimonial</option>
+              <option value="3">Marinera</option>
+            </Select>
+          </div>;       
+  }  
   
   const jsx = (
     <Form>
@@ -97,9 +121,9 @@ it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REG
   )
   
   const wrapper = mount(jsx);
-          
-  var inputComponent = wrapper.find(SelectCama).find(Select);
+
+  var selectComponent = wrapper.find(Select);
   
-  expect(inputComponent.prop('name')).toBe(name);
-  expect(typeof inputComponent.prop('register')).toBe('function');
+  expect(selectComponent.prop('name')).toBe(name);
+  expect(typeof selectComponent.prop('register')).toBe('function');
 });
