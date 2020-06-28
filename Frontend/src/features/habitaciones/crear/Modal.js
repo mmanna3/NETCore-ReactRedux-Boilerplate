@@ -33,7 +33,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
-        <SelectCama />
+        <SelectCama index="0"/>
+        <SelectCama index="1"/>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
@@ -42,7 +43,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 }
 
 
-const SelectCama = () => {
+const SelectCama = ({index}) => {
   return (
     <div className="field is-horizontal">
       <div className="field-body">
@@ -54,7 +55,7 @@ const SelectCama = () => {
               </span>
             </span>
             <span className="control">
-              <Select name="cama[0].tipo">
+              <Select name={`camas[${index}].tipo`}>
                 <option value="1">Individual</option>
                 <option value="2">Matrimonial</option>
                 <option value="3">Marinera</option>
@@ -66,7 +67,7 @@ const SelectCama = () => {
               </span>
             </span>
             <span className="control is-expanded">
-              <InputWithoutLabel name="cama[0].nombre"/>
+              <InputWithoutLabel name={`camas[${index}].numero`}/>
             </span>
           </div>
         </div>
