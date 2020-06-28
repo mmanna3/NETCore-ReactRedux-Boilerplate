@@ -70,3 +70,36 @@ it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REG
   expect(inputComponent.prop('name')).toBe(name);
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
+
+
+const SelectCama = () => {
+  return <Select name='nombre'>
+          <option value="1">Individual</option>
+          <option value="2">Matrimonial</option>
+          <option value="3">Marinera</option>
+        </Select>
+       
+}
+
+
+it('In multiLevel reactComponents tree, reactComponent has NAME prop, so add REGISTER prop', () => {
+  
+  var name = 'nombre';
+  
+  const jsx = (
+    <Form>
+      <Modal>
+        <Body>
+          <SelectCama />
+        </Body>
+      </Modal>      
+    </Form>
+  )
+  
+  const wrapper = mount(jsx);
+          
+  var inputComponent = wrapper.find(SelectCama).find(Select);
+  
+  expect(inputComponent.prop('name')).toBe(name);
+  expect(typeof inputComponent.prop('register')).toBe('function');
+});
