@@ -22,9 +22,7 @@ it('Being only child, ReactComponent has NAME prop, so add REGISTER prop', () =>
   const wrapper = mount(jsx);
     
   var inputComponent = wrapper.find(Input);
-  var htmlInnerInputTag = inputComponent.find('input');
-  
-  expect(htmlInnerInputTag.prop('name')).toBe(name);
+
   expect(inputComponent.prop('name')).toBe(name);
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
