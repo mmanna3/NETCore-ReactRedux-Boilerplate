@@ -17,6 +17,12 @@ export function Input({ register, label, name, ...otrosAtributos }) {
   )
 }
 
+export function InputWithoutLabel({ register, name, ...otrosAtributos }) {
+  return (
+      <input className="input" name={name} ref={register} {...otrosAtributos} />
+  )
+}
+
 export function NumericInput({ register, label, name, ...otrosAtributos }) {
   return (
     <div className="field">
