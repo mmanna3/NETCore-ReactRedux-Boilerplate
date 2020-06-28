@@ -41,7 +41,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
       return a;
 
     if (hasNoChildren(a)) //Si no tengo hijos convierto.
-      return convertir(e);
+      return convertir(a);
 
     var children = getChildren(a);
 
