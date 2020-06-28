@@ -19,7 +19,8 @@ it('un sólo tag input adentro, le pone el name', () => {
   
   console.log(wrapper);
   var name = wrapper.find(Input).prop('name');
-  console.log(name);
+  console.log(wrapper.find(Input).dive().find('input[name="nombre"]').prop('name'));
+
   expect(name).toBe('nombre');
   
   
