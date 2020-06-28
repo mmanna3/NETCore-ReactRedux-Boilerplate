@@ -31,24 +31,24 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (hasNameProperty(e))
       return convertir(e);
     
-    var a = e;
 
     if (typeof e.type === 'function'){        
-      a = e.type(e.props);
+      e = e.type(e.props);
     }
 
-    if (a == null)
-      return a;
+    if (e == null)
+      return e;
 
-    if (hasNoChildren(a)) //Si no tengo hijos convierto.
-      return convertir(a);
+    if (hasNoChildren(e)) //Si no tengo hijos convierto.
+      return convertir(e);
 
-    var children = getChildren(a);
+    var children = getChildren(e);
 
     var newChildren = children.map((element, innerIndex) => {
       return procesar(element, index, innerIndex);
     })
-    return React.cloneElement(a, {...{...a.props, key: `${index}-${innerIndex}`}}, newChildren);
+    
+    return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);
       
   }
 
