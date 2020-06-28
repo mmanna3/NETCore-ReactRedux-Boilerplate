@@ -40,18 +40,23 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (!a.props || !a.props.children || e.props.name) //Si no tengo hijos convierto.
       return convertir(e);
 
-    var children = [];
-    if (Array.isArray(a.props.children))
-      children = a.props.children;
-    else {
-      children.push(a.props.children);
-    }
+    var children = getChildren(a);
 
     var newChildren = children.map((element, innerIndex) => {
       return procesar(element, index, innerIndex);
     })
     return React.cloneElement(a, {...{...a.props, key: `${index}-${innerIndex}`}}, newChildren);
       
+  }
+
+  function getChildren(a) {
+    var children = [];
+    if (Array.isArray(a.props.children))
+      children = a.props.children;
+    else {
+      children.push(a.props.children);
+    }
+    return children;
   }
 
   function convertir(e){
