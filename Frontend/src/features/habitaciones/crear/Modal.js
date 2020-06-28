@@ -47,6 +47,13 @@ const SelectCama = ({index}) => {
 
   const [esMarinera, setEsMarinera] = React.useState(false);
 
+  const mostrarOcultarMarinera = (e) => {
+    if (e.target.value === "3") 
+      setEsMarinera(true);
+    else
+      setEsMarinera(false);
+  }
+
   return (
     <div className="field is-horizontal">
       <div className="field-body">
@@ -58,7 +65,7 @@ const SelectCama = ({index}) => {
               </span>
             </span>
             <span className="control">
-              <Select name={`camas[${index}].tipo`}>
+              <Select name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
                 <option value="1">Individual</option>
                 <option value="2">Matrimonial</option>
                 <option value="3">Marinera</option>
@@ -68,6 +75,7 @@ const SelectCama = ({index}) => {
                         (<>
                         <span className="control">
                         <span className="button is-static">
+                          Nº
                         </span>
                       </span>
                       <span className="control is-expanded">

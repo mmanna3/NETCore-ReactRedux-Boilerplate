@@ -47,10 +47,10 @@ export function SubmitButton({ text, loading }) {
     return <button className="button is-primary is-loading" type="button">{text}</button>
 }
 
-export function Select({ register, name, children }) {
+export function Select({ register, name, children, onChange }) {
   return (
     <div className="select">
-      <select name={name} ref={register}>
+      <select name={name} ref={register} onChange={onChange}>
         {children}
       </select>
     </div>
