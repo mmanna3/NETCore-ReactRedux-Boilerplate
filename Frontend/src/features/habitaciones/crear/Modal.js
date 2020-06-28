@@ -45,6 +45,19 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
 const SelectCama = ({index}) => {
 
+  const IdentificadorUnaCama = ({index}) => {
+                      return <>
+                        <span className="control">
+                        <span className="button is-static">
+                          Nº
+                        </span>
+                      </span>
+                      <span className="control is-expanded">
+                        <InputWithoutLabel name={`camas[${index}].numero`}/>
+                      </span>
+                    </>
+  };
+  
   const [esMarinera, setEsMarinera] = React.useState(false);
 
   const mostrarOcultarMarinera = (e) => {
@@ -71,18 +84,7 @@ const SelectCama = ({index}) => {
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            {!esMarinera ?
-                        (<>
-                        <span className="control">
-                        <span className="button is-static">
-                          Nº
-                        </span>
-                      </span>
-                      <span className="control is-expanded">
-                        <InputWithoutLabel name={`camas[${index}].numero`}/>
-                      </span>
-                      </>
-                      ) : (<></>)
+            {!esMarinera ? <IdentificadorUnaCama index={index}/>: (<></>)
             }
           </div>
         </div>
