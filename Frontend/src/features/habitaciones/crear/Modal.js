@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
 import { Input, InputWithoutLabel, Select } from "components/Input";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
@@ -44,6 +44,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
 
 const SelectCama = ({index}) => {
+
+  const [esMarinera, setEsMarinera] = React.useState(false);
+
   return (
     <div className="field is-horizontal">
       <div className="field-body">
@@ -61,14 +64,18 @@ const SelectCama = ({index}) => {
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            <span className="control">
-              <span className="button is-static">
-                Nº
-              </span>
-            </span>
-            <span className="control is-expanded">
-              <InputWithoutLabel name={`camas[${index}].numero`}/>
-            </span>
+            {!esMarinera ?
+                        (<>
+                        <span className="control">
+                        <span className="button is-static">
+                        </span>
+                      </span>
+                      <span className="control is-expanded">
+                        <InputWithoutLabel name={`camas[${index}].numero`}/>
+                      </span>
+                      </>
+                      ) : (<></>)
+            }
           </div>
         </div>
       </div>
