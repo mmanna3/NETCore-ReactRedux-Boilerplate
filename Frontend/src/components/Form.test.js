@@ -1,32 +1,29 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
-import { mount, render, shallow, configure } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import Form from './Form';
 import {Input, Select} from './Input';
 import 'mutationobserver-shim';
+
 global.MutationObserver = window.MutationObserver;
+configure({ adapter: new Adapter() });  //Necesario para hacer mount con componentes multinivel
 
-configure({ adapter: new Adapter() });
-
-it('un sólo tag input adentro, le pone el name', () => {
+it('inputHtmlTag inside InputComponent has NAME and REGISTER props', () => {
+  
+  var name = 'nombre';
+  
   const jsx = (
     <Form name="prueba">
-      <Input label="Nombre" name="nombre" />
+      <Input label="Nombre" name={name} />
     </Form>
-)
+  )
   
   const wrapper = mount(jsx);
     
-  var input = wrapper.find(Input).find('input[name="nombre"]');
+  var customInputComponent = wrapper.find(Input);
+  var htmlInputTag = customInputComponent.find('input');
   
-  var innerInput = input.getDOMNode();  
-  var a = Object.keys(innerInput).find(key=>key.startsWith("__reactInternalInstance$"))  
-  var instance = innerInput[a];
-  
-  console.log(instance.ref);  
-  console.log(instance.pendingProps.name)
-
-  var name = wrapper.find(Input).find('input[name="nombre"]').prop('name');
-  expect(name).toBe('nombre');
-
+  expect(typeof customInputComponent.prop('register')).toBe('function');
+  expect(typeof htmlInputTag.prop('register')).toBe('undefined');
+  expect(htmlInputTag.prop('name')).toBe(name);
 });
