@@ -37,7 +37,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (a == null)
       return a;
 
-    if (!a.props || !a.props.children || e.props.name) //Si no tengo hijos convierto.
+    if (hasNoChildren(a) || e.props.name) //Si no tengo hijos convierto.
       return convertir(e);
 
     var children = getChildren(a);
@@ -47,6 +47,10 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     })
     return React.cloneElement(a, {...{...a.props, key: `${index}-${innerIndex}`}}, newChildren);
       
+  }
+
+  function hasNoChildren(e) {
+    return !e.props || !e.props.children
   }
 
   function getChildren(a) {
