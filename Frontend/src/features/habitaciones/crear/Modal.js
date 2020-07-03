@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
 import { Input, InputWithoutLabel, Select } from "components/Input";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
