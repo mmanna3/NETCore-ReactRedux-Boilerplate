@@ -18,39 +18,37 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     if (Array.isArray(contenido)) {
       return processContentAsArray(contenido);
     } else
-      return procesar(contenido);
+      return ProcessHtmlTree(contenido);
   }
 
   function processContentAsArray(contenido){
     return contenido.map((element,index) => {
-      return procesar(element, index);
+      return ProcessHtmlTree(element, index);
     });
   }
 
-  function procesar(e, index, innerIndex) {    
+  function ProcessHtmlTree(e, index, innerIndex) {    
+    
     if (hasNameProperty(e))
-      return convertir(e);
+      return addRegisterAttribute(e);
     
-    
-    
-    if (typeof e.type === 'function'){        
-      e = e.type(e.props);
+    if (isReactComponent(e)){    
+      e = instantiate(e);
     }
 
     if (e == null)
       return e;
 
     if (hasNoChildren(e))
-      return convertir(e);
+      return addRegisterAttribute(e);
 
     var children = getChildren(e);
 
     var newChildren = children.map((child, innerIndex) => {
-      return procesar(child, index, innerIndex);
+      return ProcessHtmlTree(child, index, innerIndex);
     })
     
-    return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);
-      
+    return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);      
   }
 
   function hasNameProperty(e){
@@ -71,7 +69,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     return children;
   }
 
-  function convertir(e){
+  function addRegisterAttribute(e){
     if (e.props && e.props.name)
       return React.createElement(e.type, {
         ...{
@@ -83,4 +81,12 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     else
       return e;
   }
+}
+
+function instantiate(e) {
+  return e.type(e.props);
+}
+
+function isReactComponent(e) {
+  return typeof e.type === 'function';
 }
