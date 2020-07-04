@@ -27,8 +27,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function addCama() {
-    // var a = [...camas, <SelectCama key="1" index="1" />];
-    // setCamas(a);
     setCamaIndexes(prevIndexes => [...prevIndexes, counter]);
     setCounter(prevCounter => prevCounter + 1);
     configEsMarinera(counter, false);
