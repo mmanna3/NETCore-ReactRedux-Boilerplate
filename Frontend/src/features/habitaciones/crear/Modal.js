@@ -9,9 +9,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
   const [resetOnChanged, resetForm] = React.useState(0);
   
-  const [camaIndexes, setCamaIndexes] = React.useState([]);
-  const [esMarinera, setEsMarinera] = React.useState([]);
-  const [counter, setCounter] = React.useState(1);
+  const [camaIndexes, setCamaIndexes] = React.useState([{index: 0, esMarinera: false}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -27,15 +25,22 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function addCama() {
-    setCamaIndexes(prevIndexes => [...prevIndexes, counter]);
-    setCounter(prevCounter => prevCounter + 1);
-    configEsMarinera(counter, false);
+    debugger;
+    var nextIndex = camaIndexes[camaIndexes.length - 1].index + 1;    
+    setCamaIndexes(prevIndexes => [...prevIndexes, {index: nextIndex, esMarinera: false}]);
   }
 
-  function configEsMarinera(index, value){
-    let newArr = [...esMarinera];
-    newArr[index] = value;
-    setEsMarinera(newArr);
+  function configEsMarinera(index, value) {
+    debugger;
+    var newArray = [...camaIndexes]
+    for (var i = 0; i < newArray.length; i++) {
+      if (newArray[i].index === index) {
+        newArray[i].esMarinera = value; 
+          break;
+      }
+    }
+    setCamaIndexes(newArray);
+
   }
 
   return (
@@ -50,7 +55,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
         <button type="button" onClick={() => addCama()}>Agregar cama</button>
-        {camaIndexes.map(index => <SelectCama key={`cama${index}`} index={index} esMarinera={esMarinera} setEsMarinera={configEsMarinera}/>)}
+        {camaIndexes.map(metadata => <SelectCama key={`cama${metadata.index}`} index={metadata.index} esMarinera={metadata.esMarinera} setEsMarinera={configEsMarinera}/>)}
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
@@ -60,7 +65,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
 
 const SelectCama = ({index, esMarinera, setEsMarinera}) => {
-
+  debugger;
   const IdentificadorUnaCama = ({index}) => {
                       return <>
                         <span className="control">
@@ -119,7 +124,7 @@ const SelectCama = ({index, esMarinera, setEsMarinera}) => {
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            {!esMarinera[index] ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
+            {!esMarinera ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
             }
           </div>
         </div>
