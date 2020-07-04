@@ -8,6 +8,10 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
   const [resetOnChanged, resetForm] = React.useState(0);
+  
+  const [camaIndexes, setCamaIndexes] = React.useState([]);
+  const [esMarinera, setEsMarinera] = React.useState([]);
+  const [counter, setCounter] = React.useState(1);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -22,6 +26,20 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(cleanErrors());
   }
 
+  function addCama() {
+    // var a = [...camas, <SelectCama key="1" index="1" />];
+    // setCamas(a);
+    setCamaIndexes(prevIndexes => [...prevIndexes, counter]);
+    setCounter(prevCounter => prevCounter + 1);
+    configEsMarinera(counter, false);
+  }
+
+  function configEsMarinera(index, value){
+    let newArr = [...esMarinera];
+    newArr[index] = value;
+    setEsMarinera(newArr);
+  }
+
   return (
     <ModalForm
         isVisible={isVisible}
@@ -33,8 +51,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
-        <SelectCama index="0"/>
-        <SelectCama index="1"/>
+        <button type="button" onClick={() => addCama()}>Agregar cama</button>
+        {camaIndexes.map(index => <SelectCama key={`cama${index}`} index={index} esMarinera={esMarinera} setEsMarinera={configEsMarinera}/>)}
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
@@ -43,7 +61,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 }
 
 
-const SelectCama = ({index}) => {
+const SelectCama = ({index, esMarinera, setEsMarinera}) => {
 
   const IdentificadorUnaCama = ({index}) => {
                       return <>
@@ -60,36 +78,34 @@ const SelectCama = ({index}) => {
 
   const IdentificadorDosCamas = ({index}) => {
     return <>
-      <span className="control">
-      <span className="button is-static">
-        Nº Abajo
-      </span>
-    </span>
-    <span className="control is-expanded">
-      <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
-    </span>
-    <span className="control">
-      <span className="button is-static">
-        Nº Arriba
-      </span>
-    </span>
-    <span className="control is-expanded">
-      <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
-    </span>
-  </>
-};
-  
-  const [esMarinera, setEsMarinera] = React.useState(false);
+            <span className="control">
+            <span className="button is-static">
+              Nº Abajo
+            </span>
+            </span>
+            <span className="control is-expanded">
+              <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
+            </span>
+            <span className="control">
+              <span className="button is-static">
+                Nº Arriba
+              </span>
+            </span>
+            <span className="control is-expanded">
+              <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
+            </span>
+          </>
+  };  
 
   const mostrarOcultarMarinera = (e) => {
     if (e.target.value === "3") 
-      setEsMarinera(true);
+      setEsMarinera(index, true);
     else
-      setEsMarinera(false);
+      setEsMarinera(index, false);
   }
 
   return (
-    <div className="field is-horizontal">
+    <div key={index} className="field is-horizontal">
       <div className="field-body">
         <div className="field is-expanded">
           <div className="field has-addons">
@@ -105,7 +121,7 @@ const SelectCama = ({index}) => {
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            {!esMarinera ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
+            {!esMarinera[index] ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
             }
           </div>
         </div>
@@ -114,4 +130,4 @@ const SelectCama = ({index}) => {
   )
 }
 
-export default Crear
+export default Crear;

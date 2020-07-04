@@ -127,3 +127,10 @@ it('In multiLevel reactComponents tree, SelectComponent is wrapped in another Co
   expect(selectComponent.prop('name')).toBe(name);
   expect(typeof selectComponent.prop('register')).toBe('function');
 });
+
+/*TODO:
+  All tests should be renamed as "supports ..."
+  Add null component case
+  Add array component case
+  Change all "multilevel" concept for "nested" concept
+*/
