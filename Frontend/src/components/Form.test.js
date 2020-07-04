@@ -130,7 +130,8 @@ it('In multiLevel reactComponents tree, SelectComponent is wrapped in another Co
 
 /*TODO:
   All tests should be renamed as "supports ..."
-  Add null component case
-  Add array component case
+  Add "Support null component" case
+  Add "Support array component" case
+  Add "Support dynamic array component" case
   Change all "multilevel" concept for "nested" concept
 */

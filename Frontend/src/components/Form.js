@@ -34,7 +34,6 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
     
     if (Array.isArray(e)) {
       e = React.createElement('div', {key: `${index}-${innerIndex}`}, e);
-      return ProcessHtmlTree(e, index, innerIndex);
     }
 
     if (isReactComponent(e))
@@ -52,7 +51,11 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
       return ProcessHtmlTree(child, index, innerIndex);
     })
     
-    return React.cloneElement(e, {...{...e.props, key: `${index}-${innerIndex}`}}, newChildren);
+    var key = `${index}-${innerIndex}`;
+    if (e.key)
+      key = e.key;
+      
+    return React.cloneElement(e, {...{...e.props, key: key}}, newChildren);
   }
 
   function hasNameProperty(e){
@@ -74,7 +77,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
   }
 
   function addRegisterAttribute(e){
-    if (e.props && e.props.name)
+    if (e.props && e.props.name) {
       return React.createElement(e.type, {
         ...{
           ...e.props,
@@ -82,7 +85,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
           key: e.props.name
         }
       });
-    else
+    } else
       return e;
   }
 }

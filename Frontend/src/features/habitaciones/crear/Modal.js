@@ -38,7 +38,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     for (var i = 0; i < newArray.length; i++) {
       if (newArray[i].index === index) {
         newArray[i].esMarinera = value;
-          break;
+        break;
       }
     }
     setCamaIndexes(newArray);
