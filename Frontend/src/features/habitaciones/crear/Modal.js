@@ -25,22 +25,23 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function addCama() {
-    debugger;
     var nextIndex = camaIndexes[camaIndexes.length - 1].index + 1;    
     setCamaIndexes(prevIndexes => [...prevIndexes, {index: nextIndex, esMarinera: false}]);
   }
 
+  const removeCama = index => () => {
+    setCamaIndexes(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
+  };
+
   function configEsMarinera(index, value) {
-    debugger;
     var newArray = [...camaIndexes]
     for (var i = 0; i < newArray.length; i++) {
       if (newArray[i].index === index) {
-        newArray[i].esMarinera = value; 
+        newArray[i].esMarinera = value;
           break;
       }
     }
     setCamaIndexes(newArray);
-
   }
 
   return (
@@ -55,7 +56,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
         <button type="button" onClick={() => addCama()}>Agregar cama</button>
-        {camaIndexes.map(metadata => <SelectCama key={`cama${metadata.index}`} index={metadata.index} esMarinera={metadata.esMarinera} setEsMarinera={configEsMarinera}/>)}
+        {camaIndexes.map(metadata => <SelectCama key={`cama${metadata.index}`} index={metadata.index} esMarinera={metadata.esMarinera} setEsMarinera={configEsMarinera} removeCama={removeCama}/>)}
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
@@ -64,8 +65,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 }
 
 
-const SelectCama = ({index, esMarinera, setEsMarinera}) => {
-  debugger;
+const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
+
   const IdentificadorUnaCama = ({index}) => {
                       return <>
                         <span className="control">
@@ -128,6 +129,9 @@ const SelectCama = ({index, esMarinera, setEsMarinera}) => {
             }
           </div>
         </div>
+        <button type="button" onClick={removeCama(index)}>
+              Remove
+        </button>
       </div>
     </div>
   )
