@@ -107,7 +107,7 @@ it('Supports nested Wrapped Select Component (Component tree)', () => {
   AssertSelectExistsAndHasValidRegisterProp(wrapper);
 });
 
-it('Supports null result of Wrapped Component (Component tree)', () => {
+it('Supports null result of Component', () => {
   
   const SelectCama = () => {
     return null;       
@@ -126,29 +126,56 @@ it('Supports null result of Wrapped Component (Component tree)', () => {
   mount(jsx);
 });
 
-it('Supports nested Array of Input Component (Component tree)', () => {
+it('Supports dynamic Array of Component', () => {
   
-  var array = [1,2,3];
-  
+  var array = [1,2,3];  
   const jsx = (
     <Form>
-      <Modal>
-        <Body>
-          {array.map((index) => 
-            <Input key={index} name={index} />
-          )}          
-        </Body>
-      </Modal>
+      {array.map((index) => 
+        <Input key={index} name={index} />
+      )}
     </Form>
   );
   
   const wrapper = mount(jsx);
     
-  var inputs = wrapper.find(Input);
+  var inputsAfterRemovingOne = wrapper.find(Input);
+  expect(inputsAfterRemovingOne.getElements().length).toBe(3);  
+  inputsAfterRemovingOne.forEach((input) => {
+    expect(input.prop('name')).not.toBe('');
+    expect(typeof input.prop('register')).toBe('function');
+  });
 
-  expect(inputs.getElements().length).toBe(3);
-  
-  inputs.forEach((input) => {
+  //Add element
+  array.push(4);
+  const jsx2 = (
+    <Form>
+      {array.map((index) => 
+        <Input key={index} name={index} />
+      )}
+    </Form>
+  );
+  const wrapper2 = mount(jsx2);    
+  var inputsAfterAddingOne = wrapper2.find(Input);
+  expect(inputsAfterAddingOne.getElements().length).toBe(4);  
+  inputsAfterAddingOne.forEach((input) => {
+    expect(input.prop('name')).not.toBe('');
+    expect(typeof input.prop('register')).toBe('function');
+  });
+
+  //Remove element
+  var arrayAfterRemoving = array.filter(item => item !== 2);
+  const jsx3 = (
+    <Form>
+      {arrayAfterRemoving.map((index) =>
+        <Input key={index} name={index} />
+      )}
+    </Form>
+  );
+  const wrapper3 = mount(jsx3);
+  var inputsAfterRemovingOne = wrapper3.find(Input);
+  expect(inputsAfterRemovingOne.getElements().length).toBe(3);  
+  inputsAfterRemovingOne.forEach((input) => {
     expect(input.prop('name')).not.toBe('');
     expect(typeof input.prop('register')).toBe('function');
   });
@@ -166,8 +193,3 @@ function AssertInputExistsAndHasValidRegisterProp(wrapper) {
   expect(input.prop('name')).not.toBe('');
   expect(typeof input.prop('register')).toBe('function');
 }
-
-/*TODO:
-  Add "Support adding element to array of component" case
-  Add "Support removing element to array of component" case
-*/
