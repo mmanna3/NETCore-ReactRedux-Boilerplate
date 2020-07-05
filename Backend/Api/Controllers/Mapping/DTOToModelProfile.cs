@@ -11,6 +11,7 @@ namespace Api.Controllers.Mapping
         {
             CreateMap<RegistrarDTO, Usuario>();
             CreateMap<HabitacionDTO, Habitacion>();
+            CreateMap<CamaIndividualDTO, CamaIndividual>();
         }
     }
 }
