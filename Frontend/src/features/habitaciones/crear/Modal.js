@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
-import { Input } from "components/Input";
+import { Input, Button } from "components/Input";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import SelectCama from './SelectCama';
@@ -56,13 +56,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />        
-        {camas.map(metadata => 
-          <SelectCama key={`cama${metadata.index}`} 
-                      index={metadata.index} 
-                      esMarinera={metadata.esMarinera} 
-                      setEsMarinera={configEsMarinera} 
-                      removeCama={removeCama}/>)}
-          <button type="button" onClick={() => addCama()}>Agregar cama</button>
+          {camas.map(metadata => 
+            <SelectCama key={`cama${metadata.index}`} 
+                        index={metadata.index} 
+                        esMarinera={metadata.esMarinera} 
+                        setEsMarinera={configEsMarinera} 
+                        removeCama={removeCama}/>)
+          }          
+          <Button text="Agregar" onClick={() => addCama()} style={{marginTop:"1em"}}/>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       

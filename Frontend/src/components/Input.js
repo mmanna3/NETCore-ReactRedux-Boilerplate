@@ -47,6 +47,10 @@ export function SubmitButton({ text, loading }) {
     return <button className="button is-primary is-loading" type="button">{text}</button>
 }
 
+export function Button({ text, ...otrosAtributos }) {
+  return <button className="button is-primary" type="button" {...otrosAtributos}>{text}</button>
+}
+
 export function Select({ register, name, children, onChange }) {
   return (
     <div className="select">
