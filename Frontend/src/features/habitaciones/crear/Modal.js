@@ -30,7 +30,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   const removeCama = index => () => {
-    setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
+    if (camas.length > 1)
+      setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
   };
 
   function setCamaMarinera(index, value) {
