@@ -33,6 +33,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   function addCama() {
     var nextIndex = getNextCamaIndex(camas, 'Individuales');
     setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'Individuales'}]);
+    console.log(camas);
   }
 
   const removeCama = index => () => {
@@ -50,8 +51,31 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         break;
       }
     }
+    newArray = updateCamaIndexes(newArray); //Sólo debería hacerse antes de submitear
     setCamas(newArray);
   }
+
+  function updateCamaIndexes(array){
+    
+    var arrayIndividuales = updatePorTipo(array, 'Individuales');
+    var arrayMatrimoniales = updatePorTipo(array, 'Matrimoniales');
+    var arrayMarineras = updatePorTipo(array, 'Marineras');
+    
+    return arrayIndividuales.concat(arrayMatrimoniales, arrayMarineras);
+
+    function updatePorTipo(array, tipo){
+      var arrayDelTipo = array.filter(x => x.tipo === tipo);
+      for (let i = 0; i < arrayDelTipo.length; i++) {
+        if (arrayDelTipo[i].index !== i){
+          arrayDelTipo[i].index = i;
+        }
+      }
+      return arrayDelTipo;
+    }        
+  }
+
+
+
 
   return (
     <ModalForm
