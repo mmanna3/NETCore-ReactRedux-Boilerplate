@@ -5,22 +5,21 @@ import { Icon } from "components/Icon";
 const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
 
   const IdentificadorUnaCama = ({index}) => {
-                      return <>
-                      <div className="field">
-                            <span className="control is-expanded">
-                              <InputWithoutLabel name={`camas[${index}].numero`}/>
-                            </span>
+                      return <div className="field">
+                              <span className="control is-expanded">
+                                <InputWithoutLabel name={`camas[${index}].numero`} placeholder="Identificador"/>
+                              </span>
                             </div>
-                         </>
+                         
   };
 
   const IdentificadorDosCamas = ({index}) => {
     return <>
             <span className="field">
-                <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
+                <InputWithoutLabel name={`camas[${index}].numeroAbajo`} placeholder="Id. Abajo"/>
               </span>
               <span className="field">
-                <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
+                <InputWithoutLabel name={`camas[${index}].numeroArriba`} placeholder="Id. Arriba"/>
               </span>
           </>
   };  
