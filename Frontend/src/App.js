@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-// import { Navbar } from './components/Navbar'
+import 'components/FontAwesomeLibrary';
 import DashboardPage from './pages/DashboardPage'
 import PostsPage from './pages/PostsPage'
 import SinglePostPage from './pages/SinglePostPage'
