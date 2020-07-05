@@ -56,17 +56,15 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         break;
       }
     }
-    //newArray = updateCamaIndexes(newArray); //Sólo debería hacerse antes de submitear
+    updateCamaIndexes(newArray); //Sólo debería hacerse antes de submitear
     setCamas(newArray);
   }
 
   function updateCamaIndexes(array){
     
-    var arrayIndividuales = updatePorTipo(array, 'Individuales');
-    var arrayMatrimoniales = updatePorTipo(array, 'Matrimoniales');
-    var arrayMarineras = updatePorTipo(array, 'Marineras');
-    
-    return arrayIndividuales.concat(arrayMatrimoniales, arrayMarineras);
+    updatePorTipo(array, 'Individuales');
+    updatePorTipo(array, 'Matrimoniales');
+    updatePorTipo(array, 'Marineras');
 
     function updatePorTipo(array, tipo){
       var arrayDelTipo = array.filter(x => x.tipo === tipo);
@@ -75,7 +73,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           arrayDelTipo[i].index = i;
         }
       }
-      return arrayDelTipo;
     }        
   }
 
