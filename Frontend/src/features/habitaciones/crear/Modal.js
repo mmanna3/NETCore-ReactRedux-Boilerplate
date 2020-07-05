@@ -9,7 +9,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
   const [resetOnChanged, resetForm] = React.useState(0);  
-  const [camas, setCamas] = React.useState([{index: 0, tipo: 'Individuales'}]);
+  const [camas, setCamas] = React.useState([{index: 0, tipo: 'Individuales', globalIndex: 0}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -30,9 +30,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     return cama ? cama.index + 1 : 0;
   }
 
+  function getNextGlobalIndex(array) {
+    var camasReverse = array.slice().reverse();
+    return camasReverse[0].globalIndex + 1;
+  }
+
   function addCama() {
     var nextIndex = getNextCamaIndex(camas, 'Individuales');
-    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'Individuales'}]);
+    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'Individuales', globalIndex: getNextGlobalIndex(camas)}]);
     console.log(camas);
   }
 
@@ -51,7 +56,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         break;
       }
     }
-    newArray = updateCamaIndexes(newArray); //Sólo debería hacerse antes de submitear
+    //newArray = updateCamaIndexes(newArray); //Sólo debería hacerse antes de submitear
     setCamas(newArray);
   }
 
@@ -89,12 +94,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre de la habitación" name="nombre" />
         <Label text="Camas"/>
-          {camas.map((metadata, i) => 
-            <SelectCama key={`camas${i}`}
+          {camas.map(metadata => {
+            console.log(camas);
+            return <SelectCama key={`${metadata.globalIndex}`}
                         index={metadata.index}
                         tipo={metadata.tipo}
                         setTipoCama={setTipoCama}
-                        removeCama={removeCama}/>)
+                        removeCama={removeCama}/>
+          })
           }          
           <Button text="Agregar cama" onClick={() => addCama()} style={{marginTop:"1em"}}/>
       </Body>
