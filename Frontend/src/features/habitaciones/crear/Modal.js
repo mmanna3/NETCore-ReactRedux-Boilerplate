@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
-  const [resetOnChanged, resetForm] = React.useState(0);
-  
-  const [camaIndexes, setCamaIndexes] = React.useState([{index: 0, esMarinera: false}]);
+  const [resetOnChanged, resetForm] = React.useState(0);  
+  const [camas, setCamas] = React.useState([{index: 0, esMarinera: false}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -25,23 +24,23 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function addCama() {
-    var nextIndex = camaIndexes[camaIndexes.length - 1].index + 1;    
-    setCamaIndexes(prevIndexes => [...prevIndexes, {index: nextIndex, esMarinera: false}]);
+    var nextIndex = camas[camas.length - 1].index + 1;    
+    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, esMarinera: false}]);
   }
 
   const removeCama = index => () => {
-    setCamaIndexes(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
+    setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
   };
 
   function configEsMarinera(index, value) {
-    var newArray = [...camaIndexes]
+    var newArray = [...camas]
     for (var i = 0; i < newArray.length; i++) {
       if (newArray[i].index === index) {
         newArray[i].esMarinera = value;
         break;
       }
     }
-    setCamaIndexes(newArray);
+    setCamas(newArray);
   }
 
   return (
@@ -54,9 +53,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
-        <Input label="Nombre" name="nombre" />
-        <button type="button" onClick={() => addCama()}>Agregar cama</button>
-        {camaIndexes.map(metadata => <SelectCama key={`cama${metadata.index}`} index={metadata.index} esMarinera={metadata.esMarinera} setEsMarinera={configEsMarinera} removeCama={removeCama}/>)}
+        <Input label="Nombre" name="nombre" />        
+        {camas.map(metadata => 
+          <SelectCama key={`cama${metadata.index}`} 
+                      index={metadata.index} 
+                      esMarinera={metadata.esMarinera} 
+                      setEsMarinera={configEsMarinera} 
+                      removeCama={removeCama}/>)}
+          <button type="button" onClick={() => addCama()}>Agregar cama</button>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
