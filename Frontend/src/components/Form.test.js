@@ -9,6 +9,8 @@ import { Modal, Body } from './Modal';
 global.MutationObserver = window.MutationObserver;
 configure({ adapter: new Adapter() });  //Needed to mount nested components
 
+const A_NAME = 'someName';
+
 /*All tests will check Components with "Name" prop have a function in the register attribute*/
 
 it('Supports Input Component', () => {
@@ -75,13 +77,11 @@ it('Supports nested Input Component (in Component tree)', () => {
 
 it('Supports nested Select Component (in Component tree)', () => {
   
-  var name = 'nombre';
-  
   const jsx = (
     <Form>
       <Modal>
         <Body>
-          <Select name={name}>
+          <Select name={A_NAME}>
             <option>1</option>
           </Select>
         </Body>
@@ -91,20 +91,15 @@ it('Supports nested Select Component (in Component tree)', () => {
   
   const wrapper = mount(jsx);
 
-  var selectComponent = wrapper.find(Select);
-  
-  expect(selectComponent.prop('name')).toBe(name);
-  expect(typeof selectComponent.prop('register')).toBe('function');
+  AssertSelectExistsAndHasValidRegisterProp(wrapper);
 });
 
 
 it('Supports nested Wrapped Select Component (in Component tree)', () => {
   
-  var name = 'nombre';
-
   const SelectCama = () => {
     return <div>
-            <Select name={name}>
+            <Select name={A_NAME}>
               <option value="1">Individual</option>
               <option value="2">Matrimonial</option>
               <option value="3">Marinera</option>
@@ -124,11 +119,14 @@ it('Supports nested Wrapped Select Component (in Component tree)', () => {
   
   const wrapper = mount(jsx);
 
-  var selectComponent = wrapper.find(Select);
-  
-  expect(selectComponent.prop('name')).toBe(name);
-  expect(typeof selectComponent.prop('register')).toBe('function');
+  AssertSelectExistsAndHasValidRegisterProp(wrapper);
 });
+
+function AssertSelectExistsAndHasValidRegisterProp(wrapper){
+  var select = wrapper.find(Select);
+  expect(select.prop('name')).not.toBe('');
+  expect(typeof select.prop('register')).toBe('function');
+}
 
 /*TODO:
   Add "Support null component" case
