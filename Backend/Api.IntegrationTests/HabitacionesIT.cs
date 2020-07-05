@@ -37,7 +37,7 @@ namespace Api.IntegrationTests
             var body = new HabitacionDTO
             {
                 Nombre = "Roja",
-                CamasIndividuales = 1,
+                CamasIndividuales = new List<CamaIndividualDTO>(),
                 CamasMatrimoniales = CAMAS_MATRIMONIALES,
                 CamasMarineras = 3,
             };
@@ -59,7 +59,7 @@ namespace Api.IntegrationTests
             var body = new HabitacionDTO
             {
                 Nombre = "Azul",
-                CamasIndividuales = 1,
+                CamasIndividuales = new List<CamaIndividualDTO>(),
                 CamasMatrimoniales = CAMAS_MATRIMONIALES,
                 CamasMarineras = 3,
             };

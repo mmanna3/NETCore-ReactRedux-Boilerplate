@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace Api.Controllers.DTOs
 {
@@ -9,8 +9,7 @@ namespace Api.Controllers.DTOs
         [YKNRequired, YKNStringLength(Maximo = 30)]
         public string Nombre { get; set; }
 
-        [YKNRequired]
-        public byte CamasIndividuales { get; set; }
+        public List<CamaIndividualDTO> CamasIndividuales { get; set; }
 
         public byte CamasMarineras { get; set; }
         

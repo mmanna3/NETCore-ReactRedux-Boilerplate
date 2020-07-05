@@ -7,7 +7,7 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
   const IdentificadorUnaCama = ({index}) => {
                       return <div className="field">
                               <span className="control is-expanded">
-                                <InputWithoutLabel name={`camas[${index}].numero`} placeholder="Identificador"/>
+                                <InputWithoutLabel name={`camasIndividuales[${index}].nombre`} placeholder="Identificador"/>
                               </span>
                             </div>
                          
@@ -41,7 +41,7 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
             </span>
           </span>
           <span className="control is-expanded">
-            <Select ccsClass="is-fullwidth" name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
+            <Select ccsClass="is-fullwidth" onChange={mostrarOcultarMarinera}>
               <option value="1">Individual</option>
               <option value="2">Matrimonial</option>
               <option value="3">Marinera</option>

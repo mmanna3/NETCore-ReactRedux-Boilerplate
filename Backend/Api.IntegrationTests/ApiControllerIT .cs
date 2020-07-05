@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Api.IntegrationTests
         {
             var bodySinUnCampoRequerido = new HabitacionDTO
             {
-                CamasIndividuales = 1,
+                CamasIndividuales = new List<CamaIndividualDTO>(),
                 CamasMatrimoniales = CAMAS_MATRIMONIALES,
                 CamasMarineras = 3,
             };
