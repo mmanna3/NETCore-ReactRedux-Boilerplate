@@ -9,7 +9,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
   const [resetOnChanged, resetForm] = React.useState(0);  
-  const [camas, setCamas] = React.useState([{index: 0, esMarinera: false}]);
+  const [camas, setCamas] = React.useState([{index: 0, tipo: 'individuales'}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -26,7 +26,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   function addCama() {
     var nextIndex = camas[camas.length - 1].index + 1;    
-    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, esMarinera: false}]);
+    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'individuales'}]);
   }
 
   const removeCama = index => () => {
@@ -34,11 +34,11 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
   };
 
-  function setCamaMarinera(index, value) {
+  function setTipoCama(index, value) {
     var newArray = [...camas]
     for (var i = 0; i < newArray.length; i++) {
       if (newArray[i].index === index) {
-        newArray[i].esMarinera = value;
+        newArray[i].tipo = value;
         break;
       }
     }
@@ -60,8 +60,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           {camas.map(metadata => 
             <SelectCama key={`cama${metadata.index}`} 
                         index={metadata.index} 
-                        esMarinera={metadata.esMarinera} 
-                        setEsMarinera={setCamaMarinera} 
+                        tipo={metadata.tipo}
+                        setTipoCama={setTipoCama}
                         removeCama={removeCama}/>)
           }          
           <Button text="Agregar cama" onClick={() => addCama()} style={{marginTop:"1em"}}/>
