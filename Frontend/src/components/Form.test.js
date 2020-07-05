@@ -107,6 +107,25 @@ it('Supports nested Wrapped Select Component (in Component tree)', () => {
   AssertSelectExistsAndHasValidRegisterProp(wrapper);
 });
 
+it('Supports null result of Wrapped Component (in Component tree)', () => {
+  
+  const SelectCama = () => {
+    return null;       
+  }  
+  
+  const jsx = (
+    <Form>
+      <Modal>
+        <Body>
+          <SelectCama />
+        </Body>
+      </Modal>      
+    </Form>
+  );
+  
+  mount(jsx);
+});
+
 function AssertSelectExistsAndHasValidRegisterProp(wrapper) {
   var select = wrapper.find(Select);
   expect(select.prop('name')).not.toBe('');
@@ -120,7 +139,6 @@ function AssertInputExistsAndHasValidRegisterProp(wrapper) {
 }
 
 /*TODO:
-  Add "Support null component" case
   Add "Support array component" case
   Add "Support adding element to array of component" case
   Add "Support removing element to array of component" case
