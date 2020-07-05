@@ -5,7 +5,6 @@ import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import SelectCama from './SelectCama';
 
-
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
@@ -34,7 +33,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
   };
 
-  function configEsMarinera(index, value) {
+  function setCamaMarinera(index, value) {
     var newArray = [...camas]
     for (var i = 0; i < newArray.length; i++) {
       if (newArray[i].index === index) {
@@ -60,7 +59,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
             <SelectCama key={`cama${metadata.index}`} 
                         index={metadata.index} 
                         esMarinera={metadata.esMarinera} 
-                        setEsMarinera={configEsMarinera} 
+                        setEsMarinera={setCamaMarinera} 
                         removeCama={removeCama}/>)
           }          
           <Button text="Agregar" onClick={() => addCama()} style={{marginTop:"1em"}}/>
