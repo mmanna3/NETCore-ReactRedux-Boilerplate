@@ -26,7 +26,7 @@ it('Supports Input Component', () => {
   AssertInputExistsAndHasValidRegisterProp(wrapper);
 });
 
-it('Supports nested Input Component (in HTML tree)', () => {
+it('Supports nested Input Component (HTML tree)', () => {
 
   const jsx = (
     <Form>
@@ -43,7 +43,7 @@ it('Supports nested Input Component (in HTML tree)', () => {
   AssertInputExistsAndHasValidRegisterProp(wrapper);
 });
 
-it('Supports nested Input Component (in Component tree)', () => {
+it('Supports nested Input Component (Component tree)', () => {
   
   const jsx = (
     <Form>
@@ -60,7 +60,7 @@ it('Supports nested Input Component (in Component tree)', () => {
   AssertInputExistsAndHasValidRegisterProp(wrapper); 
 });
 
-it('Supports nested Select Component (in Component tree)', () => {
+it('Supports nested Select Component (Component tree)', () => {
   
   const jsx = (
     <Form>
@@ -80,7 +80,7 @@ it('Supports nested Select Component (in Component tree)', () => {
 });
 
 
-it('Supports nested Wrapped Select Component (in Component tree)', () => {
+it('Supports nested Wrapped Select Component (Component tree)', () => {
   
   const SelectCama = () => {
     return <div>
@@ -107,7 +107,7 @@ it('Supports nested Wrapped Select Component (in Component tree)', () => {
   AssertSelectExistsAndHasValidRegisterProp(wrapper);
 });
 
-it('Supports null result of Wrapped Component (in Component tree)', () => {
+it('Supports null result of Wrapped Component (Component tree)', () => {
   
   const SelectCama = () => {
     return null;       
@@ -126,6 +126,35 @@ it('Supports null result of Wrapped Component (in Component tree)', () => {
   mount(jsx);
 });
 
+it('Supports nested Array of Input Component (Component tree)', () => {
+  
+  var array = [1,2,3];
+  
+  const jsx = (
+    <Form>
+      <Modal>
+        <Body>
+          {array.map((index) => 
+            <Input key={index} name={index} />
+          )}          
+        </Body>
+      </Modal>
+    </Form>
+  );
+  
+  const wrapper = mount(jsx);
+    
+  var inputs = wrapper.find(Input);
+
+  expect(inputs.getElements().length).toBe(3);
+  
+  inputs.forEach((input) => {
+    expect(input.prop('name')).not.toBe('');
+    expect(typeof input.prop('register')).toBe('function');
+  });
+  
+});
+
 function AssertSelectExistsAndHasValidRegisterProp(wrapper) {
   var select = wrapper.find(Select);
   expect(select.prop('name')).not.toBe('');
@@ -139,7 +168,6 @@ function AssertInputExistsAndHasValidRegisterProp(wrapper) {
 }
 
 /*TODO:
-  Add "Support array component" case
   Add "Support adding element to array of component" case
   Add "Support removing element to array of component" case
 */
