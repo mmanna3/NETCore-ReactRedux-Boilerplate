@@ -55,7 +55,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
-        <Input label="Nombre" name="nombre" />        
+        <Input label="Nombre de la habitación" name="nombre" />
           {camas.map(metadata => 
             <SelectCama key={`cama${metadata.index}`} 
                         index={metadata.index} 

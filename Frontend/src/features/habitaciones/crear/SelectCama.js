@@ -32,34 +32,32 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
   }
 
   return (
-    <div key={index} className="field is-grouped">
-      <div className="field-body">
-        <div className="field is-expanded">
-          <div className="field has-addons">
-            <span className="control">
-              <span className="button is-static">
-                Cama
-              </span>
+    <div key={index} className="field field-body is-grouped">
+
+        <div className="field is-expanded has-addons" style={{minWidth:"200px"}}>
+          <span className="control">
+            <span className="button is-static">
+              Cama
             </span>
-            <span className="control is-expanded">
-              <Select ccsClass="is-fullwidth" name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
-                <option value="1">Individual</option>
-                <option value="2">Matrimonial</option>
-                <option value="3">Marinera</option>
-              </Select>
-            </span>
-          </div>
+          </span>
+          <span className="control is-expanded">
+            <Select ccsClass="is-fullwidth" name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
+              <option value="1">Individual</option>
+              <option value="2">Matrimonial</option>
+              <option value="3">Marinera</option>
+            </Select>
+          </span>
         </div>
         
         {!esMarinera ? 
-              <IdentificadorUnaCama index={index}/> : 
-              <IdentificadorDosCamas index={index} />
-            }
+          <IdentificadorUnaCama index={index}/> : 
+          <IdentificadorDosCamas index={index} />
+        }
         
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(index)}>
             <Icon faCode="trash-alt" />
         </button>
-      </div>
+
     </div>
   )
 }
