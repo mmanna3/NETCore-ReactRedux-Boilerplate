@@ -1,8 +1,10 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
-import { Input, InputWithoutLabel, Select } from "components/Input";
+import { Input } from "components/Input";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
+import SelectCama from './SelectCama';
+
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
@@ -65,79 +67,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
     </ModalForm> 
-  )
-}
-
-
-const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
-
-  const IdentificadorUnaCama = ({index}) => {
-                      return <>
-                        <span className="control">
-                        <span className="button is-static">
-                          Nº
-                        </span>
-                      </span>
-                      <span className="control is-expanded">
-                        <InputWithoutLabel name={`camas[${index}].numero`}/>
-                      </span>
-                    </>
-  };
-
-  const IdentificadorDosCamas = ({index}) => {
-    return <>
-            <span className="control">
-            <span className="button is-static">
-              Nº Abajo
-            </span>
-            </span>
-            <span className="control is-expanded">
-              <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
-            </span>
-            <span className="control">
-              <span className="button is-static">
-                Nº Arriba
-              </span>
-            </span>
-            <span className="control is-expanded">
-              <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
-            </span>
-          </>
-  };  
-
-  const mostrarOcultarMarinera = (e) => {
-    if (e.target.value === "3") 
-      setEsMarinera(index, true);
-    else
-      setEsMarinera(index, false);
-  }
-
-  return (
-    <div key={index} className="field is-horizontal">
-      <div className="field-body">
-        <div className="field is-expanded">
-          <div className="field has-addons">
-            <span className="control">
-              <span className="button is-static">
-                Cama
-              </span>
-            </span>
-            <span className="control">
-              <Select name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
-                <option value="1">Individual</option>
-                <option value="2">Matrimonial</option>
-                <option value="3">Marinera</option>
-              </Select>
-            </span>
-            {!esMarinera ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
-            }
-          </div>
-        </div>
-        <button type="button" onClick={removeCama(index)}>
-              Remove
-        </button>
-      </div>
-    </div>
   )
 }
 
