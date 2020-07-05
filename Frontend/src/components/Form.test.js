@@ -15,64 +15,49 @@ const A_NAME = 'someName';
 
 it('Supports Input Component', () => {
   
-  var name = 'nombre';
-  
   const jsx = (
     <Form>
-      <Input name={name} />
+      <Input name={A_NAME} />
     </Form>
-  )
+  );
   
   const wrapper = mount(jsx);
     
-  var inputComponent = wrapper.find(Input);
-
-  expect(inputComponent.prop('name')).toBe(name);
-  expect(typeof inputComponent.prop('register')).toBe('function');  
+  AssertInputExistsAndHasValidRegisterProp(wrapper);
 });
 
 it('Supports nested Input Component (in HTML tree)', () => {
-  
-  var name = 'nombre';
-  
+
   const jsx = (
     <Form>
       <div>
         <div>
-          <Input name={name} />
+          <Input name={A_NAME} />
         </div>
       </div>      
     </Form>
-  )
+  );
   
   const wrapper = mount(jsx);
     
-  var inputComponent = wrapper.find(Input);
-  
-  expect(inputComponent.prop('name')).toBe(name);
-  expect(typeof inputComponent.prop('register')).toBe('function');  
+  AssertInputExistsAndHasValidRegisterProp(wrapper);
 });
 
 it('Supports nested Input Component (in Component tree)', () => {
-  
-  var name = 'nombre';
   
   const jsx = (
     <Form>
       <Modal>
         <Body>
-          <Input name={name} />
+          <Input name={A_NAME} />
         </Body>
       </Modal>      
     </Form>
-  )
+  );
   
   const wrapper = mount(jsx);
     
-  var inputComponent = wrapper.find(Input);
-  
-  expect(inputComponent.prop('name')).toBe(name);
-  expect(typeof inputComponent.prop('register')).toBe('function');  
+  AssertInputExistsAndHasValidRegisterProp(wrapper); 
 });
 
 it('Supports nested Select Component (in Component tree)', () => {
@@ -87,7 +72,7 @@ it('Supports nested Select Component (in Component tree)', () => {
         </Body>
       </Modal>      
     </Form>
-  )
+  );
   
   const wrapper = mount(jsx);
 
@@ -115,17 +100,23 @@ it('Supports nested Wrapped Select Component (in Component tree)', () => {
         </Body>
       </Modal>      
     </Form>
-  )
+  );
   
   const wrapper = mount(jsx);
 
   AssertSelectExistsAndHasValidRegisterProp(wrapper);
 });
 
-function AssertSelectExistsAndHasValidRegisterProp(wrapper){
+function AssertSelectExistsAndHasValidRegisterProp(wrapper) {
   var select = wrapper.find(Select);
   expect(select.prop('name')).not.toBe('');
   expect(typeof select.prop('register')).toBe('function');
+}
+
+function AssertInputExistsAndHasValidRegisterProp(wrapper) {
+  var input = wrapper.find(Input);
+  expect(input.prop('name')).not.toBe('');
+  expect(typeof input.prop('register')).toBe('function');
 }
 
 /*TODO:
