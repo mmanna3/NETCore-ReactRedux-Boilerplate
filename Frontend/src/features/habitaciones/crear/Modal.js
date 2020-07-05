@@ -63,7 +63,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
                         setEsMarinera={setCamaMarinera} 
                         removeCama={removeCama}/>)
           }          
-          <Button text="Agregar" onClick={() => addCama()} style={{marginTop:"1em"}}/>
+          <Button text="Agregar cama" onClick={() => addCama()} style={{marginTop:"1em"}}/>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
