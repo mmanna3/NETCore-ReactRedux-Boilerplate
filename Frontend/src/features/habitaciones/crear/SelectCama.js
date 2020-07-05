@@ -25,11 +25,11 @@ const SelectCama = ({index, tipo, setTipoCama, removeCama}) => {
   };  
 
   const onTipoCamaChanged = (e) => {
-    setTipoCama(index, e.target.value);
+    setTipoCama(index, tipo, e.target.value);
   }
 
   return (
-    <div key={index} className="field field-body is-grouped">
+    <div className="field field-body is-grouped">
 
         <div className="field is-expanded has-addons" style={{minWidth:"200px"}}>
           <span className="control">

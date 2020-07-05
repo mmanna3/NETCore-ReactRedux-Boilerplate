@@ -24,8 +24,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(cleanErrors());
   }
 
+  function getNextCamaIndex(array, tipo) {
+    //camas[camas.length - 1].index + 1;
+    var cama = array.slice().reverse().find(x => x.tipo === tipo);
+    return cama ? cama.index + 1 : 0;
+  }
+
   function addCama() {
-    var nextIndex = camas[camas.length - 1].index + 1;    
+    var nextIndex = getNextCamaIndex(camas, 'Individuales');
     setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'Individuales'}]);
   }
 
@@ -34,11 +40,13 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
   };
 
-  function setTipoCama(index, value) {
-    var newArray = [...camas]
+  function setTipoCama(index, oldTipo, newTipo) {
+    var newArray = [...camas];
+    
     for (var i = 0; i < newArray.length; i++) {
-      if (newArray[i].index === index) {
-        newArray[i].tipo = value;
+      if (newArray[i].index === index && newArray[i].tipo === oldTipo) {
+        newArray[i].index = getNextCamaIndex(newArray, newTipo);
+        newArray[i].tipo = newTipo;        
         break;
       }
     }
@@ -57,9 +65,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre de la habitación" name="nombre" />
         <Label text="Camas"/>
-          {camas.map(metadata => 
-            <SelectCama key={`cama${metadata.index}`} 
-                        index={metadata.index} 
+          {camas.map((metadata, i) => 
+            <SelectCama key={`camas${i}`}
+                        index={metadata.index}
                         tipo={metadata.tipo}
                         setTipoCama={setTipoCama}
                         removeCama={removeCama}/>)
