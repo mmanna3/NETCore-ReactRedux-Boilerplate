@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel, ValidationSummary } from 'components/Modal';
-import { Input, Button } from "components/Input";
+import { Input, Button, Label } from "components/Input";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import SelectCama from './SelectCama';
@@ -56,6 +56,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre de la habitación" name="nombre" />
+        <Label text="Camas"/>
           {camas.map(metadata => 
             <SelectCama key={`cama${metadata.index}`} 
                         index={metadata.index} 

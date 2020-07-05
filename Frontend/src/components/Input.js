@@ -17,6 +17,12 @@ export function Input({ register, label, name, ...otrosAtributos }) {
   )
 }
 
+export function Label({ text, ...otrosAtributos }) {
+  return (
+      <label className="label" {...otrosAtributos}>{text}</label>
+  )
+}
+
 export function InputWithoutLabel({ register, name, ...otrosAtributos }) {
   return (
       <input className="input" name={name} ref={register} {...otrosAtributos} />
