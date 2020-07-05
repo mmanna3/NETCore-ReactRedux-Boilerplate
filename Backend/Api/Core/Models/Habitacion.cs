@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Core.Models
 {
@@ -9,7 +10,7 @@ namespace Api.Core.Models
         [Required, MaxLength(30)]
         public string Nombre { get; set; }
 
-        public byte CamasIndividuales { get; set; }
+        public List<CamaIndividual> CamasIndividuales { get; set; }
 
         public byte CamasMarineras { get; set; }
 

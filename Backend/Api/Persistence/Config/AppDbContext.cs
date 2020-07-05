@@ -8,6 +8,8 @@ namespace Api.Persistence.Config
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Habitacion> Habitaciones { get; set; }
 
+        public DbSet<CamaIndividual> CamasIndividuales { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
