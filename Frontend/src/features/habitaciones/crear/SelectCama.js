@@ -62,7 +62,9 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            {!esMarinera ? <IdentificadorUnaCama index={index}/>: <IdentificadorDosCamas index={index} />
+            {!esMarinera ? 
+              <IdentificadorUnaCama index={index}/> : 
+              <IdentificadorDosCamas index={index} />
             }
           </div>
         </div>
