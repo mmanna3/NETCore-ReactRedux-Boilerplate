@@ -9,7 +9,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
   const [resetOnChanged, resetForm] = React.useState(0);  
-  const [camas, setCamas] = React.useState([{index: 0, tipo: 'individuales'}]);
+  const [camas, setCamas] = React.useState([{index: 0, tipo: 'Individuales'}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -26,7 +26,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   function addCama() {
     var nextIndex = camas[camas.length - 1].index + 1;    
-    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'individuales'}]);
+    setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'Individuales'}]);
   }
 
   const removeCama = index => () => {
