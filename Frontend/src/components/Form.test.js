@@ -7,9 +7,11 @@ import 'mutationobserver-shim';
 import { Modal, Body } from './Modal';
 
 global.MutationObserver = window.MutationObserver;
-configure({ adapter: new Adapter() });  //Necesario para hacer mount con componentes multinivel
+configure({ adapter: new Adapter() });  //Needed to mount nested components
 
-it('Being only child, ReactComponent has NAME prop, so add REGISTER prop', () => {
+/*All tests will check Components with "Name" prop have a function in the register attribute*/
+
+it('Supports Input Component', () => {
   
   var name = 'nombre';
   
@@ -27,7 +29,7 @@ it('Being only child, ReactComponent has NAME prop, so add REGISTER prop', () =>
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
 
-it('In multiLevel html simple elements tree, InputComponent has NAME prop, so add REGISTER prop', () => {
+it('Supports nested Input Component (in HTML tree)', () => {
   
   var name = 'nombre';
   
@@ -49,7 +51,7 @@ it('In multiLevel html simple elements tree, InputComponent has NAME prop, so ad
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
 
-it('In multiLevel reactComponents tree, InputComponent has NAME prop, so add REGISTER prop', () => {
+it('Supports nested Input Component (in Component tree)', () => {
   
   var name = 'nombre';
   
@@ -71,7 +73,7 @@ it('In multiLevel reactComponents tree, InputComponent has NAME prop, so add REG
   expect(typeof inputComponent.prop('register')).toBe('function');  
 });
 
-it('In multiLevel reactComponents tree, SelectComponent has NAME prop, so add REGISTER prop', () => {
+it('Supports nested Select Component (in Component tree)', () => {
   
   var name = 'nombre';
   
@@ -96,7 +98,7 @@ it('In multiLevel reactComponents tree, SelectComponent has NAME prop, so add RE
 });
 
 
-it('In multiLevel reactComponents tree, SelectComponent is wrapped in another Component and has NAME prop, so add REGISTER prop', () => {
+it('Supports nested Wrapped Select Component (in Component tree)', () => {
   
   var name = 'nombre';
 
@@ -129,9 +131,8 @@ it('In multiLevel reactComponents tree, SelectComponent is wrapped in another Co
 });
 
 /*TODO:
-  All tests should be renamed as "supports ..."
   Add "Support null component" case
   Add "Support array component" case
-  Add "Support dynamic array component" case
-  Change all "multilevel" concept for "nested" concept
+  Add "Support adding element to array of component" case
+  Add "Support removing element to array of component" case
 */
