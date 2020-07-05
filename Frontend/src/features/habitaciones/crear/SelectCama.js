@@ -4,7 +4,7 @@ import { Icon } from "components/Icon";
 
 const SelectCama = ({index, tipo, setTipoCama, removeCama}) => {
 
-  const IdentificadorUnaCama = ({index, tipo}) => {
+  const IdentificadorIndividualOMatrimonial = ({index, tipo}) => {
                       return <div className="field">
                               <span className="control is-expanded">
                                 <InputWithoutLabel name={`camas${tipo}[${index}].nombre`} placeholder="Identificador"/>
@@ -13,7 +13,7 @@ const SelectCama = ({index, tipo, setTipoCama, removeCama}) => {
                          
   };
 
-  const IdentificadorDosCamas = ({index}) => {
+  const IdentificadorCamaMarinera = ({index}) => {
     return <>
             <span className="field">
                 <InputWithoutLabel name={`camasMarineras[${index}].nombreAbajo`} placeholder="Id. Abajo"/>
@@ -47,8 +47,8 @@ const SelectCama = ({index, tipo, setTipoCama, removeCama}) => {
         </div>
         
         {tipo !== 'Marineras' ? 
-          <IdentificadorUnaCama index={index} tipo={tipo} /> : 
-          <IdentificadorDosCamas index={index} />
+          <IdentificadorIndividualOMatrimonial index={index} tipo={tipo} /> : 
+          <IdentificadorCamaMarinera index={index} />
         }
         
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(index)}>
