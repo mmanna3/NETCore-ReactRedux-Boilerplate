@@ -6,35 +6,22 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
 
   const IdentificadorUnaCama = ({index}) => {
                       return <>
-                        <span className="control">
-                        <span className="button is-static">
-                          Nº
-                        </span>
-                      </span>
-                      <span className="control is-expanded">
-                        <InputWithoutLabel name={`camas[${index}].numero`}/>
-                      </span>
-                    </>
+                      <div className="field">
+                            <span className="control is-expanded">
+                              <InputWithoutLabel name={`camas[${index}].numero`}/>
+                            </span>
+                            </div>
+                         </>
   };
 
   const IdentificadorDosCamas = ({index}) => {
     return <>
-            <span className="control">
-            <span className="button is-static">
-              Nº Abajo
-            </span>
-            </span>
-            <span className="control is-expanded">
-              <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
-            </span>
-            <span className="control">
-              <span className="button is-static">
-                Nº Arriba
+            <span className="field">
+                <InputWithoutLabel name={`camas[${index}].numeroAbajo`}/>
               </span>
-            </span>
-            <span className="control is-expanded">
-              <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
-            </span>
+              <span className="field">
+                <InputWithoutLabel name={`camas[${index}].numeroArriba`}/>
+              </span>
           </>
   };  
 
@@ -46,7 +33,7 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
   }
 
   return (
-    <div key={index} className="field is-horizontal">
+    <div key={index} className="field is-grouped">
       <div className="field-body">
         <div className="field is-expanded">
           <div className="field has-addons">
@@ -55,19 +42,21 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
                 Cama
               </span>
             </span>
-            <span className="control">
-              <Select name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
+            <span className="control is-expanded">
+              <Select ccsClass="is-fullwidth" name={`camas[${index}].tipo`} onChange={mostrarOcultarMarinera}>
                 <option value="1">Individual</option>
                 <option value="2">Matrimonial</option>
                 <option value="3">Marinera</option>
               </Select>
             </span>
-            {!esMarinera ? 
+          </div>
+        </div>
+        
+        {!esMarinera ? 
               <IdentificadorUnaCama index={index}/> : 
               <IdentificadorDosCamas index={index} />
             }
-          </div>
-        </div>
+        
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(index)}>
             <Icon faCode="trash-alt" />
         </button>
