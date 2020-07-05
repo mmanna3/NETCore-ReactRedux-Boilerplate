@@ -1,6 +1,6 @@
 import React from 'react';
-import { InputWithoutLabel, Select } from "components/Input";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'    
+import { InputWithoutLabel, Select } from "components/Input";    
+import { Icon } from "components/Icon";    
 
 const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
 
@@ -69,9 +69,7 @@ const SelectCama = ({index, esMarinera, setEsMarinera, removeCama}) => {
           </div>
         </div>
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(index)}>
-          <span className="icon">
-            <FontAwesomeIcon icon="trash-alt" />
-          </span>
+            <Icon faCode="trash-alt" />
         </button>
       </div>
     </div>
