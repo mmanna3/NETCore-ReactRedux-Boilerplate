@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Api.Controllers.DTOs
+namespace Api.Controllers.DTOs.Habitacion
 {
     public class HabitacionDTO
     {
@@ -11,8 +11,8 @@ namespace Api.Controllers.DTOs
 
         public List<CamaIndividualDTO> CamasIndividuales { get; set; }
 
-        public byte CamasMarineras { get; set; }
-        
-        public byte CamasMatrimoniales { get; set; }
+        public List<CamaMarineraDTO> CamasMarineras { get; set; }
+
+        public List<CamaMatrimonialDTO> CamasMatrimoniales { get; set; }
     }
 }

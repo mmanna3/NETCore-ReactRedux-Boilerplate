@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.Controllers.DTOs;
+using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.Otros;
 using AutoMapper;
 using Api.Core.Models;

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Api.Controllers.DTOs
+﻿namespace Api.Controllers.DTOs.Habitacion
 {
     public class CamaIndividualDTO
     {
