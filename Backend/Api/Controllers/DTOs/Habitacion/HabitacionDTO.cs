@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Api.Controllers.DTOs.Habitacion
 {
@@ -14,5 +15,12 @@ namespace Api.Controllers.DTOs.Habitacion
         public List<CamaMarineraDTO> CamasMarineras { get; set; }
 
         public List<CamaMatrimonialDTO> CamasMatrimoniales { get; set; }
+
+        public bool HayCamasSinNombre()
+        {
+            return CamasIndividuales != null && CamasIndividuales.Exists(x => string.IsNullOrEmpty(x.Nombre)) ||
+                   CamasMatrimoniales != null && CamasMatrimoniales.Exists(x => string.IsNullOrEmpty(x.Nombre))
+                ;
+        }
     }
 }

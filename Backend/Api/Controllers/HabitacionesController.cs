@@ -35,6 +35,9 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
         {
+            if (dto.HayCamasSinNombre())
+                return BadRequest(ResponseErrorDTO.Build("Todas las camas deben tener un Identificador"));
+
             var habitacion = _mapper.Map<Habitacion>(dto);
             var id = await _habitacionService.CrearAsync(habitacion);
 
