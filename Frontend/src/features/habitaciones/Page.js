@@ -19,15 +19,15 @@ const HabitacionesPage = () => {
     },
     {
       Header: 'Camas matrimoniales',
-      accessor: 'camasMatrimoniales',
+      accessor: 'camasMatrimoniales.length',
     },
     {
       Header: 'Camas marineras',
-      accessor: 'camasMarineras',
+      accessor: 'camasMarineras.length',
     },
     {
       Header: 'Camas individuales',
-      accessor: 'camasIndividuales',
+      accessor: 'camasIndividuales.length',
     },
   ]
   
