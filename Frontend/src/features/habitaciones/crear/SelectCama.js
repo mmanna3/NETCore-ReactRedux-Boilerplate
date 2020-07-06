@@ -2,17 +2,17 @@ import React from 'react';
 import { InputWithoutLabel, Select } from "components/Input";    
 import { Icon } from "components/Icon";    
 
-const SelectCama = ({index, tipo, globalIndex, value, setTipoCama, removeCama, setValue}) => {
+const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
 
-  const IdentificadorIndividualOMatrimonial = ({index, tipo, value, globalIndex, setValue}) => {        
+  const IdentificadorIndividualOMatrimonial = ({cama, setValue}) => {        
     
     return <div className="field">
             <span className="control is-expanded">
               <InputWithoutLabel 
-                          name={`camas${tipo}[${index}].nombre`} 
+                          name={`camas${cama.tipo}[${cama.index}].nombre`} 
                           placeholder="Identificador"
-                          onChange={e => setValue(globalIndex, e.target.value)}
-                          value={value}/>
+                          onChange={e => setValue(cama.globalIndex, e.target.value)}
+                          value={cama.value}/>
             </span>
           </div>
                          
@@ -30,7 +30,8 @@ const SelectCama = ({index, tipo, globalIndex, value, setTipoCama, removeCama, s
   };  
 
   const onTipoCamaChanged = (e) => {
-    setTipoCama(index, tipo, e.target.value);
+    debugger;
+    setTipoCama(cama.index, cama.tipo, e.target.value);
   }
 
   return (
@@ -51,12 +52,12 @@ const SelectCama = ({index, tipo, globalIndex, value, setTipoCama, removeCama, s
           </span>
         </div>
         
-        {tipo !== 'Marineras' ? 
-          <IdentificadorIndividualOMatrimonial index={index} tipo={tipo} value={value} globalIndex={globalIndex} setValue={setValue} /> :
-          <IdentificadorCamaMarinera index={index} />
+        {cama.tipo !== 'Marineras' ? 
+          <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} /> :
+          <IdentificadorCamaMarinera index={cama.index} />
         }
         
-        <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(globalIndex)}>
+        <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(cama.globalIndex)}>
             <Icon faCode="trash-alt" />
         </button>
 

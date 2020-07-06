@@ -104,13 +104,10 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre de la habitación" name="nombre" />
         <Label text="Camas"/>
-          {camas.map(metadata => {
+          {camas.map(cama => {
             console.log(camas);
-            return <SelectCama key={`${metadata.globalIndex}`}
-                        index={metadata.index}  /*Pasar estos 3 en un objeto*/
-                        tipo={metadata.tipo}
-                        globalIndex={metadata.globalIndex}
-                        value={metadata.value}
+            return <SelectCama key={`${cama.globalIndex}`}
+                        cama={cama}
                         setTipoCama={setTipoCama}
                         removeCama={removeCama}
                         setValue={setValue}
