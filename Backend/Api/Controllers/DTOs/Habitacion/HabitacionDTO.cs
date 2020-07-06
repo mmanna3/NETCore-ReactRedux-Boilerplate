@@ -23,5 +23,10 @@ namespace Api.Controllers.DTOs.Habitacion
                    CamasMarineras != null && CamasMarineras.Exists(x => string.IsNullOrEmpty(x.NombreArriba) || string.IsNullOrEmpty(x.NombreAbajo))
                 ;
         }
+
+        public bool HayCamasConIdentificadorRepetido()
+        {
+            return false;
+        }
     }
 }

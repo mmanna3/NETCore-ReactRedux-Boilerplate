@@ -38,6 +38,9 @@ namespace Api.Controllers
             if (dto.HayCamasSinNombre())
                 return BadRequest(ResponseErrorDTO.Build("Todas las camas deben tener Identificador"));
 
+            if (dto.HayCamasConIdentificadorRepetido())
+                return BadRequest(ResponseErrorDTO.Build("No puede haber camas con el mismo Identificador"));
+
             var habitacion = _mapper.Map<Habitacion>(dto);
             var id = await _habitacionService.CrearAsync(habitacion);
 
