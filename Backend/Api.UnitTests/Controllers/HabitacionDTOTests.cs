@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Api.Controllers.DTOs.Habitacion;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 
 namespace Api.UnitTests.Controllers
@@ -73,9 +72,21 @@ namespace Api.UnitTests.Controllers
         }
 
         [Test]
-        public void TodasLasCamasTienenNombre_EntoncesHayCamasSinNombreDevuelveTrue()
+        public void TodasLasCamasTienenNombre_EntoncesHayCamasSinNombreDevuelveFalse()
         {
+            var sut = new HabitacionDTO
+            {
+                CamasIndividuales = new List<CamaIndividualDTO>
+                {
+                    new CamaIndividualDTO { Nombre = "Individual1" },
+                },
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                }
+            };
 
+            sut.HayCamasSinNombre().Should().Be(false);
         }
     }
 }
