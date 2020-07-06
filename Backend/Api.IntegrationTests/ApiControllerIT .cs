@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
 using FluentAssertions;
 using NUnit.Framework;
@@ -12,7 +11,6 @@ namespace Api.IntegrationTests
     public class ApiControllerIT : BaseAutenticadoIT
     {
         private const string ENDPOINT = "/api/habitaciones";
-        private const byte CAMAS_MATRIMONIALES = 2;
 
         [Test]
         public async Task Error400_PorBodyIncorrectoEnPost()
@@ -20,8 +18,8 @@ namespace Api.IntegrationTests
             var bodySinUnCampoRequerido = new HabitacionDTO
             {
                 CamasIndividuales = new List<CamaIndividualDTO>(),
-                CamasMatrimoniales = CAMAS_MATRIMONIALES,
-                CamasMarineras = 3,
+                CamasMatrimoniales = new List<CamaMatrimonialDTO>(),
+                CamasMarineras = new List<CamaMarineraDTO>()
             };
 
             var response = await _httpClient.PostAsJsonAsync(ENDPOINT, bodySinUnCampoRequerido);

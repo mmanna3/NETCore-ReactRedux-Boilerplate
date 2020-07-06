@@ -1,5 +1,4 @@
-﻿using Api.Controllers.DTOs;
-using Api.Controllers.DTOs.Habitacion;
+﻿using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.DTOs.Usuario;
 using AutoMapper;
 using Api.Core.Models;

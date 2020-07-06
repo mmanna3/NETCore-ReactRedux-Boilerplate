@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
 using FluentAssertions;
 using NUnit.Framework;
@@ -13,7 +12,6 @@ namespace Api.IntegrationTests
     public class HabitacionesIT : BaseAutenticadoIT
     {
         private const string ENDPOINT = "/api/habitaciones";
-        private const byte CAMAS_MATRIMONIALES = 2;
 
         [Test]
         public async Task CreaHabitacionCorrectamente()
@@ -26,7 +24,8 @@ namespace Api.IntegrationTests
             var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
 
             habitaciones.Count().Should().Be(1);
-            habitaciones.ToList().First().CamasMatrimoniales.Should().Be(CAMAS_MATRIMONIALES);
+            var habitacion = habitaciones.ToList().First();
+            habitacion.CamasMatrimoniales.Count.Should().Be(1);
         }
 
         [Test]
@@ -39,8 +38,15 @@ namespace Api.IntegrationTests
             {
                 Nombre = "Roja",
                 CamasIndividuales = new List<CamaIndividualDTO>(),
-                CamasMatrimoniales = CAMAS_MATRIMONIALES,
-                CamasMarineras = 3,
+                CamasMatrimoniales = new List<CamaMatrimonialDTO>(),
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO
+                    {
+                        NombreAbajo = "Abajo",
+                        NombreArriba = "Arriba",
+                    }
+                }
             };
 
             var responseModificar = await _httpClient.PutAsJsonAsync($"{ENDPOINT}/{id}", body);
@@ -52,7 +58,13 @@ namespace Api.IntegrationTests
             var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
 
             habitaciones.Count().Should().Be(1);
-            habitaciones.ToList().First().Nombre.Should().Be("Roja");
+
+            var habitacion = habitaciones.ToList().First();
+            
+            habitacion.CamasIndividuales.Count.Should().Be(0);
+            habitacion.CamasMatrimoniales.Count.Should().Be(0);
+            habitacion.CamasMarineras.Count.Should().Be(1);
+            habitacion.Nombre.Should().Be("Roja");
         }
 
         private async Task<HttpResponseMessage> CrearUnaHabitacion()
@@ -61,8 +73,14 @@ namespace Api.IntegrationTests
             {
                 Nombre = "Azul",
                 CamasIndividuales = new List<CamaIndividualDTO>(),
-                CamasMatrimoniales = CAMAS_MATRIMONIALES,
-                CamasMarineras = 3,
+                CamasMatrimoniales = new List<CamaMatrimonialDTO>
+                {
+                    new CamaMatrimonialDTO
+                    {
+                        Nombre = "Matrimonial1"
+                    }
+                },
+                CamasMarineras = new List<CamaMarineraDTO>(),
             };
 
             return await _httpClient.PostAsJsonAsync(ENDPOINT, body);
