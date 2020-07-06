@@ -8,7 +8,7 @@ import SelectCama from './SelectCama';
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
-  const [resetOnChanged, resetForm] = React.useState(0);  
+  const [resetOnChanged, resetForm] = React.useState(0);
   const [camas, setCamas] = React.useState([{index: 0, tipo: 'Individuales', globalIndex: 0, value: ''}]);
 
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function getNextCamaIndex(array, tipo) {
-    var cama = array.slice().reverse().find(x => x.tipo === tipo);
+    var cama = array.slice().reverse().find(x => x.tipo === tipo);    
     return cama ? cama.index + 1 : 0;
   }
 
@@ -49,7 +49,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   };
 
   function setValue(globalIndex, value){
-    debugger;
     var newArray = [...camas];
     
     for (var i = 0; i < newArray.length; i++) {
@@ -68,7 +67,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     for (var i = 0; i < newArray.length; i++) {
       if (newArray[i].index === index && newArray[i].tipo === oldTipo) {
         newArray[i].index = getNextCamaIndex(newArray, newTipo);
-        newArray[i].tipo = newTipo;        
+        newArray[i].tipo = newTipo;
+        newArray[i].value = {};
         break;
       }
     }

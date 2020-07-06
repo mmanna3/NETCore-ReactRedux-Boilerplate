@@ -57,10 +57,10 @@ export function Button({ text, ...otrosAtributos }) {
   return <button className="button is-primary" type="button" {...otrosAtributos}>{text}</button>
 }
 
-export function Select({ register, name, children, onChange, ccsClass }) {
+export function Select({ register, name, children, onChange, ccsClass, ...otrosAtributos }) {
   return (
     <div className={`select ${ccsClass}`}>
-      <select name={name} ref={register} onChange={onChange}>
+      <select name={name} ref={register} onChange={onChange} {...otrosAtributos}>
         {children}
       </select>
     </div>

@@ -50,6 +50,7 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
     setTipoCama(cama.index, cama.tipo, e.target.value);
   }
 
+  console.log('tipo:'+cama.tipo)
   return (
     <div className="field field-body is-grouped">
 
@@ -60,7 +61,7 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
             </span>
           </span>
           <span className="control is-expanded">
-            <Select ccsClass="is-fullwidth" onChange={onTipoCamaChanged}>
+            <Select value={cama.tipo || ''} ccsClass="is-fullwidth" onChange={onTipoCamaChanged}>
               <option value="Individuales">Individual</option>
               <option value="Matrimoniales">Matrimonial</option>
               <option value="Marineras">Marinera</option>
@@ -68,7 +69,7 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
           </span>
         </div>
         
-        {cama.tipo !== 'Marineras' ? 
+        {cama.tipo !== 'Marineras' ?
           <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} /> :
           <IdentificadorCamaMarinera cama={cama} setValue={setValue}/>
         }
