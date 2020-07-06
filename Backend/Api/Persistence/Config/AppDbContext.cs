@@ -9,6 +9,8 @@ namespace Api.Persistence.Config
         public DbSet<Habitacion> Habitaciones { get; set; }
 
         public DbSet<CamaIndividual> CamasIndividuales { get; set; }
+        public DbSet<CamaMatrimonial> CamasMatrimoniales { get; set; }
+        public DbSet<CamaMarinera> CamasMarineras { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

@@ -11,6 +11,9 @@ namespace Api.Controllers.Mapping
         public ModelToDTOProfile()
         {
             CreateMap<Habitacion, HabitacionDTO>();
+            CreateMap<CamaIndividual, CamaIndividualDTO>();
+            CreateMap<CamaMatrimonial, CamaMatrimonialDTO>();
+            CreateMap<CamaMarinera, CamaMarineraDTO>();
 
             CreateMap<Usuario, RegistrarDTO>();
         }

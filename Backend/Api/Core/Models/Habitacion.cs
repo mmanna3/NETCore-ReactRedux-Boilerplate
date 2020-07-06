@@ -11,9 +11,7 @@ namespace Api.Core.Models
         public string Nombre { get; set; }
 
         public List<CamaIndividual> CamasIndividuales { get; set; }
-
-        public byte CamasMarineras { get; set; }
-
-        public byte CamasMatrimoniales { get; set; }
+        public List<CamaMatrimonial> CamasMatrimoniales { get; set; }
+        public List<CamaMarinera> CamasMarineras { get; set; }
     }
 }

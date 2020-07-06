@@ -10,8 +10,11 @@ namespace Api.Controllers.Mapping
         public DTOToModelProfile()
         {
             CreateMap<RegistrarDTO, Usuario>();
+
             CreateMap<HabitacionDTO, Habitacion>();
             CreateMap<CamaIndividualDTO, CamaIndividual>();
+            CreateMap<CamaMatrimonialDTO, CamaMatrimonial>();
+            CreateMap<CamaMarineraDTO, CamaMarinera>();
         }
     }
 }

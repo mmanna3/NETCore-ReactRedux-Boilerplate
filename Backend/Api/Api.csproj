@@ -9,6 +9,8 @@
     <Compile Remove="Persistence\Migrations\20200525211829_Migracion-Inicial.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200615171801_pruebavacia.cs" />
     <Compile Remove="Persistence\Migrations\20200615171801_pruebavacia.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200706015932_AgregaCamasMarineraYMatrimonial.cs" />
+    <Compile Remove="Persistence\Migrations\20200706015932_AgregaCamasMarineraYMatrimonial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
