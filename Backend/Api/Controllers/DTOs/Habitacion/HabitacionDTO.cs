@@ -19,7 +19,8 @@ namespace Api.Controllers.DTOs.Habitacion
         public bool HayCamasSinNombre()
         {
             return CamasIndividuales != null && CamasIndividuales.Exists(x => string.IsNullOrEmpty(x.Nombre)) ||
-                   CamasMatrimoniales != null && CamasMatrimoniales.Exists(x => string.IsNullOrEmpty(x.Nombre))
+                   CamasMatrimoniales != null && CamasMatrimoniales.Exists(x => string.IsNullOrEmpty(x.Nombre)) ||
+                   CamasMarineras != null && CamasMarineras.Exists(x => string.IsNullOrEmpty(x.NombreArriba) || string.IsNullOrEmpty(x.NombreAbajo))
                 ;
         }
     }

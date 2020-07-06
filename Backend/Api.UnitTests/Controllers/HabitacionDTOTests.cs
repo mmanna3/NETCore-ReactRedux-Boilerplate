@@ -41,7 +41,35 @@ namespace Api.UnitTests.Controllers
         [Test]
         public void HayCamasMarinerasSinNombre_EntoncesHayCamasSinNombreDevuelveTrue()
         {
+            var sut = new HabitacionDTO
+            {
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarineraDTO { NombreAbajo = "Abajo1" },
+                }
+            };
+            sut.HayCamasSinNombre().Should().Be(true);
 
+            var sut2 = new HabitacionDTO
+            {
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarineraDTO { NombreArriba = "Arriba1" },
+                }
+            };
+            sut2.HayCamasSinNombre().Should().Be(true);
+
+            var sut3 = new HabitacionDTO
+            {
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarineraDTO { NombreArriba = "", NombreAbajo = ""},
+                }
+            };
+            sut3.HayCamasSinNombre().Should().Be(true);
         }
 
         [Test]
