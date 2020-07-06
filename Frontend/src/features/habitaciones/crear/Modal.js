@@ -9,7 +9,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearHabitacionSelector)
   const [resetOnChanged, resetForm] = React.useState(0);  
-  const [camas, setCamas] = React.useState([{index: 0, tipo: 'Individuales', globalIndex: 0}]);
+  const [camas, setCamas] = React.useState([{index: 0, tipo: 'Individuales', globalIndex: 0, value: ''}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));  
@@ -40,10 +40,27 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     console.log(camas);
   }
 
-  const removeCama = index => () => {
-    if (camas.length > 1)
-      setCamas(prevIndexes => [...prevIndexes.filter(item => item.index !== index)]);
+  const removeCama = globalIndex => () => {
+    if (camas.length > 1) {
+      var newArray = camas.filter(item => item.globalIndex !== globalIndex);
+      updateCamaIndexes(newArray);
+      setCamas(newArray);
+    }      
   };
+
+  function setValue(globalIndex, value){
+    debugger;
+    var newArray = [...camas];
+    
+    for (var i = 0; i < newArray.length; i++) {
+      if (newArray[i].globalIndex === globalIndex) {
+        newArray[i].value = value;
+        break;
+      }
+    }
+
+    setCamas(newArray);
+  }
 
   function setTipoCama(index, oldTipo, newTipo) {
     var newArray = [...camas];
@@ -90,10 +107,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           {camas.map(metadata => {
             console.log(camas);
             return <SelectCama key={`${metadata.globalIndex}`}
-                        index={metadata.index}
+                        index={metadata.index}  /*Pasar estos 3 en un objeto*/
                         tipo={metadata.tipo}
+                        globalIndex={metadata.globalIndex}
+                        value={metadata.value}
                         setTipoCama={setTipoCama}
-                        removeCama={removeCama}/>
+                        removeCama={removeCama}
+                        setValue={setValue}
+                    />
           })
           }          
           <Button text="Agregar cama" onClick={() => addCama()} style={{marginTop:"1em"}}/>

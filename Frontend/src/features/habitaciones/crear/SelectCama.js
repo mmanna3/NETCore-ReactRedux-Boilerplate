@@ -2,14 +2,19 @@ import React from 'react';
 import { InputWithoutLabel, Select } from "components/Input";    
 import { Icon } from "components/Icon";    
 
-const SelectCama = ({index, tipo, setTipoCama, removeCama}) => {
+const SelectCama = ({index, tipo, globalIndex, value, setTipoCama, removeCama, setValue}) => {
 
-  const IdentificadorIndividualOMatrimonial = ({index, tipo}) => {
-                      return <div className="field">
-                              <span className="control is-expanded">
-                                <InputWithoutLabel name={`camas${tipo}[${index}].nombre`} placeholder="Identificador"/>
-                              </span>
-                            </div>
+  const IdentificadorIndividualOMatrimonial = ({index, tipo, value, globalIndex, setValue}) => {        
+    
+    return <div className="field">
+            <span className="control is-expanded">
+              <InputWithoutLabel 
+                          name={`camas${tipo}[${index}].nombre`} 
+                          placeholder="Identificador"
+                          onChange={e => setValue(globalIndex, e.target.value)}
+                          value={value}/>
+            </span>
+          </div>
                          
   };
 
@@ -47,11 +52,11 @@ const SelectCama = ({index, tipo, setTipoCama, removeCama}) => {
         </div>
         
         {tipo !== 'Marineras' ? 
-          <IdentificadorIndividualOMatrimonial index={index} tipo={tipo} /> : 
+          <IdentificadorIndividualOMatrimonial index={index} tipo={tipo} value={value} globalIndex={globalIndex} setValue={setValue} /> :
           <IdentificadorCamaMarinera index={index} />
         }
         
-        <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(index)}>
+        <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(globalIndex)}>
             <Icon faCode="trash-alt" />
         </button>
 
