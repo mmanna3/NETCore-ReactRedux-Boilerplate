@@ -4,33 +4,49 @@ import { Icon } from "components/Icon";
 
 const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
 
-  const IdentificadorIndividualOMatrimonial = ({cama, setValue}) => {        
-    
+  const IdentificadorIndividualOMatrimonial = ({cama, setValue}) => {
+
     return <div className="field">
             <span className="control is-expanded">
               <InputWithoutLabel 
                           name={`camas${cama.tipo}[${cama.index}].nombre`} 
                           placeholder="Identificador"
-                          onChange={e => setValue(cama.globalIndex, e.target.value)}
-                          value={cama.value}/>
+                          onChange={e => setValue(cama.globalIndex, {nombre: e.target.value})}
+                          value={cama.value?.nombre}/>
             </span>
           </div>
-                         
   };
 
-  const IdentificadorCamaMarinera = ({index}) => {
+  const IdentificadorCamaMarinera = ({cama}) => {
+    
+    function setValueMarinera(){
+      var abajo = document.getElementsByName(`camasMarineras[${cama.index}].nombreAbajo`)[0].value;
+      var arriba = document.getElementsByName(`camasMarineras[${cama.index}].nombreArriba`)[0].value;
+
+      setValue(cama.globalIndex, {nombreAbajo: abajo, nombreArriba: arriba});
+    }
+    
     return <>
             <span className="field">
-                <InputWithoutLabel name={`camasMarineras[${index}].nombreAbajo`} placeholder="Id. Abajo"/>
+                <InputWithoutLabel 
+                  name={`camasMarineras[${cama.index}].nombreAbajo`} 
+                  placeholder="Id. Abajo"
+                  onChange={() => setValueMarinera()}
+                  value={cama.value?.nombreAbajo}
+                  />
               </span>
               <span className="field">
-                <InputWithoutLabel name={`camasMarineras[${index}].nombreArriba`} placeholder="Id. Arriba"/>
+                <InputWithoutLabel 
+                  name={`camasMarineras[${cama.index}].nombreArriba`} 
+                  placeholder="Id. Arriba"
+                  onChange={() => setValueMarinera()}
+                  value={cama.value?.nombreArriba}
+                />
               </span>
           </>
   };  
 
   const onTipoCamaChanged = (e) => {
-    debugger;
     setTipoCama(cama.index, cama.tipo, e.target.value);
   }
 
@@ -54,7 +70,7 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
         
         {cama.tipo !== 'Marineras' ? 
           <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} /> :
-          <IdentificadorCamaMarinera index={cama.index} />
+          <IdentificadorCamaMarinera cama={cama} setValue={setValue}/>
         }
         
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(cama.globalIndex)}>
