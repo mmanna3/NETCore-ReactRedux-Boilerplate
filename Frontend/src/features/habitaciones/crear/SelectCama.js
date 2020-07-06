@@ -50,7 +50,6 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
     setTipoCama(cama.index, cama.tipo, e.target.value);
   }
 
-  console.log('tipo:'+cama.tipo)
   return (
     <div className="field field-body is-grouped">
 

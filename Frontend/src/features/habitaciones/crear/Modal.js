@@ -17,11 +17,13 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   function onSuccess() {
     onSuccessfulSubmit();
     resetForm(resetOnChanged+1);
+    setCamas([{index: 0, tipo: 'Individuales', globalIndex: 0, value: ''}]);
   }
 
   function hide() {
     onHide();
     dispatch(cleanErrors());
+    setCamas([{index: 0, tipo: 'Individuales', globalIndex: 0, value: ''}]);
   }
 
   function getNextCamaIndex(array, tipo) {
@@ -37,7 +39,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   function addCama() {
     var nextIndex = getNextCamaIndex(camas, 'Individuales');
     setCamas(prevIndexes => [...prevIndexes, {index: nextIndex, tipo: 'Individuales', globalIndex: getNextGlobalIndex(camas)}]);
-    console.log(camas);
   }
 
   const removeCama = globalIndex => () => {
