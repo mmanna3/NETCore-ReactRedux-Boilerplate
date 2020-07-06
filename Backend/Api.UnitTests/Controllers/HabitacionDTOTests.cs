@@ -88,5 +88,60 @@ namespace Api.UnitTests.Controllers
 
             sut.HayCamasSinNombre().Should().Be(false);
         }
+
+        [Test]
+        public void HayCamasDelMismoTipoConIdentificadorRepetido_EntoncesHayCamasConIdentificadorRepetidoDevuelveTrue()
+        {
+            var sut = new HabitacionDTO
+            {
+                CamasMatrimoniales = new List<CamaMatrimonialDTO>
+                {
+                    new CamaMatrimonialDTO { Nombre = "Matrimonial1" },
+                    new CamaMatrimonialDTO { Nombre = "Matrimonial1" },
+                }
+            };
+
+            sut.HayCamasConIdentificadorRepetido().Should().Be(true);
+        }
+
+        [Test]
+        public void HayCamasDeDistintoTipoConIdentificadorRepetido_EntoncesHayCamasConIdentificadorRepetidoDevuelveTrue()
+        {
+            var sut = new HabitacionDTO
+            {
+                CamasIndividuales = new List<CamaIndividualDTO>
+                {
+                    new CamaIndividualDTO { Nombre = "Individual1" },
+                },
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO { NombreAbajo = "Individual1", NombreArriba = "Arriba1"},
+                }
+            };
+
+            sut.HayCamasConIdentificadorRepetido().Should().Be(true);
+        }
+
+        [Test]
+        public void NoHayCamasConIdentificadorRepetido_EntoncesHayCamasConIdentificadorRepetidoDevuelveFalse()
+        {
+            var sut = new HabitacionDTO
+            {
+                CamasIndividuales = new List<CamaIndividualDTO>
+                {
+                    new CamaIndividualDTO { Nombre = "Individual1" },
+                },
+                CamasMarineras = new List<CamaMarineraDTO>
+                {
+                    new CamaMarineraDTO { NombreAbajo = "xasdsad", NombreArriba = "Arriba1"},
+                },
+                CamasMatrimoniales = new List<CamaMatrimonialDTO>
+                {
+                    new CamaMatrimonialDTO { Nombre = "aaaaaaa"},
+                }
+            };
+
+            sut.HayCamasConIdentificadorRepetido().Should().Be(false);
+        }
     }
 }

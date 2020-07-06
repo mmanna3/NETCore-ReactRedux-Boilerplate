@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Api.Controllers.DTOs.Habitacion
 {
@@ -26,7 +27,21 @@ namespace Api.Controllers.DTOs.Habitacion
 
         public bool HayCamasConIdentificadorRepetido()
         {
-            return false;
+            var nombres = new List<string>();
+
+            if (CamasMatrimoniales != null)
+                nombres.AddRange(CamasMatrimoniales?.Select(x => x.Nombre));
+
+            if (CamasMarineras != null)
+            {
+                nombres.AddRange(CamasMarineras.Select(x => x.NombreAbajo));
+                nombres.AddRange(CamasMarineras.Select(x => x.NombreArriba));
+            }
+                
+            if (CamasIndividuales != null)
+                nombres.AddRange(CamasIndividuales.Select(x => x.Nombre));
+
+            return nombres.GroupBy(x => x).Any(g => g.Count() > 1);
         }
     }
 }
