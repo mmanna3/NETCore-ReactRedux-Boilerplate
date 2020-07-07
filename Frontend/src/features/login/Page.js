@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'components/Form';
 import { Input, Button, Label, SubmitButton } from "components/Input";
 import { useDispatch, useSelector } from 'react-redux'
-import styles from './Page.module.css'
+import styles from './Page.module.scss'
 
 const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
