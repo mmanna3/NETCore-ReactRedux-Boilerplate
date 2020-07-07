@@ -68,7 +68,7 @@ export function Select({ register, name, children, onChange, ccsClass, ...otrosA
 }
 
 export const ValidationSummary = ({errors}) => {
-    
+  
   function errorsList(){
     var result = [];
 

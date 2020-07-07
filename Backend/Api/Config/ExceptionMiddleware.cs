@@ -37,11 +37,7 @@ namespace Api.Config
             context.Response.ContentType = MediaTypeNames.Application.Json;
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            return context.Response.WriteAsync(new Error()
-            {
-                StatusCode = context.Response.StatusCode,
-                Mensaje = "Error interno"
-            }.ToString());
+            return context.Response.WriteAsync($"{{\"errors\": {{ \"ControlledException\": [\"{exception.Message}\"] }} }}");
         }
     }
 
