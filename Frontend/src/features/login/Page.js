@@ -1,22 +1,21 @@
 import React from 'react';
 import Form from 'components/Form';
-import { Input, Button, Label, SubmitButton } from "components/Input";
+import { Input, SubmitButton, ValidationSummary } from "components/Input";
+import { login, cleanErrors, loginSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Page.module.scss'
 
 const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
-  // const {loading, validationErrors} = useSelector(crearHabitacionSelector)
+  const {loading, validationErrors} = useSelector(loginSelector)
   const [resetOnChanged, resetForm] = React.useState(0);
 
   const dispatch = useDispatch();
-  // const onSubmit = data => dispatch(crearHabitacion(data, onSuccess));
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => dispatch(login(data, onSuccess));
   
   function onSuccess() {
     onSuccessfulSubmit();
-    // resetForm(resetOnChanged+1);
-    
+    resetForm(resetOnChanged+1);    
   }
 
   return (
@@ -27,7 +26,8 @@ const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
       </div>
       <div className="column is-flex is-vcentered is-centered">
           <Form onSubmit={onSubmit} className={`login-form ${styles.loginForm}`}>
-            <Input label="Usuario" name="usuario" />
+            <ValidationSummary errors={validationErrors} />
+            <Input label="Usuario" name="username" />
             <Input label="Contraseña" name="password" />
             <SubmitButton text="Ingresar"></SubmitButton>
           </Form>
