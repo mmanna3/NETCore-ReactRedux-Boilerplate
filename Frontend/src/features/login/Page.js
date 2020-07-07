@@ -8,14 +8,12 @@ import styles from './Page.module.scss'
 const LoginPage = () => {
 
   const {loading, validationErrors} = useSelector(loginSelector)
-  const [resetOnChanged, resetForm] = React.useState(0);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(login(data, onSuccess));
   
   function onSuccess() {
     console.log('salió piola');
-    resetForm(resetOnChanged+1);
   }
 
   return (
@@ -34,18 +32,6 @@ const LoginPage = () => {
       </div>
     </div>
   </div>
-
-    // <div className="container">
-    // <div className="columns is-desktop is-vcentered is-centered">
-    //   <div className="column is-half">
-    //     <Form onSubmit={onSubmit}>
-    //       <Input label="Usuario" name="usuario" />
-    //       <Input label="Contraseña" name="password" />
-    //       <SubmitButton text="Ingresar"></SubmitButton>
-    //     </Form>
-    //   </div>
-    // </div>
-    // </div>
   )
 }
 
