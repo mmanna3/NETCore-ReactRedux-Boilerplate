@@ -71,9 +71,8 @@ namespace Api.IntegrationTests
             var response2 = await RegistrarUnUsuario();
 
             response2.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
-            var error = await response2.Content.ReadAsAsync<Error>();
-            error.Mensaje.Should().Be("Error interno");
-            error.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+            var error = await response2.Content.ReadAsStringAsync();
+            error.Should().Contain("Ya existe un usuario");
         }
 
         [Test]

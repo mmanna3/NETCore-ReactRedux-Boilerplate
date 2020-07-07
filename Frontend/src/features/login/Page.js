@@ -1,11 +1,11 @@
 import React from 'react';
 import Form from 'components/Form';
 import { Input, SubmitButton, ValidationSummary } from "components/Input";
-import { login, cleanErrors, loginSelector } from './slice';
+import { login, loginSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Page.module.scss'
 
-const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
+const LoginPage = () => {
 
   const {loading, validationErrors} = useSelector(loginSelector)
   const [resetOnChanged, resetForm] = React.useState(0);
@@ -14,8 +14,8 @@ const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const onSubmit = data => dispatch(login(data, onSuccess));
   
   function onSuccess() {
-    onSuccessfulSubmit();
-    resetForm(resetOnChanged+1);    
+    console.log('salió piola');
+    resetForm(resetOnChanged+1);
   }
 
   return (
@@ -28,8 +28,8 @@ const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
           <Form onSubmit={onSubmit} className={`login-form ${styles.loginForm}`}>
             <ValidationSummary errors={validationErrors} />
             <Input label="Usuario" name="username" />
-            <Input label="Contraseña" name="password" />
-            <SubmitButton text="Ingresar"></SubmitButton>
+            <Input type="password" label="Contraseña" name="password" />
+            <SubmitButton text="Ingresar" loading={loading}></SubmitButton>
           </Form>
       </div>
     </div>
