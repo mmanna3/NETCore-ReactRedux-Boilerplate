@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function Form({ defaultValues, children, onSubmit, resetOnChanged }) {
+export default function Form({ defaultValues, children, onSubmit, resetOnChanged, ...otherAttr }) {
   const { handleSubmit, register, reset } = useForm({ defaultValues });
 
   useEffect(() => {
@@ -9,7 +9,7 @@ export default function Form({ defaultValues, children, onSubmit, resetOnChanged
   }, [resetOnChanged, reset]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} {...otherAttr}>
       {processContent(children)}
     </form>
   );

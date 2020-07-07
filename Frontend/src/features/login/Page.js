@@ -20,24 +20,24 @@ const LoginPage = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   return (
-    <div class="page">
-    <div class={`columns is-gapless is-desktop ${styles.columns}`}>
-      <div class="column is-flex is-hidden-mobile has-background-primary">
-        {/* <h1 class="title is-1 has-text-white">SEPA </h1> */}
+    <div className="page">
+    <div className={`columns is-gapless is-desktop ${styles.columns}`}>
+      <div className="column is-flex is-hidden-mobile has-background-primary">
+        {/* <h1 className="title is-1 has-text-white">SEPA </h1> */}
       </div>
-      <div class="column is-flex is-vcentered is-centered">
-          <section class={`login-form ${styles.loginForm}`}>
+      <div className="column is-flex is-vcentered is-centered">
+          <Form onSubmit={onSubmit} className={`login-form ${styles.loginForm}`}>
             <Input label="Usuario" name="usuario" />
             <Input label="Contraseña" name="password" />
             <SubmitButton text="Ingresar"></SubmitButton>
-          </section>
+          </Form>
       </div>
     </div>
   </div>
 
     // <div className="container">
     // <div className="columns is-desktop is-vcentered is-centered">
-    //   <div class="column is-half">
+    //   <div className="column is-half">
     //     <Form onSubmit={onSubmit}>
     //       <Input label="Usuario" name="usuario" />
     //       <Input label="Contraseña" name="password" />
