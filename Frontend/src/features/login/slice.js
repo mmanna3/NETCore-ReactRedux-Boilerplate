@@ -44,6 +44,7 @@ export function login(data, onSuccess) {
 
     axios.post('/api/usuarios/autenticar', data)
       .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.data));
         dispatch(postSuccess(res.data));
         onSuccess();
       })
