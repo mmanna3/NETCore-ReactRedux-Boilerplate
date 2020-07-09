@@ -28,19 +28,6 @@ namespace Api.Config
                 })
                 .AddJwtBearer(x =>
                 {
-                    x.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = async context =>
-                        {
-                            var userService = context.HttpContext.RequestServices.GetRequiredService<IUsuarioService>();
-                            var userId = int.Parse(context.Principal.Identity.Name);
-                            var usuario = await userService.GetById(userId);
-                            if (usuario == null)
-                            {
-                                context.Fail("Usuario no autorizado");
-                            }
-                        }
-                    };
                     x.RequireHttpsMetadata = false;
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters

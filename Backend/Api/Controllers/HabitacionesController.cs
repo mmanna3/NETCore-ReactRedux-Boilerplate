@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [AllowAnonymous]
     public class HabitacionesController : ApiAutenticadoController
     {
         private readonly IHabitacionService _habitacionService;
@@ -33,6 +32,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        //[AllowAnonymous]
         public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
         {
             if (dto.HayCamasSinNombre())

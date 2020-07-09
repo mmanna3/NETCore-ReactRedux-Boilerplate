@@ -52,7 +52,6 @@ namespace Api.Config
                         .WithOrigins("http://localhost:3000")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowCredentials()
                 );
             }
 
@@ -64,6 +63,7 @@ namespace Api.Config
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -38,11 +38,21 @@ export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
 export function crearHabitacion(data, onSuccess) {
+  
+  let user = JSON.parse(localStorage.getItem('user'));
+
+  var authToken = "";
+  if (user && user.token)
+    authToken = 'Bearer ' + user.token;
+
+  const config = {
+      headers: { Authorization: authToken , 'Content-Type': 'application/json' }
+  };
 
   return async dispatch => {
     dispatch(postInit(data));
 
-    axios.post('/api/habitaciones', data)
+    axios.post('/api/habitaciones', data, config)
       .then((res) => {
         dispatch(postSuccess(res.data));
         onSuccess();

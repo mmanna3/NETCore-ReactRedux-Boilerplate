@@ -30,6 +30,7 @@ export const habitacionesSelector = state => state.habitaciones
 export default habitacionesSlice.reducer
 
 export function fetchHabitaciones() {
+  
   return async dispatch => {
     dispatch(fetchInit())
 
