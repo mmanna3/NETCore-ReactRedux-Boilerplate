@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios from 'components/axiosAuthenticated'
 
 export const initialState = {
   loading: false,
@@ -32,15 +33,14 @@ export default habitacionesSlice.reducer
 export function fetchHabitaciones() {
   
   return async dispatch => {
-    dispatch(fetchInit())
+    dispatch(fetchInit());
 
-    try {
-      const response = await fetch('/api/habitaciones')
-      const data = await response.json()
-
-      dispatch(fetchSuccess(data))
-    } catch (error) {
-      dispatch(fetchFailure())
-    }
+    axios.get('/api/habitaciones')
+    .then((res) => {
+      dispatch(fetchSuccess(res.data));
+    })
+    .catch((error) => {
+        dispatch(fetchFailure(error.response.data));
+    })
   }
 }
