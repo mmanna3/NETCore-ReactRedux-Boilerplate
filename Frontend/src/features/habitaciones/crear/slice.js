@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axios from 'components/axiosAuthenticated'
 
 export const initialState = {
   loading: false,
@@ -37,22 +37,12 @@ export const { postInit, postSuccess, postFailure, reset } = crearHabitacionSlic
 export const crearHabitacionSelector = state => state.crearHabitacion
 export default crearHabitacionSlice.reducer
 
-export function crearHabitacion(data, onSuccess) {
-  
-  let user = JSON.parse(localStorage.getItem('user'));
-
-  var authToken = "";
-  if (user && user.token)
-    authToken = 'Bearer ' + user.token;
-
-  const config = {
-      headers: { Authorization: authToken , 'Content-Type': 'application/json' }
-  };
+export function crearHabitacion(data, onSuccess) {  
 
   return async dispatch => {
     dispatch(postInit(data));
 
-    axios.post('/api/habitaciones', data, config)
+    axios.post('/api/habitaciones', data)
       .then((res) => {
         dispatch(postSuccess(res.data));
         onSuccess();
