@@ -2,7 +2,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Api.Config;
 using Api.Controllers.DTOs.Usuario;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
@@ -19,6 +18,7 @@ namespace Api.IntegrationTests
         public override async Task Setup()
         {
             await ResetearBaseDeDatosExcluyendoMigraciones();
+            await InicializarHttpClientAutenticado();
         }
 
         protected override async Task InicializarHttpClientAutenticado()
