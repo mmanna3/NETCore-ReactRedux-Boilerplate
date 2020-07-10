@@ -4,6 +4,7 @@ import { Input, SubmitButton, ValidationSummary } from "components/Input";
 import { login, loginSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Page.module.scss'
+import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
 
@@ -12,8 +13,10 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(login(data, onSuccess));
   
-  function onSuccess() {
-    console.log('salió piola');
+  let history = useHistory();
+
+  function onSuccess() {    
+    history.push("/habitaciones");
   }
 
   return (
