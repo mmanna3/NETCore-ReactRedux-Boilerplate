@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import 'components/FontAwesomeLibrary';
+import 'utils/FontAwesomeLibrary';
 import DashboardPage from './pages/DashboardPage'
 import PostsPage from './pages/PostsPage'
 import SinglePostPage from './pages/SinglePostPage'
