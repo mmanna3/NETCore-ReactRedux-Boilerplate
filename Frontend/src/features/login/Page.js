@@ -15,7 +15,7 @@ const LoginPage = () => {
   
   let history = useHistory();
 
-  function onSuccess() {    
+  function onSuccess() {
     history.push("/habitaciones");
   }
 

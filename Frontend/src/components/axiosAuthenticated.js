@@ -9,14 +9,34 @@ if (user && user.token)
 
 axios.defaults.headers.common = {'Authorization': `${authToken}`}
 
-axios.interceptors.response.use(response => response, error => {
+const UNAUTHORIZED = 401;
+// axios.interceptors.response.use(
+//   response => respose, 
   
-  if(error.response.status === 401){    
-    createBrowserHistory().push('/');
-    window.location.reload();
-  }
+//   error => {
+//     const {status} = error.response;
+//     if (status === UNAUTHORIZED) {
+//       createBrowserHistory().push('/');
+//       window.location.reload();
+//     }
+//     return Promise.reject(error);
+//  }
   
-  return error;
-});
+  
+  
+
+// );
+
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    const {status} = error.response;
+    if (status === UNAUTHORIZED) {
+      createBrowserHistory().push('/');
+      window.location.reload();
+    }
+    return Promise.reject(error);
+ }
+);
 
 export default axios;
