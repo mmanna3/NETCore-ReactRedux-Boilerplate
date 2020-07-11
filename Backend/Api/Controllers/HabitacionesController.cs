@@ -29,12 +29,12 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
+        public async Task<int> Crear([FromBody] HabitacionDTO dto)
         {
             var habitacion = _mapper.Map<Habitacion>(dto);
             var id = await _habitacionService.CrearAsync(habitacion);
 
-            return Ok(id);
+            return id;
         }
 
         [HttpPut("{id}")]
