@@ -11,6 +11,7 @@ namespace Api.Persistence.Config
         public DbSet<CamaIndividual> CamasIndividuales { get; set; }
         public DbSet<CamaMatrimonial> CamasMatrimoniales { get; set; }
         public DbSet<CamaMarinera> CamasMarineras { get; set; }
+        public DbSet<Huesped> Huespedes { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
