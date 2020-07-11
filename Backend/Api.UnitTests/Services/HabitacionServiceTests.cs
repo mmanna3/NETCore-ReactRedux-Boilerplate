@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Api.Core;
 using Api.Core.Models;
 using Api.Core.Repositories;
 using Api.Core.Services;
 using Api.Core.Services.Interfaces;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
@@ -27,7 +29,7 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public void HayCamasIndividualesSinNombre_EntoncesHayCamasSinNombreDevuelveTrue()
+        public void Crear_DaExcepcion_PorqueHayCamasIndividualesSinNombre()
         {
             var habitacion = new Habitacion
             {
@@ -43,6 +45,26 @@ namespace Api.UnitTests.Services
                     .TypeOf<AppException>()
                     .With.Property("Message").EqualTo(TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR))
                 ;
+        }
+
+        [Test]
+        public async Task Crear_Ok_PorqueTodasLasCamasTienenNombre()
+        {
+            var habitacion = new Habitacion
+            {
+                CamasIndividuales = new List<CamaIndividual>
+                {
+                    new CamaIndividual { Nombre = "Individual1" },
+                },
+                CamasMarineras = new List<CamaMarinera>
+                {
+                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                }
+            };
+
+            var result = await _service.CrearAsync(habitacion);
+
+            result.Should().BeOfType(typeof(int));
         }
 
         //[Test]

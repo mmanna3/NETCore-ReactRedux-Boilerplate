@@ -7,20 +7,20 @@ namespace Api.UnitTests.Controllers
 {
     public class HabitacionDTOTests
     {
-        [Test]
-        public void HayCamasIndividualesSinNombre_EntoncesHayCamasSinNombreDevuelveTrue()
-        {
-            var sut = new HabitacionDTO
-            {
-                CamasIndividuales = new List<CamaIndividualDTO>
-                {
-                    new CamaIndividualDTO { Nombre = "Individual1" },
-                    new CamaIndividualDTO { Nombre = "" },
-                }
-            };
+        //[Test]
+        //public void HayCamasIndividualesSinNombre_EntoncesHayCamasSinNombreDevuelveTrue()
+        //{
+        //    var sut = new HabitacionDTO
+        //    {
+        //        CamasIndividuales = new List<CamaIndividualDTO>
+        //        {
+        //            new CamaIndividualDTO { Nombre = "Individual1" },
+        //            new CamaIndividualDTO { Nombre = "" },
+        //        }
+        //    };
 
-            sut.HayCamasSinNombre().Should().Be(true);
-        }
+        //    sut.HayCamasSinNombre().Should().Be(true);
+        //}
 
         [Test]
         public void HayCamasMatrimonialesSinNombre_EntoncesHayCamasSinNombreDevuelveTrue()
@@ -71,23 +71,23 @@ namespace Api.UnitTests.Controllers
             sut3.HayCamasSinNombre().Should().Be(true);
         }
 
-        [Test]
-        public void TodasLasCamasTienenNombre_EntoncesHayCamasSinNombreDevuelveFalse()
-        {
-            var sut = new HabitacionDTO
-            {
-                CamasIndividuales = new List<CamaIndividualDTO>
-                {
-                    new CamaIndividualDTO { Nombre = "Individual1" },
-                },
-                CamasMarineras = new List<CamaMarineraDTO>
-                {
-                    new CamaMarineraDTO { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
-                }
-            };
+        //[Test]
+        //public void TodasLasCamasTienenNombre_EntoncesHayCamasSinNombreDevuelveFalse()
+        //{
+        //    var sut = new HabitacionDTO
+        //    {
+        //        CamasIndividuales = new List<CamaIndividualDTO>
+        //        {
+        //            new CamaIndividualDTO { Nombre = "Individual1" },
+        //        },
+        //        CamasMarineras = new List<CamaMarineraDTO>
+        //        {
+        //            new CamaMarineraDTO { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+        //        }
+        //    };
 
-            sut.HayCamasSinNombre().Should().Be(false);
-        }
+        //    sut.HayCamasSinNombre().Should().Be(false);
+        //}
 
         [Test]
         public void HayCamasDelMismoTipoConIdentificadorRepetido_EntoncesHayCamasConIdentificadorRepetidoDevuelveTrue()
