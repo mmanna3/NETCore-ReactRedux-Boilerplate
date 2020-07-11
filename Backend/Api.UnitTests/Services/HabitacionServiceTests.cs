@@ -1,13 +1,9 @@
-using System;
-using System.Threading.Tasks;
-using Api.Config;
+using System.Collections.Generic;
 using Api.Core;
 using Api.Core.Models;
 using Api.Core.Repositories;
 using Api.Core.Services;
 using Api.Core.Services.Interfaces;
-using FluentAssertions;
-using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 
@@ -15,42 +11,39 @@ namespace Api.UnitTests.Services
 {
     public class HabitacionServiceTests
     {
-        //private IHabitacionService _service;
+        private IHabitacionService _service;
 
-        //private Mock<IHabitacionRepository> _mockRepo;
-        //private Mock<IUnitOfWork> _mockUnitOfWork;
+        private Mock<IHabitacionRepository> _mockRepo;
+        private Mock<IUnitOfWork> _mockUnitOfWork;
 
-        //[SetUp]
-        //public void Inicializar()
-        //{
-        //    _mockRepo = new Mock<IHabitacionRepository>();
-        //    _mockUnitOfWork = new Mock<IUnitOfWork>();
-        //    _service = new HabitacionService(_mockRepo.Object, _mockUnitOfWork.Object);
-        //}
+        private const string TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR = "Todas las camas deben tener Identificador";
 
-        //[SetUp]
-        //public void Inicializar()
-        //{
-        //    _mockRepo = new Mock<IUsuarioRepository>();
-        //    _mockUnitOfWork = new Mock<IUnitOfWork>();
-        //    _mockAppSettingsOption = new Mock<IOptions<AppSettings>>();
+        [SetUp]
+        public void Inicializar()
+        {
+            _mockRepo = new Mock<IHabitacionRepository>();
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
+            _service = new HabitacionService(_mockRepo.Object, _mockUnitOfWork.Object);
+        }
 
-        //    var mockAppSettings = new Mock<AppSettings>();
-        //    mockAppSettings.SetupGet(x => x.Secret).Returns("this is my custom Secret key for authentication");
-        //    _mockAppSettingsOption.Setup(mock => mock.Value).Returns(mockAppSettings.Object);
+        [Test]
+        public void HayCamasIndividualesSinNombre_EntoncesHayCamasSinNombreDevuelveTrue()
+        {
+            var habitacion = new Habitacion
+            {
+                CamasIndividuales = new List<CamaIndividual>
+                {
+                    new CamaIndividual { Nombre = "Individual1" },
+                    new CamaIndividual { Nombre = "" },
+                }
+            };
 
-        //    _service = new UsuarioService(_mockRepo.Object, _mockUnitOfWork.Object, _mockAppSettingsOption.Object);
-        //}
-
-        //[Test]
-        //public async Task Registra_Ok()
-        //{
-        //    DadoUnUsuario();
-
-        //    var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
-
-        //    usuarioRegistroResponse.Should().NotBe(null);
-        //}
+            Assert.That(() => _service.CrearAsync(habitacion),
+                Throws.Exception
+                    .TypeOf<AppException>()
+                    .With.Property("Message").EqualTo(TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR))
+                ;
+        }
 
         //[Test]
         //public async Task Registra_YDaError_DadoQueUsuarioYaExiste()
