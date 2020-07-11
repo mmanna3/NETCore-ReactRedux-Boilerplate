@@ -32,7 +32,6 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        //[AllowAnonymous]
         public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
         {
             if (dto.HayCamasSinNombre())
