@@ -6,7 +6,7 @@ namespace Api.Core.Services.Interfaces
 {
     public interface IHuespedService
     {
-        Task<IEnumerable<Huesped>> ListarAsync();
-        Task<int> CrearAsync(Huesped huesped);
+        Task<IEnumerable<Huesped>> ListAsync();
+        Task<int> CreateAsync(Huesped huesped);
     }
 }

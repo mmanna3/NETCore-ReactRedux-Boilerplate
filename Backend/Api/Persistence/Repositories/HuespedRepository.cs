@@ -13,24 +13,24 @@ namespace Api.Persistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<Huesped>> ListarAsync()
+        public async Task<IEnumerable<Huesped>> ListAsync()
         {
             return await _context.Huespedes.ToListAsync();
         }
 
-        public void Crear(Huesped huesped)
+        public void Create(Huesped huesped)
         {
             _context.Huespedes.Add(huesped);
         }
 
-        public async Task<Huesped> BuscarPorIdAsync(int id)
+        public async Task<Huesped> FindByIdAsync(int id)
         {
             return await _context.Huespedes.FindAsync(id);
         }
 
-        public void Modificar(Huesped original, Huesped actual)
+        public void Modify(Huesped old, Huesped current)
         {
-            _context.Entry(original).CurrentValues.SetValues(actual);
+            _context.Entry(old).CurrentValues.SetValues(current);
         }
     }
 }

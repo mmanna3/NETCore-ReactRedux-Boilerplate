@@ -17,14 +17,14 @@ namespace Api.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Huesped>> ListarAsync()
+        public async Task<IEnumerable<Huesped>> ListAsync()
         {
-            return await _huespedRepository.ListarAsync();
+            return await _huespedRepository.ListAsync();
         }
 
-        public async Task<int> CrearAsync(Huesped huesped)
+        public async Task<int> CreateAsync(Huesped huesped)
         {
-            _huespedRepository.Crear(huesped);
+            _huespedRepository.Create(huesped);
 
             await _unitOfWork.CompleteAsync();
             

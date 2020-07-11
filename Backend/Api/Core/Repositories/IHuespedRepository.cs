@@ -6,9 +6,9 @@ namespace Api.Core.Repositories
 {
     public interface IHuespedRepository
     {
-        Task<IEnumerable<Huesped>> ListarAsync();
-        void Crear(Huesped habitacion);
-        Task<Huesped> BuscarPorIdAsync(int id);
-        void Modificar(Huesped original, Huesped actual);
+        Task<IEnumerable<Huesped>> ListAsync();
+        void Create(Huesped habitacion);
+        Task<Huesped> FindByIdAsync(int id);
+        void Modify(Huesped old, Huesped current);
     }
 }
