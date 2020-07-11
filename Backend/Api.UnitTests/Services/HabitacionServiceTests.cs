@@ -19,6 +19,7 @@ namespace Api.UnitTests.Services
         private Mock<IUnitOfWork> _mockUnitOfWork;
 
         private const string TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR = "Todas las camas deben tener Identificador";
+        private const string NO_PUEDE_HABER_CAMAS_CON_EL_MISMO_IDENTIFICADOR = "No puede haber camas con el mismo Identificador";
 
         [SetUp]
         public void Inicializar()
@@ -29,7 +30,7 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public void Crear_DaExcepcion_PorqueHayCamasIndividualesSinNombre()
+        public void Crear_Falla_PorqueHayCamasIndividualesSinNombre()
         {
             var habitacion = new Habitacion
             {
@@ -48,7 +49,94 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public async Task Crear_Ok_PorqueTodasLasCamasTienenNombre()
+        public void Crear_DaExcepcion_PorqueHayCamasMatrimonialesSinNombre()
+        {
+            var habitacion = new Habitacion
+            {
+                CamasMatrimoniales = new List<CamaMatrimonial>
+                {
+                    new CamaMatrimonial { Nombre = "Matrimonial1" },
+                    new CamaMatrimonial { Nombre = "" },
+                }
+            };
+
+            Assert.That(() => _service.CrearAsync(habitacion),
+                    Throws.Exception
+                        .TypeOf<AppException>()
+                        .With.Property("Message").EqualTo(TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR))
+                ;
+        }
+
+        [Test]
+        public void Crear_Falla_PorqueHayCamasMarinerasSinNombre()
+        {
+            var habitacion = new Habitacion
+            {
+                CamasMarineras = new List<CamaMarinera>
+                {
+                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarinera { NombreAbajo = "Abajo1" },
+                }
+            };
+            
+            Assert.That(() => _service.CrearAsync(habitacion),
+                    Throws.Exception
+                        .TypeOf<AppException>()
+                        .With.Property("Message").EqualTo(TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR))
+                ;
+
+            var habitacion2 = new Habitacion
+            {
+                CamasMarineras = new List<CamaMarinera>
+                {
+                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarinera { NombreArriba = "Arriba1" },
+                }
+            };
+
+            Assert.That(() => _service.CrearAsync(habitacion2),
+                    Throws.Exception
+                        .TypeOf<AppException>()
+                        .With.Property("Message").EqualTo(TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR))
+                ;
+
+            var habitacion3 = new Habitacion
+            {
+                CamasMarineras = new List<CamaMarinera>
+                {
+                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarinera { NombreArriba = "", NombreAbajo = ""},
+                }
+            };
+
+            Assert.That(() => _service.CrearAsync(habitacion3),
+                    Throws.Exception
+                        .TypeOf<AppException>()
+                        .With.Property("Message").EqualTo(TODAS_LAS_CAMAS_DEBEN_TENER_IDENTIFICADOR))
+                ;
+        }
+
+        [Test]
+        public void Crear_Falla_PorqueHayCamasDelMismoTipoConIdentificadorRepetido()
+        {
+            var habitacion = new Habitacion
+            {
+                CamasMatrimoniales = new List<CamaMatrimonial>
+                {
+                    new CamaMatrimonial { Nombre = "Matrimonial1" },
+                    new CamaMatrimonial { Nombre = "Matrimonial1" },
+                }
+            };
+
+            Assert.That(() => _service.CrearAsync(habitacion),
+                    Throws.Exception
+                        .TypeOf<AppException>()
+                        .With.Property("Message").EqualTo(NO_PUEDE_HABER_CAMAS_CON_EL_MISMO_IDENTIFICADOR))
+                ;
+        }
+
+        [Test]
+        public void Crear_Falla_PorqueHayCamasDeDistintoTipoConIdentificadorRepetido()
         {
             var habitacion = new Habitacion
             {
@@ -58,7 +146,33 @@ namespace Api.UnitTests.Services
                 },
                 CamasMarineras = new List<CamaMarinera>
                 {
-                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
+                    new CamaMarinera { NombreAbajo = "Individual1", NombreArriba = "Arriba1"},
+                }
+            };
+
+            Assert.That(() => _service.CrearAsync(habitacion),
+                    Throws.Exception
+                        .TypeOf<AppException>()
+                        .With.Property("Message").EqualTo(NO_PUEDE_HABER_CAMAS_CON_EL_MISMO_IDENTIFICADOR))
+                ;
+        }
+
+        [Test]
+        public async Task Crear_Ok_PorqueTodasLasCamasTienenIdentificadorUnico()
+        {
+            var habitacion = new Habitacion
+            {
+                CamasIndividuales = new List<CamaIndividual>
+                {
+                    new CamaIndividual { Nombre = "Individual1" },
+                },
+                CamasMarineras = new List<CamaMarinera>
+                {
+                    new CamaMarinera { NombreAbajo = "xasdsad", NombreArriba = "Arriba1"},
+                },
+                CamasMatrimoniales = new List<CamaMatrimonial>
+                {
+                    new CamaMatrimonial { Nombre = "aaaaaaa"},
                 }
             };
 
@@ -66,46 +180,5 @@ namespace Api.UnitTests.Services
 
             result.Should().BeOfType(typeof(int));
         }
-
-        //[Test]
-        //public async Task Registra_YDaError_DadoQueUsuarioYaExiste()
-        //{
-        //    await DadoUnUsuarioRegistrado();
-
-        //    Assert.That(() => _service.AddAsync(_unUsuario, PASSWORD), Throws.Exception.TypeOf<AppException>());
-        //}
-
-        //[Test]
-        //public async Task Registra_YDaError_DadoUnPasswordVacio()
-        //{
-        //    await DadoUnUsuarioRegistrado();
-
-        //    Assert.That(() => _service.AddAsync(_unUsuario, ""), Throws.Exception.TypeOf<AppException>());
-        //}
-
-        //[Test]
-        //public async Task Autentica_Ok_DadoQueEstaRegistrado()
-        //{
-        //    await DadoUnUsuarioRegistrado();
-
-        //    var result = await _service.Autenticar(USERNAME, PASSWORD);
-
-        //    result.Should().BeOfType<Usuario>();
-        //}
-
-        //private void DadoUnUsuario()
-        //{
-        //    _unUsuario = new Usuario
-        //    {
-        //        Username = USERNAME
-        //    };
-        //}
-
-        //private async Task DadoUnUsuarioRegistrado()
-        //{
-        //    DadoUnUsuario();
-        //    var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
-        //    _mockRepo.Setup(repo => repo.FindByUsernameAsync(USERNAME)).ReturnsAsync(_unUsuario);
-        //}
     }
 }
