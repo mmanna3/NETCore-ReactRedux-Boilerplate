@@ -6,9 +6,9 @@ namespace Api.Core.Repositories
 {
     public interface IHabitacionRepository
     {
-        Task<IEnumerable<Habitacion>> ListarAsync();
-        void Crear(Habitacion habitacion);
-        Task<Habitacion> BuscarPorIdAsync(int id);
-        void Modificar(Habitacion original, Habitacion actual);
+        Task<IEnumerable<Habitacion>> ListAsync();
+        void Create(Habitacion habitacion);
+        Task<Habitacion> FindByIdAsync(int id);
+        void Modify(Habitacion old, Habitacion current);
     }
 }

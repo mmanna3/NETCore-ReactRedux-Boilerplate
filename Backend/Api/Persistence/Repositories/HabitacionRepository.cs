@@ -14,7 +14,7 @@ namespace Api.Persistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<Habitacion>> ListarAsync()
+        public async Task<IEnumerable<Habitacion>> ListAsync()
         {
             return await _context.Habitaciones
                                     .Include(x => x.CamasIndividuales)
@@ -23,19 +23,19 @@ namespace Api.Persistence.Repositories
                                     .ToListAsync();
         }
 
-        public void Crear(Habitacion habitacion)
+        public void Create(Habitacion habitacion)
         {
             _context.Habitaciones.Add(habitacion);
         }
 
-        public async Task<Habitacion> BuscarPorIdAsync(int id)
+        public async Task<Habitacion> FindByIdAsync(int id)
         {
             return await _context.Habitaciones.FindAsync(id);
         }
 
-        public void Modificar(Habitacion original, Habitacion actual)
+        public void Modify(Habitacion old, Habitacion current)
         {
-            _context.Entry(original).CurrentValues.SetValues(actual);
+            _context.Entry(old).CurrentValues.SetValues(current);
         }
     }
 }
