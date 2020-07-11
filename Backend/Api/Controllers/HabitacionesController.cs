@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
-using Api.Controllers.Otros;
 using AutoMapper;
 using Api.Core.Models;
 using Api.Core.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -34,12 +31,6 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear([FromBody] HabitacionDTO dto)
         {
-            if (dto.HayCamasSinNombre())
-                return BadRequest(ResponseErrorDTO.Build("Todas las camas deben tener Identificador"));
-
-            if (dto.HayCamasConIdentificadorRepetido())
-                return BadRequest(ResponseErrorDTO.Build("No puede haber camas con el mismo Identificador"));
-
             var habitacion = _mapper.Map<Habitacion>(dto);
             var id = await _habitacionService.CrearAsync(habitacion);
 
