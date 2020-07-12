@@ -4,8 +4,8 @@ import styles from './Navbar.module.css'
 
 const Navbar = () => {
   
-  let a = JSON.parse(localStorage.getItem('user'));
-  let nombre = a.firstName;
+  let user = JSON.parse(localStorage.getItem('user'));
+  let nombre = user.firstName;
 
   return (
     <>
@@ -22,17 +22,17 @@ const Navbar = () => {
 
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-              <Link class="navbar-item" to="/habitaciones">Habitaciones</Link>
-              <Link class="navbar-item" to="/huespedes">Huéspedes</Link>
+              <Link class="navbar-item has-text-weight-medium" to="/habitaciones">Habitaciones</Link>
+              <Link class="navbar-item has-text-weight-medium" to="/huespedes">Huéspedes</Link>
           </div>
 
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-disabled is-primary">
-                  <span>¡Hola  </span><strong> {nombre}</strong>!
-                </a>
-                <a class="button is-light">
+                <p class="button is-primary">
+                  <span>¡Hola  </span><strong>{nombre}</strong>!
+                </p>
+                <a class="button is-primary is-inverted is-outlined">
                   Cerrar sesión
                 </a>
               </div>

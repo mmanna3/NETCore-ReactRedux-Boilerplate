@@ -54,7 +54,7 @@ export function SubmitButton({ text, loading }) {
 }
 
 export function Button({ text, ...otrosAtributos }) {
-  return <button className="button is-primary" type="button" {...otrosAtributos}>{text}</button>
+  return <button className="button is-primary has-text-weight-medium" type="button" {...otrosAtributos}>{text}</button>
 }
 
 export function Select({ register, name, children, onChange, ccsClass, ...otrosAtributos }) {

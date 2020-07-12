@@ -3,6 +3,7 @@ import Table from 'components/Table'
 import { fetchHabitaciones, habitacionesSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
+import {Button} from 'components/Input'
 
 const HabitacionesPage = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const HabitacionesPage = () => {
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
-          <button className="button is-primary" onClick={showModal}>Crear</button>
+          <Button onClick={showModal} text="Crear" />
         </div>        
         <Table  fetchData={fetchData} 
                 selector={habitacionesSelector} 
