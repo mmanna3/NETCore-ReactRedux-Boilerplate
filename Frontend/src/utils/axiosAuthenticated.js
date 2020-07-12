@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 
 let user = JSON.parse(localStorage.getItem('user'));
 
