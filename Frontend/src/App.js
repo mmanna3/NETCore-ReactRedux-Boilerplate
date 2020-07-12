@@ -16,23 +16,28 @@ import HuespedesPage from 'features/huespedes/Page'
 import HabitacionesPage from 'features/habitaciones/Page'
 import LoginPage from 'features/login/Page'
 
-import Navbar from 'components/Navbar'
+import Navbar from 'components/navbar/Navbar'
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
       <Switch>
-        <Route exact path="/habitaciones" component={HabitacionesPage} />
-        <Route exact path="/huespedes" component={HuespedesPage} />
         <Route exact path="/" component={LoginPage} />
-        <Route exact path="/dashboard" component={DashboardPage} />
-        <Route exact path="/posts" component={PostsPage} />
-        <Route exact path="/posts/:id" component={SinglePostPage} />
-        <Redirect to="/" />
+        <Route component={RoutesWithNavbar}/>        
       </Switch>
     </Router>
   )
 }
+
+const RoutesWithNavbar = () => (
+  <div>
+    <Navbar />
+    <Route exact path="/habitaciones" component={HabitacionesPage} />
+    <Route exact path="/huespedes" component={HuespedesPage} />    
+    <Route exact path="/dashboard" component={DashboardPage} />
+    <Route exact path="/posts" component={PostsPage} />
+    <Route exact path="/posts/:id" component={SinglePostPage} />
+  </div>
+);
 
 export default App

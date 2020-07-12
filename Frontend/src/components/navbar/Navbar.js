@@ -10,23 +10,10 @@ const Navbar = () => {
   //   </section>
   // </nav>
 
-  const [display, setDisplay] = useState('');
-
-  useEffect(() => {
-    
-    if (localStorage.getItem('user') == null){
-      debugger;
-      setDisplay(styles.noDisplay);
-    }
-      
-
-  }, []);
-  
-
   return (
     <>
 
-      <nav class={`navbar ${styles.spaceAtBottom} ${display}`} role="navigation" aria-label="main navigation">
+      <nav class={`navbar ${styles.spaceAtBottom}`} role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="https://bulma.io">
             <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
