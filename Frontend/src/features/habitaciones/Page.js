@@ -53,7 +53,7 @@ const HabitacionesPage = () => {
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="buttons is-fullwidth is-pulled-right">
-          <Button onClick={showModal} text="Crear" />
+          <Button onClick={showModal} text="Cargar nueva" />
         </div>        
         <Table  fetchData={fetchData} 
                 selector={habitacionesSelector} 
