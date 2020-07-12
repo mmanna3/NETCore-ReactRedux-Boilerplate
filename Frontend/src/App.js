@@ -16,10 +16,12 @@ import HuespedesPage from 'features/huespedes/Page'
 import HabitacionesPage from 'features/habitaciones/Page'
 import LoginPage from 'features/login/Page'
 
+import Navbar from 'components/Navbar'
+
 const App = () => {
   return (
     <Router>
-      {/* <Navbar /> */}
+      <Navbar />
       <Switch>
         <Route exact path="/habitaciones" component={HabitacionesPage} />
         <Route exact path="/huespedes" component={HuespedesPage} />
