@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import Table from 'components/Table'
 import { fetchHuespedes, huespedesSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
+import Crear from './crear/Modal'
 
 const HuespedesPage = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const HuespedesPage = () => {
 
   return (
     <div className="container">
-        {/* <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear> */}
+        <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Huéspedes</h1>
         <div className="buttons is-fullwidth is-pulled-right">
