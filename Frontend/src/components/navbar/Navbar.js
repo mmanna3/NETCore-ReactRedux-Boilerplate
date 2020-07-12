@@ -12,7 +12,7 @@ const Navbar = () => {
       <nav className={`navbar is-primary ${styles.spaceAtBottom}`} role="navigation" aria-label="main navigation">
         <div className="container">
           <div className="navbar-brand">
-            <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" href="/#">
+            <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" href="# ">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -31,7 +31,7 @@ const Navbar = () => {
                 <p className="button is-primary">
                   <span>¡Hola  </span><strong>{nombre}</strong>!
                 </p>
-                <a className="button is-primary is-inverted is-outlined" href="/#">
+                <a className="button is-primary is-inverted is-outlined" href="# ">
                   Cerrar sesión
                 </a>
               </div>
