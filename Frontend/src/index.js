@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 import App from './App'
-import rootReducer from './slices'
+import rootReducer from 'utils/rootReducer'
 import './universal.scss';
 
 

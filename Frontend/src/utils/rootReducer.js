@@ -11,7 +11,7 @@ import loginReducer from 'features/login/slice'
 
 
 const rootReducer = combineReducers({
-  login : loginReducer,
+  login: loginReducer,
   
   habitaciones: habitacionesReducer,
   crearHabitacion : crearHabitacionReducer,
