@@ -11,7 +11,7 @@ const Navbar = () => {
 
   function onNavbarBurguerClick(){
     
-    if (isBurguerActive == '')
+    if (isBurguerActive === '')
       setIsBurguerActive('is-active');
     else
       setIsBurguerActive('');

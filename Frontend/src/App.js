@@ -2,7 +2,8 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 
 import 'utils/FontAwesomeLibrary';
@@ -22,21 +23,29 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={LoginPage} />
-        <Route component={RoutesWithNavbar}/>        
+        <Route component={AuthRoutes}/>
       </Switch>
     </Router>
   )
 }
 
-const RoutesWithNavbar = () => (
-  <div>
-    <Navbar />
-    <Route exact path="/habitaciones" component={HabitacionesPage} />
-    <Route exact path="/huespedes" component={HuespedesPage} />    
-    <Route exact path="/dashboard" component={DashboardPage} />
-    <Route exact path="/posts" component={PostsPage} />
-    <Route exact path="/posts/:id" component={SinglePostPage} />
-  </div>
-);
+const AuthRoutes = () => {
+  if (localStorage.getItem('user') == null)
+    return <Redirect
+              to={{
+                pathname: "/"
+              }}
+          />
+  else
+    return (
+    <div>
+      <Navbar />
+      <Route exact path="/habitaciones" component={HabitacionesPage} />
+      <Route exact path="/huespedes" component={HuespedesPage} />    
+      <Route exact path="/dashboard" component={DashboardPage} />
+      <Route exact path="/posts" component={PostsPage} />
+      <Route exact path="/posts/:id" component={SinglePostPage} />
+    </div>
+)};
 
 export default App
