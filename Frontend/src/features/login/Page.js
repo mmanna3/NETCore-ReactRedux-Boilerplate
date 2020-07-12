@@ -5,6 +5,7 @@ import { login, loginSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Page.module.scss'
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 const LoginPage = () => {
 
@@ -15,8 +16,14 @@ const LoginPage = () => {
   
   let history = useHistory();
 
-  function onSuccess() {
+  function onSuccess() {    
+    makeAllAxiosRequestsSendToken();
     history.push("/habitaciones");
+  }
+
+  function makeAllAxiosRequestsSendToken(){
+    let user = JSON.parse(localStorage.getItem('user'));
+    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
   }
 
   return (
