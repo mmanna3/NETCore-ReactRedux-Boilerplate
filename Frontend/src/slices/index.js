@@ -10,11 +10,6 @@ import crearHuespedReducer from 'features/huespedes/crear/slice'
 import loginReducer from 'features/login/slice'
 
 
-import postsReducer from './posts'
-import postReducer from './post'
-import commentsReducer from './comments'
-
-
 const rootReducer = combineReducers({
   login : loginReducer,
   
@@ -23,11 +18,6 @@ const rootReducer = combineReducers({
   
   huespedes: huespedesReducer,
   crearHuesped: crearHuespedReducer,
-
-  
-  posts: postsReducer,
-  comments: commentsReducer,
-  post: postReducer,
 });
 
 export default rootReducer;
