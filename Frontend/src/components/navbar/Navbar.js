@@ -33,6 +33,7 @@ const Navbar = () => {
           <div className="navbar-start">
               <Link className="navbar-item has-text-weight-medium" to="/habitaciones">Habitaciones</Link>
               <Link className="navbar-item has-text-weight-medium" to="/huespedes">Huéspedes</Link>
+              <Link className="navbar-item has-text-weight-medium" to="/calendario">Calendario</Link>
           </div>
 
           <div className="navbar-end">
