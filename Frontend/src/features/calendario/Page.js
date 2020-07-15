@@ -1,22 +1,50 @@
 import React from 'react';
+import Styles from './Page.module.scss'
 
-const CalendarioPage = () => {
+const CalendarioPage = () => {  
 
-  return (
-    // <div className={`columns is-gapless is-desktop ${styles.columns}`}>
-    //   <div className="column is-flex is-hidden-mobile has-background-primary">
-    //     {/* <h1 className="title is-1 has-text-white">SEPA </h1> */}
-    //   </div>
-    //   <div className="column is-flex is-vcentered is-centered">
-    //       <Form onSubmit={onSubmit} className={`login-form ${styles.loginForm}`}>
-    //         <ValidationSummary errors={validationErrors} />
-    //         <Input label="Usuario" name="username" />
-    //         <Input type="password" label="Contraseña" name="password" />
-    //         <SubmitButton text="Ingresar" loading={loading}></SubmitButton>
-    //       </Form>
-    //   </div>
-    // </div>
-    <h1>Aasdasdsa</h1>
+  const array = new Array(30);
+  for(var i = 1; i < 30; i++) {
+    array.push(i);
+  }
+
+  return (  
+    <div className="container">
+      <h1 className="title is-1">Calendario</h1>
+      <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
+        <thead className="is-bordered">
+          <tr>
+            <th rowSpan="2"></th>
+            <th colSpan="2">Habitación Azul</th>
+            <th colSpan="3">Habitación Roja</th>
+            <th colSpan="2">Habitación Verde</th>
+          </tr>        
+          <tr>
+            <th>Individual: A</th>
+            <th>Individual: B</th>
+            <th>Matrimonial: 1</th>
+            <th>Mar. arriba: 2</th>
+            <th>Mar. abajo: 3</th>
+            <th>Matrimonial: Matri</th>
+            <th>Individual: Indi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {array.map((e, i) => 
+              <tr key={i}>
+                <td>{e}/07</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>              
+          )}
+        </tbody>
+    </table>
+  </div>
   )
 }
 

@@ -1,0 +1,7 @@
+@import 'universal.scss';
+
+.table thead tr th {
+    border: 1px solid $primary-invert;
+    background-color: $primary;
+    color:$primary-invert;
+}
