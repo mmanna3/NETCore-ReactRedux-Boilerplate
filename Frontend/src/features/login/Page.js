@@ -27,7 +27,6 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="page">
     <div className={`columns is-gapless is-desktop ${styles.columns}`}>
       <div className="column is-flex is-hidden-mobile has-background-primary">
         {/* <h1 className="title is-1 has-text-white">SEPA </h1> */}
@@ -41,7 +40,6 @@ const LoginPage = () => {
           </Form>
       </div>
     </div>
-  </div>
   )
 }
 
