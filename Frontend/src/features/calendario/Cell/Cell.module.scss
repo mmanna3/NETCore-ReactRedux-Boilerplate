@@ -1,6 +1,30 @@
 @import 'universal.scss';
 
 .selectedCell {
-    background-color: red;
+    background: rgba(255,0,35,1);
+    background: linear-gradient(90deg,  rgba(255,0,35,1) 0%, rgba(200,0,14,1) 90%);
     border: 0px !important;
 }
+
+.firstSelectedCell {
+    background: rgba(255,0,35,1);
+    background: linear-gradient(90deg,  rgba(255,0,35,1) 0%, rgba(200,0,14,1) 90%);
+    border: 0px !important;
+    
+    
+    border-top: 1px solid black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.lastSelectedCell {
+    background: rgba(255,0,35,1);
+    background: linear-gradient(90deg,  rgba(255,0,35,1) 0%, rgba(200,0,14,1) 90%);
+    border: 0px !important;
+
+
+    border-bottom: 1px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
