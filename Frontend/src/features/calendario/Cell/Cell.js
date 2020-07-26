@@ -11,9 +11,9 @@ const Cell = ({startSelection, endSelection, daysSelectionStarted}) => {
   }
 
   const onClick = () => {
-    if (!daysSelectionStarted){
+    if (!daysSelectionStarted){      
       setStyle(Styles.selectedCell);
-      startSelection();
+      startSelection();      
     } else {
       endSelection();
     }          
