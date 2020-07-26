@@ -1,4 +1,5 @@
 import React from 'react';
+import Cell from './Cell/Cell.js'
 import Styles from './Page.module.scss'
 
 const CalendarioPage = () => {  
@@ -6,6 +7,12 @@ const CalendarioPage = () => {
   const array = new Array(30);
   for(var i = 1; i < 30; i++) {
     array.push(i);
+  }
+
+  const [isSelecting, setIsSelecting] = React.useState(false);
+
+  const toggleIsSelecting = () => {
+    setIsSelecting(!isSelecting);    
   }
 
   return (  
@@ -33,13 +40,13 @@ const CalendarioPage = () => {
           {array.map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
               </tr>              
           )}
         </tbody>
