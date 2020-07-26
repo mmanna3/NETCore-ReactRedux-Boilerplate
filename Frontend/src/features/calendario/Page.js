@@ -9,10 +9,14 @@ const CalendarioPage = () => {
     array.push(i);
   }
 
-  const [isSelecting, setIsSelecting] = React.useState(false);
+  const [daysSelectionStarted, startOrEndDaySelection] = React.useState(false);
 
-  const toggleIsSelecting = () => {
-    setIsSelecting(!isSelecting);    
+  const startSelection = () => {
+    startOrEndDaySelection(true);
+  }
+
+  const endSelection = () => {
+    startOrEndDaySelection(false);
   }
 
   return (  
@@ -40,13 +44,13 @@ const CalendarioPage = () => {
           {array.map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
-                <Cell toggleIsSelecting={toggleIsSelecting} isSelecting={isSelecting}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
               </tr>              
           )}
         </tbody>

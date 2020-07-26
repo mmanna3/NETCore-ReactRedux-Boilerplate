@@ -1,20 +1,22 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 
-const Cell = ({toggleIsSelecting, isSelecting}) => {  
+const Cell = ({startSelection, endSelection, daysSelectionStarted}) => {
 
   const [style, setStyle] = React.useState('');
 
   function onMouseEnter() {
-    if (isSelecting) 
-      setStyle(Styles.selectedCell);      
+    if (daysSelectionStarted)
+      setStyle(Styles.selectedCell);
   }
 
   const onClick = () => {
-    if (!isSelecting)
+    if (!daysSelectionStarted){
       setStyle(Styles.selectedCell);
-    
-      toggleIsSelecting();    
+      startSelection();
+    } else {
+      endSelection();
+    }          
   }
 
   return (
