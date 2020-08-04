@@ -9,27 +9,41 @@ const CalendarioPage = () => {
     array.push(i);
   }
 
-  const [daysSelectionStarted, startOrEndDaySelection] = React.useState([false,false,false,false,false,false,false]);
-  const [lastSelectedIndex, setLastSelectedIndex] = React.useState([-1,-1,-1,-1,-1,-1,-1]);
-
+  const [selected, setSelected] = React.useState({daysSelectionStarted: false, lastSelectedIndex: -1, selectedColumn: -1});
+  
   const startSelection = (columnId, rowId) => {
-    modifyStateArrayPosition(daysSelectionStarted, startOrEndDaySelection, columnId, true);    
-    modifyStateArrayPosition(lastSelectedIndex, setLastSelectedIndex, columnId, rowId);
+    var copy = selected;
+    selected.daysSelectionStarted = true;
+    selected.lastSelectedIndex = rowId;
+    selected.selectedColumn = columnId;
+    setSelected(copy);
+
   }
 
-  const endSelection = (columnId) => {
-    modifyStateArrayPosition(daysSelectionStarted, startOrEndDaySelection, columnId, false);
+  const endSelection = () => {
+    var copy = selected;
+    selected.daysSelectionStarted = false;
+    selected.lastSelectedIndex = -1;
+    selected.selectedColumn = -1;
+    setSelected(copy);
   }
 
   const canSelect = (columnId, rowId) => {
-    if (isInmediatlyUnderLastSelectedCell(columnId, rowId) && daysSelectionStarted[columnId]) {
-      modifyStateArrayPosition(lastSelectedIndex, setLastSelectedIndex, columnId, rowId);
+    
+    if (selected.selectedColumn === columnId && selected.lastSelectedIndex + 1 === rowId && selected.daysSelectionStarted) {
+
+      var copy = selected;
+      selected.daysSelectionStarted = true;
+      selected.lastSelectedIndex = rowId;
+      selected.selectedColumn = columnId;
+      setSelected(copy);
+
       return true;
     }      
     return false;
   }
 
-  const isInmediatlyUnderLastSelectedCell = (columnId, rowId) => lastSelectedIndex[columnId] + 1 === rowId;
+  // const isInmediatlyUnderLastSelectedCell = (columnId, rowId) => lastSelectedIndex[columnId] + 1 === rowId;
 
   const modifyStateArrayPosition = (array, setFunc, index, value) => {
     var copy = [...array];
@@ -62,13 +76,13 @@ const CalendarioPage = () => {
           {array.map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
-                <Cell startSelection={() => startSelection(0, i)} endSelection={() => endSelection(0)} daysSelectionStarted={daysSelectionStarted[0]} canSelect={() => canSelect(0, i)}></Cell>
-                <Cell startSelection={() => startSelection(1, i)} endSelection={() => endSelection(1)} daysSelectionStarted={daysSelectionStarted[1]} canSelect={() => canSelect(1, i)}></Cell>
-                <Cell startSelection={() => startSelection(2, i)} endSelection={() => endSelection(2)} daysSelectionStarted={daysSelectionStarted[2]} canSelect={() => canSelect(2, i)}></Cell>
-                <Cell startSelection={() => startSelection(3, i)} endSelection={() => endSelection(3)} daysSelectionStarted={daysSelectionStarted[3]} canSelect={() => canSelect(3, i)}></Cell>
-                <Cell startSelection={() => startSelection(4, i)} endSelection={() => endSelection(4)} daysSelectionStarted={daysSelectionStarted[4]} canSelect={() => canSelect(4, i)}></Cell>
-                <Cell startSelection={() => startSelection(5, i)} endSelection={() => endSelection(5)} daysSelectionStarted={daysSelectionStarted[5]} canSelect={() => canSelect(5, i)}></Cell>
-                <Cell startSelection={() => startSelection(6, i)} endSelection={() => endSelection(6)} daysSelectionStarted={daysSelectionStarted[6]} canSelect={() => canSelect(6, i)}></Cell>
+                <Cell startSelection={() => startSelection(0, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(0, i)}></Cell>
+                <Cell startSelection={() => startSelection(1, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(1, i)}></Cell>
+                <Cell startSelection={() => startSelection(2, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(2, i)}></Cell>
+                <Cell startSelection={() => startSelection(3, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(3, i)}></Cell>
+                <Cell startSelection={() => startSelection(4, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(4, i)}></Cell>
+                <Cell startSelection={() => startSelection(5, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(5, i)}></Cell>
+                <Cell startSelection={() => startSelection(6, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(6, i)}></Cell>
               </tr>              
           )}
         </tbody>

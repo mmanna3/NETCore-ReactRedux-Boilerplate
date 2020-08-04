@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 
-const Cell = ({startSelection, endSelection, daysSelectionStarted, canSelect}) => {
+const Cell = ({startSelection, endSelection, selected, canSelect}) => {
 
   const [style, setStyle] = React.useState('');
 
@@ -11,7 +11,8 @@ const Cell = ({startSelection, endSelection, daysSelectionStarted, canSelect}) =
   }
 
   const onClick = () => {
-    if (!daysSelectionStarted){
+    debugger;
+    if (!selected.daysSelectionStarted){
       setStyle(Styles.firstSelectedCell);
       startSelection();            
     } else {
