@@ -1,17 +1,17 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 
-const Cell = ({columnId, startSelection, endSelection, daysSelectionStarted}) => {
+const Cell = ({startSelection, endSelection, daysSelectionStarted, canSelect}) => {
 
   const [style, setStyle] = React.useState('');
 
   function onMouseEnter() {
-    if (daysSelectionStarted)
+    if (canSelect())
       setStyle(Styles.selectedCell);
   }
 
   const onClick = () => {
-    if (!daysSelectionStarted){      
+    if (!daysSelectionStarted){
       setStyle(Styles.firstSelectedCell);
       startSelection();            
     } else {
