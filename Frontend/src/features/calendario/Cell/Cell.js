@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 
-const Cell = ({startSelection, endSelection, daysSelectionStarted}) => {
+const Cell = ({columnId, startSelection, endSelection, daysSelectionStarted}) => {
 
   const [style, setStyle] = React.useState('');
 

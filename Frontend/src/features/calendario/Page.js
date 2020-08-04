@@ -9,14 +9,18 @@ const CalendarioPage = () => {
     array.push(i);
   }
 
-  const [daysSelectionStarted, startOrEndDaySelection] = React.useState(false);
+  const [daysSelectionStarted, startOrEndDaySelection] = React.useState([false,false,false,false,false,false,false]);
 
-  const startSelection = () => {
-    startOrEndDaySelection(true);
+  const startSelection = (columnId) => {
+    var newArray = [...daysSelectionStarted];    
+    newArray[columnId] = true;
+    startOrEndDaySelection(newArray);
   }
 
-  const endSelection = () => {
-    startOrEndDaySelection(false);
+  const endSelection = (columnId) => {
+    var newArray = [...daysSelectionStarted];    
+    newArray[columnId] = false;
+    startOrEndDaySelection(newArray);
   }
 
   return (  
@@ -44,13 +48,13 @@ const CalendarioPage = () => {
           {array.map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
-                <Cell startSelection={startSelection} endSelection={endSelection} daysSelectionStarted={daysSelectionStarted}></Cell>
+                <Cell columnId={0} startSelection={() => startSelection(0)} endSelection={() => endSelection(0)} daysSelectionStarted={daysSelectionStarted[0]}></Cell>
+                <Cell columnId={1} startSelection={() => startSelection(1)} endSelection={() => endSelection(1)} daysSelectionStarted={daysSelectionStarted[1]}></Cell>
+                <Cell columnId={2} startSelection={() => startSelection(2)} endSelection={() => endSelection(2)}daysSelectionStarted={daysSelectionStarted[2]}></Cell>
+                <Cell columnId={3} startSelection={() => startSelection(3)} endSelection={() => endSelection(3)}daysSelectionStarted={daysSelectionStarted[3]}></Cell>
+                <Cell columnId={4} startSelection={() => startSelection(4)} endSelection={() => endSelection(4)}daysSelectionStarted={daysSelectionStarted[4]}></Cell>
+                <Cell columnId={5} startSelection={() => startSelection(5)} endSelection={() => endSelection(5)}daysSelectionStarted={daysSelectionStarted[5]}></Cell>
+                <Cell columnId={6} startSelection={() => startSelection(6)} endSelection={() => endSelection(6)}daysSelectionStarted={daysSelectionStarted[6]}></Cell>                
               </tr>              
           )}
         </tbody>
