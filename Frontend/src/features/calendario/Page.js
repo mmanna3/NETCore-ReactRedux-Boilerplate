@@ -22,12 +22,14 @@ const CalendarioPage = () => {
   }
 
   const canSelect = (columnId, rowId) => {
-    if (lastSelectedIndex[columnId] + 1 == rowId && daysSelectionStarted[columnId]){
+    if (isInmediatlyUnderLastSelectedCell(columnId, rowId) && daysSelectionStarted[columnId]) {
       modifyStateArrayPosition(lastSelectedIndex, setLastSelectedIndex, columnId, rowId);
       return true;
     }      
     return false;
   }
+
+  const isInmediatlyUnderLastSelectedCell = (columnId, rowId) => lastSelectedIndex[columnId] + 1 === rowId;
 
   const modifyStateArrayPosition = (array, setFunc, index, value) => {
     var copy = [...array];
