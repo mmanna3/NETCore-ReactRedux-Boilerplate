@@ -12,12 +12,7 @@ const CalendarioPage = () => {
   const [selectionData, setSelected] = React.useState({daysSelectionStarted: false, lastSelectedIndex: -1, selectedColumn: -1});
   
   const startSelection = (columnId, rowId) => {
-    var copy = selectionData;
-    selectionData.daysSelectionStarted = true;
-    selectionData.lastSelectedIndex = rowId;
-    selectionData.selectedColumn = columnId;
-    setSelected(copy);
-
+    updateSelectionData(true, columnId, rowId);
   }
 
   const endSelection = () => {
@@ -27,19 +22,12 @@ const CalendarioPage = () => {
   const canBeSelected = (columnId, rowId) => {
     
     if (selectionData.selectedColumn === columnId && selectionData.lastSelectedIndex + 1 === rowId && selectionData.daysSelectionStarted) {
-
-      var copy = selectionData;
-      selectionData.daysSelectionStarted = true;
-      selectionData.lastSelectedIndex = rowId;
-      selectionData.selectedColumn = columnId;
-      setSelected(copy);
-
+      updateSelectionData(true, columnId, rowId);
       return true;
-    }      
+    }
+
     return false;
   }
-
-  // const isInmediatlyUnderLastSelectedCell = (columnId, rowId) => lastSelectedIndex[columnId] + 1 === rowId;
 
   const updateSelectionData = (hasStarted, currentColumn, lastRow) => {
     var copy = selectionData;
