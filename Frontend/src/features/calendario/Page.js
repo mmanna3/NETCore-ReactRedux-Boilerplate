@@ -9,33 +9,33 @@ const CalendarioPage = () => {
     array.push(i);
   }
 
-  const [selected, setSelected] = React.useState({daysSelectionStarted: false, lastSelectedIndex: -1, selectedColumn: -1});
+  const [selectionData, setSelected] = React.useState({daysSelectionStarted: false, lastSelectedIndex: -1, selectedColumn: -1});
   
   const startSelection = (columnId, rowId) => {
-    var copy = selected;
-    selected.daysSelectionStarted = true;
-    selected.lastSelectedIndex = rowId;
-    selected.selectedColumn = columnId;
+    var copy = selectionData;
+    selectionData.daysSelectionStarted = true;
+    selectionData.lastSelectedIndex = rowId;
+    selectionData.selectedColumn = columnId;
     setSelected(copy);
 
   }
 
   const endSelection = () => {
-    var copy = selected;
-    selected.daysSelectionStarted = false;
-    selected.lastSelectedIndex = -1;
-    selected.selectedColumn = -1;
+    var copy = selectionData;
+    selectionData.daysSelectionStarted = false;
+    selectionData.lastSelectedIndex = -1;
+    selectionData.selectedColumn = -1;
     setSelected(copy);
   }
 
-  const canSelect = (columnId, rowId) => {
+  const canBeSelected = (columnId, rowId) => {
     
-    if (selected.selectedColumn === columnId && selected.lastSelectedIndex + 1 === rowId && selected.daysSelectionStarted) {
+    if (selectionData.selectedColumn === columnId && selectionData.lastSelectedIndex + 1 === rowId && selectionData.daysSelectionStarted) {
 
-      var copy = selected;
-      selected.daysSelectionStarted = true;
-      selected.lastSelectedIndex = rowId;
-      selected.selectedColumn = columnId;
+      var copy = selectionData;
+      selectionData.daysSelectionStarted = true;
+      selectionData.lastSelectedIndex = rowId;
+      selectionData.selectedColumn = columnId;
       setSelected(copy);
 
       return true;
@@ -76,13 +76,13 @@ const CalendarioPage = () => {
           {array.map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
-                <Cell startSelection={() => startSelection(0, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(0, i)}></Cell>
-                <Cell startSelection={() => startSelection(1, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(1, i)}></Cell>
-                <Cell startSelection={() => startSelection(2, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(2, i)}></Cell>
-                <Cell startSelection={() => startSelection(3, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(3, i)}></Cell>
-                <Cell startSelection={() => startSelection(4, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(4, i)}></Cell>
-                <Cell startSelection={() => startSelection(5, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(5, i)}></Cell>
-                <Cell startSelection={() => startSelection(6, i)} endSelection={() => endSelection()} selected={selected} canSelect={() => canSelect(6, i)}></Cell>
+                <Cell startSelection={() => startSelection(0, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(0, i)}></Cell>
+                <Cell startSelection={() => startSelection(1, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(1, i)}></Cell>
+                <Cell startSelection={() => startSelection(2, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(2, i)}></Cell>
+                <Cell startSelection={() => startSelection(3, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(3, i)}></Cell>
+                <Cell startSelection={() => startSelection(4, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(4, i)}></Cell>
+                <Cell startSelection={() => startSelection(5, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(5, i)}></Cell>
+                <Cell startSelection={() => startSelection(6, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(6, i)}></Cell>
               </tr>              
           )}
         </tbody>
