@@ -21,11 +21,7 @@ const CalendarioPage = () => {
   }
 
   const endSelection = () => {
-    var copy = selectionData;
-    selectionData.daysSelectionStarted = false;
-    selectionData.lastSelectedIndex = -1;
-    selectionData.selectedColumn = -1;
-    setSelected(copy);
+    updateSelectionData(false, -1, -1);
   }
 
   const canBeSelected = (columnId, rowId) => {
@@ -45,10 +41,12 @@ const CalendarioPage = () => {
 
   // const isInmediatlyUnderLastSelectedCell = (columnId, rowId) => lastSelectedIndex[columnId] + 1 === rowId;
 
-  const modifyStateArrayPosition = (array, setFunc, index, value) => {
-    var copy = [...array];
-    copy[index] = value;
-    setFunc(copy);
+  const updateSelectionData = (hasStarted, currentColumn, lastRow) => {
+    var copy = selectionData;
+    selectionData.daysSelectionStarted = hasStarted;
+    selectionData.lastSelectedIndex = lastRow;
+    selectionData.selectedColumn = currentColumn;
+    setSelected(copy);
   }
 
   return (  
