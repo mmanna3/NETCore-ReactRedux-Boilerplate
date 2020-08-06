@@ -21,13 +21,15 @@ const CalendarioPage = () => {
 
   const canBeSelected = (columnId, rowId) => {
     
-    if (selectionData.currentColumn === columnId && selectionData.lastRow + 1 === rowId && selectionData.hasStarted) {
+    if (selectionData.currentColumn === columnId && isContiguous(rowId) && selectionData.hasStarted) {
       updateSelectionData(true, columnId, rowId);
       return true;
     }
 
     return false;
   }
+
+  const isContiguous = (rowId) => selectionData.lastRow + 1 === rowId;
 
   const updateSelectionData = (hasStarted, currentColumn, lastRow) => {
     var copy = selectionData;
