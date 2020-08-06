@@ -4,11 +4,6 @@ import Styles from './Page.module.scss'
 
 const CalendarioPage = () => {  
 
-  const array = new Array(30);
-  for(var i = 1; i < 30; i++) {
-    array.push(i);
-  }
-
   const [selectionData, setSelected] = React.useState({hasStarted: false, currentColumn: -1, currentSelection: []});
   
   const selectFirstRow = (columnId, rowId) => {
@@ -16,7 +11,7 @@ const CalendarioPage = () => {
   }
 
   const endSelection = () => {
-    updateSelectionData(false, -1, -1);
+    updateSelectionData(false, -1);
   }
 
   const canBeSelected = (columnId, rowId) => {
@@ -37,13 +32,13 @@ const CalendarioPage = () => {
 
   const isLastRow = (rowId) => selectionData.currentSelection[selectionData.currentSelection.length - 1] === rowId;
 
-  const updateSelectionData = (hasStarted, currentColumn, lastRow) => {
+  const updateSelectionData = (hasStarted, currentColumn, newSelectedRow) => {
     var copy = selectionData;
     selectionData.hasStarted = hasStarted;
     selectionData.currentColumn = currentColumn;
     
-    if (lastRow != -1)
-      selectionData.currentSelection.push(lastRow);    
+    if (newSelectedRow)
+      selectionData.currentSelection.push(newSelectedRow);    
   
     setSelected(copy);
   }
@@ -70,7 +65,7 @@ const CalendarioPage = () => {
           </tr>
         </thead>
         <tbody>
-          {array.map((e, i) => 
+          {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
                 {[0,1,2,3,4,5,6].map((e, column) =>
