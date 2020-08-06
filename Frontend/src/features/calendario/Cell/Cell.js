@@ -1,14 +1,18 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 
-const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
+const Cell = ({startSelection, endSelection, selectionData, canBeSelected, canBeClickedForEndingSelection}) => {
 
   const [style, setStyle] = React.useState('');
   const [isSelected, setIsSelected] = React.useState(false);
 
   function onMouseEnter() {
     if (canBeSelected())
-      setStyle(Styles.selectedCell);
+      select();      
+  }
+
+  const select = () => {
+    setStyle(Styles.selectedCell);
   }
 
   const onClick = () => {
@@ -17,8 +21,10 @@ const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
       setStyle(Styles.firstSelectedCell);
       startSelection();            
     } else {
-      endSelection();
-      setStyle(Styles.lastSelectedCell);
+      // if (canBeClickedForEndingSelection()) {
+        endSelection();
+        setStyle(Styles.lastSelectedCell);
+      // }
     }          
   }
 

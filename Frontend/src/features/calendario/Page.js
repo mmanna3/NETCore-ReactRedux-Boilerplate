@@ -64,13 +64,14 @@ const CalendarioPage = () => {
           {array.map((e, i) => 
               <tr key={i}>
                 <td>{e}/07</td>
-                <Cell startSelection={() => startSelection(0, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(0, i)}></Cell>
-                <Cell startSelection={() => startSelection(1, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(1, i)}></Cell>
-                <Cell startSelection={() => startSelection(2, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(2, i)}></Cell>
-                <Cell startSelection={() => startSelection(3, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(3, i)}></Cell>
-                <Cell startSelection={() => startSelection(4, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(4, i)}></Cell>
-                <Cell startSelection={() => startSelection(5, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(5, i)}></Cell>
-                <Cell startSelection={() => startSelection(6, i)} endSelection={() => endSelection()} selectionData={selectionData} canBeSelected={() => canBeSelected(6, i)}></Cell>
+                {[0,1,2,3,4,5,6].map((e, column) =>
+                    <Cell
+                      startSelection={() => startSelection(column, i)} 
+                      endSelection={() => endSelection()} 
+                      selectionData={selectionData} 
+                      canBeSelected={() => canBeSelected(column, i)}
+                    />                    
+                )}
               </tr>              
           )}
         </tbody>
