@@ -7,24 +7,26 @@ const Cell = ({startSelection, endSelection, selectionData, canBeSelected, canBe
   const [isSelected, setIsSelected] = React.useState(false);
 
   function onMouseEnter() {
-    if (canBeSelected())
+    if (canBeSelected() && !isSelected)
       select();      
   }
 
   const select = () => {
     setStyle(Styles.selectedCell);
+    setIsSelected(true);
   }
 
   const onClick = () => {
     
-    if (!selectionData.hasStarted){
+    if (!selectionData.hasStarted && !isSelected){
       setStyle(Styles.firstSelectedCell);
-      startSelection();            
+      setIsSelected(true);
+      startSelection();     
     } else {
-      // if (canBeClickedForEndingSelection()) {
+      if (canBeClickedForEndingSelection()) {
         endSelection();
         setStyle(Styles.lastSelectedCell);
-      // }
+      }
     }          
   }
 

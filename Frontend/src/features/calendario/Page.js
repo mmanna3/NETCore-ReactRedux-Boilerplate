@@ -9,9 +9,9 @@ const CalendarioPage = () => {
     array.push(i);
   }
 
-  const [selectionData, setSelected] = React.useState({hasStarted: false, lastRow: -1, currentColumn: -1});
+  const [selectionData, setSelected] = React.useState({hasStarted: false, lastRow: -1, currentColumn: -1, currentSelection: []});
   
-  const startSelection = (columnId, rowId) => {
+  const selectFirstRow = (columnId, rowId) => {
     updateSelectionData(true, columnId, rowId);
   }
 
@@ -29,6 +29,10 @@ const CalendarioPage = () => {
     return false;
   }
 
+  const canBeClickedForEndingSelection = (columnId, rowId) => {
+    return selectionData.currentColumn === columnId && selectionData.lastRow === rowId && selectionData.hasStarted
+  }
+
   const isContiguous = (rowId) => selectionData.lastRow + 1 === rowId;
 
   const updateSelectionData = (hasStarted, currentColumn, lastRow) => {
@@ -36,6 +40,10 @@ const CalendarioPage = () => {
     selectionData.hasStarted = hasStarted;
     selectionData.lastRow = lastRow;
     selectionData.currentColumn = currentColumn;
+    
+    if (lastRow != -1)
+      selectionData.currentSelection.push(lastRow);    
+  
     setSelected(copy);
   }
 
@@ -66,10 +74,11 @@ const CalendarioPage = () => {
                 <td>{e}/07</td>
                 {[0,1,2,3,4,5,6].map((e, column) =>
                     <Cell
-                      startSelection={() => startSelection(column, i)} 
+                      startSelection={() => selectFirstRow(column, i)}
                       endSelection={() => endSelection()} 
                       selectionData={selectionData} 
                       canBeSelected={() => canBeSelected(column, i)}
+                      canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, i)}
                     />                    
                 )}
               </tr>              
