@@ -13,7 +13,7 @@ const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
 
   const onClick = () => {
     
-    if (!selectionData.daysSelectionStarted){
+    if (!selectionData.hasStarted){
       setStyle(Styles.firstSelectedCell);
       startSelection();            
     } else {

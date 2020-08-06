@@ -9,7 +9,7 @@ const CalendarioPage = () => {
     array.push(i);
   }
 
-  const [selectionData, setSelected] = React.useState({daysSelectionStarted: false, lastSelectedIndex: -1, selectedColumn: -1});
+  const [selectionData, setSelected] = React.useState({hasStarted: false, lastRow: -1, currentColumn: -1});
   
   const startSelection = (columnId, rowId) => {
     updateSelectionData(true, columnId, rowId);
@@ -21,7 +21,7 @@ const CalendarioPage = () => {
 
   const canBeSelected = (columnId, rowId) => {
     
-    if (selectionData.selectedColumn === columnId && selectionData.lastSelectedIndex + 1 === rowId && selectionData.daysSelectionStarted) {
+    if (selectionData.currentColumn === columnId && selectionData.lastRow + 1 === rowId && selectionData.hasStarted) {
       updateSelectionData(true, columnId, rowId);
       return true;
     }
@@ -31,9 +31,9 @@ const CalendarioPage = () => {
 
   const updateSelectionData = (hasStarted, currentColumn, lastRow) => {
     var copy = selectionData;
-    selectionData.daysSelectionStarted = hasStarted;
-    selectionData.lastSelectedIndex = lastRow;
-    selectionData.selectedColumn = currentColumn;
+    selectionData.hasStarted = hasStarted;
+    selectionData.lastRow = lastRow;
+    selectionData.currentColumn = currentColumn;
     setSelected(copy);
   }
 
