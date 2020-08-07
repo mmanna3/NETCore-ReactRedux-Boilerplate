@@ -4,45 +4,6 @@ import Styles from './Page.module.scss'
 
 const CalendarioPage = () => {  
 
-  const [selectionData, setSelected] = React.useState({hasStarted: false, currentColumn: -1, currentSelection: []});
-  
-  const selectFirstRow = (columnId, rowId) => {
-    updateSelectionData(true, columnId, rowId);
-  }
-
-  const endSelection = () => {
-    updateSelectionData(false, -1);
-  }
-
-  const canBeSelected = (columnId, rowId) => {
-    
-    if (selectionData.currentColumn === columnId && isContiguous(rowId) && selectionData.hasStarted) {
-      updateSelectionData(true, columnId, rowId);
-      return true;
-    }
-
-    return false;
-  }
-
-  const canBeClickedForEndingSelection = (columnId, rowId) => {
-    return selectionData.currentColumn === columnId && isLastRow(rowId) && selectionData.hasStarted;
-  }
-
-  const isContiguous = (rowId) => selectionData.currentSelection[selectionData.currentSelection.length - 1] + 1 === rowId;
-
-  const isLastRow = (rowId) => selectionData.currentSelection[selectionData.currentSelection.length - 1] === rowId;
-
-  const updateSelectionData = (hasStarted, currentColumn, newSelectedRow) => {
-    var copy = selectionData;
-    selectionData.hasStarted = hasStarted;
-    selectionData.currentColumn = currentColumn;
-    
-    if (newSelectedRow)
-      selectionData.currentSelection.push(newSelectedRow);    
-  
-    setSelected(copy);
-  }
-
   return (  
     <div className="container">
       <h1 className="title is-1">Calendario</h1>
@@ -70,11 +31,6 @@ const CalendarioPage = () => {
                 <td>{e}/07</td>
                 {[0,1,2,3,4,5,6].map((e, column) =>
                     <Cell
-                      startSelection={() => selectFirstRow(column, i)}
-                      endSelection={() => endSelection()} 
-                      selectionData={selectionData} 
-                      canBeSelected={() => canBeSelected(column, i)}
-                      canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, i)}
                     />                    
                 )}
               </tr>              
