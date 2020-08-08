@@ -2,12 +2,30 @@ import React from 'react';
 import Cell from './Cell/Cell.js'
 import Styles from './Page.module.scss'
 
-const CalendarioPage = () => {  
+const CalendarioPage = () => {
+  
+  const [dragging, setDragging] = React.useState(false);
+  const [yOnMouseDown, setYOnMouseDown] = React.useState(0);
+
+  const onMouseMove = (e) => {
+    // debugger;
+    if(dragging) {
+      // e.preventDefault();
+      // $('.hour').each( function() {
+      //     var top = $(this).offset().top;
+      //     var bottom = top + $(this).height();
+      //     if( bottom > yOnMousedown && e.pageY > top )
+      //         $(this).addClass( 'hour-highlighted' );
+      //     else
+      //         $(this).removeClass( 'hour-highlighted' );
+      // } );
+    }
+  }
 
   return (  
     <div className="container">
       <h1 className="title is-1">Calendario</h1>
-      <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
+      <table onMouseMove={(e) => onMouseMove(e)} className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
         <thead className="is-bordered">
           <tr>
             <th rowSpan="2"></th>
@@ -31,6 +49,9 @@ const CalendarioPage = () => {
                 <td>{e}/07</td>
                 {[0,1,2,3,4,5,6].map((e, column) =>
                     <Cell
+                      setDragging={setDragging}
+                      setYOnMouseDown={setYOnMouseDown}
+                      onMouseMove={onMouseMove}
                     />                    
                 )}
               </tr>              
