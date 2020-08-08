@@ -2,30 +2,51 @@ import React from 'react';
 import Cell from './Cell/Cell.js'
 import Styles from './Page.module.scss'
 
-const CalendarioPage = () => {
-  
-  const [dragging, setDragging] = React.useState(false);
-  const [yOnMouseDown, setYOnMouseDown] = React.useState(0);
+const CalendarioPage = () => {  
 
-  const onMouseMove = (e) => {
-    // debugger;
-    if(dragging) {
-      // e.preventDefault();
-      // $('.hour').each( function() {
-      //     var top = $(this).offset().top;
-      //     var bottom = top + $(this).height();
-      //     if( bottom > yOnMousedown && e.pageY > top )
-      //         $(this).addClass( 'hour-highlighted' );
-      //     else
-      //         $(this).removeClass( 'hour-highlighted' );
-      // } );
+  const [selectionData, setSelected] = React.useState({hasStarted: false, currentColumn: -1, currentSelection: []});
+  
+  const selectFirstRow = (columnId, rowId) => {
+    updateSelectionData(true, columnId, rowId);
+  }
+
+  const endSelection = () => {
+    updateSelectionData(false, -1);
+  }
+
+  const canBeSelected = (columnId, rowId) => {
+    
+    if (selectionData.currentColumn === columnId && isContiguous(rowId) && selectionData.hasStarted) {
+      updateSelectionData(true, columnId, rowId);
+      return true;
     }
+
+    return false;
+  }
+
+  const canBeClickedForEndingSelection = (columnId, rowId) => {
+    return selectionData.currentColumn === columnId && isLastRow(rowId) && selectionData.hasStarted;
+  }
+
+  const isContiguous = (rowId) => selectionData.currentSelection[selectionData.currentSelection.length - 1] + 1 === rowId;
+
+  const isLastRow = (rowId) => selectionData.currentSelection[selectionData.currentSelection.length - 1] === rowId;
+
+  const updateSelectionData = (hasStarted, currentColumn, newSelectedRow) => {
+    var copy = selectionData;
+    selectionData.hasStarted = hasStarted;
+    selectionData.currentColumn = currentColumn;
+    
+    if (newSelectedRow)
+      selectionData.currentSelection.push(newSelectedRow);    
+  
+    setSelected(copy);
   }
 
   return (  
     <div className="container">
       <h1 className="title is-1">Calendario</h1>
-      <table onMouseMove={(e) => onMouseMove(e)} className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
+      <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
         <thead className="is-bordered">
           <tr>
             <th rowSpan="2"></th>
@@ -49,9 +70,11 @@ const CalendarioPage = () => {
                 <td>{e}/07</td>
                 {[0,1,2,3,4,5,6].map((e, column) =>
                     <Cell
-                      setDragging={setDragging}
-                      setYOnMouseDown={setYOnMouseDown}
-                      onMouseMove={onMouseMove}
+                      startSelection={() => selectFirstRow(column, i)}
+                      endSelection={() => endSelection()} 
+                      selectionData={selectionData} 
+                      canBeSelected={() => canBeSelected(column, i)}
+                      canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, i)}
                     />                    
                 )}
               </tr>              
