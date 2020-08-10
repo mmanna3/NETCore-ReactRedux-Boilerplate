@@ -6,14 +6,14 @@ const Thead = ({camasPorHabitacion}) => {
         <thead className="is-bordered">
           <tr>
             <th rowSpan="2"></th>
-            {camasPorHabitacion.map((habitacion) => 
-              <th colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
+            {camasPorHabitacion.map((habitacion, i) => 
+              <th key={i} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
             )}
           </tr>        
           <tr>
             {camasPorHabitacion.map((habitacion) => 
-              habitacion.camas.map((cama) =>
-                <th>{cama}</th>
+              habitacion.camas.map((cama,i) =>
+                <th key={i}>{cama}</th>
               )
             )}
           </tr>

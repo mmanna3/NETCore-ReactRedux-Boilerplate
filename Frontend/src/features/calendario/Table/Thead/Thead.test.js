@@ -39,4 +39,15 @@ describe('Thead', () => {
     const texts = habitaciones.map((node) => node.text());
     expect(texts).toEqual(['', 'Habitación Azul', 'Habitación Roja', 'Habitación Verde']);
   })
+
+  it('muestra camas correctamente', () => {
+    const wrapper = shallow(<Thead camasPorHabitacion={camasPorHabitacion} />);
+    const theadHtml = wrapper.find('thead');
+    const habitacionesTr = theadHtml.find('tr').at(1);
+    const habitaciones = habitacionesTr.find('th');
+    expect(habitaciones).toHaveLength(7);
+    
+    const texts = habitaciones.map((node) => node.text());
+    expect(texts).toEqual(['Individual: A', 'Individual: B', 'Matrimonial: 1', 'Mar. Arriba: 2', 'Mar. Abajo: 3', 'Matrimonial: Matri', 'Individual: Indi']);
+  })
 })
