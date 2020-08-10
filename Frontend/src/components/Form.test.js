@@ -11,9 +11,13 @@ configure({ adapter: new Adapter() });  //Needed to mount nested components
 
 const A_NAME = 'someName';
 
-/*All tests will check Components with "Name" prop have a function in the register attribute*/
+/*
+  All tests will check Components with "Name" prop have a function in the register attribute.
+  To test 'Simple component' an Input is used.
+  To test 'Complex component' a Select is used.
+*/
 
-it('Supports Input Component', () => {
+it('Supports simple React Component', () => {
   
   const jsx = (
     <Form>
@@ -26,88 +30,95 @@ it('Supports Input Component', () => {
   AssertInputExistsAndHasValidRegisterProp(wrapper);
 });
 
-it('Supports nested Input Component (HTML tree)', () => {
-
-  const jsx = (
-    <Form>
-      <div>
+describe('Supports simple React Component nested', () => {
+  
+  it('In HTML tree', () => {
+  
+    const jsx = (
+      <Form>
         <div>
-          <Input name={A_NAME} />
-        </div>
-      </div>      
-    </Form>
-  );
-  
-  const wrapper = mount(jsx);
+          <div>
+            <Input name={A_NAME} />
+          </div>
+        </div>      
+      </Form>
+    );
     
-  AssertInputExistsAndHasValidRegisterProp(wrapper);
-});
+    const wrapper = mount(jsx);
+      
+    AssertInputExistsAndHasValidRegisterProp(wrapper);
+  });
 
-it('Supports nested Input Component (Component tree)', () => {
+  it('In React Component tree', () => {
   
-  const jsx = (
-    <Form>
-      <Modal>
-        <Body>
-          <Input name={A_NAME} />
-        </Body>
-      </Modal>      
-    </Form>
-  );
-  
-  const wrapper = mount(jsx);
+    const jsx = (
+      <Form>
+        <Modal>
+          <Body>
+            <Input name={A_NAME} />
+          </Body>
+        </Modal>      
+      </Form>
+    );
     
-  AssertInputExistsAndHasValidRegisterProp(wrapper); 
-});
+    const wrapper = mount(jsx);
+      
+    AssertInputExistsAndHasValidRegisterProp(wrapper); 
+  });
 
-it('Supports nested Select Component (Component tree)', () => {
-  
-  const jsx = (
-    <Form>
-      <Modal>
-        <Body>
-          <Select name={A_NAME}>
-            <option>1</option>
-          </Select>
-        </Body>
-      </Modal>      
-    </Form>
-  );
-  
-  const wrapper = mount(jsx);
+})
 
-  AssertSelectExistsAndHasValidRegisterProp(wrapper);
-});
+describe('Supports complex React Component nested', () => {
 
-
-it('Supports nested Wrapped Select Component (Component tree)', () => {
-  
-  const SelectCama = () => {
-    return <div>
+  it('In React Component tree', () => {
+    
+    const jsx = (
+      <Form>
+        <Modal>
+          <Body>
             <Select name={A_NAME}>
-              <option value="1">Individual</option>
-              <option value="2">Matrimonial</option>
-              <option value="3">Marinera</option>
+              <option>1</option>
             </Select>
-          </div>;       
-  }  
+          </Body>
+        </Modal>      
+      </Form>
+    );
+    
+    const wrapper = mount(jsx);
   
-  const jsx = (
-    <Form>
-      <Modal>
-        <Body>
-          <SelectCama />
-        </Body>
-      </Modal>      
-    </Form>
-  );
+    AssertSelectExistsAndHasValidRegisterProp(wrapper);
+  });
   
-  const wrapper = mount(jsx);
+  it('In HTML tree wrapped in another component', () => {
+    
+    const SelectCama = () => {
+      return <div>
+              <Select name={A_NAME}>
+                <option value="1">Individual</option>
+                <option value="2">Matrimonial</option>
+                <option value="3">Marinera</option>
+              </Select>
+            </div>;       
+    }  
+    
+    const jsx = (
+      <Form>
+        <Modal>
+          <Body>
+            <SelectCama />
+          </Body>
+        </Modal>      
+      </Form>
+    );
+    
+    const wrapper = mount(jsx);
+  
+    AssertSelectExistsAndHasValidRegisterProp(wrapper);
+  });
 
-  AssertSelectExistsAndHasValidRegisterProp(wrapper);
-});
+})
 
-it('Supports null result of Component', () => {
+it('Supports React Component that returns null', () => {
   
   const SelectCama = () => {
     return null;       
@@ -126,7 +137,7 @@ it('Supports null result of Component', () => {
   mount(jsx);
 });
 
-it('Supports dynamic Array of Component', () => {
+it('Supports Array of React Component', () => {
   
   var array = [1,2,3];  
   const jsx = (
