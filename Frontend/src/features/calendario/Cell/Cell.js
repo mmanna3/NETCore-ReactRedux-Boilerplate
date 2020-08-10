@@ -16,20 +16,31 @@ const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
     setIsSelected(true);
   }
 
+  const cancelSelection = () => {
+    endSelection();
+  }
+
   const onMouseDown = (e) => {
     e.preventDefault();
-    if (!selectionData.hasStarted && !isSelected){
+
+    if (isSelected) {
+      cancelSelection();
+    }
+
+    if (!selectionData.hasStarted) {
       setStyle(Styles.firstSelectedCell);
       setIsSelected(true);
       startSelection();     
-    }          
+    }     
   }
 
   const onMouseUp = (e) => {
-    e.preventDefault();
-    setIsSelected(false);
-    endSelection();    
-    setStyle(Styles.lastSelectedCell);
+    if (selectionData.hasStarted) {
+      e.preventDefault();
+      setIsSelected(false);
+      endSelection();    
+      setStyle(Styles.lastSelectedCell);
+    }
   }
 
   return (
