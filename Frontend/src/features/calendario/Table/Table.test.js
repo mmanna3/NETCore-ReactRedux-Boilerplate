@@ -9,7 +9,7 @@ describe('Calendar Table', () => {
 
     describe('Thead', () => {
 
-        it('has two rows', () => {    
+        it('has two rows', () => {
             const wrapper = shallow(<Table />);
             const thead = wrapper.find('thead');
             const rows = thead.find('tr');

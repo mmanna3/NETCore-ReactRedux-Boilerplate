@@ -43,23 +43,36 @@ const Table = () => {
     setSelected(copy);
   }
 
+  var head = [
+    {
+      nombre: 'Azul',
+      camas: ['Individual: A', 'Individual: B']
+    },
+    {
+      nombre: 'Roja',
+      camas: ['Matrimonial: 1', 'Mar. Arriba: 2', 'Mar. Abajo: 3']
+    },
+    {
+      nombre: 'Verde',
+      camas: ['Matrimonial: Matri', 'Individual: Indi']
+    }
+  ];
+
   return (  
       <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
         <thead className="is-bordered">
           <tr>
             <th rowSpan="2"></th>
-            <th colSpan="2">Habitación Azul</th>
-            <th colSpan="3">Habitación Roja</th>
-            <th colSpan="2">Habitación Verde</th>
+            {head.map((habitacion) => 
+              <th colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
+            )}
           </tr>        
           <tr>
-            <th>Individual: A</th>
-            <th>Individual: B</th>
-            <th>Matrimonial: 1</th>
-            <th>Mar. arriba: 2</th>
-            <th>Mar. abajo: 3</th>
-            <th>Matrimonial: Matri</th>
-            <th>Individual: Indi</th>
+            {head.map((habitacion) => 
+              habitacion.camas.map((cama) =>
+                <th>{cama}</th>
+              )
+            )}
           </tr>
         </thead>
         <tbody>
