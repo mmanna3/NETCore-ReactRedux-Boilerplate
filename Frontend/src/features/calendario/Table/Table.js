@@ -1,8 +1,9 @@
 import React from 'react';
 import Cell from './Cell/Cell.js'
 import Styles from './Table.module.scss'
+import Thead from './Thead/Thead.js'
 
-const Table = () => {  
+const Table = ({camasPorHabitacion}) => {  
 
   const [selectionData, setSelected] = React.useState({hasStarted: false, currentColumn: -1, currentSelection: []});
   
@@ -43,38 +44,9 @@ const Table = () => {
     setSelected(copy);
   }
 
-  var head = [
-    {
-      nombre: 'Azul',
-      camas: ['Individual: A', 'Individual: B']
-    },
-    {
-      nombre: 'Roja',
-      camas: ['Matrimonial: 1', 'Mar. Arriba: 2', 'Mar. Abajo: 3']
-    },
-    {
-      nombre: 'Verde',
-      camas: ['Matrimonial: Matri', 'Individual: Indi']
-    }
-  ];
-
   return (  
       <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
-        <thead className="is-bordered">
-          <tr>
-            <th rowSpan="2"></th>
-            {head.map((habitacion) => 
-              <th colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
-            )}
-          </tr>        
-          <tr>
-            {head.map((habitacion) => 
-              habitacion.camas.map((cama) =>
-                <th>{cama}</th>
-              )
-            )}
-          </tr>
-        </thead>
+        <Thead camasPorHabitacion={camasPorHabitacion} />
         <tbody>
           {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((e, i) => 
               <tr key={i}>
