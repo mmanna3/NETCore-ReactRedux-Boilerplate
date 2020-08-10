@@ -1,5 +1,5 @@
 import React from 'react';
-import Cell from './Cell/Cell_old.js'
+import Cell from './Table/Cell/Cell_old.js'
 import Styles from './Page.module.scss'
 
 const CalendarioPage = () => {
