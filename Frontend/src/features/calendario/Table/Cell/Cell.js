@@ -1,12 +1,13 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 
-const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
+const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) => {
 
   const [style, setStyle] = React.useState('');
   const [isSelected, setIsSelected] = React.useState(false);
 
   function onMouseEnter() {
+    console.log(`MOUSEENTER:${id}`);    
     if (canBeSelected() && !isSelected)
       select();      
   }
@@ -20,14 +21,14 @@ const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
     endSelection();
   }
 
-  const onMouseDown = (e) => {
+  const onMouseDown = (e) => {    
     e.preventDefault();
 
     if (isSelected) {
       cancelSelection();
     }
 
-    if (!selectionData.hasStarted) {
+    if (!selectionData.hasStarted) {      
       setStyle(Styles.firstSelectedCell);
       setIsSelected(true);
       startSelection();     
@@ -44,7 +45,7 @@ const Cell = ({startSelection, endSelection, selectionData, canBeSelected}) => {
   }
 
   return (
-    <td className={style} onMouseUp={(e) => onMouseUp(e)} onMouseDown={(e) => onMouseDown(e)} onMouseEnter={onMouseEnter}></td>
+    <td className={`${id} ${style}`} onMouseUp={(e) => onMouseUp(e)} onMouseDown={(e) => onMouseDown(e)} onMouseEnter={onMouseEnter}></td>
   )
 }
 

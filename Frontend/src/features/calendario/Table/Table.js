@@ -8,6 +8,7 @@ const Table = ({camasPorHabitacion}) => {
   const [selectionData, setSelected] = React.useState({hasStarted: false, currentColumn: -1, currentSelection: []});
   
   const selectFirstRow = (columnId, rowId) => {
+    debugger;
     updateSelectionData(true, columnId, rowId);
   }
 
@@ -35,11 +36,11 @@ const Table = ({camasPorHabitacion}) => {
 
   const updateSelectionData = (hasStarted, currentColumn, newSelectedRow) => {
     var copy = selectionData;
-    selectionData.hasStarted = hasStarted;
-    selectionData.currentColumn = currentColumn;
+    copy.hasStarted = hasStarted;
+    copy.currentColumn = currentColumn;
     
-    if (newSelectedRow)
-      selectionData.currentSelection.push(newSelectedRow);    
+    if (newSelectedRow !== undefined)
+      copy.currentSelection.push(newSelectedRow);
   
     setSelected(copy);
   }
@@ -54,6 +55,7 @@ const Table = ({camasPorHabitacion}) => {
                 {[0,1,2,3,4,5,6].map((e, column) =>
                     <Cell
                       key={column}
+                      id={`${i}${column}`}
                       startSelection={() => selectFirstRow(column, i)}
                       endSelection={() => endSelection()} 
                       selectionData={selectionData} 
