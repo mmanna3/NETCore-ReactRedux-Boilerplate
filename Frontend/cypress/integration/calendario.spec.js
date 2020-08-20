@@ -22,19 +22,47 @@ describe('Tests del calendario', () => {
 
         cy.contains('h1', 'Calendario')
             .should('be.visible')
+        
+        seleccionarDesdeHasta('00', '30');
 
+        cy.get('#00')
+            .invoke('attr', 'class')
+            .should('contain', 'Selected');
+    })
 
-        //cy.get('.00').then($el => console.log($el[0].getBoundingClientRect()))  Quizás sirva (?)
+  })
 
-        cy.get('.00')
-            .trigger('mouseover')
-            .trigger('mousedown', {which: 1})
-            .trigger('mousemove')
-            .get('.10')
+const seleccionarDesdeHasta = (celdaInicialId, celdaFinalId) => {
+
+    const celdasIdsEntre = (celdaInicialId, celdaFinalId) => {
+        var columna = celdaInicialId[1];
+        
+        var result = [];
+        var i = parseInt(celdaInicialId[0]) + 1;
+    
+        while (i < parseInt(celdaFinalId[0])) {            
+            result.push(`${i}${columna}`);
+            i++;            
+        }
+    
+        return result;
+    }
+
+    var celdasIdsEntre = celdasIdsEntre(celdaInicialId, celdaFinalId);        
+
+    cy.get('#'+celdaInicialId)
+        .trigger('mouseover')
+        .trigger('mousedown', {which: 1})
+        .trigger('mousemove')        
+
+    celdasIdsEntre.forEach(id => {
+        cy.get('#'+id)
             .trigger('mouseover')            
             .trigger('mousemove')
-            .get('.20')
-            .trigger('mousemove')
-            .trigger('mouseup', {force: true})
-    })
-  })
+    });
+
+    cy.get('#'+celdaFinalId)
+        .trigger('mousemove')
+        .trigger('mouseup', {force: true})
+}
+

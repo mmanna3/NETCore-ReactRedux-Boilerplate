@@ -49,18 +49,18 @@ const Table = ({camasPorHabitacion}) => {
       <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
         <Thead camasPorHabitacion={camasPorHabitacion} />
         <tbody>
-          {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((e, i) => 
-              <tr key={i}>
+          {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((e, row) => 
+              <tr key={row}>
                 <td>{e}/07</td>
                 {[0,1,2,3,4,5,6].map((e, column) =>
                     <Cell
                       key={column}
-                      id={`${i}${column}`}
-                      startSelection={() => selectFirstRow(column, i)}
+                      id={`${row}${column}`}
+                      startSelection={() => selectFirstRow(column, row)}
                       endSelection={() => endSelection()} 
                       selectionData={selectionData} 
-                      canBeSelected={() => canBeSelected(column, i)}
-                      canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, i)}
+                      canBeSelected={() => canBeSelected(column, row)}
+                      canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, row)}
                     />                    
                 )}
               </tr>              

@@ -6,8 +6,7 @@ const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) 
   const [style, setStyle] = React.useState('');
   const [isSelected, setIsSelected] = React.useState(false);
 
-  function onMouseEnter() {
-    console.log(`MOUSEENTER:${id}`);    
+  function onMouseEnter() {    
     if (canBeSelected() && !isSelected)
       select();      
   }
@@ -45,7 +44,7 @@ const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) 
   }
 
   return (
-    <td className={`${id} ${style}`} onMouseUp={(e) => onMouseUp(e)} onMouseDown={(e) => onMouseDown(e)} onMouseEnter={onMouseEnter}></td>
+    <td id={id} className={`${style}`} onMouseUp={(e) => onMouseUp(e)} onMouseDown={(e) => onMouseDown(e)} onMouseEnter={onMouseEnter}></td>
   )
 }
 
