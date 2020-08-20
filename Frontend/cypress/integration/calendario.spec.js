@@ -19,45 +19,81 @@ describe('Tests del calendario', () => {
             .should('be.visible')
         
         seleccionarDesdeHasta('00', '50');
-
-        cy.get('#00')
-            .invoke('attr', 'class')
-            .should('contain', 'Selected');
+        QueEstenSeleccionadasDesdeHasta('00','50');        
     })
-
-  })
-
-const seleccionarDesdeHasta = (celdaInicialId, celdaFinalId) => {
-
-    const celdasIdsEntre = (celdaInicialId, celdaFinalId) => {
-        var columna = celdaInicialId[1];
+    
+    const seleccionarDesdeHasta = (celdaInicialId, celdaFinalId) => {
+    
+        const celdasIdsEntre = (celdaInicialId, celdaFinalId) => {
+            var columna = celdaInicialId[1];
+            
+            var result = [];
+            var i = parseInt(celdaInicialId[0]) + 1;
         
-        var result = [];
-        var i = parseInt(celdaInicialId[0]) + 1;
-    
-        while (i < parseInt(celdaFinalId[0])) {            
-            result.push(`${i}${columna}`);
-            i++;            
+            while (i < parseInt(celdaFinalId[0])) {            
+                result.push(`${i}${columna}`);
+                i++;            
+            }
+        
+            return result;
         }
+
+        
+        var celdasIdsEntre = celdasIdsEntre(celdaInicialId, celdaFinalId);        
     
-        return result;
+        cy.get('#'+celdaInicialId)
+            .trigger('mouseover')
+            .trigger('mousedown', {which: 1})
+            .trigger('mousemove')        
+    
+        celdasIdsEntre.forEach(id => {
+            cy.get('#'+id)
+                .trigger('mouseover')            
+                .trigger('mousemove')
+        });
+    
+        cy.get('#'+celdaFinalId)
+            .trigger('mousemove')
+            .trigger('mouseup', {force: true})
+    }
+    
+    
+    const QueEstenSeleccionadasDesdeHasta = (celdaInicialId, celdaFinalId) => {
+    
+        const celdasIdsEntre = (celdaInicialId, celdaFinalId) => {
+            var columna = celdaInicialId[1];
+            
+            var result = [];
+            var i = parseInt(celdaInicialId[0]) + 1;
+        
+            while (i < parseInt(celdaFinalId[0])) {            
+                result.push(`${i}${columna}`);
+                i++;            
+            }
+        
+            return result;
+        }
+        
+        var celdasIdsEntre = celdasIdsEntre(celdaInicialId, celdaFinalId);        
+    
+        cy.get('#'+celdaInicialId)
+            .invoke('attr', 'class')
+            .should('contain', 'selected')
+            .should('contain', 'firstSelected');
+    
+        celdasIdsEntre.forEach(id => {
+            cy.get('#'+id)
+                .invoke('attr', 'class')
+                .should('contain', 'selected');
+        });
+    
+        cy.get('#'+celdaFinalId)
+            .invoke('attr', 'class')
+            .should('contain', 'selected')
+            .should('contain', 'lastSelected');
+    
     }
 
-    var celdasIdsEntre = celdasIdsEntre(celdaInicialId, celdaFinalId);        
 
-    cy.get('#'+celdaInicialId)
-        .trigger('mouseover')
-        .trigger('mousedown', {which: 1})
-        .trigger('mousemove')        
-
-    celdasIdsEntre.forEach(id => {
-        cy.get('#'+id)
-            .trigger('mouseover')            
-            .trigger('mousemove')
-    });
-
-    cy.get('#'+celdaFinalId)
-        .trigger('mousemove')
-        .trigger('mouseup', {force: true})
-}
+  })
 
