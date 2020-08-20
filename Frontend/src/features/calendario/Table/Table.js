@@ -8,7 +8,6 @@ const Table = ({camasPorHabitacion}) => {
   const [selectionData, setSelected] = React.useState({hasStarted: false, currentColumn: -1, currentSelection: []});
   
   const selectFirstRow = (columnId, rowId) => {
-    debugger;
     updateSelectionData(true, columnId, rowId);
   }
 

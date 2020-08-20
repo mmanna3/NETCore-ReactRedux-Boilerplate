@@ -11,19 +11,14 @@ describe('Tests del calendario', () => {
 
         cy.get('[type="submit"]')
             .click()
-        
-        cy.get('.navbar-burger')
-            .click()
 
         cy.contains('a', 'Calendario')
             .click()
-        
-        //El menú debería cerrarse. Assertear eso cuando se pueda.
 
         cy.contains('h1', 'Calendario')
             .should('be.visible')
         
-        seleccionarDesdeHasta('00', '30');
+        seleccionarDesdeHasta('00', '50');
 
         cy.get('#00')
             .invoke('attr', 'class')
