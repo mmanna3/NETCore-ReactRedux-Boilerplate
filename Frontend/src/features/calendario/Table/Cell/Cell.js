@@ -12,7 +12,7 @@ const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) 
   }
 
   const select = () => {
-    setStyle(Styles.selectedCell);
+    setStyle(Styles.selected);
     setIsSelected(true);
   }
 
@@ -28,7 +28,7 @@ const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) 
     }
 
     if (!selectionData.hasStarted) {      
-      setStyle(Styles.firstSelectedCell);
+      setStyle(`${Styles.firstSelected} ${Styles.selected}`);
       setIsSelected(true);
       startSelection();     
     }     
@@ -39,7 +39,7 @@ const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) 
       e.preventDefault();
       setIsSelected(false);
       endSelection();    
-      setStyle(Styles.lastSelectedCell);
+      setStyle(`${Styles.lastSelected} ${Styles.selected}`);
     }
   }
 

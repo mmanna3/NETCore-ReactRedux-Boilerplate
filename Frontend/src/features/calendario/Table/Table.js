@@ -60,7 +60,7 @@ const Table = ({camasPorHabitacion}) => {
                       selectionData={selectionData} 
                       canBeSelected={() => canBeSelected(column, row)}
                       canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, row)}
-                    />                    
+                    />
                 )}
               </tr>              
           )}
