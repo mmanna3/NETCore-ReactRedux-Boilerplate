@@ -1,6 +1,6 @@
 describe('Calendario', () => {
 
-    it('Selección básica', () => {
+    it('Reservar 6 días', () => {
         
         acceder();
         
@@ -9,6 +9,39 @@ describe('Calendario', () => {
         seleccionarDesdeHasta('00', '50');
 
         queEstenSeleccionadasDesdeHasta('00','50');
+    })
+
+    it('Si se inició la reserva de una cama, al mover el mouse a la columna de otra cama, no se selecciona', () => {
+        
+        acceder();
+        
+        irAlCalendario();        
+        
+        cy.get('#00')
+            .trigger('mouseover')
+            .trigger('mousedown', {which: 1})
+            .trigger('mousemove')        
+
+        cy.get('#10')
+            .trigger('mouseover')
+            .trigger('mousemove')
+
+        cy.get('#11')
+            .trigger('mouseover')
+            .trigger('mousemove')
+        
+        cy.get('#22')
+            .trigger('mouseover')
+            .trigger('mousemove')
+
+        cy.get('#20')
+            .trigger('mousemove')
+            .trigger('mouseup', {force: true})
+
+        queEstenSeleccionadasDesdeHasta('00','20');
+
+        queNoEsteSeleccionada('11');
+        queNoEsteSeleccionada('22');
     })
 })
 
@@ -69,6 +102,12 @@ const seleccionarDesdeHasta = (celdaInicialId, celdaFinalId) => {
         .trigger('mouseup', {force: true})
 }
 
+
+const queNoEsteSeleccionada = (celda) => {
+    cy.get('#'+celda)
+        .invoke('attr', 'class')
+        .should('not.contain', 'selected');
+}
 
 const queEstenSeleccionadasDesdeHasta = (celdaInicialId, celdaFinalId) => {
 
