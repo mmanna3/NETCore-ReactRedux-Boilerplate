@@ -43,6 +43,8 @@ describe('Calendario', () => {
         queNoEsteSeleccionada('11');
         queNoEsteSeleccionada('22');
     })
+
+    //idem arriba pero volviendo a 50 en vez de a 20.
 })
 
 const acceder = () => {
