@@ -20,10 +20,12 @@ environment:
     secure: fViNusck/3ewKyAw1iVOVQ==
   db_password:
     secure: 4y9U8rtIudL2GAfDA3JfbQ==
+  jwt_secret:
+      secure: PtsG6zq5IAqBHEge2INHxA==
 install:
   - ps: >-
       $file = "./Backend/Api/appsettings.Production.json";
-      (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password) | Set-Content $file
+      (Get-Content $file).Replace("{db_server}", $env:db_server).Replace("{db_name}", $env:db_name).Replace("{db_username}", $env:db_username).Replace("{db_password}", $env:db_password).Replace("{jwt_secret}", $env:jwt_secret) | Set-Content $file
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
