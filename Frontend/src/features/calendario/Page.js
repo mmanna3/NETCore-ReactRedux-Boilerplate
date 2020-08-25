@@ -5,16 +5,50 @@ const CalendarioPage = () => {
 
   var camasPorHabitacion = [
     {
+      id: 1,
       nombre: 'Azul',
-      camas: ['Individual: A', 'Individual: B']
+      camas: [
+        {
+          id: 1,
+          nombre:'Individual: A'
+        },
+        {
+          id: 2,
+          nombre:'Individual: B'
+        },
+      ]
     },
     {
+      id: 2,
       nombre: 'Roja',
-      camas: ['Matrimonial: 1', 'Mar. Arriba: 2', 'Mar. Abajo: 3']
+      camas: [
+        {
+          id: 3,
+          nombre:'Matrimonial'
+        },
+        {
+          id: 4,
+          nombre:'Mar: Arr.'
+        },
+        {
+          id: 5,
+          nombre:'Mar: Ab.'
+        },
+      ]
     },
     {
+      id: 3,
       nombre: 'Verde',
-      camas: ['Matrimonial: Matri', 'Individual: Indi']
+      camas: [
+        {
+          id: 6,
+          nombre:'Matrimonial'
+        },
+        {
+          id: 7,
+          nombre:'Individual única'
+        }
+      ]
     }
   ];
 

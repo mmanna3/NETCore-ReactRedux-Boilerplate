@@ -13,7 +13,7 @@ const Thead = ({camasPorHabitacion}) => {
           <tr>
             {camasPorHabitacion.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
-                <th key={i}>{cama}</th>
+                <th key={i}>{cama.nombre}</th>
               )
             )}
           </tr>

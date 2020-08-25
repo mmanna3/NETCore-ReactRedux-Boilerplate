@@ -61,7 +61,7 @@ const Table = ({camasPorHabitacion}) => {
                 <td>{e}/07</td>
                 {
 
-              camas.map((cama,i) =>                   
+              camas.map((cama,i) =>
                   <Cell
                     key={i}
                     id={`${dia}${i}`}
