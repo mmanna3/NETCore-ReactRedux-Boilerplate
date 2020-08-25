@@ -44,7 +44,12 @@ const Cell = ({id, startSelection, endSelection, selectionData, canBeSelected}) 
   }
 
   return (
-    <td id={id} className={`${style}`} onMouseUp={(e) => onMouseUp(e)} onMouseDown={(e) => onMouseDown(e)} onMouseEnter={onMouseEnter}></td>
+    <td id={id} 
+        className={style} 
+        onMouseUp={(e) => onMouseUp(e)} 
+        onMouseDown={(e) => onMouseDown(e)} 
+        onMouseEnter={onMouseEnter}>
+    </td>
   )
 }
 

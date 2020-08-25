@@ -1,3 +1,38 @@
+/*
+
+Puedo reservar un sólo día
+    una cama
+    2 camas
+    3 camas
+Puedo resevar 2 días
+    una cama
+    2 camas
+    3 camas
+Puedo reservar más de 2 días
+    una cama
+    2 camas
+    3 camas
+
+Al moverme hacia la celda de arriba, se deselecciona(n) la(s) celda(s) del día actual
+    Durante reserva de una cama
+    Durante reserva de 2 camas
+    Durante reserva de 3 camas
+
+No puedo seleccionar en la misma reserva camas de distintas habitaciones
+
+No puedo seleccionar camas ya reservadas ese día
+    una cama
+    2 camas
+    3 camas
+
+    
+    En Table, tener variable "reservas" que sea array de objetos. Props: celda inicio, celda fin (a lo excel) y después más datos.
+    Al finalizar, assertear que la reserva se guarde en ese array
+
+    En cada celda tener los attributes: dia="01" cama="id" habitacion="id"
+*/
+
+
 describe('Calendario', () => {
 
     it('Reservar 6 días', () => {
@@ -11,7 +46,7 @@ describe('Calendario', () => {
         queEstenSeleccionadasDesdeHasta('00','50');
     })
 
-    it('Si se inició la reserva de una cama, al mover el mouse a la columna de otra cama, no se selecciona', () => {
+    it('Si se inició la reserva de una cama, al mover el mouse a la columna de otra cama, termina reserva en último día seleccionado', () => {
         
         acceder();
         
@@ -26,6 +61,10 @@ describe('Calendario', () => {
             .trigger('mouseover')
             .trigger('mousemove')
 
+        cy.get('#20')
+            .trigger('mouseover')
+            .trigger('mousemove')
+
         cy.get('#11')
             .trigger('mouseover')
             .trigger('mousemove')
@@ -34,17 +73,15 @@ describe('Calendario', () => {
             .trigger('mouseover')
             .trigger('mousemove')
 
-        cy.get('#20')
-            .trigger('mousemove')
-            .trigger('mouseup', {force: true})
-
         queEstenSeleccionadasDesdeHasta('00','20');
 
         queNoEsteSeleccionada('11');
         queNoEsteSeleccionada('22');
     })
 
-    //idem arriba pero volviendo a 50 en vez de a 20.
+    it('Si se inició la reserva de una cama, si me paro arriba una celda ya seleccionada, termino ahí la reserva', () => {
+
+    })
 })
 
 const acceder = () => {
