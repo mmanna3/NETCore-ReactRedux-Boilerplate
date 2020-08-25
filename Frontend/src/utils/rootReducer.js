@@ -6,6 +6,7 @@ import crearHabitacionReducer from 'features/habitaciones/crear/slice'
 import huespedesReducer from 'features/huespedes/slice'
 import crearHuespedReducer from 'features/huespedes/crear/slice'
 
+import reservasDelMesReducer from 'features/calendario/reservasDelMesSlice'
 
 import loginReducer from 'features/login/slice'
 
@@ -18,6 +19,8 @@ const rootReducer = combineReducers({
   
   huespedes: huespedesReducer,
   crearHuesped: crearHuespedReducer,
+
+  reservasDelMes: reservasDelMesReducer,
 });
 
 export default rootReducer;

@@ -1,32 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Cell from './Cell/Cell.js'
 import Styles from './Table.module.scss'
 import Thead from './Thead/Thead.js'
+import {setInitialState} from 'features/calendario/reservasDelMesSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
 const Table = ({camasPorHabitacion, diasDelMes}) => {  
+  const dispatch = useDispatch();  
+  useEffect(() => setCalendarioInitialState(), [camasPorHabitacion, diasDelMes]);
 
   var camas = camasPorHabitacion.map((habitacion) => 
-                    habitacion.camas.map((cama) => {
-                        return {
-                          habitacion: habitacion.nombre,
-                          cama
-                        }
-                    })).flat();
-  
-  var initialReservasVirtualTable = diasDelMes.map((dia, row) => 
-    camas.map((cama, column) => {
-      return {selected: 'none'}
-    })
-  );
+  habitacion.camas.map((cama) => {
+      return {
+        habitacion: habitacion.nombre,
+        cama
+      }
+  })).flat();
 
-  const [reservasVirtualTable, setReservasVirtualTable] = React.useState(initialReservasVirtualTable);
+  const setCalendarioInitialState = () => {
+
+    var initialState = diasDelMes.map((dia, row) => 
+      camas.map((cama, column) => {
+        return {selected: 'none'}
+      })
+    );
+
+    dispatch(setInitialState(initialState));
+  }
+  
+
+
+  // const [reservasVirtualTable, setReservasVirtualTable] = React.useState(initialReservasVirtualTable);
   
   const onClick = (row, column) => {
-    debugger;
-    var copyReservasVirtualTable = reservasVirtualTable;
-    copyReservasVirtualTable[row][column] = {selected: 'yes'}
-    setReservasVirtualTable(copyReservasVirtualTable);
-    console.log(reservasVirtualTable);
+    // debugger;
+    // var copyReservasVirtualTable = reservasVirtualTable;
+    // copyReservasVirtualTable[row][column] = {selected: 'yes'}
+    // setReservasVirtualTable(copyReservasVirtualTable);
+    // console.log(reservasVirtualTable);
   }
 
   return (
