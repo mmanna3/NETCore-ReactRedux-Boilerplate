@@ -44,24 +44,38 @@ const Table = ({camasPorHabitacion}) => {
     setSelected(copy);
   }
 
+  var camas = camasPorHabitacion.map((habitacion) => 
+                  habitacion.camas.map((cama) => {
+                      return {
+                        habitacion: habitacion.nombre,
+                        cama
+                      }
+                })).flat();
+
   return (  
       <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
         <Thead camasPorHabitacion={camasPorHabitacion} />
         <tbody>
-          {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((e, row) => 
-              <tr key={row}>
+          {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((e, dia) => 
+              <tr key={dia}>
                 <td>{e}/07</td>
-                {[0,1,2,3,4,5,6].map((e, column) =>
-                    <Cell
-                      key={column}
-                      id={`${row}${column}`}
-                      startSelection={() => selectFirstRow(column, row)}
-                      endSelection={() => endSelection()} 
-                      selectionData={selectionData} 
-                      canBeSelected={() => canBeSelected(column, row)}
-                      canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(column, row)}
-                    />
-                )}
+                {
+
+              camas.map((cama,i) =>                   
+                  <Cell
+                    key={i}
+                    id={`${dia}${i}`}
+                    startSelection={() => selectFirstRow(i, dia)}
+                    endSelection={() => endSelection()} 
+                    selectionData={selectionData} 
+                    canBeSelected={() => canBeSelected(i, dia)}
+                    canBeClickedForEndingSelection={() => canBeClickedForEndingSelection(i, dia)}
+                  />
+              )
+
+
+                    
+                }
               </tr>              
           )}
         </tbody>
