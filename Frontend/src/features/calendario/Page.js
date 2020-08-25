@@ -55,7 +55,7 @@ const CalendarioPage = () => {
   return (  
     <div className="container">
       <h1 className="title is-1">Calendario</h1>
-      <Table camasPorHabitacion={camasPorHabitacion} />
+      <Table camasPorHabitacion={camasPorHabitacion} diasDelMes={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}/>
   </div>
   )
 }
