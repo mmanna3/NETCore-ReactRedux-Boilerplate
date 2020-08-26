@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Cell from './Cell/Cell.js'
 import Styles from './Table.module.scss'
 import Thead from './Thead/Thead.js'
-import {init} from 'features/calendario/reservasDelMesHelper'
+import {init} from 'features/calendario/reservasDelMes/helper'
 
 const Table = ({camasPorHabitacion, diasDelMes}) => {    
   useEffect(() => setCalendarioInitialState(), [camasPorHabitacion, diasDelMes]);
