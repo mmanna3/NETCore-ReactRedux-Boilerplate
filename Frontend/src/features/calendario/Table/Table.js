@@ -2,11 +2,9 @@ import React, {useEffect} from 'react';
 import Cell from './Cell/Cell.js'
 import Styles from './Table.module.scss'
 import Thead from './Thead/Thead.js'
-import {setInitialState} from 'features/calendario/reservasDelMesSlice'
-import { useDispatch, useSelector } from 'react-redux';
+import {init} from 'features/calendario/reservasDelMesHelper'
 
-const Table = ({camasPorHabitacion, diasDelMes}) => {  
-  const dispatch = useDispatch();  
+const Table = ({camasPorHabitacion, diasDelMes}) => {    
   useEffect(() => setCalendarioInitialState(), [camasPorHabitacion, diasDelMes]);
 
   var camas = camasPorHabitacion.map((habitacion) => 
@@ -18,14 +16,7 @@ const Table = ({camasPorHabitacion, diasDelMes}) => {
   })).flat();
 
   const setCalendarioInitialState = () => {
-
-    var initialState = diasDelMes.map((dia, row) => 
-      camas.map((cama, column) => {
-        return {selected: 'none'}
-      })
-    );
-
-    dispatch(setInitialState(initialState));
+    init(diasDelMes, camas);
   }
   
 

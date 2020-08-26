@@ -19,7 +19,6 @@ export const reservasDelMesSelector = state => state.reservasDelMesSlice
 export default reservasDelMesSlice.reducer
 
 export function setInitialState(data) {
-  
   return async dispatch => {
     dispatch(setState(data));
   }

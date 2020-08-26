@@ -8,7 +8,7 @@ import rootReducer from 'utils/rootReducer'
 import './universal.scss';
 
 
-const store = configureStore({ reducer: rootReducer })
+export const store = configureStore({ reducer: rootReducer })
 
 render(
   <Provider store={store}>
