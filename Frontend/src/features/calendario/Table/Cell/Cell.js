@@ -5,12 +5,12 @@ import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama } from 'features/cale
 const Cell = ({row, column}) => {
 
   const [style, setStyle] = React.useState('');
-  const [isSelected, setIsSelected] = React.useState(false);
   
   const onClick = () => {
     var selectedCssClassesMap = {
       "none": Styles.unselected,
-      "yes": Styles.selected
+      "yes": Styles.selected,
+      "unique": `${Styles.selected} ${Styles.firstSelected} ${Styles.lastSelected}`
     };
     
     seleccionarUnSoloDiaEnUnaSolaCama(row, column);

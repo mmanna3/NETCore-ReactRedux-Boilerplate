@@ -4,8 +4,7 @@ import Styles from './Table.module.scss'
 import Thead from './Thead/Thead.js'
 import {init} from 'features/calendario/reservasDelMes/helper'
 
-const Table = ({camasPorHabitacion, diasDelMes}) => {    
-  useEffect(() => setCalendarioInitialState(), [camasPorHabitacion, diasDelMes]);
+const Table = ({camasPorHabitacion, diasDelMes}) => {
 
   var camas = camasPorHabitacion.map((habitacion) => 
   habitacion.camas.map((cama) => {
@@ -14,10 +13,8 @@ const Table = ({camasPorHabitacion, diasDelMes}) => {
         cama
       }
   })).flat();
-
-  const setCalendarioInitialState = () => {
-    init(diasDelMes, camas);
-  }
+  
+  useEffect(() => init(diasDelMes, camas), [camasPorHabitacion, diasDelMes, camas]);
   
 
 

@@ -13,7 +13,7 @@ const reservasDelMesSlice = createSlice({
     },
     updateACell: (state, {payload}) => {
       var copy = state.calendario;
-      copy[payload.row][payload.column] = {'selected':'yes'};
+      copy[payload.row][payload.column] = {'selected':'unique'};
       state.calendario = copy;
     }
   },
