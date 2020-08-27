@@ -8,7 +8,15 @@ const Cell = ({row, column}) => {
   const [isSelected, setIsSelected] = React.useState(false);
   
   const onClick = () => {
-    getCamaDiaInfo();
+    var selectedCssClassesMap = {
+      "none": "unselected",
+      "yes": "selected"
+    };
+    
+    
+
+    var selected = getCamaDiaInfo(row, column);
+    setStyle(selectedCssClassesMap[selected]);
   }
 
   return (

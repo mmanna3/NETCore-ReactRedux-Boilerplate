@@ -16,7 +16,8 @@ export const init = (diasDelMes, camas) => {
     dispatchAction(setInitialState(initialState));
 }
 
-export const getCamaDiaInfo = (cama, dia) => {
-    var calendario = invokeSelector(reservasDelMesSelector);
+export const getCamaDiaInfo = (row, column) => {    
+    var reservasDelMes = invokeSelector(reservasDelMesSelector);
+    return reservasDelMes.calendario[row][column].selected;
 }
 
