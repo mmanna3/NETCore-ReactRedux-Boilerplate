@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
-import { getCamaDiaInfo } from 'features/calendario/reservasDelMes/helper'
+import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama } from 'features/calendario/reservasDelMes/helper'
 
 const Cell = ({row, column}) => {
 
@@ -9,11 +9,11 @@ const Cell = ({row, column}) => {
   
   const onClick = () => {
     var selectedCssClassesMap = {
-      "none": "unselected",
-      "yes": "selected"
+      "none": Styles.unselected,
+      "yes": Styles.selected
     };
     
-    
+    seleccionarUnSoloDiaEnUnaSolaCama(row, column);
 
     var selected = getCamaDiaInfo(row, column);
     setStyle(selectedCssClassesMap[selected]);
