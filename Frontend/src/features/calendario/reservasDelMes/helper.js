@@ -1,4 +1,4 @@
-import {setInitialState, seleccionarPrimeraCelda, seleccionarCeldaUnica, seleccionarCeldaIntermedia, reservasDelMesSelector} from './slice'
+import {setInitialState, seleccionarPrimeraCelda, seleccionarUltimaCelda, seleccionarCeldaUnica, seleccionarCeldaIntermedia, reservasDelMesSelector} from './slice'
 import {store} from 'index'
 
 const invokeSelector = (selector) => selector(store.getState());
@@ -31,6 +31,10 @@ export const iniciarSeleccion = (row, column) => {
 
 export const seleccionarDiaIntermedio = (row, column) => {
     dispatchAction(seleccionarCeldaIntermedia(row, column));
+}
+
+export const terminarSeleccion = (row, column) => {
+    dispatchAction(seleccionarUltimaCelda(row, column));
 }
 
 

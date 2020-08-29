@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
 import { selectedOptions } from 'features/calendario/reservasDelMes/consts'
-import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama, seleccionarDiaIntermedio, iniciarSeleccion } from 'features/calendario/reservasDelMes/helper'
+import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama, seleccionarDiaIntermedio, iniciarSeleccion, terminarSeleccion } from 'features/calendario/reservasDelMes/helper'
 
 const Cell = ({row, column}) => {
 
@@ -24,18 +24,16 @@ const Cell = ({row, column}) => {
 
   const onMouseDown = (e) => {    
     e.preventDefault();
-
-    // if (!selectionData.hasStarted) {      
-
-      iniciarSeleccion(row, column);
-      var selected = getCamaDiaInfo(row, column).selected;  
-      setStyle(selectedCssClassesMap[selected]);
-      // startSelection();     
-    // }     
+    iniciarSeleccion(row, column);
+    var selected = getCamaDiaInfo(row, column).selected;  
+    setStyle(selectedCssClassesMap[selected]);    
   }
 
-  const onMouseUp = () => {
-
+  const onMouseUp = (e) => {
+    e.preventDefault();
+    terminarSeleccion(row, column);
+    var selected = getCamaDiaInfo(row, column).selected;  
+    setStyle(selectedCssClassesMap[selected]);    
   }
 
   const onMouseEnter = (e) => {

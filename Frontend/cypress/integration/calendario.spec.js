@@ -1,30 +1,21 @@
 /*
-
-Puedo reservar un sólo día
-    3 camas
-Puedo resevar 2 días
-    una cama
-    3 camas
 Puedo reservar más de 2 días
     una cama
     2 camas
     3 camas
 
-Al moverme hacia la celda de arriba, se deselecciona(n) la(s) celda(s) del día actual
-    Durante reserva de una cama
-    Durante reserva de 3 camas
+MOVIMIENTO HACIA ARRIBA
+        Al moverme hacia la celda de arriba, se deselecciona(n) la(s) celda(s) del día actual
+            Durante reserva de una cama
+            Durante reserva de 3 camas
+
+MOVIMIENTO HACIA LA IZQUIERDA
 
 No puedo seleccionar en la misma reserva camas de distintas habitaciones
 
 No puedo seleccionar camas ya reservadas ese día
     una cama
     3 camas
-
-    
-    En Table, tener variable "reservas" que sea array de objetos. Props: celda inicio, celda fin (a lo excel) y después más datos.
-    Al finalizar, assertear que la reserva se guarde en ese array
-
-    En cada celda tener los attributes: dia="01" cama="id" habitacion="id"
 */
 
 
@@ -46,7 +37,7 @@ describe('Poder reservar un día', () => {
             ;
     })
 
-    it.only('3 camas', () => {
+    it('3 camas', () => {
         
         acceder();        
         irAlCalendario();
@@ -88,7 +79,6 @@ const seleccionarDesdeHasta = (celdaInicial, celdaFinal) => {
         .trigger('mousedown', {which: 1})
         .trigger('mousemove')        
 
-    debugger;
     celdasIntermedias.forEach(celda => {
         getCeldaCypress(celda)
             .trigger('mouseover')
