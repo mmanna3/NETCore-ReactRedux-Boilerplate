@@ -1,4 +1,8 @@
 /*
+No puedo seleccionar camas ya reservadas ese día
+    una cama
+    3 camas
+
 Puedo reservar más de 2 días
     una cama
     2 camas
@@ -13,9 +17,6 @@ MOVIMIENTO HACIA LA IZQUIERDA
 
 No puedo seleccionar en la misma reserva camas de distintas habitaciones
 
-No puedo seleccionar camas ya reservadas ese día
-    una cama
-    3 camas
 */
 
 
