@@ -53,7 +53,7 @@ describe('Poder reservar un día', () => {
 
         seleccionarDesdeHasta({row:0,col:0},{row:2,col:0});
 
-        // queEstenSeleccionadasDesdeHasta({row:0,col:0},{row:2,col:0});
+        queEstenSeleccionadasDesdeHasta({row:0,col:0},{row:2,col:0});
         // queNoEsteSeleccionada(({row:1,col:0}));
     })
 })
@@ -110,27 +110,27 @@ function getCeldaCypress(celda) {
 //         .should('not.contain', 'selected');
 // }
 
-// function queEstenSeleccionadasDesdeHasta(celdaInicialId, celdaFinalId) {
+function queEstenSeleccionadasDesdeHasta(celdaInicial, celdaFinal) {
     
-//     var celdasIdsEntre = celdasIdsEntre(celdaInicialId, celdaFinalId);        
+    var celdasIntermedias = celdasEntre(celdaInicial, celdaFinal);        
 
-//     cy.get('#'+celdaInicialId)
-//         .invoke('attr', 'class')
-//         .should('contain', 'selected')
-//         .should('contain', 'firstSelected');
+    getCeldaCypress(celdaInicial)
+        .invoke('attr', 'class')
+        .should('contain', 'selected')
+        .should('contain', 'firstSelected');
 
-//     celdasIdsEntre.forEach(id => {
-//         cy.get('#'+id)
-//             .invoke('attr', 'class')
-//             .should('contain', 'selected');
-//     });
+    celdasIntermedias.forEach(celda => {
+        getCeldaCypress(celda)
+            .invoke('attr', 'class')
+            .should('contain', 'selected');
+    });
 
-//     cy.get('#'+celdaFinalId)
-//         .invoke('attr', 'class')
-//         .should('contain', 'selected')
-//         .should('contain', 'lastSelected');
+    getCeldaCypress(celdaFinal)
+        .invoke('attr', 'class')
+        .should('contain', 'selected')
+        .should('contain', 'lastSelected');
 
-// }
+}
 
 function celdasEntre(celdaInicial, celdaFinal) {
     
