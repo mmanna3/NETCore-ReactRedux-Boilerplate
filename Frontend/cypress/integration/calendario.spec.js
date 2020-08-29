@@ -26,10 +26,10 @@ describe('Poder reservar un día', () => {
         acceder();        
         irAlCalendario();        
         
-        cy.get('[row="0"][column="0"]')
+        getCeldaCypress({col: 0, row: 0})
             .click();
         
-        cy.get('[row="0"][column="0"]')
+        getCeldaCypress({col: 0, row: 0})
             .invoke('attr', 'class')
             .should('contain', 'selected')
             .should('contain', 'firstSelected')
@@ -45,7 +45,7 @@ describe('Poder reservar un día', () => {
         seleccionarDesdeHasta({row:0,col:0},{row:2,col:0});
 
         queEstenSeleccionadasDesdeHasta({row:0,col:0},{row:2,col:0});
-        // queNoEsteSeleccionada(({row:1,col:0}));
+        queNoEsteSeleccionada(({row:0,col:1}));
     })
 })
 
@@ -95,11 +95,11 @@ function getCeldaCypress(celda) {
 }
 
 
-// const queNoEsteSeleccionada = (celda) => {
-//     cy.get('#'+celda)
-//         .invoke('attr', 'class')
-//         .should('not.contain', 'selected');
-// }
+const queNoEsteSeleccionada = (celda) => {
+    getCeldaCypress(celda)
+        .invoke('attr', 'class')
+        .should('not.contain', 'selected');
+}
 
 function queEstenSeleccionadasDesdeHasta(celdaInicial, celdaFinal) {
     
