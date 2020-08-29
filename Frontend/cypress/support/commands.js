@@ -25,9 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add("loginAndRedirectTo", (relativePath) => { 
+Cypress.Commands.add("login", () => { 
     
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.request({
         method: 'POST',
         url: 'http://localhost:5000/api/usuarios/autenticar',
@@ -38,6 +38,5 @@ Cypress.Commands.add("loginAndRedirectTo", (relativePath) => {
       })
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res.body));
-        cy.visit('http://localhost:3000' + relativePath);
       })  
 })

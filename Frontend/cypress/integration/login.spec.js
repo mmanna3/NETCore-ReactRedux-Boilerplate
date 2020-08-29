@@ -5,12 +5,16 @@ describe('Login', () => {
     it('Exitoso', () => {
         
         acceder();        
+        
         irAlCalendario();
+
+        cy.contains('h1', 'Calendario')
+            .should("be.visible")
     })
 })
 
 const acceder = () => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('/');
 
     cy.get('[name="username"]')
         .type('yo');
@@ -25,7 +29,4 @@ const acceder = () => {
 const irAlCalendario = () => {
     cy.contains('a', 'Calendario')
     .click()
-
-    cy.contains('h1', 'Calendario')
-        .should('be.visible')
 }

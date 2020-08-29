@@ -11,6 +11,7 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@reduxjs/toolkit": "1.2.5",
     "axios": "^0.19.2",
+    "cypress-localstorage-commands": "^1.2.2",
     "history": "^5.0.0",
     "mutationobserver-shim": "^0.3.7",
     "react": "16.12.0",
