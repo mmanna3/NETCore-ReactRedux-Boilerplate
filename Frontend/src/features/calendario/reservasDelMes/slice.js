@@ -13,18 +13,33 @@ const reservasDelMesSlice = createSlice({
     },
     seleccionarPrimeraCeldaAction: (state, {payload}) => {
       var copy = state.calendario;
-      copy[payload.row][payload.column] = {'selected':'first'};
+      copy[payload.row][payload.column] = crearCelda('first');
+      copy[payload.row+1][payload.column] = crearCelda('no', true);
       state.calendario = copy;
     },
     seleccionarCeldaUnicaAction: (state, {payload}) => {
       var copy = state.calendario;
-      copy[payload.row][payload.column] = {'selected':'unique'};
+      copy[payload.row][payload.column] = crearCelda('unique');
+      state.calendario = copy;
+    },
+    seleccionarCeldaIntermediaAction: (state, {payload}) => {
+      var copy = state.calendario;
+      copy[payload.row][payload.column] = crearCelda('yes');
+      copy[payload.row+1][payload.column] = crearCelda('no', true);
       state.calendario = copy;
     }
   },
 })
 
-export const { setState, seleccionarCeldaUnicaAction, seleccionarPrimeraCeldaAction } = reservasDelMesSlice.actions
+function crearCelda(selected, canBeSelected = false) {
+  return {
+    selected: selected,
+    canBeSelected: canBeSelected
+  }
+}
+
+
+export const { setState, seleccionarCeldaUnicaAction, seleccionarPrimeraCeldaAction, seleccionarCeldaIntermediaAction } = reservasDelMesSlice.actions
 export const reservasDelMesSelector = state => state.reservasDelMes
 export default reservasDelMesSlice.reducer
 
@@ -43,5 +58,11 @@ export function seleccionarCeldaUnica(row, column) {
 export function seleccionarPrimeraCelda(row, column) {
   return async dispatch => {
     dispatch(seleccionarPrimeraCeldaAction({row, column}));
+  }
+}
+
+export function seleccionarCeldaIntermedia(row, column) {
+  return async dispatch => {
+    dispatch(seleccionarCeldaIntermediaAction({row, column}));
   }
 }

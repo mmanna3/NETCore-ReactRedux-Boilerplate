@@ -46,7 +46,7 @@ describe('Poder reservar un día', () => {
             ;
     })
 
-    it('3 camas', () => {
+    it.only('3 camas', () => {
         
         acceder();        
         irAlCalendario();
@@ -88,10 +88,11 @@ const seleccionarDesdeHasta = (celdaInicial, celdaFinal) => {
         .trigger('mousedown', {which: 1})
         .trigger('mousemove')        
 
-        celdasIntermedias.forEach(celda => {
-            getCeldaCypress(celda)
-                .trigger('mouseover')
-                .trigger('mousemove')
+    debugger;
+    celdasIntermedias.forEach(celda => {
+        getCeldaCypress(celda)
+            .trigger('mouseover')
+            .trigger('mousemove')
     });
 
     getCeldaCypress(celdaFinal)
@@ -135,15 +136,15 @@ function queEstenSeleccionadasDesdeHasta(celdaInicial, celdaFinal) {
 function celdasEntre(celdaInicial, celdaFinal) {
     
     var result = [];
-    var i = parseInt(celdaInicial.column) + 1;
+    var i = parseInt(celdaInicial.row) + 1;
 
-    while (i < parseInt(celdaFinal.column)) {            
+    while (i < parseInt(celdaFinal.row)) {
         result.push({
-                        column: celdaInicial.column, 
+                        col: celdaInicial.col, 
                         row: i
                     });
         i++;            
     }
-
+    
     return result;
 }
