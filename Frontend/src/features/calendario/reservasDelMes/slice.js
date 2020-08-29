@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { selectedOptions } from './consts'
 
 export const initialState = {
   calendario: [],
@@ -13,19 +14,19 @@ const reservasDelMesSlice = createSlice({
     },
     seleccionarPrimeraCeldaAction: (state, {payload}) => {
       var copy = state.calendario;
-      copy[payload.row][payload.column] = crearCelda('first');
-      copy[payload.row+1][payload.column] = crearCelda('no', true);
+      copy[payload.row][payload.column] = crearCelda(selectedOptions.FIRST);
+      copy[payload.row+1][payload.column] = crearCelda(selectedOptions.NO, true);
       state.calendario = copy;
     },
     seleccionarCeldaUnicaAction: (state, {payload}) => {
       var copy = state.calendario;
-      copy[payload.row][payload.column] = crearCelda('unique');
+      copy[payload.row][payload.column] = crearCelda(selectedOptions.UNIQUE);
       state.calendario = copy;
     },
     seleccionarCeldaIntermediaAction: (state, {payload}) => {
       var copy = state.calendario;
-      copy[payload.row][payload.column] = crearCelda('yes');
-      copy[payload.row+1][payload.column] = crearCelda('no', true);
+      copy[payload.row][payload.column] = crearCelda(selectedOptions.YES);
+      copy[payload.row+1][payload.column] = crearCelda(selectedOptions.NO, true);
       state.calendario = copy;
     }
   },

@@ -1,17 +1,18 @@
 import React from 'react';
 import Styles from './Cell.module.scss'
+import { selectedOptions } from 'features/calendario/reservasDelMes/consts'
 import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama, seleccionarDiaIntermedio, iniciarSeleccion } from 'features/calendario/reservasDelMes/helper'
 
 const Cell = ({row, column}) => {
 
   const [style, setStyle] = React.useState('');
-  const selectedCssClassesMap = {
-    "none": Styles.unselected,
-    "yes": Styles.selected,
-    "unique": `${Styles.selected} ${Styles.firstSelected} ${Styles.lastSelected}`,
-    "first": `${Styles.selected} ${Styles.firstSelected}`
-  };
   
+  var selectedCssClassesMap = {};
+  selectedCssClassesMap[selectedOptions.NO] = Styles.unselected;
+  selectedCssClassesMap[selectedOptions.YES] = Styles.selected;
+  selectedCssClassesMap[selectedOptions.UNIQUE] = `${Styles.selected} ${Styles.firstSelected} ${Styles.lastSelected}`;
+  selectedCssClassesMap[selectedOptions.FIRST] = `${Styles.selected} ${Styles.firstSelected}`;
+  selectedCssClassesMap[selectedOptions.LAST] = `${Styles.selected} ${Styles.lastSelected}`;  
   
   const onClick = () => {
     
@@ -39,7 +40,7 @@ const Cell = ({row, column}) => {
 
   const onMouseEnter = (e) => {
     e.preventDefault();    
-    debugger;
+    
     var celdaInfo = getCamaDiaInfo(row, column);
     if (celdaInfo.canBeSelected)
       seleccionarDiaIntermedio(row, column);

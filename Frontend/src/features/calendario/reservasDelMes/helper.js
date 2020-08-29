@@ -33,3 +33,4 @@ export const seleccionarDiaIntermedio = (row, column) => {
     dispatchAction(seleccionarCeldaIntermedia(row, column));
 }
 
+
