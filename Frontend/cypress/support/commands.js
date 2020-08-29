@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+
+Cypress.Commands.add("loginAndRedirectTo", (relativePath) => { 
+    
+    cy.visit('http://localhost:3000');
+    cy.request({
+        method: 'POST',
+        url: 'http://localhost:5000/api/usuarios/autenticar',
+        body: {
+            username: 'yo',
+            password: '123',
+        }
+      })
+      .then(res => {
+        localStorage.setItem('user', JSON.stringify(res.body));
+        cy.visit('http://localhost:3000' + relativePath);
+      })  
+})

@@ -22,10 +22,9 @@ No puedo seleccionar en la misma reserva camas de distintas habitaciones
 
 describe('Poder reservar un día', () => {
 
-    it('Una cama', () => {
-        
-        acceder();        
-        irAlCalendario();        
+    it.only('Una cama', () => {
+                
+        cy.loginAndRedirectTo('/calendario');
         
         getCeldaCypress({col: 0, row: 0})
             .click();
@@ -40,8 +39,7 @@ describe('Poder reservar un día', () => {
 
     it('3 camas', () => {
         
-        acceder();        
-        irAlCalendario();
+        cy.loginAndRedirectTo('/calendario');
 
         seleccionarDesdeHasta({row:0,col:0},{row:2,col:0});
 
@@ -49,27 +47,6 @@ describe('Poder reservar un día', () => {
         queNoEsteSeleccionada(({row:0,col:1}));
     })
 })
-
-const acceder = () => {
-    cy.visit('http://localhost:3000/');
-
-    cy.get('[name="username"]')
-        .type('yo');
-
-    cy.get('[name="password"]')
-        .type('123');
-
-    cy.get('[type="submit"]')
-        .click();
-}
-
-const irAlCalendario = () => {
-    cy.contains('a', 'Calendario')
-    .click()
-
-    cy.contains('h1', 'Calendario')
-        .should('be.visible')
-}
 
 const seleccionarDesdeHasta = (celdaInicial, celdaFinal) => {    
     
