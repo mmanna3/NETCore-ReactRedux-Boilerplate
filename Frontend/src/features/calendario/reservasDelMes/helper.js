@@ -1,4 +1,4 @@
-import {setInitialState, updateCell, reservasDelMesSelector} from './slice'
+import {setInitialState, seleccionarPrimeraCelda, seleccionarCeldaUnica, reservasDelMesSelector} from './slice'
 import {store} from 'index'
 
 const invokeSelector = (selector) => selector(store.getState());
@@ -17,11 +17,15 @@ export const init = (diasDelMes, camas) => {
 }
 
 export const seleccionarUnSoloDiaEnUnaSolaCama = (row, column) => {    
-    dispatchAction(updateCell(row, column));
+    dispatchAction(seleccionarCeldaUnica(row, column));
 }
 
 export const getCamaDiaInfo = (row, column) => {    
     var reservasDelMes = invokeSelector(reservasDelMesSelector);
     return reservasDelMes.calendario[row][column].selected;
+}
+
+export const iniciarSeleccion = (row, column) => {    
+    dispatchAction(seleccionarPrimeraCelda(row, column));
 }
 

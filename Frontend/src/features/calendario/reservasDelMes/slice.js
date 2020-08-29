@@ -11,7 +11,12 @@ const reservasDelMesSlice = createSlice({
     setState: (state, { payload }) => {
       state.calendario = payload
     },
-    updateACell: (state, {payload}) => {
+    seleccionarPrimeraCeldaAction: (state, {payload}) => {
+      var copy = state.calendario;
+      copy[payload.row][payload.column] = {'selected':'first'};
+      state.calendario = copy;
+    },
+    seleccionarCeldaUnicaAction: (state, {payload}) => {
       var copy = state.calendario;
       copy[payload.row][payload.column] = {'selected':'unique'};
       state.calendario = copy;
@@ -19,7 +24,7 @@ const reservasDelMesSlice = createSlice({
   },
 })
 
-export const { setState, updateACell } = reservasDelMesSlice.actions
+export const { setState, seleccionarCeldaUnicaAction, seleccionarPrimeraCeldaAction } = reservasDelMesSlice.actions
 export const reservasDelMesSelector = state => state.reservasDelMes
 export default reservasDelMesSlice.reducer
 
@@ -29,8 +34,14 @@ export function setInitialState(data) {
   }
 }
 
-export function updateCell(row, column) {
+export function seleccionarCeldaUnica(row, column) {
   return async dispatch => {
-    dispatch(updateACell({row, column}));
+    dispatch(seleccionarCeldaUnicaAction({row, column}));
+  }
+}
+
+export function seleccionarPrimeraCelda(row, column) {
+  return async dispatch => {
+    dispatch(seleccionarPrimeraCeldaAction({row, column}));
   }
 }
