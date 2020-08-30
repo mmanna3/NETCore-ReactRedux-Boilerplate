@@ -3,6 +3,7 @@ import { selectedOptions } from './consts'
 
 export const initialState = {
   calendario: [],
+  selectionHasStarded: false
 }
 
 const reservasDelMesSlice = createSlice({
@@ -15,14 +16,19 @@ const reservasDelMesSlice = createSlice({
     seleccionarPrimeraCeldaAction: (state, {payload}) => {
       var copy = state.calendario;
       copy[payload.row][payload.col] = crearCelda(selectedOptions.FIRST);
+
+      
       copy[payload.row+1][payload.col] = crearCelda(selectedOptions.NO, true);
-      state.calendario = copy;
+      
+      state.calendario = copy;      
+      state.selectionHasStarded = true;
     },
     seleccionarUltimaCeldaAction: (state, {payload}) => {
       var copy = state.calendario;
       copy[payload.row][payload.col] = crearCelda(selectedOptions.LAST);
       
       state.calendario = copy;
+      state.selectionHasStarded = false;
     },
     seleccionarCeldaUnicaAction: (state, {payload}) => {
       var copy = state.calendario;
@@ -30,10 +36,12 @@ const reservasDelMesSlice = createSlice({
       state.calendario = copy;
     },
     seleccionarCeldaIntermediaAction: (state, {payload}) => {
-      var copy = state.calendario;
-      copy[payload.row][payload.col] = crearCelda(selectedOptions.YES);
-      copy[payload.row+1][payload.col] = crearCelda(selectedOptions.NO, true);
-      state.calendario = copy;
+      if (state.selectionHasStarded) {
+        var copy = state.calendario;
+        copy[payload.row][payload.col] = crearCelda(selectedOptions.YES);
+        copy[payload.row+1][payload.col] = crearCelda(selectedOptions.NO, true);
+        state.calendario = copy;
+      }      
     }
   },
 })
