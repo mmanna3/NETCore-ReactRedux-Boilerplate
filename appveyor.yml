@@ -32,8 +32,7 @@ before_build:
   - cd Frontend
   - npm install
   - npm install wait-on  
-  - npm start
-  - npx wait-on http://127.0.0.1:3000
+  - "npm start & npx wait-on http://127.0.0.1:3000"
   - npx cypress run
   - npm run build  
   - cd ..  
