@@ -15,18 +15,6 @@ const Table = ({camasPorHabitacion, diasDelMes}) => {
   })).flat();
   
   useEffect(() => init(diasDelMes, camas), [camasPorHabitacion, diasDelMes, camas]);
-  
-
-
-  // const [reservasVirtualTable, setReservasVirtualTable] = React.useState(initialReservasVirtualTable);
-  
-  const onClick = (row, column) => {
-    // debugger;
-    // var copyReservasVirtualTable = reservasVirtualTable;
-    // copyReservasVirtualTable[row][column] = {selected: 'yes'}
-    // setReservasVirtualTable(copyReservasVirtualTable);
-    // console.log(reservasVirtualTable);
-  }
 
   return (
       <table className={`table is-hoverable is-bordered is-fullwidth ${Styles.table}`}>
@@ -40,7 +28,6 @@ const Table = ({camasPorHabitacion, diasDelMes}) => {
                         key={column}
                         row={row}
                         column={column}
-                        onClick={() => onClick(row, column)}
                       />
                 )}
               </tr>              
