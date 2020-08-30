@@ -34,9 +34,6 @@ beforeEach(() => {
 describe('Poder reservar un día', () => {
 
     it('Una cama', () => {
-                
-        
-        
         getCeldaCypress({col: 0, row: 0})
             .click();
         
@@ -46,14 +43,41 @@ describe('Poder reservar un día', () => {
             .should('contain', 'firstSelected')
             .should('contain', 'lastSelected')
             ;
+        
+        getCeldaCypress({col: 0, row: 1})
+            .trigger('mouseover')
+            .trigger('mousemove')
+
+        getCeldaCypress({col: 0, row: 1})
+            .invoke('attr', 'class')
+            .should('not.contain', 'selected')
+            ;
     })
 
-    it('3 camas', () => {
+    xit('3 camas', () => {
+    })
+})
 
+describe('Poder reservar 3 días', () => {
+
+    it('Una cama', () => {
         seleccionarDesdeHasta({row:0,col:0},{row:2,col:0});
 
         queEstenSeleccionadasDesdeHasta({row:0,col:0},{row:2,col:0});
         queNoEsteSeleccionada(({row:0,col:1}));
+    })
+
+    xit('3 camas', () => {
+    })
+})
+
+describe('No puedo reservar un día ya reservado', () => {
+
+    xit('Una cama', () => {       
+        
+    })
+
+    xit('3 camas', () => {
     })
 })
 
