@@ -31,7 +31,6 @@ before_build:
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
   - cd Frontend
   - npm install
-  - npm install --save-dev start-server-and-test
   - npm run build  
   - cd ..  
   - ps: >-

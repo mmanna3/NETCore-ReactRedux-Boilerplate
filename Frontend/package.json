@@ -29,13 +29,15 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "node-sass": "^4.14.1",
+    "start-server-and-test": "^1.11.3",
     "typescript": "3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "cy:run": "cypress run",
-    "test": "react-scripts test --env=jsdom && start-server-and-test start http://localhost:3000 cy:run",
+    "test": "react-scripts test --env=jsdom",
+    "test-ci": "start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject",
     "cypress": "cypress open"
   },
