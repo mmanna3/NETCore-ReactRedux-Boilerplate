@@ -40,11 +40,11 @@ const Cell = ({row, column}) => {
     e.preventDefault();    
     
     var celdaInfo = getCamaDiaInfo(row, column);
-    if (celdaInfo.canBeSelected)
-      seleccionarDiaIntermedio(row, column);
-    
-    celdaInfo = getCamaDiaInfo(row, column);
-    setStyle(selectedCssClassesMap[celdaInfo.selected]);
+    if (celdaInfo.canBeSelected) {
+      seleccionarDiaIntermedio(row, column);    
+      celdaInfo = getCamaDiaInfo(row, column);
+      setStyle(selectedCssClassesMap[celdaInfo.selected]);
+    }      
   }
 
   return (

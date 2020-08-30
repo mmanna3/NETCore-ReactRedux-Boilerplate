@@ -44,14 +44,7 @@ describe('Poder reservar un día', () => {
             .should('contain', 'lastSelected')
             ;
         
-        getCeldaCypress({col: 0, row: 1})
-            .trigger('mouseover')
-            .trigger('mousemove')
-
-        getCeldaCypress({col: 0, row: 1})
-            .invoke('attr', 'class')
-            .should('not.contain', 'selected')
-            ;
+        alHacerHoverLaCeldaNoSeSelecciona({col: 0, row: 1});
     })
 
     xit('3 camas', () => {
@@ -148,4 +141,15 @@ function celdasEntre(celdaInicial, celdaFinal) {
     }
     
     return result;
+}
+
+function alHacerHoverLaCeldaNoSeSelecciona(celda){
+    getCeldaCypress(celda)
+            .trigger('mouseover')
+            .trigger('mousemove')
+
+        getCeldaCypress(celda)
+            .invoke('attr', 'class')
+            .should('not.contain', 'selected')
+            ;
 }
