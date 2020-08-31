@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Styles from './Cell.module.scss'
 import { selectedOptions } from 'features/calendario/reservasDelMes/consts'
+import { reservasDelMesSelector } from 'features/calendario/reservasDelMes/slice'
+import { useSelector } from 'react-redux'
 import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama, seleccionarDiaIntermedio, iniciarSeleccion, terminarSeleccion } from 'features/calendario/reservasDelMes/helper'
 
 const Cell = ({row, column}) => {
 
   const [style, setStyle] = React.useState('');
-  
+  const {calendario} = useSelector(reservasDelMesSelector);
+
+    useEffect(() => {
+        if (calendario && calendario.length > 0){
+          var info = calendario[row][column];  
+          setStyle(selectedCssClassesMap[info.selected]);
+        }
+
+    }, [calendario, row, column]);
+
   var selectedCssClassesMap = {};
   selectedCssClassesMap[selectedOptions.NO] = Styles.unselected;
   selectedCssClassesMap[selectedOptions.YES] = Styles.selected;
@@ -17,33 +28,23 @@ const Cell = ({row, column}) => {
   const onClick = () => {
     
     seleccionarUnSoloDiaEnUnaSolaCama(row, column);
-
-    var selected = getCamaDiaInfo(row, column).selected;
-    setStyle(selectedCssClassesMap[selected]);
   }
 
   const onMouseDown = (e) => {    
     e.preventDefault();
-    iniciarSeleccion(row, column);
-    var selected = getCamaDiaInfo(row, column).selected;  
-    setStyle(selectedCssClassesMap[selected]);    
+    iniciarSeleccion(row, column);  
   }
 
   const onMouseUp = (e) => {
     e.preventDefault();
     terminarSeleccion(row, column);
-    var selected = getCamaDiaInfo(row, column).selected;  
-    setStyle(selectedCssClassesMap[selected]);    
   }
 
   const onMouseEnter = (e) => {
     e.preventDefault();    
-    
-    var celdaInfo = getCamaDiaInfo(row, column);
-    if (celdaInfo.canBeSelected) {
-      seleccionarDiaIntermedio(row, column);    
-      celdaInfo = getCamaDiaInfo(row, column);
-      setStyle(selectedCssClassesMap[celdaInfo.selected]);
+        
+    if (calendario && calendario[row][column].canBeSelected) {
+      seleccionarDiaIntermedio(row, column);
     }      
   }
 
