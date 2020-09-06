@@ -1,5 +1,6 @@
 import {setInitialState, seleccionarPrimeraCelda, seleccionarUltimaCelda, seleccionarCeldaUnica, seleccionarCeldaIntermedia, reservasDelMesSelector} from './slice'
 import {store} from 'index'
+import { selectedOptions } from './consts';
 
 const invokeSelector = (selector) => selector(store.getState());
 
@@ -9,7 +10,7 @@ export const init = (diasDelMes, camas) => {
 
     var initialState = diasDelMes.map((dia, row) => 
         camas.map((cama, column) => {
-            return {selected: 'none'}
+            return {selected: selectedOptions.NO, canBeSelected: false}
         })
     );
 

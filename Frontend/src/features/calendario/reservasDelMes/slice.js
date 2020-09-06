@@ -3,7 +3,9 @@ import { selectedOptions } from './consts'
 
 export const initialState = {
   calendario: [],
-  selectionHasStarded: false
+  selectionHasStarded: false,
+  primeraCeldaSeleccionada: {},
+  ultimaCeldaSeleccionada: {}
 }
 
 const reservasDelMesSlice = createSlice({
@@ -14,33 +16,47 @@ const reservasDelMesSlice = createSlice({
       state.calendario = payload
     },
     seleccionarPrimeraCeldaAction: (state, {payload}) => {
-      var copy = state.calendario;
-      copy[payload.row][payload.col] = crearCelda(selectedOptions.FIRST);
+      var celda = state.calendario[payload.row][payload.col];
+      
+      if (celda.selected === selectedOptions.NO) {
+        celda.selected = selectedOptions.FIRST;
+                
+        var celdaDeAbajo = state.calendario[payload.row+1][payload.col];
+        if (celdaDeAbajo.selected === selectedOptions.NO)
+          celdaDeAbajo.canBeSelected = true;
+        
+        var celdaDeLaDerecha = state.calendario[payload.row][payload.col+1];
+        if (celdaDeLaDerecha.selected === selectedOptions.NO)
+          celdaDeLaDerecha.canBeSelected = true;
 
-      
-      copy[payload.row+1][payload.col] = crearCelda(selectedOptions.NO, true);
-      
-      state.calendario = copy;      
-      state.selectionHasStarded = true;
+        state.primeraCeldaSeleccionada = {row: payload.row, col: payload.col};
+        
+        state.selectionHasStarded = true;
+      }
     },
     seleccionarUltimaCeldaAction: (state, {payload}) => {
-      var copy = state.calendario;
-      copy[payload.row][payload.col] = crearCelda(selectedOptions.LAST);
-      
-      state.calendario = copy;
+      state.calendario[payload.row][payload.col] = crearCelda(selectedOptions.LAST);
       state.selectionHasStarded = false;
     },
     seleccionarCeldaUnicaAction: (state, {payload}) => {
-      var copy = state.calendario;
-      copy[payload.row][payload.col] = crearCelda(selectedOptions.UNIQUE);
-      state.calendario = copy;
+      state.calendario[payload.row][payload.col] = crearCelda(selectedOptions.UNIQUE);
     },
     seleccionarCeldaIntermediaAction: (state, {payload}) => {
-      if (state.selectionHasStarded) {
-        var copy = state.calendario;
-        copy[payload.row][payload.col] = crearCelda(selectedOptions.YES);
-        copy[payload.row+1][payload.col] = crearCelda(selectedOptions.NO, true);
-        state.calendario = copy;
+      var celda = state.calendario[payload.row][payload.col];
+      
+      if (state.selectionHasStarded && celda.canBeSelected) {
+        celda.selected = selectedOptions.YES;
+        celda.canBeSelected = false;        
+        
+        var celdaDeAbajo = state.calendario[payload.row+1][payload.col];
+        if (celdaDeAbajo.selected === selectedOptions.NO)
+          celdaDeAbajo.canBeSelected = true;
+        
+        var celdaDeLaDerecha = state.calendario[payload.row][payload.col+1];
+        if (celdaDeLaDerecha.selected === selectedOptions.NO)
+          celdaDeLaDerecha.canBeSelected = true;
+
+        state.ultimaCeldaSeleccionada = {row: payload.row, col: payload.col};
       }      
     }
   },
@@ -52,6 +68,13 @@ function crearCelda(selected, canBeSelected = false) {
     canBeSelected: canBeSelected
   }
 }
+
+// function modificarCelda(celda, prop, val) {
+//   return {
+//     selected: selected,
+//     canBeSelected: canBeSelected
+//   }
+// }
 
 
 export const { setState, seleccionarCeldaUnicaAction, seleccionarPrimeraCeldaAction, seleccionarUltimaCeldaAction, seleccionarCeldaIntermediaAction } = reservasDelMesSlice.actions

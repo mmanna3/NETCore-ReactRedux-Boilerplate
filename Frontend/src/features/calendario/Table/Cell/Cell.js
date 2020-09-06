@@ -43,9 +43,9 @@ const Cell = ({row, column}) => {
   const onMouseEnter = (e) => {
     e.preventDefault();    
         
-    if (calendario && calendario[row][column].canBeSelected) {
+    // if (calendario && calendario[row][column].canBeSelected) {
       seleccionarDiaIntermedio(row, column);
-    }      
+    // }      
   }
 
   return (

@@ -44,7 +44,7 @@ describe('Poder reservar un día', () => {
             .should('contain', 'lastSelected')
             ;
         
-        alHacerHoverLaCeldaNoSeSelecciona({col: 0, row: 1});
+        // alHacerHoverLaCeldaNoSeSelecciona({col: 0, row: 1});
     })
 
     xit('3 camas', () => {
@@ -57,7 +57,7 @@ describe('Poder reservar 3 días', () => {
         seleccionarDesdeHasta({row:0,col:0},{row:2,col:0});
 
         queEstenSeleccionadasDesdeHasta({row:0,col:0},{row:2,col:0});
-        queNoEsteSeleccionada(({row:0,col:1}));
+        // queNoEsteSeleccionada(({row:0,col:1}));
     })
 
     xit('3 camas', () => {
