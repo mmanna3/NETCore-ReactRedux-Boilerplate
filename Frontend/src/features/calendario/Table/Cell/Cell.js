@@ -3,12 +3,19 @@ import Styles from './Cell.module.scss'
 import { selectedOptions } from 'features/calendario/reservasDelMes/consts'
 import { reservasDelMesSelector } from 'features/calendario/reservasDelMes/slice'
 import { useSelector } from 'react-redux'
-import { getCamaDiaInfo, seleccionarUnSoloDiaEnUnaSolaCama, seleccionarDiaIntermedio, iniciarSeleccion, terminarSeleccion } from 'features/calendario/reservasDelMes/helper'
+import { seleccionarUnSoloDiaEnUnaSolaCama, seleccionarDiaIntermedio, iniciarSeleccion, terminarSeleccion } from 'features/calendario/reservasDelMes/helper'
 
 const Cell = ({row, column}) => {
 
   const [style, setStyle] = React.useState('');
   const {calendario} = useSelector(reservasDelMesSelector);
+
+  var selectedCssClassesMap = {};
+  selectedCssClassesMap[selectedOptions.NO] = Styles.unselected;
+  selectedCssClassesMap[selectedOptions.YES] = Styles.selected;
+  selectedCssClassesMap[selectedOptions.UNIQUE] = `${Styles.selected} ${Styles.firstSelected} ${Styles.lastSelected}`;
+  selectedCssClassesMap[selectedOptions.FIRST] = `${Styles.selected} ${Styles.firstSelected}`;
+  selectedCssClassesMap[selectedOptions.LAST] = `${Styles.selected} ${Styles.lastSelected}`;
 
     useEffect(() => {
         if (calendario && calendario.length > 0){
@@ -16,14 +23,7 @@ const Cell = ({row, column}) => {
           setStyle(selectedCssClassesMap[info.selected]);
         }
 
-    }, [calendario, row, column]);
-
-  var selectedCssClassesMap = {};
-  selectedCssClassesMap[selectedOptions.NO] = Styles.unselected;
-  selectedCssClassesMap[selectedOptions.YES] = Styles.selected;
-  selectedCssClassesMap[selectedOptions.UNIQUE] = `${Styles.selected} ${Styles.firstSelected} ${Styles.lastSelected}`;
-  selectedCssClassesMap[selectedOptions.FIRST] = `${Styles.selected} ${Styles.firstSelected}`;
-  selectedCssClassesMap[selectedOptions.LAST] = `${Styles.selected} ${Styles.lastSelected}`;  
+    }, [calendario, row, column, selectedCssClassesMap]);  
   
   const onClick = () => {
     
