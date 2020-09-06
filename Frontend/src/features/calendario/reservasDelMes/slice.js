@@ -21,13 +21,8 @@ const reservasDelMesSlice = createSlice({
       if (celda.selected === selectedOptions.NO) {
         celda.selected = selectedOptions.FIRST;
                 
-        var celdaDeAbajo = state.calendario[payload.row+1][payload.col];
-        if (celdaDeAbajo.selected === selectedOptions.NO)
-          celdaDeAbajo.canBeSelected = true;
-        
-        var celdaDeLaDerecha = state.calendario[payload.row][payload.col+1];
-        if (celdaDeLaDerecha.selected === selectedOptions.NO)
-          celdaDeLaDerecha.canBeSelected = true;
+        siNoEstaSeleccionadaMarcarComoSeleccionable(state, payload.row+1, payload.col); //la de abajo
+        siNoEstaSeleccionadaMarcarComoSeleccionable(state, payload.row, payload.col+1); // la de la derecha
 
         state.primeraCeldaSeleccionada = {row: payload.row, col: payload.col};
         
@@ -37,6 +32,8 @@ const reservasDelMesSlice = createSlice({
     seleccionarUltimaCeldaAction: (state, {payload}) => {
       state.calendario[payload.row][payload.col] = crearCelda(selectedOptions.LAST);
       state.selectionHasStarded = false;
+      state.primeraCeldaSeleccionada = {};
+      state.ultimaCeldaSeleccionada = {};
     },
     seleccionarCeldaUnicaAction: (state, {payload}) => {
       state.calendario[payload.row][payload.col] = crearCelda(selectedOptions.UNIQUE);
@@ -48,13 +45,8 @@ const reservasDelMesSlice = createSlice({
         celda.selected = selectedOptions.YES;
         celda.canBeSelected = false;        
         
-        var celdaDeAbajo = state.calendario[payload.row+1][payload.col];
-        if (celdaDeAbajo.selected === selectedOptions.NO)
-          celdaDeAbajo.canBeSelected = true;
-        
-        var celdaDeLaDerecha = state.calendario[payload.row][payload.col+1];
-        if (celdaDeLaDerecha.selected === selectedOptions.NO)
-          celdaDeLaDerecha.canBeSelected = true;
+        siNoEstaSeleccionadaMarcarComoSeleccionable(state, payload.row+1, payload.col); //la de abajo
+        siNoEstaSeleccionadaMarcarComoSeleccionable(state, payload.row, payload.col+1); // la de la derecha
 
         state.ultimaCeldaSeleccionada = {row: payload.row, col: payload.col};
       }      
@@ -69,12 +61,11 @@ function crearCelda(selected, canBeSelected = false) {
   }
 }
 
-// function modificarCelda(celda, prop, val) {
-//   return {
-//     selected: selected,
-//     canBeSelected: canBeSelected
-//   }
-// }
+function siNoEstaSeleccionadaMarcarComoSeleccionable(state, row, col) {
+  var celdaDeAbajo = state.calendario[row][col];
+  if (celdaDeAbajo.selected === selectedOptions.NO)
+    celdaDeAbajo.canBeSelected = true;
+}
 
 
 export const { setState, seleccionarCeldaUnicaAction, seleccionarPrimeraCeldaAction, seleccionarUltimaCeldaAction, seleccionarCeldaIntermediaAction } = reservasDelMesSlice.actions
