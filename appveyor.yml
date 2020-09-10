@@ -21,7 +21,7 @@ environment:
   db_password:
     secure: 4y9U8rtIudL2GAfDA3JfbQ==
   jwt_secret:
-      secure: PtsG6zq5IAqBHEge2INHxA==
+      secure: M+XNGZRp9MtgE0JL5vqreHbaN2zGo6Md40OU9kyv6sjXxyRfmQkMfYYVmKId4RPR
 install:
   - ps: >-
       $file = "./Backend/Api/appsettings.Production.json";
