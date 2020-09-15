@@ -12,7 +12,6 @@ import HuespedesPage from 'features/huespedes/Page'
 import HabitacionesPage from 'features/habitaciones/Page'
 import CalendarioPage from 'features/calendario/Page'
 import LoginPage from 'features/login/Page'
-
 import Navbar from 'components/navbar/Navbar'
 
 const App = () => {
