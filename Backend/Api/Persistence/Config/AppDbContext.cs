@@ -22,11 +22,7 @@ namespace Api.Persistence.Config
 
             builder.Entity<Cama>()
                 .ToTable("Camas")
-                .HasDiscriminator<int>("Tipo")
-                .HasValue<CamaIndividual>(1)
-                .HasValue<CamaMatrimonial>(2)
-                .HasValue<CamaCuchetaDeAbajo>(3)
-                .HasValue<CamaCuchetaDeArriba>(4);
+                .HasDiscriminator<string>("Tipo");
 
             builder.Entity<CamaIndividual>()
                 .HasOne(b => b.Habitacion)
