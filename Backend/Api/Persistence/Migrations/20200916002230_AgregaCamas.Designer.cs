@@ -4,14 +4,16 @@ using Api.Persistence.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200916002230_AgregaCamas")]
+    partial class AgregaCamas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,28 +41,6 @@ namespace Api.Persistence.Migrations
                     b.ToTable("Camas");
 
                     b.HasDiscriminator<int>("Tipo");
-                });
-
-            modelBuilder.Entity("Api.Core.Models.CamaCucheta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AbajoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ArribaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AbajoId");
-
-                    b.HasIndex("ArribaId");
-
-                    b.ToTable("CamasCuchetas");
                 });
 
             modelBuilder.Entity("Api.Core.Models.Habitacion", b =>
@@ -158,17 +138,6 @@ namespace Api.Persistence.Migrations
                     b.HasBaseType("Api.Core.Models.Cama");
 
                     b.HasDiscriminator().HasValue(2);
-                });
-
-            modelBuilder.Entity("Api.Core.Models.CamaCucheta", b =>
-                {
-                    b.HasOne("Api.Core.Models.CamaCuchetaDeAbajo", "Abajo")
-                        .WithMany()
-                        .HasForeignKey("AbajoId");
-
-                    b.HasOne("Api.Core.Models.CamaCuchetaDeArriba", "Arriba")
-                        .WithMany()
-                        .HasForeignKey("ArribaId");
                 });
 #pragma warning restore 612, 618
         }

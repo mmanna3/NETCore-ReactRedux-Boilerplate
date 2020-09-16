@@ -11,6 +11,12 @@
     <Compile Remove="Persistence\Migrations\20200615171801_pruebavacia.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200706015932_AgregaCamasMarineraYMatrimonial.cs" />
     <Compile Remove="Persistence\Migrations\20200706015932_AgregaCamasMarineraYMatrimonial.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001619_AgregaCamas.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001619_AgregaCamas.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001903_AgregaCamas.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001903_AgregaCamas.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001952_AgregaCamas.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001952_AgregaCamas.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
