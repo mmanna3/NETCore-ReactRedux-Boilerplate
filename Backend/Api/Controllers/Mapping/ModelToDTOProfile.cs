@@ -12,9 +12,9 @@ namespace Api.Controllers.Mapping
         {
             CreateMap<Huesped, HuespedDTO>();
             CreateMap<Habitacion, HabitacionDTO>();
-            //CreateMap<CamaIndividual, CamaIndividualDTO>();
+            //CreateMap<CamaIndividual, CamaDTO>();
             //CreateMap<CamaMatrimonial, CamaMatrimonialDTO>();
-            //CreateMap<CamaMarinera, CamaMarineraDTO>();
+            //CreateMap<CamaMarinera, CamaCuchetaDTO>();
 
             CreateMap<Usuario, RegistrarDTO>();
         }

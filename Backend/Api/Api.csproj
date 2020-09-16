@@ -17,6 +17,12 @@
     <Compile Remove="Persistence\Migrations\20200916001903_AgregaCamas.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200916001952_AgregaCamas.cs" />
     <Compile Remove="Persistence\Migrations\20200916001952_AgregaCamas.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916032917_aaa.cs" />
+    <Compile Remove="Persistence\Migrations\20200916032917_aaa.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033138_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033138_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033727_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033727_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

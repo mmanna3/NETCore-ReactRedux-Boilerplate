@@ -17,9 +17,9 @@ namespace Api.IntegrationTests
         {
             var bodySinUnCampoRequerido = new HabitacionDTO
             {
-                CamasIndividuales = new List<CamaIndividualDTO>(),
-                CamasMatrimoniales = new List<CamaMatrimonialDTO>(),
-                CamasMarineras = new List<CamaMarineraDTO>()
+                CamasIndividuales = new List<CamaDTO>(),
+                CamasMatrimoniales = new List<CamaDTO>(),
+                CamasCuchetas = new List<CamaCuchetaDTO>()
             };
 
             var response = await _httpClient.PostAsJsonAsync(ENDPOINT, bodySinUnCampoRequerido);

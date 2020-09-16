@@ -4,14 +4,16 @@ using Api.Persistence.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200916003835_AgregaCamasALaHabitacion")]
+    partial class AgregaCamasALaHabitacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,16 +142,22 @@ namespace Api.Persistence.Migrations
             modelBuilder.Entity("Api.Core.Models.CamaCuchetaDeAbajo", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
+
+                    b.HasDiscriminator().HasValue(3);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaCuchetaDeArriba", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
+
+                    b.HasDiscriminator().HasValue(4);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaIndividual", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
+
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaMatrimonial", b =>

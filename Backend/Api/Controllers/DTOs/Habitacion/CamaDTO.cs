@@ -1,6 +1,6 @@
 ﻿namespace Api.Controllers.DTOs.Habitacion
 {
-    public class CamaIndividualDTO
+    public class CamaDTO
     {
         public int Id { get; set; }
 
