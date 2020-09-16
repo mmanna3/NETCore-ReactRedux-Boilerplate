@@ -1,6 +1,11 @@
-﻿namespace Api.Core.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api.Core.Models
 {
     public class CamaIndividual : Cama
     {
+        [Column("Individual_HabitacionId")]
+        public int HabitacionId { get; set; }
+        public Habitacion Habitacion { get; set; }
     }
 }

@@ -27,6 +27,21 @@ namespace Api.Persistence.Config
                 .HasValue<CamaMatrimonial>(2)
                 .HasValue<CamaCuchetaDeAbajo>(3)
                 .HasValue<CamaCuchetaDeArriba>(4);
+
+            builder.Entity<CamaIndividual>()
+                .HasOne(b => b.Habitacion)
+                .WithMany(a => a.CamasIndividuales)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<CamaMatrimonial>()
+                .HasOne(b => b.Habitacion)
+                .WithMany(a => a.CamasMatrimoniales)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<CamaCucheta>()
+                .HasOne(b => b.Habitacion)
+                .WithMany(a => a.CamasCuchetas)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

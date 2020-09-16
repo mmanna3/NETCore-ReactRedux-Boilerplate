@@ -8,6 +8,5 @@ namespace Api.Core.Models
 
         [Required, MaxLength(30)]
         public string Nombre { get; set; }
-        public int HabitacionId { get; set; }
     }
 }
