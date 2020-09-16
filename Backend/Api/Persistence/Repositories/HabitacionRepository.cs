@@ -17,9 +17,9 @@ namespace Api.Persistence.Repositories
         public async Task<IEnumerable<Habitacion>> ListAsync()
         {
             return await _context.Habitaciones
-                                    .Include(x => x.CamasIndividuales)
-                                    .Include(x => x.CamasMarineras)
-                                    .Include(x => x.CamasMatrimoniales)
+                                    //.Include(x => x.CamasIndividuales)
+                                    //.Include(x => x.CamasMarineras)
+                                    //.Include(x => x.CamasMatrimoniales)
                                     .ToListAsync();
         }
 

@@ -14,9 +14,9 @@ namespace Api.Controllers.Mapping
 
             CreateMap<HuespedDTO, Huesped>();
             CreateMap<HabitacionDTO, Habitacion>();
-            CreateMap<CamaIndividualDTO, CamaIndividual>();
-            CreateMap<CamaMatrimonialDTO, CamaMatrimonial>();
-            CreateMap<CamaMarineraDTO, CamaMarinera>();
+            //CreateMap<CamaIndividualDTO, CamaIndividual>();
+            //CreateMap<CamaMatrimonialDTO, CamaMatrimonial>();
+            //CreateMap<CamaMarineraDTO, CamaMarinera>();
         }
     }
 }
