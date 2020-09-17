@@ -44,11 +44,6 @@ namespace Api.UnitTests.Controllers
             habitacion.CamasCuchetas.Count.Should().Be(1);
         }
 
-        //private void DadoQueElServicioDevuelveUnUsuario()
-        //{
-        //    _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>())).ReturnsAsync(_unUsuario);
-        //}
-
         private void DadoUnHabitacionDto()
         {
             _unaHabitacionDTO = new HabitacionDTO
