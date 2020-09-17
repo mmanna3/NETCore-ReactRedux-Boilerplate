@@ -17,30 +17,30 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
           </div>
   };
 
-  const IdentificadorCamaMarinera = ({cama}) => {
+  const IdentificadorCamaCucheta = ({cama}) => {
     
-    function setValueMarinera(){
-      var abajo = document.getElementsByName(`camasMarineras[${cama.index}].nombreAbajo`)[0].value;
-      var arriba = document.getElementsByName(`camasMarineras[${cama.index}].nombreArriba`)[0].value;
+    function setValueCucheta(){
+      var abajo = document.getElementsByName(`camasCuchetas[${cama.index}].abajo.nombre`)[0].value;
+      var arriba = document.getElementsByName(`camasCuchetas[${cama.index}].arriba.nombre`)[0].value;
 
-      setValue(cama.globalIndex, {nombreAbajo: abajo, nombreArriba: arriba});
+      setValue(cama.globalIndex, {abajo: {nombre: abajo}, arriba: {nombre: arriba}});
     }
     
     return <>
             <span className="field">
                 <InputWithoutLabel 
-                  name={`camasMarineras[${cama.index}].nombreAbajo`} 
+                  name={`camasCuchetas[${cama.index}].abajo.nombre`} 
                   placeholder="Id. Abajo"
-                  onChange={() => setValueMarinera()}
-                  value={cama.value?.nombreAbajo}
+                  onChange={() => setValueCucheta()}
+                  value={cama.value?.abajo?.nombre}
                   />
               </span>
               <span className="field">
                 <InputWithoutLabel 
-                  name={`camasMarineras[${cama.index}].nombreArriba`} 
+                  name={`camasCuchetas[${cama.index}].arriba.nombre`} 
                   placeholder="Id. Arriba"
-                  onChange={() => setValueMarinera()}
-                  value={cama.value?.nombreArriba}
+                  onChange={() => setValueCucheta()}
+                  value={cama.value?.arriba?.nombre}
                 />
               </span>
           </>
@@ -63,14 +63,14 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
             <Select value={cama.tipo || ''} ccsClass="is-fullwidth" onChange={onTipoCamaChanged}>
               <option value="Individuales">Individual</option>
               <option value="Matrimoniales">Matrimonial</option>
-              <option value="Marineras">Marinera</option>
+              <option value="Cuchetas">Cucheta</option>
             </Select>
           </span>
         </div>
         
-        {cama.tipo !== 'Marineras' ?
+        {cama.tipo !== 'Cuchetas' ?
           <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} /> :
-          <IdentificadorCamaMarinera cama={cama} setValue={setValue}/>
+          <IdentificadorCamaCucheta cama={cama} setValue={setValue}/>
         }
         
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(cama.globalIndex)}>
