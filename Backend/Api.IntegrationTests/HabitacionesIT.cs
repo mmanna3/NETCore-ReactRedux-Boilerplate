@@ -25,7 +25,13 @@ namespace Api.IntegrationTests
 
             habitaciones.Count().Should().Be(1);
             var habitacion = habitaciones.ToList().First();
+
             habitacion.CamasMatrimoniales.Count.Should().Be(1);
+            habitacion.CamasIndividuales.Count.Should().Be(1);
+
+            habitacion.CamasCuchetas.Count.Should().Be(1);
+            habitacion.CamasCuchetas.First().Abajo.Should().NotBeNull();
+            habitacion.CamasCuchetas.First().Arriba.Should().NotBeNull();
         }
 
         [Test, Ignore("Esto no funca, cuando hagas la edición, revisalo piola")]

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Api.Controllers;
 using Api.Controllers.DTOs.Habitacion;
 using Api.Core.Models;
@@ -17,6 +18,7 @@ namespace Api.UnitTests.Controllers
         private IMapper _mapper;
 
         private HabitacionDTO _unaHabitacionDTO;
+        private IList<Habitacion> _unaListaDeHabitaciones;
 
         [SetUp]
         public void Inicializar()
@@ -42,6 +44,58 @@ namespace Api.UnitTests.Controllers
             habitacion.CamasMatrimoniales.Count.Should().Be(1);
             habitacion.CamasIndividuales.Count.Should().Be(1);
             habitacion.CamasCuchetas.Count.Should().Be(1);
+        }
+
+        [Test]
+        public void MapeaCorrectamenteEnLaConsulta()
+        {
+            DadaUnaListaDeHabitaciones();
+
+            var habitacionesDTO = _mapper.Map<IEnumerable<HabitacionDTO>>(_unaListaDeHabitaciones).ToList();
+
+            habitacionesDTO.First().CamasMatrimoniales.Count.Should().Be(1);
+            habitacionesDTO.First().CamasIndividuales.Count.Should().Be(1);
+            habitacionesDTO.First().CamasCuchetas.Count.Should().Be(1);
+        }
+
+        private void DadaUnaListaDeHabitaciones()
+        {
+            _unaListaDeHabitaciones = new List<Habitacion>();
+
+            var h1 = new Habitacion
+            {
+                Nombre = "Azul",
+                CamasIndividuales = new List<CamaIndividual>
+                {
+                    new CamaIndividual
+                    {
+                        Nombre = "Indi"
+                    }
+                },
+                CamasCuchetas = new List<CamaCucheta>
+                {
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo
+                        {
+                            Nombre = "Abajo"
+                        },
+                        Arriba = new CamaCuchetaDeArriba
+                        {
+                            Nombre = "Arriba"
+                        }
+                    }
+                },
+                CamasMatrimoniales = new List<CamaMatrimonial>
+                {
+                    new CamaMatrimonial
+                    {
+                        Nombre = "Matri"
+                    }
+                }
+            };
+
+            _unaListaDeHabitaciones.Add(h1);
         }
 
         private void DadoUnHabitacionDto()
