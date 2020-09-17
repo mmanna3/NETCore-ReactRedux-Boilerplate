@@ -96,7 +96,7 @@ describe('Supports complex React Component nested', () => {
               <Select name={A_NAME}>
                 <option value="1">Individual</option>
                 <option value="2">Matrimonial</option>
-                <option value="3">Marinera</option>
+                <option value="3">Cucheta</option>
               </Select>
             </div>;       
     }  

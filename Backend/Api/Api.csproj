@@ -11,6 +11,34 @@
     <Compile Remove="Persistence\Migrations\20200615171801_pruebavacia.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200706015932_AgregaCamasMarineraYMatrimonial.cs" />
     <Compile Remove="Persistence\Migrations\20200706015932_AgregaCamasMarineraYMatrimonial.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001619_AgregaCamas.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001619_AgregaCamas.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001903_AgregaCamas.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001903_AgregaCamas.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001952_AgregaCamas.cs" />
+    <Compile Remove="Persistence\Migrations\20200916001952_AgregaCamas.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916032917_aaa.cs" />
+    <Compile Remove="Persistence\Migrations\20200916032917_aaa.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033138_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033138_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033727_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.cs" />
+    <Compile Remove="Persistence\Migrations\20200916033727_CambiaLasCamasGenericasDeLaHabitacionPorUnaListaDeCadaTipo.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916034247_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916034247_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916034639_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916034639_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916034835_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916034835_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916035940_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916035940_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916040207_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916040207_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916040303_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916040303_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200916040438_PoneHabitacionIdEnLasCamasQueCorresponde.cs" />
+    <Compile Remove="Persistence\Migrations\20200916040438_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200917004448_a.cs" />
+    <Compile Remove="Persistence\Migrations\20200917004448_a.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

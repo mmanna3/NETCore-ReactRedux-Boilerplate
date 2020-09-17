@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Controllers;
 using Api.Core.Models;
 using Api.Core.Repositories;
 using Api.Core.Services.Interfaces;
@@ -51,9 +52,23 @@ namespace Api.Core.Services
 
         private static bool HayCamasSinNombre(Habitacion habitacion)
         {
-            return habitacion.CamasIndividuales != null && habitacion.CamasIndividuales.Exists(x => string.IsNullOrEmpty(x.Nombre)) ||
-                   habitacion.CamasMatrimoniales != null && habitacion.CamasMatrimoniales.Exists(x => string.IsNullOrEmpty(x.Nombre)) ||
-                   habitacion.CamasMarineras != null && habitacion.CamasMarineras.Exists(x => string.IsNullOrEmpty(x.NombreArriba) || string.IsNullOrEmpty(x.NombreAbajo))
+            return habitacion.CamasIndividuales != null && 
+                   habitacion.CamasIndividuales.ToList().Exists(x => string.IsNullOrEmpty(x.Nombre))
+                   ||
+                   habitacion.CamasMatrimoniales != null && 
+                   habitacion.CamasMatrimoniales.ToList().Exists(x => string.IsNullOrEmpty(x.Nombre))
+                   ||
+                   habitacion.CamasCuchetas != null && 
+                   habitacion.CamasCuchetas
+                       .Select(x => x.Abajo)
+                       .ToList()
+                       .Exists(x => string.IsNullOrEmpty(x.Nombre))
+                   ||
+                   habitacion.CamasCuchetas != null &&
+                   habitacion.CamasCuchetas
+                       .Select(x => x.Arriba)
+                       .ToList()
+                       .Exists(x => string.IsNullOrEmpty(x.Nombre))
                 ;
         }
 
@@ -64,10 +79,10 @@ namespace Api.Core.Services
             if (habitacion.CamasMatrimoniales != null)
                 nombres.AddRange(habitacion.CamasMatrimoniales?.Select(x => x.Nombre));
 
-            if (habitacion.CamasMarineras != null)
+            if (habitacion.CamasCuchetas != null)
             {
-                nombres.AddRange(habitacion.CamasMarineras.Select(x => x.NombreAbajo));
-                nombres.AddRange(habitacion.CamasMarineras.Select(x => x.NombreArriba));
+                nombres.AddRange(habitacion.CamasCuchetas.Select(x => x.Abajo.Nombre));
+                nombres.AddRange(habitacion.CamasCuchetas.Select(x => x.Arriba.Nombre));
             }
 
             if (habitacion.CamasIndividuales != null)

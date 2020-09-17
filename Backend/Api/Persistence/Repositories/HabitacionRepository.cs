@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
@@ -18,7 +17,10 @@ namespace Api.Persistence.Repositories
         {
             return await _context.Habitaciones
                                     .Include(x => x.CamasIndividuales)
-                                    .Include(x => x.CamasMarineras)
+                                    .Include(x => x.CamasCuchetas)
+                                        .ThenInclude(x => x.Abajo)
+                                    .Include(x => x.CamasCuchetas)
+                                        .ThenInclude(x => x.Arriba)
                                     .Include(x => x.CamasMatrimoniales)
                                     .ToListAsync();
         }

@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Core.Models
 {
-    public class CamaIndividual
+    public class CamaIndividual : Cama
     {
-        public int Id { get; set; }
-
-        [Required, MaxLength(30)]
-        public string Nombre { get; set; }
-
+        [Column("Individual_HabitacionId")]
         public int HabitacionId { get; set; }
         public Habitacion Habitacion { get; set; }
     }

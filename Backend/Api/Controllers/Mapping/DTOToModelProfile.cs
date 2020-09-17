@@ -13,10 +13,35 @@ namespace Api.Controllers.Mapping
             CreateMap<RegistrarDTO, Usuario>();
 
             CreateMap<HuespedDTO, Huesped>();
-            CreateMap<HabitacionDTO, Habitacion>();
-            CreateMap<CamaIndividualDTO, CamaIndividual>();
-            CreateMap<CamaMatrimonialDTO, CamaMatrimonial>();
-            CreateMap<CamaMarineraDTO, CamaMarinera>();
+
+            CreateMap<HabitacionDTO, Habitacion>()
+                .ForMember(
+                    dest => dest.CamasIndividuales,
+                    opt => opt.MapFrom(src => src.CamasIndividuales)
+                )
+                .ForMember(
+                    dest => dest.CamasMatrimoniales,
+                    opt => opt.MapFrom(src => src.CamasMatrimoniales)
+                )
+                .ForMember(
+                    dest => dest.CamasCuchetas,
+                    opt => opt.MapFrom(src => src.CamasCuchetas)
+                );
+
+            CreateMap<CamaDTO, CamaIndividual>();
+            CreateMap<CamaDTO, CamaMatrimonial>();
+            CreateMap<CamaDTO, CamaCuchetaDeAbajo>();
+            CreateMap<CamaDTO, CamaCuchetaDeArriba>();
+
+            CreateMap<CamaCuchetaDTO, CamaCucheta>()
+                .ForMember(
+                    dest => dest.Abajo,
+                    opt => opt.MapFrom(src => src.Abajo)
+                )
+                .ForMember(
+                    dest => dest.Arriba,
+                    opt => opt.MapFrom(src => src.Arriba)
+                );
         }
     }
 }

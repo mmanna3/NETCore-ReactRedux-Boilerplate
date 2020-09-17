@@ -4,14 +4,16 @@ using Api.Persistence.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200916002230_AgregaCamas")]
+    partial class AgregaCamas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,42 +33,14 @@ namespace Api.Persistence.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Camas");
 
-                    b.HasDiscriminator<string>("Tipo").HasValue("Cama");
-                });
-
-            modelBuilder.Entity("Api.Core.Models.CamaCucheta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AbajoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ArribaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HabitacionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AbajoId");
-
-                    b.HasIndex("ArribaId");
-
-                    b.HasIndex("HabitacionId");
-
-                    b.ToTable("CamasCuchetas");
+                    b.HasDiscriminator<int>("Tipo");
                 });
 
             modelBuilder.Entity("Api.Core.Models.Habitacion", b =>
@@ -142,75 +116,28 @@ namespace Api.Persistence.Migrations
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
 
-                    b.HasDiscriminator().HasValue("CamaCuchetaDeAbajo");
+                    b.HasDiscriminator().HasValue(3);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaCuchetaDeArriba", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
 
-                    b.HasDiscriminator().HasValue("CamaCuchetaDeArriba");
+                    b.HasDiscriminator().HasValue(4);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaIndividual", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
 
-                    b.Property<int>("HabitacionId")
-                        .HasColumnName("Individual_HabitacionId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("HabitacionId");
-
-                    b.HasDiscriminator().HasValue("CamaIndividual");
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaMatrimonial", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
 
-                    b.Property<int>("HabitacionId")
-                        .HasColumnName("Matrimonial_HabitacionId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("HabitacionId");
-
-                    b.HasDiscriminator().HasValue("CamaMatrimonial");
-                });
-
-            modelBuilder.Entity("Api.Core.Models.CamaCucheta", b =>
-                {
-                    b.HasOne("Api.Core.Models.CamaCuchetaDeAbajo", "Abajo")
-                        .WithMany()
-                        .HasForeignKey("AbajoId");
-
-                    b.HasOne("Api.Core.Models.CamaCuchetaDeArriba", "Arriba")
-                        .WithMany()
-                        .HasForeignKey("ArribaId");
-
-                    b.HasOne("Api.Core.Models.Habitacion", "Habitacion")
-                        .WithMany("CamasCuchetas")
-                        .HasForeignKey("HabitacionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Api.Core.Models.CamaIndividual", b =>
-                {
-                    b.HasOne("Api.Core.Models.Habitacion", "Habitacion")
-                        .WithMany("CamasIndividuales")
-                        .HasForeignKey("HabitacionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Api.Core.Models.CamaMatrimonial", b =>
-                {
-                    b.HasOne("Api.Core.Models.Habitacion", "Habitacion")
-                        .WithMany("CamasMatrimoniales")
-                        .HasForeignKey("HabitacionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasDiscriminator().HasValue(2);
                 });
 #pragma warning restore 612, 618
         }

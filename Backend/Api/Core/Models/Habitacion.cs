@@ -10,8 +10,8 @@ namespace Api.Core.Models
         [Required, MaxLength(30)]
         public string Nombre { get; set; }
 
-        public List<CamaIndividual> CamasIndividuales { get; set; }
-        public List<CamaMatrimonial> CamasMatrimoniales { get; set; }
-        public List<CamaMarinera> CamasMarineras { get; set; }
+        public ICollection<CamaIndividual> CamasIndividuales { get; set; }
+        public ICollection<CamaMatrimonial> CamasMatrimoniales { get; set; }
+        public ICollection<CamaCucheta> CamasCuchetas { get; set; }
     }
 }

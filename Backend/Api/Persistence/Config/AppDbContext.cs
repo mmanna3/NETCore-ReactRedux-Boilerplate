@@ -7,10 +7,11 @@ namespace Api.Persistence.Config
     {
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Habitacion> Habitaciones { get; set; }
-
         public DbSet<CamaIndividual> CamasIndividuales { get; set; }
         public DbSet<CamaMatrimonial> CamasMatrimoniales { get; set; }
-        public DbSet<CamaMarinera> CamasMarineras { get; set; }
+        public DbSet<CamaCuchetaDeAbajo> CamasCuchetasDeAbajo { get; set; }
+        public DbSet<CamaCuchetaDeArriba> CamasCuchetasDeArriba { get; set; }
+        public DbSet<CamaCucheta> CamasCuchetas { get; set; }
         public DbSet<Huesped> Huespedes { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -18,7 +19,25 @@ namespace Api.Persistence.Config
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.RemovePluralizingTableNameConvention();
+
+            builder.Entity<Cama>()
+                .ToTable("Camas")
+                .HasDiscriminator<string>("Tipo");
+
+            builder.Entity<CamaIndividual>()
+                .HasOne(b => b.Habitacion)
+                .WithMany(a => a.CamasIndividuales)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<CamaMatrimonial>()
+                .HasOne(b => b.Habitacion)
+                .WithMany(a => a.CamasMatrimoniales)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<CamaCucheta>()
+                .HasOne(b => b.Habitacion)
+                .WithMany(a => a.CamasCuchetas)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

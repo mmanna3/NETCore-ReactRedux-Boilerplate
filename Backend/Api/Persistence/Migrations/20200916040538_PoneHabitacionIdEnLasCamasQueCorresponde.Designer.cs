@@ -4,14 +4,16 @@ using Api.Persistence.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200916040538_PoneHabitacionIdEnLasCamasQueCorresponde")]
+    partial class PoneHabitacionIdEnLasCamasQueCorresponde
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,15 +33,14 @@ namespace Api.Persistence.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Camas");
 
-                    b.HasDiscriminator<string>("Tipo").HasValue("Cama");
+                    b.HasDiscriminator<int>("Tipo");
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaCucheta", b =>
@@ -142,14 +143,14 @@ namespace Api.Persistence.Migrations
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
 
-                    b.HasDiscriminator().HasValue("CamaCuchetaDeAbajo");
+                    b.HasDiscriminator().HasValue(3);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaCuchetaDeArriba", b =>
                 {
                     b.HasBaseType("Api.Core.Models.Cama");
 
-                    b.HasDiscriminator().HasValue("CamaCuchetaDeArriba");
+                    b.HasDiscriminator().HasValue(4);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaIndividual", b =>
@@ -162,7 +163,7 @@ namespace Api.Persistence.Migrations
 
                     b.HasIndex("HabitacionId");
 
-                    b.HasDiscriminator().HasValue("CamaIndividual");
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaMatrimonial", b =>
@@ -175,7 +176,7 @@ namespace Api.Persistence.Migrations
 
                     b.HasIndex("HabitacionId");
 
-                    b.HasDiscriminator().HasValue("CamaMatrimonial");
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("Api.Core.Models.CamaCucheta", b =>

@@ -68,17 +68,25 @@ namespace Api.UnitTests.Services
         }
 
         [Test]
-        public void Crear_Falla_PorqueHayCamasMarinerasSinNombre()
+        public void Crear_Falla_PorqueHayCamasCuchetasSinNombre()
         {
             var habitacion = new Habitacion
             {
-                CamasMarineras = new List<CamaMarinera>
+                CamasCuchetas = new List<CamaCucheta>
                 {
-                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
-                    new CamaMarinera { NombreAbajo = "Abajo1" },
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "Abajo"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "Arriba"}
+                    },
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "Abajo1"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = ""}
+                    }
                 }
             };
-            
+
             Assert.That(() => _service.CrearAsync(habitacion),
                     Throws.Exception
                         .TypeOf<AppException>()
@@ -87,10 +95,18 @@ namespace Api.UnitTests.Services
 
             var habitacion2 = new Habitacion
             {
-                CamasMarineras = new List<CamaMarinera>
+                CamasCuchetas = new List<CamaCucheta>
                 {
-                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
-                    new CamaMarinera { NombreArriba = "Arriba1" },
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = ""},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "Arriba"}
+                    },
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "Abajo1"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "Arri"}
+                    }
                 }
             };
 
@@ -102,10 +118,18 @@ namespace Api.UnitTests.Services
 
             var habitacion3 = new Habitacion
             {
-                CamasMarineras = new List<CamaMarinera>
+                CamasCuchetas = new List<CamaCucheta>
                 {
-                    new CamaMarinera { NombreAbajo = "Abajo1", NombreArriba = "Arriba1"},
-                    new CamaMarinera { NombreArriba = "", NombreAbajo = ""},
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = ""},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = ""}
+                    },
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "Abajo1"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "Arri"}
+                    }
                 }
             };
 
@@ -144,9 +168,18 @@ namespace Api.UnitTests.Services
                 {
                     new CamaIndividual { Nombre = "Individual1" },
                 },
-                CamasMarineras = new List<CamaMarinera>
+                CamasCuchetas = new List<CamaCucheta>
                 {
-                    new CamaMarinera { NombreAbajo = "Individual1", NombreArriba = "Arriba1"},
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "Individual1"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "111as"}
+                    },
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "Abajo1"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "Arri"}
+                    }
                 }
             };
 
@@ -166,9 +199,13 @@ namespace Api.UnitTests.Services
                 {
                     new CamaIndividual { Nombre = "Individual1" },
                 },
-                CamasMarineras = new List<CamaMarinera>
+                CamasCuchetas = new List<CamaCucheta>
                 {
-                    new CamaMarinera { NombreAbajo = "xasdsad", NombreArriba = "Arriba1"},
+                    new CamaCucheta
+                    {
+                        Abajo = new CamaCuchetaDeAbajo {Nombre = "CuchetaAbajo"},
+                        Arriba = new CamaCuchetaDeArriba {Nombre = "CuchetaArriba"}
+                    }
                 },
                 CamasMatrimoniales = new List<CamaMatrimonial>
                 {

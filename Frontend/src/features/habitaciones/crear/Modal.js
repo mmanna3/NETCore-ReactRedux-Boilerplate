@@ -82,7 +82,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     
     updatePorTipo(array, 'Individuales');
     updatePorTipo(array, 'Matrimoniales');
-    updatePorTipo(array, 'Marineras');
+    updatePorTipo(array, 'Cuchetas');
 
     function updatePorTipo(array, tipo){
       var arrayDelTipo = array.filter(x => x.tipo === tipo);
