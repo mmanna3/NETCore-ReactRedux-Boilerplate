@@ -65,6 +65,9 @@ namespace Api.Config
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<ILoggerService, LoggerService>();
+
+            services.AddScoped<IReservaService, ReservaService>();
+            services.AddScoped<IReservaRepository, ReservaRepository>();
         }
     }
 }

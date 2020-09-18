@@ -1,4 +1,6 @@
-﻿using Api.Controllers.DTOs;
+﻿using System;
+using System.Collections.Generic;
+using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.DTOs.Usuario;
 using AutoMapper;
@@ -10,6 +12,8 @@ namespace Api.Controllers.Mapping
     {
         public DTOToModelProfile()
         {
+            CreateMap<string, DateTime>().ConvertUsing(new DateTimeTypeConverter());
+
             CreateMap<RegistrarDTO, Usuario>();
 
             CreateMap<HuespedDTO, Huesped>();
@@ -42,6 +46,26 @@ namespace Api.Controllers.Mapping
                     dest => dest.Arriba,
                     opt => opt.MapFrom(src => src.Arriba)
                 );
+
+            CreateMap<ReservaDTO, Reserva>()
+                .ForMember(
+                    m => m.ReservaCamas,
+                    dto => dto.MapFrom(x => x.CamasIds)
+                );
+
+            CreateMap<int, ReservaCama>()
+                .ForMember(
+                    m => m.CamaId,
+                    dto => dto.MapFrom(x => x)
+                );
+        }
+
+        public class DateTimeTypeConverter : ITypeConverter<string, DateTime>
+        {
+            public DateTime Convert(string source, DateTime destination, ResolutionContext context)
+            {
+                return System.Convert.ToDateTime(source);
+            }
         }
     }
 }

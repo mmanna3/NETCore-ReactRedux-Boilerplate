@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Controllers;
 using Api.Core.Models;
 using Api.Core.Repositories;
 using Api.Core.Services.Interfaces;

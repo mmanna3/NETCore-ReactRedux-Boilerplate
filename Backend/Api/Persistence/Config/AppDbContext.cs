@@ -7,6 +7,7 @@ namespace Api.Persistence.Config
     {
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Habitacion> Habitaciones { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
         public DbSet<CamaIndividual> CamasIndividuales { get; set; }
         public DbSet<CamaMatrimonial> CamasMatrimoniales { get; set; }
         public DbSet<CamaCuchetaDeAbajo> CamasCuchetasDeAbajo { get; set; }
@@ -38,6 +39,17 @@ namespace Api.Persistence.Config
                 .HasOne(b => b.Habitacion)
                 .WithMany(a => a.CamasCuchetas)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ReservaCama>()
+                .HasKey(x => new { x.ReservaId, x.CamaId });
+            builder.Entity<ReservaCama>()
+                .HasOne(x => x.Reserva)
+                .WithMany(x => x.ReservaCamas)
+                .HasForeignKey(x => x.ReservaId);
+            builder.Entity<ReservaCama>()
+                .HasOne(x => x.Cama)
+                .WithMany(x => x.ReservaCamas)
+                .HasForeignKey(x => x.CamaId);
         }
     }
 }

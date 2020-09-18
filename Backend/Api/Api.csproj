@@ -39,6 +39,8 @@
     <Compile Remove="Persistence\Migrations\20200916040438_PoneHabitacionIdEnLasCamasQueCorresponde.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200917004448_a.cs" />
     <Compile Remove="Persistence\Migrations\20200917004448_a.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200918004323_AgregaReserva.cs" />
+    <Compile Remove="Persistence\Migrations\20200918004323_AgregaReserva.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
