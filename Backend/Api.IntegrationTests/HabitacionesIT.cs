@@ -73,7 +73,7 @@ namespace Api.IntegrationTests
             //habitacion.Nombre.Should().Be("Roja");
         }
 
-        private async Task<HttpResponseMessage> CrearUnaHabitacion()
+        public async Task<HttpResponseMessage> CrearUnaHabitacion()
         {
             var body = new HabitacionDTO
             {

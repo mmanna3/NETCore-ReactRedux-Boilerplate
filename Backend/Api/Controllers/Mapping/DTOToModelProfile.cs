@@ -51,7 +51,15 @@ namespace Api.Controllers.Mapping
                 .ForMember(
                     m => m.ReservaCamas,
                     dto => dto.MapFrom(x => x.CamasIds)
-                );
+                )
+                .AfterMap((model, entity) =>
+                {
+                    foreach (var reservaCama in entity.ReservaCamas)
+                    {
+                        reservaCama.Reserva = entity;
+                    }
+                });
+
 
             CreateMap<int, ReservaCama>()
                 .ForMember(
