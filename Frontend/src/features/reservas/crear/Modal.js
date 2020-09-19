@@ -34,7 +34,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Header title="Alta de reserva" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
-        <Input label="Nombre" name="nombre" />
+        <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker 
           value={desdeHasta}
           onChange={onDesdeHastaChange}
