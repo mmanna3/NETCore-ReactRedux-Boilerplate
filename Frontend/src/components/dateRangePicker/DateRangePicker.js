@@ -18,8 +18,8 @@ const DateRangePicker = ({value, onChange}) => {
           minDate={new Date()}
         />
       </div>
-      <Input style={{display: 'none'}} name="desde" defaultValue={value[0]}/>
-      <Input style={{display: 'none'}} name="hasta" defaultValue={value[1]}/>
+      <Input style={{display: 'none'}} name="desde" defaultValue={value[0].toISOString().slice(0,10)}/>
+      <Input style={{display: 'none'}} name="hasta" defaultValue={value[1].toISOString().slice(0,10)}/>
     </div>
   )
 }
