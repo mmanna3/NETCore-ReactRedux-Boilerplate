@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input, ValidationSummary } from "components/Input";
-import DateRangePicker from 'components/DateRangePicker';
+import DateRangePicker from 'components/dateRangePicker/DateRangePicker';
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
 

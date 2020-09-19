@@ -1,0 +1,9 @@
+@import 'universal.scss';
+
+.dateRangePicker > div {  
+  @extend .input;
+}
+
+.calendar {
+  border-radius: 4px;
+}
