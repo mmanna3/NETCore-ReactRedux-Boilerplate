@@ -39,8 +39,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           value={desdeHasta}
           onChange={onDesdeHastaChange}
         />
-        <Input label="aaNombre" name="aanombre" />
-        <Input label="bbbNombre" name="bnombre" />
+        <Input label="CamasIds" name="CamasIds[0]" />
         
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
