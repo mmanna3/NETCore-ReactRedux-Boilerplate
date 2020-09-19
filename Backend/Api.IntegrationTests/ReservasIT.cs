@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
+using Api.Core;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -64,8 +65,8 @@ namespace Api.IntegrationTests
             {
                 ANombreDe = A_NOMBRE_DE,
                 CamasIds = new List<int> { UN_CAMA_ID },
-                Desde = DESDE.ToShortDateString(),
-                Hasta = HASTA.ToShortDateString()
+                Desde = Utilidades.Convertir(DESDE),
+                Hasta = Utilidades.Convertir(HASTA)
             };
 
             return await _httpClient.PostAsJsonAsync(ENDPOINT, body);

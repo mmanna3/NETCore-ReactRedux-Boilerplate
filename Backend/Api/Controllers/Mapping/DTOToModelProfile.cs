@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.DTOs.Usuario;
+using Api.Core;
 using AutoMapper;
 using Api.Core.Models;
 
@@ -72,7 +72,7 @@ namespace Api.Controllers.Mapping
         {
             public DateTime Convert(string source, DateTime destination, ResolutionContext context)
             {
-                return System.Convert.ToDateTime(source);
+                return Utilidades.Convertir(source);
             }
         }
     }

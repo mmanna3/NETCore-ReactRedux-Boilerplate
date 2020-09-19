@@ -4,6 +4,7 @@ using System.Linq;
 using Api.Controllers;
 using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
+using Api.Core;
 using Api.Core.Models;
 using Api.Core.Services.Interfaces;
 using AutoMapper;
@@ -112,8 +113,8 @@ namespace Api.UnitTests.Controllers
             {
                 ANombreDe = A_NOMBRE_DE,
                 CamasIds = new List<int>{UN_CAMA_ID},
-                Desde = DESDE.ToShortDateString(),
-                Hasta = HASTA.ToShortDateString()
+                Desde = Utilidades.Convertir(DESDE),
+                Hasta = Utilidades.Convertir(HASTA)
             };
         }
     }
