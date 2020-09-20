@@ -14,7 +14,7 @@ namespace Api.Persistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<TModel>> Listar()
+        public virtual async Task<IEnumerable<TModel>> Listar()
         {
             return await _context.Set<TModel>().ToListAsync();
         }
@@ -27,6 +27,11 @@ namespace Api.Persistence.Repositories
         public async Task<TModel> ObtenerPorId(int id)
         {
             return await _context.Set<TModel>().SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public void Modificar(TModel anterior, TModel nuevo)
+        {
+            _context.Entry(anterior).CurrentValues.SetValues(nuevo);
         }
     }
 }

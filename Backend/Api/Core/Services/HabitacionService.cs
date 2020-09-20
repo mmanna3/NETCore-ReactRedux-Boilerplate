@@ -20,7 +20,7 @@ namespace Api.Core.Services
 
         public async Task<IEnumerable<Habitacion>> ListarAsync()
         {
-            return await _habitacionRepository.ListAsync();
+            return await _habitacionRepository.Listar();
         }
 
         public async Task<int> CrearAsync(Habitacion habitacion)
@@ -31,20 +31,20 @@ namespace Api.Core.Services
             if (HayCamasConIdentificadorRepetido(habitacion))
                 throw new AppException("No puede haber camas con el mismo Identificador");
 
-            _habitacionRepository.Create(habitacion);
+            _habitacionRepository.Crear(habitacion);
             await _unitOfWork.CompleteAsync();
             return habitacion.Id;
         }
 
         public async Task ModificarAsync(int id, Habitacion habitacion)
         {
-            var habitacionAModificar = await _habitacionRepository.FindByIdAsync(id);
+            var habitacionAModificar = await _habitacionRepository.ObtenerPorId(id);
 
             if (habitacionAModificar == null)
                 throw new AppException($"No se encontró la habitación de id:{id}");
 
             habitacion.Id = habitacionAModificar.Id;
-            _habitacionRepository.Modify(habitacionAModificar, habitacion);
+            _habitacionRepository.Modificar(habitacionAModificar, habitacion);
             
             await _unitOfWork.CompleteAsync();
         }

@@ -10,5 +10,6 @@ namespace Api.Core.Repositories
         Task<IEnumerable<TModel>> Listar();
         void Crear(TModel reserva);
         Task<TModel> ObtenerPorId(int id);
+        void Modificar(TModel anterior, TModel nuevo);
     }
 }

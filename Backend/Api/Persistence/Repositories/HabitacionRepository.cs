@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Persistence.Repositories
 {
-    public class HabitacionRepository : BaseRepository, IHabitacionRepository
+    public class HabitacionRepository : ABMRepository<Habitacion>, IHabitacionRepository
     {
         public HabitacionRepository(AppDbContext context) : base(context)
         {
         }
 
-        public async Task<IEnumerable<Habitacion>> ListAsync()
+        public override async Task<IEnumerable<Habitacion>> Listar()
         {
             return await _context.Habitaciones
                                     .Include(x => x.CamasIndividuales)
@@ -23,21 +23,6 @@ namespace Api.Persistence.Repositories
                                         .ThenInclude(x => x.Arriba)
                                     .Include(x => x.CamasMatrimoniales)
                                     .ToListAsync();
-        }
-
-        public void Create(Habitacion habitacion)
-        {
-            _context.Habitaciones.Add(habitacion);
-        }
-
-        public async Task<Habitacion> FindByIdAsync(int id)
-        {
-            return await _context.Habitaciones.FindAsync(id);
-        }
-
-        public void Modify(Habitacion old, Habitacion current)
-        {
-            _context.Entry(old).CurrentValues.SetValues(current);
         }
     }
 }
