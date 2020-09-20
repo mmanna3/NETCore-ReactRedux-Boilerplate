@@ -6,8 +6,8 @@ namespace Api.Core.Services.Interfaces
     public interface IUsuarioService
     {
         Task<Usuario> Autenticar(string username, string password);
-        Task<Usuario> AddAsync(Usuario usuario, string password);
-        Task<Usuario> GetById(int id);
+        Task<Usuario> Crear(Usuario usuario, string password);
+        Task<Usuario> ObtenerPorId(int id);
         string ObtenerToken(int usuarioId);
     }
 }

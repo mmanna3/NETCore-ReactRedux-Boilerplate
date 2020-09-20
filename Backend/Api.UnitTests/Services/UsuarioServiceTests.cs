@@ -42,7 +42,7 @@ namespace Api.UnitTests.Services
         {
             DadoUnUsuario();
 
-            var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
+            var usuarioRegistroResponse = await _service.Crear(_unUsuario, PASSWORD);
 
             usuarioRegistroResponse.Should().NotBe(null);
         }
@@ -52,7 +52,7 @@ namespace Api.UnitTests.Services
         {
             await DadoUnUsuarioRegistrado();
 
-            Assert.That(() => _service.AddAsync(_unUsuario, PASSWORD), Throws.Exception.TypeOf<AppException>());
+            Assert.That(() => _service.Crear(_unUsuario, PASSWORD), Throws.Exception.TypeOf<AppException>());
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Api.UnitTests.Services
         {
             await DadoUnUsuarioRegistrado();
 
-            Assert.That(() => _service.AddAsync(_unUsuario, ""), Throws.Exception.TypeOf<AppException>());
+            Assert.That(() => _service.Crear(_unUsuario, ""), Throws.Exception.TypeOf<AppException>());
         }
 
         [Test]
@@ -84,8 +84,8 @@ namespace Api.UnitTests.Services
         private async Task DadoUnUsuarioRegistrado()
         {
             DadoUnUsuario();
-            var usuarioRegistroResponse = await _service.AddAsync(_unUsuario, PASSWORD);
-            _mockRepo.Setup(repo => repo.FindByUsernameAsync(USERNAME)).ReturnsAsync(_unUsuario);
+            var usuarioRegistroResponse = await _service.Crear(_unUsuario, PASSWORD);
+            _mockRepo.Setup(repo => repo.ObtenerPorNombreDeUsuario(USERNAME)).ReturnsAsync(_unUsuario);
         }
     }
 }

@@ -92,8 +92,8 @@ namespace Api.IntegrationTests
         {
             var body = new RegistrarDTO
             {
-                Nombre = "Jackson",
-                Apellido = "Watmore",
+                Nombre = "Elliot",
+                Apellido = "Alderson",
                 Username = USERNAME,
                 Password = PASSWORD
             };

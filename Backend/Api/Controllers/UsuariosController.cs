@@ -45,7 +45,7 @@ namespace Api.Controllers
         {
             var usuario = _mapper.Map<RegistrarDTO, Usuario>(dto);
 
-            var result = await _userService.AddAsync(usuario, dto.Password);
+            var result = await _userService.Crear(usuario, dto.Password);
             
             var usuarioDTO = _mapper.Map<Usuario, RegistrarDTO>(result);
 
@@ -59,9 +59,9 @@ namespace Api.Controllers
         }
 
         //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
+        //public IActionResult ObtenerPorId(int id)
         //{
-        //    var user = _userService.GetById(id);
+        //    var user = _userService.ObtenerPorId(id);
         //    var model = _mapper.Map<UserModel>(user);
         //    return Ok(model);
         //}

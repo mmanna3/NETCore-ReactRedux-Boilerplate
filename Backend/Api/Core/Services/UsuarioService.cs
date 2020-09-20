@@ -29,12 +29,12 @@ namespace Api.Core.Services
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 throw new AppException("El password es requerido");
 
-            var usuario = await _usuarioRepository.FindByUsernameAsync(username);
+            var usuario = await _usuarioRepository.ObtenerPorNombreDeUsuario(username);
 
             if (usuario == null)
                 throw new AppException("Usuario inexistente");
 
-            if (!VerifyPasswordHash(password, usuario.PasswordHash, usuario.PasswordSalt))
+            if (!VerificarHash(password, usuario.PasswordHash, usuario.PasswordSalt))
                 throw new AppException("Clave incorrecta");
 
             return usuario;
@@ -58,34 +58,34 @@ namespace Api.Core.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<Usuario> AddAsync(Usuario usuario, string password)
+        public async Task<Usuario> Crear(Usuario usuario, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("El password es requerido");
 
-            var usuarioConElMismoUsername = await _usuarioRepository.FindByUsernameAsync(usuario.Username);
+            var usuarioConElMismoUsername = await _usuarioRepository.ObtenerPorNombreDeUsuario(usuario.Username);
 
             if (usuarioConElMismoUsername != null)
                 throw new AppException($@"Ya existe un usuario '{usuario.Username}'");
 
-            CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
+            CrearHash(password, out var passwordHash, out var passwordSalt);
 
             usuario.PasswordHash = passwordHash;
             usuario.PasswordSalt = passwordSalt;
 
-            await _usuarioRepository.AddAsync(usuario);
+            _usuarioRepository.Crear(usuario);
             await _unitOfWork.CompleteAsync();
 
             return usuario;
         }
 
-        public async Task<Usuario> GetById(int id)
+        public async Task<Usuario> ObtenerPorId(int id)
         {
-            var usuario = await _usuarioRepository.GetById(id);
+            var usuario = await _usuarioRepository.ObtenerPorId(id);
             return usuario;
         }
 
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private static void CrearHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             if (password == null) throw new ArgumentNullException("password");
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
@@ -97,7 +97,7 @@ namespace Api.Core.Services
             }
         }
 
-        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        private static bool VerificarHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null) throw new ArgumentNullException(nameof(password));
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));

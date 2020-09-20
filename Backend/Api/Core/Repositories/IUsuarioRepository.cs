@@ -3,10 +3,8 @@ using Api.Core.Models;
 
 namespace Api.Core.Repositories
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IABMRepository<Usuario>
     {
-        Task AddAsync(Usuario usuario);
-        Task<Usuario> FindByUsernameAsync(string username);
-        Task<Usuario> GetById(int id);
+        Task<Usuario> ObtenerPorNombreDeUsuario(string username);
     }
 }

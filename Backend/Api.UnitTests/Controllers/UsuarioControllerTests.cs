@@ -53,7 +53,7 @@ namespace Api.UnitTests.Controllers
 
         private void DadoQueElServicioDevuelveUnUsuario()
         {
-            _mockService.Setup(x => x.AddAsync(It.IsAny<Usuario>(), It.IsAny<string>())).ReturnsAsync(_unUsuario);
+            _mockService.Setup(x => x.Crear(It.IsAny<Usuario>(), It.IsAny<string>())).ReturnsAsync(_unUsuario);
         }
 
         private void DadoUnRegistroResource()
