@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Core.Models
 {
-    public class Reserva
+    public class Reserva : EntidadConId
     {
-        public int Id { get; set; }
-
         [Required, MaxLength(30)]
         public string ANombreDe { get; set; }
 
