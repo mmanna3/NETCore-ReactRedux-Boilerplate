@@ -11,8 +11,8 @@ namespace Api.IntegrationTests
 {
     public class UsuarioIT : BaseAutenticadoIT
     {
-        private const string USERNAME = "jackson2";
-        private const string PASSWORD = "my-super-secret-password";
+        private const string USERNAME = "MrRobot";
+        private const string PASSWORD = "RosaBlanca";
 
         [SetUp]
         public override async Task Setup()
@@ -32,8 +32,8 @@ namespace Api.IntegrationTests
         {
             var body = new RegistrarDTO
             {
-                Nombre = "Jackson",
-                Apellido = "Watmore",
+                Nombre = "Elliot",
+                Apellido = "Alderson",
                 Password = PASSWORD
             };
 
