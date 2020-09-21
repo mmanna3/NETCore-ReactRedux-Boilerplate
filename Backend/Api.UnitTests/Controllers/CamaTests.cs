@@ -42,7 +42,7 @@ namespace Api.UnitTests.Controllers
         {
             var cama = DadaUnaCamaConVariasReservas();
 
-            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(-3), FIN_RESERVA_2.AddDays(3)).Should().BeFalse(); //Rango mayor a las dos reservas, incluyendo ambas
+            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(-3), FIN_RESERVA_2.AddDays(3)).Should().BeFalse();
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace Api.UnitTests.Controllers
         {
             var cama = DadaUnaCamaConVariasReservas();
 
-            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(1), FIN_RESERVA_2.AddDays(-1)).Should().BeFalse(); //Entre reservas incluyendo algunos días de ambas
+            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(1), FIN_RESERVA_2.AddDays(-1)).Should().BeFalse();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace Api.UnitTests.Controllers
         {
             var cama = DadaUnaCamaConVariasReservas();
 
-            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(-1), INICIO_RESERVA_1).Should().BeFalse(); //Empieza día disponible y termina en día reservado
+            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(-1), INICIO_RESERVA_1).Should().BeFalse();
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Api.UnitTests.Controllers
         {
             var cama = DadaUnaCamaConVariasReservas();
 
-            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(1), FIN_RESERVA_1.AddDays(1)).Should().BeFalse(); //Empieza día reservado y termina día disponible
+            cama.EstaLibreEntre(INICIO_RESERVA_1.AddDays(1), FIN_RESERVA_1.AddDays(1)).Should().BeFalse();
         }
 
         [Test]
