@@ -14,5 +14,10 @@ namespace Api.Core.Models
         public DateTime Desde { get; set; }
         
         public DateTime Hasta { get; set; }
+
+        public bool EstaReservado(DateTime dia)
+        {
+            return dia >= Desde && dia <= Hasta;
+        }
     }
 }

@@ -43,6 +43,10 @@
     <Compile Remove="Persistence\Migrations\20200918004323_AgregaReserva.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200920175518_a.cs" />
     <Compile Remove="Persistence\Migrations\20200920175518_a.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200920224118_a.cs" />
+    <Compile Remove="Persistence\Migrations\20200920224118_a.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200920224312_a.cs" />
+    <Compile Remove="Persistence\Migrations\20200920224312_a.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

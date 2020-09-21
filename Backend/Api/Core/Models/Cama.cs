@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Api.Core.Models
 {
@@ -11,5 +13,20 @@ namespace Api.Core.Models
         public string Nombre { get; set; }
 
         public ICollection<ReservaCama> ReservaCamas { get; set; }
+
+        public bool EstaLibreEntre(DateTime desde, DateTime hasta)
+        {
+            return !AlgunaReservaIncluyeElDia(desde) && !AlgunaReservaIncluyeElDia(hasta) && !ElRangoIncluyeAlgunaReserva(desde, hasta);
+        }
+
+        private bool AlgunaReservaIncluyeElDia(DateTime dia)
+        {
+            return ReservaCamas.Select(x => x.Reserva).Any(x => x.EstaReservado(dia));
+        }
+
+        private bool ElRangoIncluyeAlgunaReserva(DateTime desde, DateTime hasta)
+        {
+            return ReservaCamas.Select(x => x.Reserva).Any(x => x.Desde >= desde && x.Hasta <= hasta);
+        }
     }
 }

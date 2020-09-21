@@ -8,6 +8,7 @@ namespace Api.Persistence.Config
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Habitacion> Habitaciones { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
+
         public DbSet<CamaIndividual> CamasIndividuales { get; set; }
         public DbSet<CamaMatrimonial> CamasMatrimoniales { get; set; }
         public DbSet<CamaCuchetaDeAbajo> CamasCuchetasDeAbajo { get; set; }
