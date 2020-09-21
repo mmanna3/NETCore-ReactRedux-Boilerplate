@@ -2,7 +2,7 @@ using Api.Persistence.Config;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
-namespace Api.UnitTests.Controllers
+namespace Api.UnitTests.Repositories
 {
     public class BaseRepositoryTests
     {

@@ -14,6 +14,16 @@ namespace Api.Core.Models
 
         public ICollection<ReservaCama> ReservaCamas { get; set; }
 
+        protected virtual int Plazas()
+        {
+            return 1;
+        }
+        
+        public virtual int LugaresLibresEntre(DateTime desde, DateTime hasta)
+        {
+            return EstaLibreEntre(desde, hasta) ? Plazas() : 0;
+        }
+
         public bool EstaLibreEntre(DateTime desde, DateTime hasta)
         {
             return !AlgunaReservaIncluyeElDia(desde) && !AlgunaReservaIncluyeElDia(hasta) && !ElRangoIncluyeAlgunaReserva(desde, hasta);

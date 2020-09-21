@@ -4,7 +4,7 @@ using Api.Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Api.UnitTests.Controllers
+namespace Api.UnitTests.Models
 {
     public class CamaTests
     {
