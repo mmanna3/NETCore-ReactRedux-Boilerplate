@@ -16,10 +16,11 @@ namespace Api.Core.Models
 
         public int LugaresLibresEntre(DateTime desde, DateTime hasta)
         {
-            return CamasIndividuales?.Sum(x => x.LugaresLibresEntre(desde, hasta)) ?? 0 +
-                CamasMatrimoniales?.Sum(x => x.LugaresLibresEntre(desde, hasta)) ?? 0 +
-                CamasCuchetas?.Sum(x =>
-                    x.Abajo.LugaresLibresEntre(desde, hasta) + x.Arriba.LugaresLibresEntre(desde, hasta)) ?? 0;
+            var sumaIndividuales = CamasIndividuales?.Sum(x => x.LugaresLibresEntre(desde, hasta)) ?? 0;
+            var sumaMatri = CamasMatrimoniales?.Sum(x => x.LugaresLibresEntre(desde, hasta)) ?? 0;
+            var sumaCucheta = CamasCuchetas?.Sum(x => x.Abajo.LugaresLibresEntre(desde, hasta) + x.Arriba.LugaresLibresEntre(desde, hasta)) ?? 0;
+
+            return sumaIndividuales + sumaCucheta + sumaMatri;
         }
     }
 }

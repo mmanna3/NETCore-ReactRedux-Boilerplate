@@ -9,7 +9,7 @@ namespace Api.UnitTests.Repositories
         protected AppDbContext _context;
 
         [SetUp]
-        private void InicializarBase()
+        public void InicializarBase()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase(databaseName: "BaseDePrueba")

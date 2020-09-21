@@ -24,5 +24,21 @@ namespace Api.Persistence.Repositories
                                     .Include(x => x.CamasMatrimoniales)
                                     .ToListAsync();
         }
+
+        public async Task<IEnumerable<Habitacion>> ListarConCantidadDeCamasLibres()
+        {
+            return await _context.Habitaciones
+                .Include(x => x.CamasIndividuales)
+                    .ThenInclude(x => x.ReservaCamas)
+                .Include(x => x.CamasCuchetas)
+                    .ThenInclude(x => x.Abajo)
+                    .ThenInclude(x => x.ReservaCamas)
+                .Include(x => x.CamasCuchetas)
+                    .ThenInclude(x => x.Arriba)
+                    .ThenInclude(x => x.ReservaCamas)
+                .Include(x => x.CamasMatrimoniales)
+                    .ThenInclude(x => x.ReservaCamas)
+                .ToListAsync();
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace Api.Core.Models
         
         public virtual int LugaresLibresEntre(DateTime desde, DateTime hasta)
         {
-            return EstaLibreEntre(desde, hasta) ? Plazas() : 0;
+            var a = EstaLibreEntre(desde, hasta) ? Plazas() : 0;
+            return a;
         }
 
         public bool EstaLibreEntre(DateTime desde, DateTime hasta)
