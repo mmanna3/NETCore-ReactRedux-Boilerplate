@@ -18,7 +18,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
 
-  const { datos } = useSelector(habitacionesSelector);
+  const habRequest = useSelector(habitacionesSelector);
+  const habitacionesCargando = habRequest.loading;
+  const habitaciones = habRequest.datos;
 
   useEffect(() => {
     dispatch(fetchHabitacionesConLugaresLibres(desdeHasta[0], desdeHasta[1]));
@@ -47,9 +49,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker onChangeCallback={onDesdeHastaChange} />
         <Select name="CamasIds[0]">
-          {loading ?
+          {habitacionesCargando ?
             <option>Cargando..</option> :
-            datos.map((habitacion) => {
+            habitaciones.map((habitacion) => {
               return <option>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
             })
           }

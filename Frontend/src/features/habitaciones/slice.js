@@ -36,7 +36,7 @@ export function fetchHabitaciones() {
     dispatch(fetchInit());
 
     axios.get('/api/habitaciones')
-    .then((res) => {
+    .then((res) => {      
       dispatch(fetchSuccess(res.data));
     })
     .catch((error) => {
