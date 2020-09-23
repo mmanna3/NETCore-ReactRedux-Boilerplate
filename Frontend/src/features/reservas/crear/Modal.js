@@ -50,7 +50,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <Select name="CamasIds[0]">
           {datos ?
           datos.map((habitacion) => {
-            return <option>{habitacion.nombre}</option>
+            return <option>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
           }): <option>2</option>
           }
         </Select>
