@@ -46,16 +46,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker onChangeCallback={onDesdeHastaChange} />
-        {/* <Input label="CamasIds" name="CamasIds[0]" /> */}
         <Select name="CamasIds[0]">
-          {datos ?
-          datos.map((habitacion) => {
-            return <option>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
-          }): <option>2</option>
+          {loading ?
+            <option>Cargando..</option> :
+            datos.map((habitacion) => {
+              return <option>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
+            })
           }
-        </Select>
-        
-        {/* <Input label="Resultado" defaultValue={datos} /> */}
+        </Select>        
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
