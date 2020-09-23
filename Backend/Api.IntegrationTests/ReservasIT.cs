@@ -20,7 +20,7 @@ namespace Api.IntegrationTests
         private const string A_NOMBRE_DE = "Un nombre";
         private int UN_CAMA_ID;
         private readonly DateTime DESDE = new DateTime(2020, 09, 17);
-        private readonly DateTime HASTA = new DateTime(2020, 09, 17);
+        private readonly DateTime HASTA = new DateTime(2020, 09, 18);
 
         [Test]
         public async Task CreaReservaCorrectamente()

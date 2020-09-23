@@ -23,6 +23,11 @@ namespace Api.Core.Services
             return await _habitacionRepository.Listar();
         }
 
+        public async Task<IEnumerable<Habitacion>> ListarConLugaresLibres()
+        {
+            return await _habitacionRepository.ListarConCamasLibres();
+        }
+
         public async Task<int> CrearAsync(Habitacion habitacion)
         {
             if (HayCamasSinNombre(habitacion))

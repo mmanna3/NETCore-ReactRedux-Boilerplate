@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
@@ -25,19 +27,23 @@ namespace Api.Persistence.Repositories
                                     .ToListAsync();
         }
 
-        public async Task<IEnumerable<Habitacion>> ListarConCantidadDeCamasLibres()
+        public async Task<IEnumerable<Habitacion>> ListarConCamasLibres()
         {
             return await _context.Habitaciones
                 .Include(x => x.CamasIndividuales)
                     .ThenInclude(x => x.ReservaCamas)
+                    .ThenInclude(x => x.Reserva)
                 .Include(x => x.CamasCuchetas)
                     .ThenInclude(x => x.Abajo)
                     .ThenInclude(x => x.ReservaCamas)
+                    .ThenInclude(x => x.Reserva)
                 .Include(x => x.CamasCuchetas)
                     .ThenInclude(x => x.Arriba)
                     .ThenInclude(x => x.ReservaCamas)
+                    .ThenInclude(x => x.Reserva)
                 .Include(x => x.CamasMatrimoniales)
                     .ThenInclude(x => x.ReservaCamas)
+                    .ThenInclude(x => x.Reserva)
                 .ToListAsync();
         }
     }

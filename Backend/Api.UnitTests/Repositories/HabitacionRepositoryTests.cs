@@ -47,7 +47,7 @@ namespace Api.UnitTests.Repositories
 
             await _context.SaveChangesAsync();
 
-            (await _repository.ListarConCantidadDeCamasLibres()).First().LugaresLibresEntre(DESDE, HASTA).Should().Be(5);
+            (await _repository.ListarConCamasLibres()).First().LugaresLibresEntre(DESDE, HASTA).Should().Be(5);
         }
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
+using Api.Core;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -12,6 +15,10 @@ namespace Api.IntegrationTests
     public class HabitacionesIT : BaseAutenticadoIT
     {
         private const string ENDPOINT = "/api/habitaciones";
+        private const string ENDPOINT_RESERVAS = "/api/reservas";
+        private const string ENDPOINT_CONLUGARESLIBRES = ENDPOINT + "/conLugaresLibres";
+        private readonly DateTime DESDE = new DateTime(2020, 09, 17);
+        private readonly DateTime HASTA = new DateTime(2020, 09, 18);
 
         [Test]
         public async Task CreaHabitacionCorrectamente()
@@ -34,43 +41,37 @@ namespace Api.IntegrationTests
             habitacion.CamasCuchetas.First().Arriba.Should().NotBeNull();
         }
 
-        [Test, Ignore("Esto no funca, cuando hagas la edición, revisalo piola")]
-        public void ModificaHabitacionCorrectamente()
+        [Test]
+        public async Task ListaConLugaresLibresCorrectamente()
         {
-            //var response = await CrearUnaHabitacion();
-            //var id = await response.Content.ReadAsAsync<int>();
+            await CrearUnaHabitacion();
+            await CargarUnaReservaEnLaPrimeraCamaDeLaPrimeraHabitacion();
 
-            //var body = new HabitacionDTO
-            //{
-            //    Nombre = "Roja",
-            //    CamasIndividuales = new List<CamaDTO>(),
-            //    CamasMatrimoniales = new List<CamaDTO>(),
-            //    CamasCuchetas = new List<CamaCuchetaDTO>
-            //    {
-            //        new CamaCuchetaDTO
-            //        {
-            //            NombreAbajo = "Abajo",
-            //            NombreArriba = "Arriba",
-            //        }
-            //    }
-            //};
+            var consultarHabitacionesResponse = await ListarHabitacionesConLugaresLibresEnElRango();
+            var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
+            var habitacion = habitaciones.ToList().First();
 
-            //var responseModificar = await _httpClient.PutAsJsonAsync($"{ENDPOINT}/{id}", body);
-            //responseModificar.StatusCode.Should().Be(HttpStatusCode.OK);
+            habitacion.CantidadDeLugaresLibres.Should().Be(4);
+        }
 
+        private async Task CargarUnaReservaEnLaPrimeraCamaDeLaPrimeraHabitacion()
+        {
+            var consultarHabitacionesResponse = await ListarHabitaciones();
+            var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
 
-            //var consultarHabitacionesResponse = await ListarHabitaciones();
-            //consultarHabitacionesResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            //var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
+            var habitacion = habitaciones.ToList().First();
 
-            //habitaciones.Count().Should().Be(1);
+            var camaId = habitacion.CamasIndividuales.First().Id;
 
-            //var habitacion = habitaciones.ToList().First();
-            
-            //habitacion.CamasIndividuales.Count.Should().Be(0);
-            //habitacion.CamasMatrimoniales.Count.Should().Be(0);
-            //habitacion.CamasCuchetas.Count.Should().Be(1);
-            //habitacion.Nombre.Should().Be("Roja");
+            var body = new ReservaDTO
+            {
+                ANombreDe = "Un nombre",
+                CamasIds = new List<int> { camaId },
+                Desde = Utilidades.Convertir(DESDE),
+                Hasta = Utilidades.Convertir(HASTA)
+            };
+
+            await _httpClient.PostAsJsonAsync(ENDPOINT_RESERVAS, body);
         }
 
         public async Task<HttpResponseMessage> CrearUnaHabitacion()
@@ -114,6 +115,11 @@ namespace Api.IntegrationTests
         private async Task<HttpResponseMessage> ListarHabitaciones()
         {
             return await _httpClient.GetAsync(ENDPOINT);
+        }
+
+        private async Task<HttpResponseMessage> ListarHabitacionesConLugaresLibresEnElRango()
+        {
+            return await _httpClient.GetAsync($"{ENDPOINT_CONLUGARESLIBRES}?desde={Utilidades.Convertir(DESDE)}&hasta={Utilidades.Convertir(HASTA)}");
         }
     }
 }

@@ -32,12 +32,12 @@ namespace Api.Core.Models
 
         private bool AlgunaReservaIncluyeElDia(DateTime dia)
         {
-            return ReservaCamas.Select(x => x.Reserva).Any(x => x.EstaReservado(dia));
+            return ReservaCamas?.Select(x => x.Reserva).Any(x => x.EstaReservado(dia)) ?? false;
         }
 
         private bool ElRangoIncluyeAlgunaReserva(DateTime desde, DateTime hasta)
         {
-            return ReservaCamas.Select(x => x.Reserva).Any(x => x.Desde >= desde && x.Hasta <= hasta);
+            return ReservaCamas?.Select(x => x.Reserva).Any(x => x.Desde >= desde && x.Hasta <= hasta) ?? false;
         }
     }
 }

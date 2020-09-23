@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Api.Controllers.DTOs.Habitacion
 {
@@ -16,5 +14,7 @@ namespace Api.Controllers.DTOs.Habitacion
         public List<CamaCuchetaDTO> CamasCuchetas { get; set; }
 
         public List<CamaDTO> CamasMatrimoniales { get; set; }
+
+        public int CantidadDeLugaresLibres { get; set; }
     }
 }

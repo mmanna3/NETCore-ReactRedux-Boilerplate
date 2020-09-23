@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Controllers.DTOs.Habitacion;
 using AutoMapper;
@@ -26,6 +28,20 @@ namespace Api.Controllers
             var habitacionesDTO = _mapper.Map<IEnumerable<HabitacionDTO>>(habitaciones);
 
             return habitacionesDTO;
+        }
+
+        [HttpGet, Route("conLugaresLibres")]
+        public async Task<IEnumerable<HabitacionDTO>> ListarConLugaresLibres(DateTime desde, DateTime hasta)
+        {
+            var habitaciones = await _habitacionService.ListarConLugaresLibres();
+            var dtos = _mapper.Map<IEnumerable<HabitacionDTO>>(habitaciones);
+            foreach (var dto in dtos)
+            {
+                var habitacion = habitaciones.Single(x => x.Id == dto.Id);
+                dto.CantidadDeLugaresLibres = habitacion.LugaresLibresEntre(desde, hasta);
+            }
+
+            return dtos;
         }
 
         [HttpPost]
