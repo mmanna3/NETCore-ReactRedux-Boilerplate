@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input } from "components/Input";
+import Select from "components/Select";
 import ValidationSummary from "components/ValidationSummary";
 import DateRangePicker from 'components/dateRangePicker/DateRangePicker';
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice';
@@ -45,8 +46,16 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker onChangeCallback={onDesdeHastaChange} />
-        <Input label="CamasIds" name="CamasIds[0]" />
-        <Input label="Resultado" defaultValue={datos} />
+        {/* <Input label="CamasIds" name="CamasIds[0]" /> */}
+        <Select name="CamasIds[0]">
+          {datos ?
+          datos.map((habitacion) => {
+            return <option>{habitacion.nombre}</option>
+          }): <option>2</option>
+          }
+        </Select>
+        
+        {/* <Input label="Resultado" defaultValue={datos} /> */}
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
