@@ -44,3 +44,18 @@ export function fetchHabitaciones() {
     })
   }
 }
+
+export function fetchHabitacionesConLugaresLibres(desde, hasta) {
+  
+  return async dispatch => {
+    dispatch(fetchInit());
+
+    axios.get(`/api/habitaciones/conLugaresLibres?desde=${'2020-09-09'}&hasta=${'2020-09-10'}`)
+    .then((res) => {
+      dispatch(fetchSuccess(res.data));
+    })
+    .catch((error) => {
+        dispatch(fetchFailure(error.response.data));
+    })
+  }
+}
