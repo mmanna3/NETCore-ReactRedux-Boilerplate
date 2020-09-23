@@ -3,7 +3,7 @@ import Table from 'components/Table'
 import { fetchReservas, reservasSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
-import {Button} from 'components/Input'
+import {Button} from 'components/Buttons'
 
 const ReservasPage = () => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import Table from 'components/Table'
 import { fetchHuespedes, huespedesSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
-import {Button} from 'components/Input'
+import {Button} from 'components/Buttons'
 
 const HuespedesPage = () => {
   const dispatch = useDispatch();

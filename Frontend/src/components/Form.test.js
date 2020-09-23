@@ -2,7 +2,8 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import { mount, configure } from 'enzyme';
 import Form from './Form';
-import {Input, Select} from './Input';
+import {Input} from './Input';
+import Select from './Select';
 import 'mutationobserver-shim';
 import { Modal, Body } from './Modal';
 

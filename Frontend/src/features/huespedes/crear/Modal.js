@@ -1,6 +1,7 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
-import { Input, ValidationSummary } from "components/Input";
+import { Input } from "components/Input";
+import ValidationSummary from "components/ValidationSummary";
 import { crearHuesped, cleanErrors, crearHuespedSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import Form from 'components/Form';
-import { Input, SubmitButton, ValidationSummary } from "components/Input";
+import { Input } from "components/Input";
+import ValidationSummary from "components/ValidationSummary";
+import { SubmitButton } from "components/Buttons";
 import { login, loginSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Page.module.scss'

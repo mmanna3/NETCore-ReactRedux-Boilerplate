@@ -1,5 +1,6 @@
 import React from 'react';
-import { InputWithoutLabel, Select } from "components/Input";    
+import { InputWithoutLabel } from "components/Input";    
+import Select from "components/Select";    
 import { Icon } from "components/Icon";    
 
 const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {

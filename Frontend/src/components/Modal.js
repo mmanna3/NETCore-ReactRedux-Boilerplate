@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from "components/Form";
-import {SubmitButton} from "components/Input";
+import {SubmitButton} from "components/Buttons";
 
 export const Modal = ({children, onHide, isVisible}) => {  
 

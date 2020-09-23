@@ -17,12 +17,6 @@ export function Input({ register, label, name, ...otrosAtributos }) {
   )
 }
 
-export function Label({ text, ...otrosAtributos }) {
-  return (
-      <label className="label" {...otrosAtributos}>{text}</label>
-  )
-}
-
 export function InputWithoutLabel({ register, name, ...otrosAtributos }) {
   return (
       <input className="input" name={name} ref={register} {...otrosAtributos} />
@@ -44,48 +38,4 @@ export function NumericInput({ register, label, name, ...otrosAtributos }) {
       
     </div>
   )
-}
-
-export function SubmitButton({ text, loading }) {
-  if (!loading)
-    return <button className="button is-primary" type="submit">{text}</button>
-  else
-    return <button className="button is-primary is-loading" type="button">{text}</button>
-}
-
-export function Button({ text, ...otrosAtributos }) {
-  return <button className="button is-primary has-text-weight-medium" type="button" {...otrosAtributos}>{text}</button>
-}
-
-export function Select({ register, name, children, onChange, ccsClass, ...otrosAtributos }) {
-  return (
-    <div className={`select ${ccsClass}`}>
-      <select name={name} ref={register} onChange={onChange} {...otrosAtributos}>
-        {children}
-      </select>
-    </div>
-  );
-}
-
-export const ValidationSummary = ({errors}) => {
-  
-  function errorsList(){
-    var result = [];
-
-    for (var key in errors)
-      result.push(<li key={key}>{errors[key]}</li>);
-
-    return result;
-  }
-  
-  if (errors !== undefined)
-    return (
-        <div className="notification is-danger is-light">
-          <div className="content">
-              {errorsList()}
-          </div>
-        </div>
-    );
-    
-  return null;
 }
