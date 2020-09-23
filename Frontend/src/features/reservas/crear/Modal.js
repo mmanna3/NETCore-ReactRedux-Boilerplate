@@ -6,12 +6,13 @@ import DateRangePicker from 'components/dateRangePicker/DateRangePicker';
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/slice';
+import {convertirAString} from 'utils/Fecha'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
-  const [desdeHasta, onDesdeHastaChange] = useState(["", ""]);
+  const [desdeHasta, onDesdeHastaChange] = useState([convertirAString(new Date()), convertirAString(new Date())]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -31,7 +32,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     onHide();
     dispatch(cleanErrors());
   }
-  
+
   return (
     <ModalForm
         isVisible={isVisible}

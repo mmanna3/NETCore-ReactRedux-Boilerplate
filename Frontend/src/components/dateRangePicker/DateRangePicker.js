@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Input} from 'components/Input'
 import Styles from './DateRangePicker.module.scss'
 import Drp from '@wojtekmaj/react-daterange-picker'
+import {convertirAString} from 'utils/Fecha'
 
 const DateRangePicker = ({onChangeCallback}) => {
   
@@ -16,11 +17,11 @@ const DateRangePicker = ({onChangeCallback}) => {
     var result = new Date(hasta);
     //Porque como tiene muchos 9 en los milisegundos, al pasar a ISOString redondea a un día más
     result.setDate(result.getDate()-1);    
-    return result.toISOString().slice(0,10);    
+    return convertirAString(result);
   }
 
   function ajustarFechaDesde(desde) {
-    return desde.toISOString().slice(0,10);
+    return convertirAString(desde);
   }
 
   return (
