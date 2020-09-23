@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input } from "components/Input";
 import ValidationSummary from "components/ValidationSummary";
@@ -11,16 +11,16 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
-  const [desdeHasta, onDesdeHastaChange] = useState([new Date(), new Date()]);
+  const [desdeHasta, onDesdeHastaChange] = useState(["", ""]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
 
   const { datos } = useSelector(habitacionesSelector);
 
-  const fetchHabitaciones = useCallback(() => {
-    dispatch(fetchHabitacionesConLugaresLibres());
-  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchHabitacionesConLugaresLibres(desdeHasta[0], desdeHasta[1]));
+  }, [dispatch, desdeHasta]);
   
   function onSuccess() {
     onSuccessfulSubmit();
@@ -31,12 +31,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     onHide();
     dispatch(cleanErrors());
   }
-
-  function onDesdeHastaChangeInterceptor(value) {
-    onDesdeHastaChange(value);
-    fetchHabitaciones();
-  }
-
+  
   return (
     <ModalForm
         isVisible={isVisible}
@@ -48,10 +43,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
-        <DateRangePicker 
-          value={desdeHasta}
-          onChange={onDesdeHastaChangeInterceptor}
-        />
+        <DateRangePicker onChangeCallback={onDesdeHastaChange} />
         <Input label="CamasIds" name="CamasIds[0]" />
         <Input label="Resultado" defaultValue={datos} />
       </Body>

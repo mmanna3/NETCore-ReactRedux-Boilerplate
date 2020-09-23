@@ -50,7 +50,7 @@ export function fetchHabitacionesConLugaresLibres(desde, hasta) {
   return async dispatch => {
     dispatch(fetchInit());
 
-    axios.get(`/api/habitaciones/conLugaresLibres?desde=${'2020-09-09'}&hasta=${'2020-09-10'}`)
+    axios.get(`/api/habitaciones/conLugaresLibres?desde=${desde}&hasta=${hasta}`)
     .then((res) => {
       dispatch(fetchSuccess(res.data));
     })

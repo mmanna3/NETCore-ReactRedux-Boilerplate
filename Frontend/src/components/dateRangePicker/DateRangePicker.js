@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react';
 import {Input} from 'components/Input'
 import Styles from './DateRangePicker.module.scss'
 import Drp from '@wojtekmaj/react-daterange-picker'
 
-const DateRangePicker = ({value, onChange}) => {  
+const DateRangePicker = ({onChangeCallback}) => {
   
+  const [value, onValueChange] = useState([new Date(), new Date()]);
+
+  function onChange(value) {
+    onValueChange(value);
+    onChangeCallback([ajustarFechaDesde(value[0]), ajustarFechaHasta(value[1])]);
+  }
+
   function ajustarFechaHasta(hasta) {
     var result = new Date(hasta);
     //Porque como tiene muchos 9 en los milisegundos, al pasar a ISOString redondea a un día más
