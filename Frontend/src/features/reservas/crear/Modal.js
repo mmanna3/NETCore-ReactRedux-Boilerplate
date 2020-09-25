@@ -14,7 +14,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, onDesdeHastaChange] = useState([convertirAString(new Date()), convertirAString(new Date())]);
-  const [habitacionSeleccionada, actualizarHabitacionSeleccionada] = useState(null);
+  const [camasDisponibles, actualizarCamasDisponibles] = useState([]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -38,8 +38,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function onHabitacionChange(e) {
+    debugger;
     console.log(e.target.value);
-    actualizarHabitacionSeleccionada(e.target.value);
+    actualizarCamasDisponibles(habitaciones[e.target.value].camas);
   }
 
   return (
@@ -54,24 +55,21 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker onChangeCallback={onDesdeHastaChange} />
-        <Select name="CamasIds[0]" onChange={onHabitacionChange}>
+        <Select name="Habitacion" onChange={onHabitacionChange}>
           {habitacionesCargando ?
             <option>Cargando habitación..</option> :
-            habitaciones.map((habitacion) => {
-              return <option value={habitacion}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
+            habitaciones.map((habitacion, index) => {
+              return <option key={habitacion.Id} value={index}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
             })
           }
         </Select>
         <Select name="CamasIds[0]">
-
-          {/* PRIMERO, HACER QUE EN EL DTO ESTÉN TODAS LAS CAMAS EN UNA SOLA LISTA. DESPUÉS ITERARLA. */}
-
-        {/* {habitacionSeleccionada ?
-            <option>Cargando camas..</option> :
-            habitacionSeleccionada.map((habitacion) => {
-              return <option value={habitacion.id}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
+          {camasDisponibles.length === 0 ?
+            <option>No hay camas disponibles</option> :
+            camasDisponibles.map((cama) => {
+              return <option key={cama.Id} value={cama.Id}>{cama.nombre} ({cama.tipo})</option>
             })
-          } */}
+          }
         </Select>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
