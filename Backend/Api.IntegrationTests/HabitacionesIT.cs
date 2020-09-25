@@ -48,7 +48,7 @@ namespace Api.IntegrationTests
             await CargarUnaReservaEnLaPrimeraCamaDeLaPrimeraHabitacion();
 
             var consultarHabitacionesResponse = await ListarHabitacionesConLugaresLibresEnElRango();
-            var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
+            var habitaciones = await consultarHabitacionesResponse.Content.ReadAsAsync<IEnumerable<HabitacionParaReservaDTO>>();
             var habitacion = habitaciones.ToList().First();
 
             habitacion.CantidadDeLugaresLibres.Should().Be(4);

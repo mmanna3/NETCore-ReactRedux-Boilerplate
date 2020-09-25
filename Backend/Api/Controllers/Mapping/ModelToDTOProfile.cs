@@ -3,6 +3,7 @@ using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.DTOs.Usuario;
 using AutoMapper;
 using Api.Core.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Api.Controllers.Mapping
 {
@@ -13,10 +14,29 @@ namespace Api.Controllers.Mapping
             CreateMap<Huesped, HuespedDTO>();
             CreateMap<Habitacion, HabitacionDTO>();
 
-            CreateMap<CamaIndividual, CamaDTO>();
-            CreateMap<CamaMatrimonial, CamaDTO>();
-            CreateMap<CamaCuchetaDeAbajo, CamaDTO>();
-            CreateMap<CamaCuchetaDeArriba, CamaDTO>();
+            CreateMap<CamaIndividual, CamaDTO>()
+                .ForMember(
+                    dest => dest.Tipo,
+                    opt => opt.MapFrom(src => "Ind.")
+                );
+
+            CreateMap<CamaMatrimonial, CamaDTO>()
+                .ForMember(
+                    dest => dest.Tipo,
+                    opt => opt.MapFrom(src => "Matrim.")
+                );
+
+            CreateMap<CamaCuchetaDeAbajo, CamaDTO>()
+                .ForMember(
+                    dest => dest.Tipo,
+                    opt => opt.MapFrom(src => "Cuch. Ab.")
+                );
+
+            CreateMap<CamaCuchetaDeArriba, CamaDTO>()
+                .ForMember(
+                    dest => dest.Tipo,
+                    opt => opt.MapFrom(src => "Cuch. Ar.")
+                );
 
             CreateMap<Habitacion, HabitacionDTO>()
                 .ForMember(
@@ -43,6 +63,16 @@ namespace Api.Controllers.Mapping
                 );
 
             CreateMap<Usuario, RegistrarDTO>();
+
+            CreateMap<Habitacion, HabitacionParaReservaDTO>()
+                .ForMember(
+                    dest => dest.Camas,
+                    opt => opt.Ignore()
+                )
+                .ForMember(
+                    dest => dest.CantidadDeLugaresLibres,
+                    opt => opt.Ignore()
+                );
         }
     }
 }

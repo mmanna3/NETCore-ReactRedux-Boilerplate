@@ -14,6 +14,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, onDesdeHastaChange] = useState([convertirAString(new Date()), convertirAString(new Date())]);
+  const [habitacionSeleccionada, actualizarHabitacionSeleccionada] = useState(null);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -36,6 +37,11 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(cleanErrors());
   }
 
+  function onHabitacionChange(e) {
+    console.log(e.target.value);
+    actualizarHabitacionSeleccionada(e.target.value);
+  }
+
   return (
     <ModalForm
         isVisible={isVisible}
@@ -48,14 +54,25 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker onChangeCallback={onDesdeHastaChange} />
-        <Select name="CamasIds[0]">
+        <Select name="CamasIds[0]" onChange={onHabitacionChange}>
           {habitacionesCargando ?
-            <option>Cargando..</option> :
+            <option>Cargando habitación..</option> :
             habitaciones.map((habitacion) => {
-              return <option>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
+              return <option value={habitacion}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
             })
           }
-        </Select>        
+        </Select>
+        <Select name="CamasIds[0]">
+
+          {/* PRIMERO, HACER QUE EN EL DTO ESTÉN TODAS LAS CAMAS EN UNA SOLA LISTA. DESPUÉS ITERARLA. */}
+
+        {/* {habitacionSeleccionada ?
+            <option>Cargando camas..</option> :
+            habitacionSeleccionada.map((habitacion) => {
+              return <option value={habitacion.id}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
+            })
+          } */}
+        </Select>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       

@@ -31,14 +31,21 @@ namespace Api.Controllers
         }
 
         [HttpGet, Route("conLugaresLibres")]
-        public async Task<IEnumerable<HabitacionDTO>> ListarConLugaresLibres(DateTime desde, DateTime hasta)
+        public async Task<IEnumerable<HabitacionParaReservaDTO>> ListarConLugaresLibres(DateTime desde, DateTime hasta)
         {
             var habitaciones = await _habitacionService.ListarConLugaresLibres();
-            var dtos = _mapper.Map<IEnumerable<HabitacionDTO>>(habitaciones);
+
+            var dtos = _mapper.Map<IEnumerable<HabitacionParaReservaDTO>>(habitaciones);
             foreach (var dto in dtos)
             {
                 var habitacion = habitaciones.Single(x => x.Id == dto.Id);
                 dto.CantidadDeLugaresLibres = habitacion.LugaresLibresEntre(desde, hasta);
+
+                dto.Camas = new List<CamaDTO>();
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasCuchetas.Select(x => x.Abajo)));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasCuchetas.Select(x => x.Arriba)));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasMatrimoniales));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasIndividuales));
             }
 
             return dtos;
