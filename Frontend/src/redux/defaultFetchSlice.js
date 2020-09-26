@@ -1,3 +1,4 @@
+import { createSlice as createSliceRTK } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
@@ -6,8 +7,8 @@ const initialState = {
   datos: [],
 }
 
-export const createSliceParam = (nombre) => {
-  return {
+export const createSlice = (nombre) => 
+  createSliceRTK({
     name: nombre,
     initialState,
     reducers: {
@@ -24,8 +25,7 @@ export const createSliceParam = (nombre) => {
         state.hasErrors = true
       },
     },
-  };
-}
+  });
 
 export function fetchFunc(endpoint, actions) {
   const { fetchInit, fetchSuccess, fetchFailure } = actions

@@ -1,13 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { createSliceParam, fetchFunc } from 'redux/defaultFetchSlice'
+import { createSlice, fetchFunc } from 'redux/defaultFetchSlice'
 
 const nombre = 'habitacionesConLugaresLibres';
-const habitacionesSlice = createSlice(createSliceParam(nombre));
+const slice = createSlice(nombre);
 
 export const habitacionesSelector = state => state[nombre]
-export default habitacionesSlice.reducer
+export default slice.reducer
 
 export function fetchHabitacionesConLugaresLibres(desde, hasta) {
   var endpoint = `/habitaciones/conLugaresLibres?desde=${desde}&hasta=${hasta}`;
-  return fetchFunc(endpoint, habitacionesSlice.actions);  
+  return fetchFunc(endpoint, slice.actions);  
 }
