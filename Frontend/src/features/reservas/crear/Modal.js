@@ -14,7 +14,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
-  const [desdeHasta, actualizarDesdeHasta] = useState([convertirAString(new Date()), convertirAString(new Date())]);
+  const [desdeHasta, actualizarDesdeHasta] = useState([new Date(), new Date()]);
   const [camasDisponibles, actualizarCamasDisponibles] = useState([]);
 
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const habitaciones = habRequest.datos;
 
   useEffect(() => {
-    dispatch(fetchHabitacionesConLugaresLibres(desdeHasta[0], desdeHasta[1]));
+    dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(desdeHasta[1])));
   }, [dispatch, desdeHasta]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }, [habitaciones]);
 
   function onSuccess() {
-    actualizarDesdeHasta([convertirAString(new Date()), convertirAString(new Date())]);    
+    actualizarDesdeHasta([new Date(), new Date()]);
     onSuccessfulSubmit();
     resetForm(resetOnChanged+1);
   }
@@ -59,7 +59,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
-        <DateRangePicker onChangeCallback={actualizarDesdeHasta} />
+        <DateRangePicker actualizarValor={actualizarDesdeHasta} valor={desdeHasta}/>
         <Label text="Camas"/>
         <Select name="Habitacion" onChange={onHabitacionChange}>
           {habitacionesCargando ?
