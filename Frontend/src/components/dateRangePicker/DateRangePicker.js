@@ -10,18 +10,7 @@ const DateRangePicker = ({onChangeCallback}) => {
 
   function onChange(value) {
     onValueChange(value);
-    onChangeCallback([ajustarFechaDesde(value[0]), ajustarFechaHasta(value[1])]);
-  }
-
-  function ajustarFechaHasta(hasta) {
-    var result = new Date(hasta);
-    //Porque como tiene muchos 9 en los milisegundos, al pasar a ISOString redondea a un día más
-    result.setDate(result.getDate()-1);    
-    return convertirAString(result);
-  }
-
-  function ajustarFechaDesde(desde) {
-    return convertirAString(desde);
+    onChangeCallback([convertirAString(value[0]), convertirAString(value[1])]);
   }
 
   return (
@@ -37,8 +26,8 @@ const DateRangePicker = ({onChangeCallback}) => {
           minDate={new Date()}
         />
       </div>
-      <Input style={{display: 'none'}} name="desde" defaultValue={ajustarFechaDesde(value[0])}/>
-      <Input style={{display: 'none'}} name="hasta" defaultValue={ajustarFechaHasta(value[1])}/>
+      <Input style={{display: 'none'}} name="desde" defaultValue={convertirAString(value[0])}/>
+      <Input style={{display: 'none'}} name="hasta" defaultValue={convertirAString(value[1])}/>
     </div>
   )
 }
