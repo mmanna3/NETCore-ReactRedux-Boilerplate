@@ -27,7 +27,7 @@ export const createSlice = (nombre) =>
     },
   });
 
-export function fetchFunc(endpoint, actions) {
+export function fetchFunc(endpoint, actions, onSuccessCallback) {
   const { fetchInit, fetchSuccess, fetchFailure } = actions
   
   return async dispatch => {
@@ -36,6 +36,7 @@ export function fetchFunc(endpoint, actions) {
     axios.get('/api'+endpoint)
     .then((res) => {      
       dispatch(fetchSuccess(res.data));
+      typeof onSuccessCallback === 'function' && onSuccessCallback();
     })
     .catch((error) => {
         dispatch(fetchFailure(error.response.data));
