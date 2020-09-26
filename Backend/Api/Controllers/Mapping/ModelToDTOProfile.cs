@@ -17,25 +17,25 @@ namespace Api.Controllers.Mapping
             CreateMap<CamaIndividual, CamaDTO>()
                 .ForMember(
                     dest => dest.Tipo,
-                    opt => opt.MapFrom(src => "Ind.")
+                    opt => opt.MapFrom(src => "Individual")
                 );
 
             CreateMap<CamaMatrimonial, CamaDTO>()
                 .ForMember(
                     dest => dest.Tipo,
-                    opt => opt.MapFrom(src => "Matrim.")
+                    opt => opt.MapFrom(src => "Matrimimonial")
                 );
 
             CreateMap<CamaCuchetaDeAbajo, CamaDTO>()
                 .ForMember(
                     dest => dest.Tipo,
-                    opt => opt.MapFrom(src => "Cuch. Ab.")
+                    opt => opt.MapFrom(src => "Cucheta Abajo")
                 );
 
             CreateMap<CamaCuchetaDeArriba, CamaDTO>()
                 .ForMember(
                     dest => dest.Tipo,
-                    opt => opt.MapFrom(src => "Cuch. Ar.")
+                    opt => opt.MapFrom(src => "Cucheta Arriba")
                 );
 
             CreateMap<Habitacion, HabitacionDTO>()

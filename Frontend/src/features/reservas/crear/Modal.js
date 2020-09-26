@@ -69,7 +69,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           {camasDisponibles.length === 0 ?
             <option>No hay camas disponibles</option> :
             camasDisponibles.map((cama) => {
-              debugger;
               return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
             })
           }
