@@ -21,7 +21,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
 
   const habRequest = useSelector(habitacionesSelector);
-  const habitacionesCargando = habRequest.loading;
+  const habitacionesCargando = habRequest.estaCargando;
   const habitaciones = habRequest.datos;
 
   useEffect(() => {

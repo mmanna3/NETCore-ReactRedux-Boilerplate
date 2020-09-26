@@ -2,8 +2,8 @@ import { createSlice as createSliceRTK } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
-  loading: false,
-  hasErrors: false,
+  estaCargando: false,
+  tieneErrores: false,
   datos: [],
 }
 
@@ -13,16 +13,16 @@ export const createSlice = (nombre) =>
     initialState,
     reducers: {
       fetchInit: state => {
-        state.loading = true
+        state.estaCargando = true
       },
       fetchSuccess: (state, { payload }) => {
         state.datos = payload
-        state.loading = false
-        state.hasErrors = false
+        state.estaCargando = false
+        state.tieneErrores = false
       },
       fetchFailure: state => {
-        state.loading = false
-        state.hasErrors = true
+        state.estaCargando = false
+        state.tieneErrores = true
       },
     },
   });

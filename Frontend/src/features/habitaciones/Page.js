@@ -7,7 +7,7 @@ import {Button} from 'components/Buttons'
 
 const HabitacionesPage = () => {
   const dispatch = useDispatch();
-  const { datos, loading, hasErrors } = useSelector(habitacionesSelector);
+  const { datos, estaCargando, tieneErrores } = useSelector(habitacionesSelector);
 
   const fetchData = useCallback(() => {
     dispatch(fetchHabitaciones());
@@ -59,8 +59,8 @@ const HabitacionesPage = () => {
                 selector={habitacionesSelector} 
                 columnas={columnas}
                 datos={datos}
-                loading={loading}
-                hasErrors={hasErrors}
+                loading={estaCargando}
+                hasErrors={tieneErrores}
         />
     </div>
   )
