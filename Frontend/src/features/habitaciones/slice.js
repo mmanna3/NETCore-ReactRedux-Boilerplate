@@ -1,61 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import {createSliceParam, fetchFunc} from './defaultFetchSlice'
 
-export const initialState = {
-  loading: false,
-  hasErrors: false,
-  datos: [],
-}
+const nombre = 'habitaciones';
+const endpoint = '/habitaciones';
+const habitacionesSlice = createSlice(createSliceParam(nombre));
 
-const habitacionesSlice = createSlice({
-  name: 'habitaciones',
-  initialState,
-  reducers: {
-    fetchInit: state => {
-      state.loading = true
-    },
-    fetchSuccess: (state, { payload }) => {
-      state.datos = payload
-      state.loading = false
-      state.hasErrors = false
-    },
-    fetchFailure: state => {
-      state.loading = false
-      state.hasErrors = true
-    },
-  },
-})
-
-export const { fetchInit, fetchSuccess, fetchFailure } = habitacionesSlice.actions
-export const habitacionesSelector = state => state.habitaciones
+export const habitacionesSelector = state => state[nombre]
 export default habitacionesSlice.reducer
 
 export function fetchHabitaciones() {
-  
-  return async dispatch => {
-    dispatch(fetchInit());
-
-    axios.get('/api/habitaciones')
-    .then((res) => {      
-      dispatch(fetchSuccess(res.data));
-    })
-    .catch((error) => {
-        dispatch(fetchFailure(error.response.data));
-    })
-  }
+  return fetchFunc(endpoint, habitacionesSlice.actions);
 }
 
 export function fetchHabitacionesConLugaresLibres(desde, hasta) {
   
-  return async dispatch => {
-    dispatch(fetchInit());
-
-    axios.get(`/api/habitaciones/conLugaresLibres?desde=${desde}&hasta=${hasta}`)
-    .then((res) => {
-      dispatch(fetchSuccess(res.data));
-    })
-    .catch((error) => {
-        dispatch(fetchFailure(error.response.data));
-    })
-  }
+  return null;
 }
