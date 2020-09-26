@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
 import { Input } from "components/Input"
-import Select from "components/Select"
+import {Button} from "components/Buttons"
 import Label from "components/Label"
 import ValidationSummary from "components/ValidationSummary"
 import DateRangePicker from 'components/dateRangePicker/DateRangePicker'
@@ -72,7 +72,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         
         
 
-
+        <Button text="Agregar cama" onClick={() => console.log("agregar cama")} style={{marginTop:"1em"}}/>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
