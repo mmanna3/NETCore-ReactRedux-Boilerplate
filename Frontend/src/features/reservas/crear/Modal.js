@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input } from "components/Input";
 import Select from "components/Select";
+import Label from "components/Label";
 import ValidationSummary from "components/ValidationSummary";
 import DateRangePicker from 'components/dateRangePicker/DateRangePicker';
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice';
@@ -55,6 +56,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker onChangeCallback={onDesdeHastaChange} />
+        <Label text="Camas"/>
         <Select name="Habitacion" onChange={onHabitacionChange}>
           {habitacionesCargando ?
             <option>Cargando habitación..</option> :
@@ -67,7 +69,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           {camasDisponibles.length === 0 ?
             <option>No hay camas disponibles</option> :
             camasDisponibles.map((cama) => {
-              return <option key={cama.Id} value={cama.Id}>{cama.nombre} ({cama.tipo})</option>
+              debugger;
+              return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
             })
           }
         </Select>
