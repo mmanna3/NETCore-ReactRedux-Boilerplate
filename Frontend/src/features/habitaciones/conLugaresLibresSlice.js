@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { createSliceParam, fetchFunc } from './defaultFetchSlice'
+import { createSliceParam, fetchFunc } from 'utils/defaultFetchSlice'
 
 const nombre = 'habitacionesConLugaresLibres';
 const habitacionesSlice = createSlice(createSliceParam(nombre));
