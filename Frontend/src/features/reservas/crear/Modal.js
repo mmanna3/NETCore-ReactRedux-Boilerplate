@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
-import { Input } from "components/Input";
-import Select from "components/Select";
-import Label from "components/Label";
-import ValidationSummary from "components/ValidationSummary";
-import DateRangePicker from 'components/dateRangePicker/DateRangePicker';
-import { crearReserva, cleanErrors, crearReservaSelector } from './slice';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice';
+import React, {useState, useEffect} from 'react'
+import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
+import { Input } from "components/Input"
+import Select from "components/Select"
+import Label from "components/Label"
+import ValidationSummary from "components/ValidationSummary"
+import DateRangePicker from 'components/dateRangePicker/DateRangePicker'
+import { crearReserva, cleanErrors, crearReservaSelector } from './slice'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice'
 import {convertirAString} from 'utils/Fecha'
+import SelectCama from './SelectCama'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
@@ -61,22 +62,17 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker actualizarValor={actualizarDesdeHasta} valor={desdeHasta}/>
         <Label text="Camas"/>
-        <Select name="Habitacion" onChange={onHabitacionChange}>
-          {habitacionesCargando ?
-            <option>Cargando habitación..</option> :
-            habitaciones.map((habitacion, index) => {
-              return <option key={habitacion.Id} value={index}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres} lugares)</option>
-            })
-          }
-        </Select>
-        <Select name="CamasIds[0]">
-          {camasDisponibles.length === 0 ?
-            <option>No hay camas disponibles</option> :
-            camasDisponibles.map((cama) => {
-              return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
-            })
-          }
-        </Select>
+
+        <SelectCama
+          habitaciones={habitaciones}
+          cargando={habitacionesCargando}
+          camasDisponibles={camasDisponibles}
+          onHabitacionChange={onHabitacionChange}
+        />
+        
+        
+
+
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
