@@ -7,7 +7,7 @@ namespace Api.Core.Models
 {
     public class Habitacion : EntidadConId
     {
-        [Required, MaxLength(30)]
+        [Required, MaxLength(12)]
         public string Nombre { get; set; }
 
         public ICollection<CamaIndividual> CamasIndividuales { get; set; }

@@ -9,7 +9,7 @@ namespace Api.Core.Models
     {
         public int Id { get; set; }
 
-        [Required, MaxLength(30)]
+        [Required, MaxLength(10)]
         public string Nombre { get; set; }
 
         public ICollection<ReservaCama> ReservaCamas { get; set; }
