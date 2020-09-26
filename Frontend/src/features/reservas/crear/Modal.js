@@ -7,7 +7,7 @@ import ValidationSummary from "components/ValidationSummary";
 import DateRangePicker from 'components/dateRangePicker/DateRangePicker';
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/slice';
+import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice';
 import {convertirAString} from 'utils/Fecha'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import habitacionesReducer from 'features/habitaciones/slice'
+import habitacionesConLugaresLibresReducer from 'features/habitaciones/conLugaresLibresSlice'
 import crearHabitacionReducer from 'features/habitaciones/crear/slice'
 
 import huespedesReducer from 'features/huespedes/slice'
@@ -20,8 +21,9 @@ const rootReducer = combineReducers({
   login: loginReducer,
   
   habitaciones: habitacionesReducer,
-  crearHabitacion : crearHabitacionReducer,
-  
+  habitacionesConLugaresLibres: habitacionesConLugaresLibresReducer,
+  crearHabitacion : crearHabitacionReducer,  
+
   huespedes: huespedesReducer,
   crearHuesped: crearHuespedReducer,
 
