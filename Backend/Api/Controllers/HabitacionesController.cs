@@ -42,10 +42,10 @@ namespace Api.Controllers
                 dto.CantidadDeLugaresLibres = habitacion.LugaresLibresEntre(desde, hasta);
 
                 dto.Camas = new List<CamaDTO>();
-                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasCuchetas.Select(x => x.Abajo)));
-                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasCuchetas.Select(x => x.Arriba)));
-                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasMatrimoniales));
-                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasIndividuales));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasCuchetas.Select(x => x.Abajo).Where(x => x.EstaLibreEntre(desde, hasta))));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasCuchetas.Select(x => x.Arriba).Where(x => x.EstaLibreEntre(desde, hasta))));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasMatrimoniales.Where(x => x.EstaLibreEntre(desde, hasta))));
+                dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasIndividuales.Where(x => x.EstaLibreEntre(desde, hasta))));
             }
 
             return dtos;
