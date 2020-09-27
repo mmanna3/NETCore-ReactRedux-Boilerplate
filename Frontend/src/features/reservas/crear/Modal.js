@@ -16,7 +16,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, actualizarDesdeHasta] = useState([new Date(), new Date()]);
-  const [camasDisponibles, actualizarCamasDisponibles] = useState([]);
+  const [camas, actualizarCamas] = useState([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -31,7 +31,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarCamasDisponibles(habitaciones[0].camas);
+      actualizarCamasDisponibles(0, habitaciones[0]);
   }, [habitaciones]);
 
   function onSuccess() {
@@ -46,7 +46,19 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function onHabitacionChange(e) {
-    actualizarCamasDisponibles(habitaciones[e.target.value].camas);
+    actualizarCamasDisponibles(0, habitaciones[e.target.value]);
+  }
+
+  function actualizarCamasDisponibles(indiceGlobal, habitacion) {
+    var camasCopia = camas;
+
+    for (let i = 0; i < camas.length; i++)
+      if (camasCopia[i].indiceGlobal === indiceGlobal) {
+        camasCopia[i].camasDisponibles = habitacion.camas;
+        break;
+      }      
+
+    actualizarCamas([...camasCopia]);
   }
 
   return (
@@ -63,12 +75,21 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <DateRangePicker actualizarValor={actualizarDesdeHasta} valor={desdeHasta}/>
         <Label text="Camas"/>
 
-        <SelectCama
-          habitaciones={habitaciones}
-          cargando={habitacionesCargando}
-          camasDisponibles={camasDisponibles}
-          onHabitacionChange={onHabitacionChange}
-        />
+        {
+          camas.map((cama) => {
+            
+            return <SelectCama
+            key={`${cama.indiceGlobal}`}
+            cama={cama}
+            habitaciones={habitaciones}
+            cargando={habitacionesCargando}
+            onHabitacionChange={onHabitacionChange}
+          />
+          }
+          )
+        }
+
+
         
         
 

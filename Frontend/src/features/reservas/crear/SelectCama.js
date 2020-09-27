@@ -2,7 +2,7 @@ import React from 'react';
 import Select from "components/Select";    
 import { Icon } from "components/Icon";    
 
-const SelectCama = ({habitaciones, cargando, camasDisponibles, onHabitacionChange}) => {
+const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -37,9 +37,9 @@ const SelectCama = ({habitaciones, cargando, camasDisponibles, onHabitacionChang
           <span className="control is-expanded">
             <span className="control is-expanded">
             <Select name="CamasIds[0]" style={{minWidth:"220px"}}>
-              {camasDisponibles.length === 0 ?
+              {cama.camasDisponibles.length === 0 ?
                 <option>No tiene</option> :
-                camasDisponibles.map((cama) => {
+                cama.camasDisponibles.map((cama) => {
                   return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
                 })
               }
