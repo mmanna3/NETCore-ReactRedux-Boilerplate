@@ -49,3 +49,7 @@ $primary: $blue;
 abbr {
     text-decoration: none !important;
 }
+
+.react-calendar__tile--active {
+    background: $blue;
+}
