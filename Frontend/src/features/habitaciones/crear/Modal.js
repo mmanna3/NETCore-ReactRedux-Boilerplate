@@ -109,7 +109,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <Input label="Nombre de la habitación" name="nombre" />
         <Label text="Camas"/>
           {camas.map(cama => {
-            console.log(camas);
             return <SelectCama key={`${cama.globalIndex}`}
                         cama={cama}
                         setTipoCama={setTipoCama}
