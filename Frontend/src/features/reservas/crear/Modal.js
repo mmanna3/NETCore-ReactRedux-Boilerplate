@@ -26,10 +26,11 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const habitaciones = habRequest.datos;
 
   useEffect(() => {
+    //Cuando hagas el remove, eliminá todas las camas salvo la primera
     dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(desdeHasta[1])));
   }, [dispatch, desdeHasta]);
 
-  useEffect(() => {
+  useEffect(() => {    
     if (habitaciones.length > 0)
       actualizarCamasDisponibles(0, habitaciones[0]);
   }, [habitaciones]);
@@ -45,8 +46,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(cleanErrors());
   }
 
-  function onHabitacionChange(e) {
-    actualizarCamasDisponibles(0, habitaciones[e.target.value]);
+  function onHabitacionChange(indiceGlobal, e) {
+    actualizarCamasDisponibles(indiceGlobal, habitaciones[e.target.value]);
   }
 
   function actualizarCamasDisponibles(indiceGlobal, habitacion) {
@@ -83,7 +84,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
             cama={cama}
             habitaciones={habitaciones}
             cargando={habitacionesCargando}
-            onHabitacionChange={onHabitacionChange}
+            onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e)}
           />
           }
           )
