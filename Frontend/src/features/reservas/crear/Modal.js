@@ -70,6 +70,20 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     actualizarCamas([...camas, {indiceGlobal: proximoIndiceGlobal, indice: proximoIndice, camasDisponibles: habitaciones[0].camas}]);
   }
 
+  function eliminarCama(indiceGlobal) {
+    if (camas.length > 1) {
+      var camasSinLaBorrada = camas.filter(cama => cama.indiceGlobal !== indiceGlobal);
+      actualizarIndices(camasSinLaBorrada);
+      actualizarCamas(camasSinLaBorrada);
+    }      
+  };
+
+  function actualizarIndices(camas){
+    for (let i = 0; i < camas.length; i++)
+      if (camas[i].indice !== i)
+        camas[i].indice = i;
+  }
+
   return (
     <ModalForm
         isVisible={isVisible}
@@ -88,12 +102,13 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           camas.map((cama) => {
             
             return <SelectCama
-            key={`${cama.indiceGlobal}`}
-            cama={cama}
-            habitaciones={habitaciones}
-            cargando={habitacionesCargando}
-            onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e)}
-          />
+              key={`${cama.indiceGlobal}`}
+              cama={cama}
+              habitaciones={habitaciones}
+              cargando={habitacionesCargando}
+              onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e)}
+              eliminar={eliminarCama}
+            />
           }
           )
         }

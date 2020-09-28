@@ -2,7 +2,7 @@ import React from 'react';
 import Select from "components/Select";    
 import { Icon } from "components/Icon";    
 
-const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange}) => {
+const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -49,7 +49,7 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange}) => {
         </div>
       </div>
 
-      <button className="button has-text-grey has-background-light" type="button" onClick={() => console.log('aas')}>
+      <button className="button has-text-grey has-background-light" type="button" onClick={() => eliminar(cama.indiceGlobal)}>
         <Icon faCode="trash-alt" />
       </button>
 
