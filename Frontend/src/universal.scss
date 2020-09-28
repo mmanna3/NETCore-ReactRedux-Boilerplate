@@ -44,6 +44,8 @@ $primary: $blue;
 
 .react-daterange-picker__calendar--open {
     z-index: 9;
+    top: 0px !important;
+    left: 280px !important;
 }
 
 abbr {

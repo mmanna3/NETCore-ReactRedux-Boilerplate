@@ -90,9 +90,10 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         onHide={hide}
         onSubmit={onSubmit}
         resetOnChanged={resetOnChanged}
+        minWidth="680px"
     >
       <Header title="Alta de reserva" onHide={hide} />
-      <Body>
+      <Body minHeight="420px">
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker actualizarValor={actualizarDesdeHasta} valor={desdeHasta}/>

@@ -2,7 +2,7 @@ import React from 'react'
 import Form from "components/Form";
 import {SubmitButton} from "components/Buttons";
 
-export const Modal = ({children, onHide, isVisible}) => {  
+export const Modal = ({children, onHide, isVisible, minWidth}) => {  
 
   var visibility = {
     true: 'is-active',
@@ -12,17 +12,17 @@ export const Modal = ({children, onHide, isVisible}) => {
   return (
     <div className={`modal ${visibility[isVisible]}`}>
       <div className="modal-background" onClick={onHide}></div>
-      <div className="modal-card">
+      <div className="modal-card" style={{minWidth: minWidth}}>
           {children}
       </div>
     </div>
   )
 }
 
-export const ModalForm = ({children, onHide, isVisible, onSubmit, resetOnChanged}) => {  
+export const ModalForm = ({children, onHide, isVisible, onSubmit, resetOnChanged, minWidth}) => {  
 
   return (
-    <Modal onHide={onHide} isVisible={isVisible}>
+    <Modal onHide={onHide} isVisible={isVisible} minWidth={minWidth}>
         <Form onSubmit={onSubmit} resetOnChanged={resetOnChanged}>
           {children}
         </Form>
@@ -60,9 +60,9 @@ export const FooterAcceptCancel = ({onCancel, loading}) => {
   );
 }
 
-export const Body = ({children}) => {
+export const Body = ({children, minHeight}) => {
   return (
-    <section className="modal-card-body" style={{width: 'inherit'}}>
+    <section className="modal-card-body" style={{width: 'inherit', minHeight: minHeight}}>
       <div className="content">
         {children}
       </div>
