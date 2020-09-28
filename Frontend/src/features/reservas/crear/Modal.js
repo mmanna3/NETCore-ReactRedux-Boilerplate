@@ -62,6 +62,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     actualizarCamas([...camasCopia]);
   }
 
+  function agregarCama() {
+    var ultimaCama = camas.slice(-1).pop();
+    var proximoIndiceGlobal = ultimaCama.indiceGlobal + 1;
+    var proximoIndice = ultimaCama.indice + 1;
+    
+    actualizarCamas([...camas, {indiceGlobal: proximoIndiceGlobal, indice: proximoIndice, camasDisponibles: habitaciones[0].camas}]);
+  }
+
   return (
     <ModalForm
         isVisible={isVisible}
@@ -94,7 +102,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         
         
 
-        <Button text="Agregar cama" onClick={() => console.log("agregar cama")} style={{marginTop:"1em"}}/>
+        <Button text="Agregar cama" onClick={agregarCama} style={{marginTop:"1em"}}/>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       
