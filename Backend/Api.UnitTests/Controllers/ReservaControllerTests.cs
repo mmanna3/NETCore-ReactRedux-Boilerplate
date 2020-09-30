@@ -112,7 +112,7 @@ namespace Api.UnitTests.Controllers
             _unaReservaDto = new ReservaDTO
             {
                 ANombreDe = A_NOMBRE_DE,
-                CamasIds = new List<int>{UN_CAMA_ID},
+                CamasIds = new List<int?>{UN_CAMA_ID},
                 Desde = Utilidades.Convertir(DESDE),
                 Hasta = Utilidades.Convertir(HASTA)
             };

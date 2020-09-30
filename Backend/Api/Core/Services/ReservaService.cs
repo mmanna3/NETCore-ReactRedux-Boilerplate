@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
@@ -24,11 +25,19 @@ namespace Api.Core.Services
 
         public async Task<int> Crear(Reserva reserva)
         {
+            if (HayUnaCamaReservadaDosVeces(reserva))
+                throw new AppException("No puede reservarse dos veces la misma cama");
+
             _repository.Crear(reserva);
 
             await _unitOfWork.CompleteAsync();
             
             return reserva.Id;
+        }
+
+        private static bool HayUnaCamaReservadaDosVeces(Reserva reserva)
+        {
+            return reserva.ReservaCamas.Select(x => x.CamaId).Count() != reserva.ReservaCamas.Select(x => x.CamaId).Distinct().Count();
         }
     }
 }
