@@ -36,6 +36,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   function onSuccess() {
     actualizarDesdeHasta([new Date(), new Date()]);
+    actualizarCamas([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);
     onSuccessfulSubmit();
     resetForm(resetOnChanged+1);
   }
