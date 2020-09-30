@@ -48,7 +48,7 @@ namespace Api.Controllers
                 dto.Camas.AddRange(_mapper.Map<IEnumerable<CamaDTO>>(habitacion.CamasIndividuales.Where(x => x.EstaLibreEntre(desde, hasta))));
             }
 
-            return dtos;
+            return dtos.OrderByDescending(x => x.CantidadDeLugaresLibres);
         }
 
         [HttpPost]
