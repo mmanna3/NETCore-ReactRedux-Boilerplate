@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Controllers.DTOs;
+using Api.Core;
 using Api.Core.Models;
 using AutoMapper;
 using Api.Core.Services.Interfaces;
@@ -31,6 +33,9 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<int> Crear([FromBody] ReservaDTO dto)
         {
+            if (dto.CamasIds.Count != dto.CamasIds.Distinct().Count())
+                throw new AppException("No puede reservarse dos veces la misma cama");
+
             var reserva = _mapper.Map<Reserva>(dto);
             var id = await _service.Crear(reserva);
 
