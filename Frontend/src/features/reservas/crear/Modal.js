@@ -26,7 +26,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const habitaciones = habRequest.datos;
 
   useEffect(() => {
-    //Cuando hagas el remove, eliminá todas las camas salvo la primera
     dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(desdeHasta[1])));
   }, [dispatch, desdeHasta]);
 
