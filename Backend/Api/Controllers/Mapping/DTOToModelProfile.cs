@@ -46,7 +46,12 @@ namespace Api.Controllers.Mapping
                 .ForMember(
                     dest => dest.Arriba,
                     opt => opt.MapFrom(src => src.Arriba)
-                );
+                )
+                .AfterMap((dto, entity) =>
+                {
+                    entity.Arriba = new CamaCuchetaDeArriba {Nombre = dto.Nombre};
+                    entity.Abajo = new CamaCuchetaDeAbajo {Nombre = dto.Nombre};
+                });
 
             CreateMap<ReservaDTO, Reserva>()
                 .ForMember(

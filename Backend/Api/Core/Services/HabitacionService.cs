@@ -84,10 +84,7 @@ namespace Api.Core.Services
                 nombres.AddRange(habitacion.CamasMatrimoniales?.Select(x => x.Nombre));
 
             if (habitacion.CamasCuchetas != null)
-            {
-                nombres.AddRange(habitacion.CamasCuchetas.Select(x => x.Abajo.Nombre));
-                nombres.AddRange(habitacion.CamasCuchetas.Select(x => x.Arriba.Nombre));
-            }
+                nombres.AddRange(habitacion.CamasCuchetas.Select(x => x.Abajo.Nombre)); //Es el mismo nombre arriba y abajo
 
             if (habitacion.CamasIndividuales != null)
                 nombres.AddRange(habitacion.CamasIndividuales.Select(x => x.Nombre));

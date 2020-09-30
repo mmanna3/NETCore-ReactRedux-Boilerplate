@@ -66,7 +66,7 @@ namespace Api.IntegrationTests
             var body = new ReservaDTO
             {
                 ANombreDe = "Un nombre",
-                CamasIds = new List<int> { camaId },
+                CamasIds = new List<int?> { camaId },
                 Desde = Utilidades.Convertir(DESDE),
                 Hasta = Utilidades.Convertir(HASTA)
             };
@@ -97,14 +97,7 @@ namespace Api.IntegrationTests
                 {
                     new CamaCuchetaDTO
                     {
-                        Abajo = new CamaDTO
-                        {
-                            Nombre = "Abajo"
-                        },
-                        Arriba = new CamaDTO
-                        {
-                            Nombre = "Arriba"
-                        }
+                        Nombre = "Cucheta1"
                     }
                 }
             };

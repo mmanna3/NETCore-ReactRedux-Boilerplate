@@ -68,11 +68,8 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
             </Select>
           </span>
         </div>
-        
-        {cama.tipo !== 'Cuchetas' ?
-          <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} /> :
-          <IdentificadorCamaCucheta cama={cama} setValue={setValue}/>
-        }
+                
+        <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} />
         
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(cama.globalIndex)}>
             <Icon faCode="trash-alt" />
