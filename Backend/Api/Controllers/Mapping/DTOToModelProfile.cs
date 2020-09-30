@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.DTOs.Usuario;
@@ -50,7 +51,7 @@ namespace Api.Controllers.Mapping
             CreateMap<ReservaDTO, Reserva>()
                 .ForMember(
                     m => m.ReservaCamas,
-                    dto => dto.MapFrom(x => x.CamasIds)
+                    dto => dto.MapFrom(x => x.CamasIds.Where(c => c != null))
                 )
                 .AfterMap((model, entity) =>
                 {

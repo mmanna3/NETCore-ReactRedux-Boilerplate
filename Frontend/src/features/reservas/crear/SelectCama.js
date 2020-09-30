@@ -36,14 +36,16 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
           </span>
           <span className="control is-expanded">
             <span className="control is-expanded">
-            <Select name={`CamasIds[${cama.indice}]`} style={{minWidth:"260px"}}>
-              {cama.camasDisponibles.length === 0 ?
-                <option>No tiene</option> :
-                cama.camasDisponibles.map((cama) => {
-                  return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
-                })
-              }
+            {cama.camasDisponibles.length === 0 ?
+            <Select style={{minWidth:"260px"}}>
+                <option>No tiene</option>               
+            </Select> :
+            <Select name={`CamasIds[${cama.indiceGlobal}]`} style={{minWidth:"260px"}}>
+              {cama.camasDisponibles.map((cama) => {
+                return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
+              })}
             </Select>
+            }
             </span>
           </span>
         </div>
