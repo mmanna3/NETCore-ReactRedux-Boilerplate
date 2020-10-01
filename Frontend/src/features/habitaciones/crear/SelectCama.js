@@ -5,7 +5,7 @@ import { Icon } from "components/Icon";
 
 const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
 
-  const IdentificadorIndividualOMatrimonial = ({cama, setValue}) => {
+  const Identificador = ({cama, setValue}) => {
 
     return <div className="field">
             <span className="control is-expanded">
@@ -17,35 +17,6 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
             </span>
           </div>
   };
-
-  const IdentificadorCamaCucheta = ({cama}) => {
-    
-    function setValueCucheta(){
-      var abajo = document.getElementsByName(`camasCuchetas[${cama.index}].abajo.nombre`)[0].value;
-      var arriba = document.getElementsByName(`camasCuchetas[${cama.index}].arriba.nombre`)[0].value;
-
-      setValue(cama.globalIndex, {abajo: {nombre: abajo}, arriba: {nombre: arriba}});
-    }
-    
-    return <>
-            <span className="field">
-                <InputWithoutLabel 
-                  name={`camasCuchetas[${cama.index}].abajo.nombre`} 
-                  placeholder="Id. Abajo"
-                  onChange={() => setValueCucheta()}
-                  value={cama.value?.abajo?.nombre}
-                  />
-              </span>
-              <span className="field">
-                <InputWithoutLabel 
-                  name={`camasCuchetas[${cama.index}].arriba.nombre`} 
-                  placeholder="Id. Arriba"
-                  onChange={() => setValueCucheta()}
-                  value={cama.value?.arriba?.nombre}
-                />
-              </span>
-          </>
-  };  
 
   const onTipoCamaChanged = (e) => {
     setTipoCama(cama.index, cama.tipo, e.target.value);
@@ -69,7 +40,7 @@ const SelectCama = ({cama, setTipoCama, removeCama, setValue}) => {
           </span>
         </div>
                 
-        <IdentificadorIndividualOMatrimonial cama={cama} setValue={setValue} />
+        <Identificador cama={cama} setValue={setValue} />
         
         <button className="button has-text-grey has-background-light" type="button" onClick={removeCama(cama.globalIndex)}>
             <Icon faCode="trash-alt" />
