@@ -113,8 +113,8 @@ namespace Api.UnitTests.Controllers
             {
                 ANombreDe = A_NOMBRE_DE,
                 CamasIds = new List<int?>{UN_CAMA_ID},
-                Desde = Utilidades.Convertir(DESDE),
-                Hasta = Utilidades.Convertir(HASTA)
+                Desde = Utilidades.ConvertirFecha(DESDE),
+                Hasta = Utilidades.ConvertirFecha(HASTA)
             };
         }
     }

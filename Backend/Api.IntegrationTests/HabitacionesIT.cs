@@ -67,8 +67,8 @@ namespace Api.IntegrationTests
             {
                 ANombreDe = "Un nombre",
                 CamasIds = new List<int?> { camaId },
-                Desde = Utilidades.Convertir(DESDE),
-                Hasta = Utilidades.Convertir(HASTA)
+                Desde = Utilidades.ConvertirFecha(DESDE),
+                Hasta = Utilidades.ConvertirFecha(HASTA)
             };
 
             await _httpClient.PostAsJsonAsync(ENDPOINT_RESERVAS, body);
@@ -112,7 +112,7 @@ namespace Api.IntegrationTests
 
         private async Task<HttpResponseMessage> ListarHabitacionesConLugaresLibresEnElRango()
         {
-            return await _httpClient.GetAsync($"{ENDPOINT_CONLUGARESLIBRES}?desde={Utilidades.Convertir(DESDE)}&hasta={Utilidades.Convertir(HASTA)}");
+            return await _httpClient.GetAsync($"{ENDPOINT_CONLUGARESLIBRES}?desde={Utilidades.ConvertirFecha(DESDE)}&hasta={Utilidades.ConvertirFecha(HASTA)}");
         }
     }
 }

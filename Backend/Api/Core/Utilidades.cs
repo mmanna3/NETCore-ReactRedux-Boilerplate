@@ -7,12 +7,12 @@ namespace Api.Core
     {
         public static string FORMATO_FECHA = "yyyy-MM-dd";
 
-        public static DateTime Convertir(string fecha)
+        public static DateTime ConvertirFecha(string fecha)
         {
             return DateTime.ParseExact(fecha, FORMATO_FECHA, CultureInfo.InvariantCulture);
         }
 
-        public static string Convertir(DateTime fecha)
+        public static string ConvertirFecha(DateTime fecha)
         {
             return fecha.ToString(FORMATO_FECHA);
         }

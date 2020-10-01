@@ -13,7 +13,7 @@ namespace Api.Controllers.Mapping
     {
         public DTOToModelProfile()
         {
-            CreateMap<string, DateTime>().ConvertUsing(new DateTimeTypeConverter());
+            CreateMap<string, DateTime>().ConvertUsing(new StringADateTimeConverter());
 
             CreateMap<RegistrarDTO, Usuario>();
 
@@ -74,11 +74,11 @@ namespace Api.Controllers.Mapping
                 );
         }
 
-        public class DateTimeTypeConverter : ITypeConverter<string, DateTime>
+        public class StringADateTimeConverter : ITypeConverter<string, DateTime>
         {
             public DateTime Convert(string source, DateTime destination, ResolutionContext context)
             {
-                return Utilidades.Convertir(source);
+                return Utilidades.ConvertirFecha(source);
             }
         }
     }

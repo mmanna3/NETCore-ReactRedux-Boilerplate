@@ -1,9 +1,11 @@
-﻿using Api.Controllers.DTOs;
+﻿using System;
+using System.Linq;
+using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
 using Api.Controllers.DTOs.Usuario;
+using Api.Core;
 using AutoMapper;
 using Api.Core.Models;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Api.Controllers.Mapping
 {
@@ -73,6 +75,22 @@ namespace Api.Controllers.Mapping
                     dest => dest.CantidadDeLugaresLibres,
                     opt => opt.Ignore()
                 );
+
+            CreateMap<Reserva, ReservaDTO>()
+                .ForMember(
+                    dest => dest.CamasIds,
+                    opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.CamaId))
+                );
+
+            CreateMap<DateTime, string>().ConvertUsing(new DateTimeAStringConverter());
+        }
+
+        public class DateTimeAStringConverter : ITypeConverter<DateTime, string>
+        {
+            public string Convert(DateTime source, string destination, ResolutionContext context)
+            {
+                return Utilidades.ConvertirFecha(source);
+            }
         }
     }
 }

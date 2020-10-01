@@ -18,14 +18,34 @@ namespace Api.IntegrationTests
         private const string ENDPOINT_HABITACIONES = "/api/habitaciones";
 
         private const string A_NOMBRE_DE = "Un nombre";
-        private int UN_CAMA_ID;
         private readonly DateTime DESDE = new DateTime(2020, 09, 17);
         private readonly DateTime HASTA = new DateTime(2020, 09, 18);
 
         [Test]
-        public async Task CreaReservaCorrectamente()
+        public async Task Crear_UnaReserva_Y_Listarla()
         {
 
+            var camaId = await CrearHabitacionConUnaCama();
+
+            var response = await CrearReserva(camaId);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var consultaResponse = await ListarReservas();
+            consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            var reservas = await consultaResponse.Content.ReadAsAsync<IEnumerable<ReservaDTO>>();
+
+            reservas.Count().Should().Be(1);
+            var reserva = reservas.ToList().First();
+
+            reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
+            reserva.Desde.Should().Be(Utilidades.ConvertirFecha(DESDE));
+            reserva.Hasta.Should().Be(Utilidades.ConvertirFecha(HASTA));
+            reserva.CamasIds.Should().HaveCount(1);
+            reserva.CamasIds.First().Should().Be(camaId);
+        }
+
+        private async Task<int> CrearHabitacionConUnaCama()
+        {
             var body = new HabitacionDTO
             {
                 Nombre = "Roja",
@@ -38,35 +58,21 @@ namespace Api.IntegrationTests
                 }
             };
 
-            var habitacionId = await _httpClient.PostAsJsonAsync(ENDPOINT_HABITACIONES, body);
-            var habitacionesDTO = await (await _httpClient.GetAsync(ENDPOINT_HABITACIONES)).Content.ReadAsAsync<IEnumerable<HabitacionDTO>>();
-            UN_CAMA_ID = habitacionesDTO.First().CamasIndividuales.First().Id;
+            await _httpClient.PostAsJsonAsync(ENDPOINT_HABITACIONES, body);
+            var habitacionesDTO = await (await _httpClient.GetAsync(ENDPOINT_HABITACIONES)).Content
+                .ReadAsAsync<IEnumerable<HabitacionDTO>>();
 
-            var response = await CrearReserva();
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-            //var consultaResponse = await ListarReservas();
-            //consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            //var reservas = await consultaResponse.Content.ReadAsAsync<IEnumerable<ReservaDTO>>();
-
-            //reservas.Count().Should().Be(1);
-            //var reserva = reservas.ToList().First();
-
-            //reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
-            //reserva.Desde.Should().Be(DESDE.ToShortDateString());
-            //reserva.Hasta.Should().Be(HASTA.ToShortDateString());
-            //reserva.CamasIds.Should().HaveCount(1);
-            //reserva.CamasIds.First().Should().Be(UN_CAMA_ID);
+            return habitacionesDTO.First().CamasIndividuales.First().Id;
         }
 
-        private async Task<HttpResponseMessage> CrearReserva()
+        private async Task<HttpResponseMessage> CrearReserva(int camaId)
         {
             var body = new ReservaDTO
             {
                 ANombreDe = A_NOMBRE_DE,
-                CamasIds = new List<int?> { UN_CAMA_ID },
-                Desde = Utilidades.Convertir(DESDE),
-                Hasta = Utilidades.Convertir(HASTA)
+                CamasIds = new List<int?> { camaId },
+                Desde = Utilidades.ConvertirFecha(DESDE),
+                Hasta = Utilidades.ConvertirFecha(HASTA)
             };
 
             return await _httpClient.PostAsJsonAsync(ENDPOINT, body);
