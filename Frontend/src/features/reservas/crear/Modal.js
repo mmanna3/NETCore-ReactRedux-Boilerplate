@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect } from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
 import { Input } from "components/Input"
 import {Button} from "components/Buttons"
@@ -31,7 +31,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   useEffect(() => {    
     if (habitaciones.length > 0)
-      actualizarCamasDisponibles(0, habitaciones[0]);
+      actualizarCamas([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);      
   }, [habitaciones]);
 
   function onSuccess() {
@@ -50,7 +50,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     actualizarCamasDisponibles(indiceGlobal, habitaciones[e.target.value]);
   }
 
-  function actualizarCamasDisponibles(indiceGlobal, habitacion) {
+  const actualizarCamasDisponibles = (indiceGlobal, habitacion) => {
     var camasCopia = camas;
 
     for (let i = 0; i < camas.length; i++)
