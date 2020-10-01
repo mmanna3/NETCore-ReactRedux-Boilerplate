@@ -7,10 +7,10 @@ import {Button} from 'components/Buttons'
 
 const ReservasPage = () => {
   const dispatch = useDispatch();
-  const { datos, loading, hasErrors } = useSelector(reservasSelector);
+  const { datos, estaCargando, tieneErrores } = useSelector(reservasSelector);
 
   const fetchData = useCallback(() => {
-    // dispatch(fetchReservas());
+    dispatch(fetchReservas());
   }, [dispatch]);
 
   const columnas = [
@@ -43,13 +43,13 @@ const ReservasPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <Button onClick={showModal} text="Cargar nueva" />
         </div>        
-        {/* <Table  fetchData={fetchData}
+        <Table  fetchData={fetchData}
                 selector={reservasSelector}
                 columnas={columnas}
                 datos={datos}
-                loading={loading}
-                hasErrors={hasErrors}
-        /> */}
+                loading={estaCargando}
+                hasErrors={tieneErrores}
+        />
     </div>
   )
 }
