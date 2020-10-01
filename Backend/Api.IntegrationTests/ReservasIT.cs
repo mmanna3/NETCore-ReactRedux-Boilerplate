@@ -28,12 +28,12 @@ namespace Api.IntegrationTests
 
             var body = new HabitacionDTO
             {
-                Nombre = "Azul",
+                Nombre = "Roja",
                 CamasIndividuales = new List<CamaDTO>
                 {
                     new CamaDTO
                     {
-                        Nombre = "Indi"
+                        Nombre = "Indios"
                     }
                 }
             };

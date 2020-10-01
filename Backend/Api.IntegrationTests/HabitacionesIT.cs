@@ -90,14 +90,14 @@ namespace Api.IntegrationTests
                 {
                     new CamaDTO
                     {
-                        Nombre = "Matrimonial1"
+                        Nombre = "Ma"
                     }
                 },
                 CamasCuchetas = new List<CamaCuchetaDTO>
                 {
                     new CamaCuchetaDTO
                     {
-                        Nombre = "Cucheta1"
+                        Nombre = "Cucheta"
                     }
                 }
             };

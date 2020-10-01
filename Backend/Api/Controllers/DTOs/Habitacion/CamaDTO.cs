@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        [YKNStringLength(Maximo = 30)]
+        [YKNStringLength(Maximo = 10)]
         public string Nombre { get; set; }
 
         public string Tipo { get; set; }
