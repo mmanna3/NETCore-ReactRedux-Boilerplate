@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
@@ -88,7 +89,7 @@ namespace Api.Controllers.Mapping
                     opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.CamaId))
                 );
 
-            CreateMap<Reserva, ReservaParaConsultaMensualDTO>()
+            CreateMap<Reserva, ReservasDelMesDTO.ReservaParaConsultaMensualDTO>()
                 .ForMember(
                     dest => dest.DiaInicio,
                     opt => opt.MapFrom((src, dest, _, context) => src.Desde.Month < (int)context.Options.Items["mes"] ? 1 : src.Desde.Day)
@@ -98,8 +99,22 @@ namespace Api.Controllers.Mapping
                     opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > (int)context.Options.Items["mes"] ? DateTime.DaysInMonth(src.Hasta.Year, (int)context.Options.Items["mes"]) : src.Hasta.Day)
                 )
                 .ForMember(
+                    dest => dest.CamasIds,
+                    opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.CamaId))
+                );
+
+            CreateMap<IEnumerable<Reserva>, ReservasDelMesDTO>()
+                .ForMember(
+                    dest => dest.Reservas,
+                    opt => opt.MapFrom(src => src)
+                )
+                .ForMember(
                     dest => dest.Camas,
-                    opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.Cama))
+                    opt => opt.MapFrom(src => src.SelectMany(x => x.ReservaCamas).Select(r => r.Cama).Distinct())
+                )
+                .ForMember(
+                    dest => dest.DiasDelMes,
+                    opt => opt.MapFrom((src, dest, _, context) => DateTime.DaysInMonth(src.First().Hasta.Year, (int)context.Options.Items["mes"]))
                 );
 
             CreateMap<DateTime, string>().ConvertUsing(new DateTimeAStringConverter());

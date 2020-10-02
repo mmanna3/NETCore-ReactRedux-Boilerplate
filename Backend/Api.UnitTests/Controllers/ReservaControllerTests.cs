@@ -60,15 +60,19 @@ namespace Api.UnitTests.Controllers
         {
             DadaUnaListaDeReservas();
 
-            var reservasDTO = _mapper.Map<IEnumerable<ReservaParaConsultaMensualDTO>>(_unaListaDeReservas, op => op.Items["mes"] = 8).ToList();
-            var primeraReserva = reservasDTO.First();
-            
+            var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op => op.Items["mes"] = 8);
+            var primeraReserva = reservasDTO.Reservas.First();
+
+            reservasDTO.DiasDelMes.Should().Be(31);
+            reservasDTO.Camas.Should().HaveCount(2);
+            reservasDTO.Camas.Single(x => x.Nombre == "a").Tipo.Should().Be("Cucheta abajo");
+
             primeraReserva.DiaInicio.Should().Be(1);
             primeraReserva.DiaFin.Should().Be(31);
             primeraReserva.ANombreDe.Should().Be(A_NOMBRE_DE);
-            primeraReserva.Camas.Should().HaveCount(2);
-            primeraReserva.Camas.First().Id.Should().Be(1);
-            primeraReserva.Camas.Skip(1).First().Id.Should().Be(2);
+            primeraReserva.CamasIds.Should().HaveCount(2);
+            primeraReserva.CamasIds.First().Should().Be(1);
+            primeraReserva.CamasIds.Skip(1).First().Should().Be(2);
         }
 
         private void DadaUnaListaDeReservas()
@@ -83,10 +87,19 @@ namespace Api.UnitTests.Controllers
                 Desde = DESDE,
                 Hasta = HASTA,
                 ANombreDe = A_NOMBRE_DE,
-                ReservaCamas = new List<ReservaCama> { new ReservaCama{ Cama = cama1 }, new ReservaCama{ Cama = cama2 } }
+                ReservaCamas = new List<ReservaCama> { new ReservaCama{ Cama = cama1, CamaId = cama1.Id}, new ReservaCama{ Cama = cama2, CamaId = cama2.Id } }
+            };
+
+            var r2 = new Reserva
+            {
+                Desde = DESDE,
+                Hasta = HASTA,
+                ANombreDe = A_NOMBRE_DE,
+                ReservaCamas = new List<ReservaCama> { new ReservaCama { Cama = cama1, CamaId = cama1.Id }, new ReservaCama { Cama = cama2, CamaId = cama2.Id } }
             };
 
             _unaListaDeReservas.Add(r1);
+            _unaListaDeReservas.Add(r2);
         }
 
         private void DadaUnaReservaDto()

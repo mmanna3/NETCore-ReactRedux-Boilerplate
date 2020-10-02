@@ -33,17 +33,16 @@ namespace Api.IntegrationTests
 
             var consultaResponse = await ListarReservasMensuales(DESDE.Month);
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            var reservas = await consultaResponse.Content.ReadAsAsync<IEnumerable<ReservaParaConsultaMensualDTO>>();
+            var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
 
-            reservas.Count().Should().Be(1);
-            var reserva = reservas.ToList().First();
+            reservasDelMes.Reservas.Count().Should().Be(1);
+            var reserva = reservasDelMes.Reservas.ToList().First();
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
             reserva.DiaInicio.Should().Be(17);
             reserva.DiaFin.Should().Be(18);
-            reserva.Camas.Should().HaveCount(1);
-            reserva.Camas.First().Id.Should().Be(camaId);
-            reserva.Camas.First().Tipo.Should().Be(CAMA_TIPO);
+            reserva.CamasIds.Should().HaveCount(1);
+            reserva.CamasIds.First().Should().Be(camaId);
         }
 
         private async Task<int> CrearHabitacionConUnaCama()
