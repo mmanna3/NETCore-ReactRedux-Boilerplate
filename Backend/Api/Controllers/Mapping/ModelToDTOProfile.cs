@@ -16,6 +16,12 @@ namespace Api.Controllers.Mapping
             CreateMap<Huesped, HuespedDTO>();
             CreateMap<Habitacion, HabitacionDTO>();
 
+            CreateMap<Cama, CamaDTO>()
+                .ForMember(
+                    dest => dest.Tipo,
+                    opt => opt.MapFrom(src => src.Tipo())
+                );
+
             CreateMap<CamaIndividual, CamaDTO>()
                 .ForMember(
                     dest => dest.Tipo,
@@ -80,6 +86,20 @@ namespace Api.Controllers.Mapping
                 .ForMember(
                     dest => dest.CamasIds,
                     opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.CamaId))
+                );
+
+            CreateMap<Reserva, ReservaParaConsultaMensualDTO>()
+                .ForMember(
+                    dest => dest.DiaInicio,
+                    opt => opt.MapFrom((src, dest, _, context) => src.Desde.Month < (int)context.Options.Items["mes"] ? 1 : src.Desde.Day)
+                )
+                .ForMember(
+                    dest => dest.DiaFin,
+                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > (int)context.Options.Items["mes"] ? DateTime.DaysInMonth(src.Hasta.Year, (int)context.Options.Items["mes"]) : src.Hasta.Day)
+                )
+                .ForMember(
+                    dest => dest.Camas,
+                    opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.Cama))
                 );
 
             CreateMap<DateTime, string>().ConvertUsing(new DateTimeAStringConverter());

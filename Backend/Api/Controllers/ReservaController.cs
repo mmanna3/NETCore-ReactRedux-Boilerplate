@@ -31,10 +31,10 @@ namespace Api.Controllers
         }
 
         [HttpGet, Route("mensuales")]
-        public async Task<IEnumerable<ReservaDTO>> ListarMensuales(int mes)
+        public async Task<IEnumerable<ReservaParaConsultaMensualDTO>> ListarMensuales(int mes)
         {
             var reservas = await _service.ListarMensuales(mes);
-            var reservaDTOs = _mapper.Map<IEnumerable<ReservaDTO>>(reservas);
+            var reservaDTOs = _mapper.Map<IEnumerable<ReservaParaConsultaMensualDTO>>(reservas, op => op.Items["mes"] = mes);
 
             return reservaDTOs;
         }

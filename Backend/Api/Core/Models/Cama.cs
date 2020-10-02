@@ -39,5 +39,7 @@ namespace Api.Core.Models
         {
             return ReservaCamas?.Select(x => x.Reserva).Any(x => x.Desde >= desde && x.Hasta <= hasta) ?? false;
         }
+
+        public abstract string Tipo();
     }
 }

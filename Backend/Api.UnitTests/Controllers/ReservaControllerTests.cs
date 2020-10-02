@@ -24,7 +24,7 @@ namespace Api.UnitTests.Controllers
         private IList<Reserva> _unaListaDeReservas;
         private const string A_NOMBRE_DE = "Un nombre";
         private const int UN_CAMA_ID = 1;
-        private readonly DateTime DESDE = new DateTime(2020, 09, 17);
+        private readonly DateTime DESDE = new DateTime(2020, 07, 17);
         private readonly DateTime HASTA = new DateTime(2020, 09, 17);
 
         [SetUp]
@@ -55,57 +55,39 @@ namespace Api.UnitTests.Controllers
             reserva.ReservaCamas.First().CamaId.Should().Be(UN_CAMA_ID);
         }
 
-        //[Test]
-        //public void MapeaCorrectamenteEnLaConsulta()
-        //{
-        //    DadaUnaListaDeHabitaciones();
+        [Test]
+        public void MapeaCorrectamenteEnLaConsultaMensual()
+        {
+            DadaUnaListaDeReservas();
 
-        //    var habitacionesDTO = _mapper.Map<IEnumerable<HabitacionDTO>>(_unaListaDeHabitaciones).ToList();
+            var reservasDTO = _mapper.Map<IEnumerable<ReservaParaConsultaMensualDTO>>(_unaListaDeReservas, op => op.Items["mes"] = 8).ToList();
+            var primeraReserva = reservasDTO.First();
+            
+            primeraReserva.DiaInicio.Should().Be(1);
+            primeraReserva.DiaFin.Should().Be(31);
+            primeraReserva.ANombreDe.Should().Be(A_NOMBRE_DE);
+            primeraReserva.Camas.Should().HaveCount(2);
+            primeraReserva.Camas.First().Id.Should().Be(1);
+            primeraReserva.Camas.Skip(1).First().Id.Should().Be(2);
+        }
 
-        //    habitacionesDTO.First().CamasMatrimoniales.Count.Should().Be(1);
-        //    habitacionesDTO.First().CamasIndividuales.Count.Should().Be(1);
-        //    habitacionesDTO.First().CamasCuchetas.Count.Should().Be(1);
-        //}
+        private void DadaUnaListaDeReservas()
+        {
+            _unaListaDeReservas = new List<Reserva>();
 
-        //private void DadaUnaListaDeHabitaciones()
-        //{
-        //    _unaListaDeHabitaciones = new List<Habitacion>();
+            var cama1 = new CamaCuchetaDeAbajo {Id = 1, Nombre = "a"};
+            var cama2 = new CamaIndividual {Id = 2, Nombre = "b"};
+            
+            var r1 = new Reserva
+            {
+                Desde = DESDE,
+                Hasta = HASTA,
+                ANombreDe = A_NOMBRE_DE,
+                ReservaCamas = new List<ReservaCama> { new ReservaCama{ Cama = cama1 }, new ReservaCama{ Cama = cama2 } }
+            };
 
-        //    var h1 = new Habitacion
-        //    {
-        //        Nombre = "Azul",
-        //        CamasIndividuales = new List<CamaIndividual>
-        //        {
-        //            new CamaIndividual
-        //            {
-        //                Nombre = "Indi"
-        //            }
-        //        },
-        //        CamasCuchetas = new List<CamaCucheta>
-        //        {
-        //            new CamaCucheta
-        //            {
-        //                Abajo = new CamaCuchetaDeAbajo
-        //                {
-        //                    Nombre = "Abajo"
-        //                },
-        //                Arriba = new CamaCuchetaDeArriba
-        //                {
-        //                    Nombre = "Arriba"
-        //                }
-        //            }
-        //        },
-        //        CamasMatrimoniales = new List<CamaMatrimonial>
-        //        {
-        //            new CamaMatrimonial
-        //            {
-        //                Nombre = "Matri"
-        //            }
-        //        }
-        //    };
-
-        //    _unaListaDeHabitaciones.Add(h1);
-        //}
+            _unaListaDeReservas.Add(r1);
+        }
 
         private void DadaUnaReservaDto()
         {

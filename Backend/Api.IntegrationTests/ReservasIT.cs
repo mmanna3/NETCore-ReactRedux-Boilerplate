@@ -18,6 +18,7 @@ namespace Api.IntegrationTests
         private const string ENDPOINT_HABITACIONES = "/api/habitaciones";
 
         private const string A_NOMBRE_DE = "Un nombre";
+        private const string CAMA_TIPO = "Individual";
         private readonly DateTime DESDE = new DateTime(2020, 09, 17);
         private readonly DateTime HASTA = new DateTime(2020, 09, 18);
 
@@ -32,16 +33,17 @@ namespace Api.IntegrationTests
 
             var consultaResponse = await ListarReservasMensuales(DESDE.Month);
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            var reservas = await consultaResponse.Content.ReadAsAsync<IEnumerable<ReservaDTO>>();
+            var reservas = await consultaResponse.Content.ReadAsAsync<IEnumerable<ReservaParaConsultaMensualDTO>>();
 
             reservas.Count().Should().Be(1);
             var reserva = reservas.ToList().First();
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
-            reserva.Desde.Should().Be(Utilidades.ConvertirFecha(DESDE));
-            reserva.Hasta.Should().Be(Utilidades.ConvertirFecha(HASTA));
-            reserva.CamasIds.Should().HaveCount(1);
-            reserva.CamasIds.First().Should().Be(camaId);
+            reserva.DiaInicio.Should().Be(17);
+            reserva.DiaFin.Should().Be(18);
+            reserva.Camas.Should().HaveCount(1);
+            reserva.Camas.First().Id.Should().Be(camaId);
+            reserva.Camas.First().Tipo.Should().Be(CAMA_TIPO);
         }
 
         private async Task<int> CrearHabitacionConUnaCama()
@@ -53,7 +55,8 @@ namespace Api.IntegrationTests
                 {
                     new CamaDTO
                     {
-                        Nombre = "Indios"
+                        Nombre = "Indios",
+                        Tipo = CAMA_TIPO
                     }
                 }
             };

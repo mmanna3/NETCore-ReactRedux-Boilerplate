@@ -24,6 +24,7 @@ namespace Api.Persistence.Repositories
         {
             return await _context.Reservas
                 .Include(x => x.ReservaCamas)
+                .ThenInclude(x => x.Cama)
                 .Where(x => x.Desde.Month <= mes && x.Hasta.Month >= mes)
                 .ToListAsync();
         }

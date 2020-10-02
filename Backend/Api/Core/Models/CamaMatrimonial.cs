@@ -11,5 +11,9 @@ namespace Api.Core.Models
         {
             return 2;
         }
+        public override string Tipo()
+        {
+            return "Matrimonial";
+        }
     }
 }
