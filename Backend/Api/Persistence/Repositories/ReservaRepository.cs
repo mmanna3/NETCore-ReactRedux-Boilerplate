@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Core.Repositories;
@@ -16,6 +17,14 @@ namespace Api.Persistence.Repositories
         {
             return await _context.Reservas
                 .Include(x => x.ReservaCamas)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Reserva>> ListarMensuales(int mes)
+        {
+            return await _context.Reservas
+                .Include(x => x.ReservaCamas)
+                .Where(x => x.Desde.Month <= mes && x.Hasta.Month >= mes)
                 .ToListAsync();
         }
     }

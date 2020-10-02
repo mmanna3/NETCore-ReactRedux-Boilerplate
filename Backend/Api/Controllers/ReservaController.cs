@@ -30,6 +30,15 @@ namespace Api.Controllers
             return reservaDTOs;
         }
 
+        [HttpGet, Route("mensuales")]
+        public async Task<IEnumerable<ReservaDTO>> ListarMensuales(int mes)
+        {
+            var reservas = await _service.ListarMensuales(mes);
+            var reservaDTOs = _mapper.Map<IEnumerable<ReservaDTO>>(reservas);
+
+            return reservaDTOs;
+        }
+
         [HttpPost]
         public async Task<int> Crear([FromBody] ReservaDTO dto)
         {

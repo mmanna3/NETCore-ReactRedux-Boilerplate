@@ -23,6 +23,11 @@ namespace Api.Core.Services
             return await _repository.Listar();
         }
 
+        public async Task<IEnumerable<Reserva>> ListarMensuales(int mes)
+        {
+            return await _repository.ListarMensuales(mes);
+        }
+
         public async Task<int> Crear(Reserva reserva)
         {
             if (HayUnaCamaReservadaDosVeces(reserva))

@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Api.Core.Models;
 using Api.Persistence.Repositories;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Api.UnitTests.Repositories
@@ -34,6 +38,54 @@ namespace Api.UnitTests.Repositories
 
 
             //_context.ReservasDeCamas.Should().HaveCount(1);
+        }
+
+        [Test]
+        public async Task ListarMensuales_ListaReservaQueContieneDiasDelMes_MesesConsecutivos()
+        {
+            var reservaId = AgregarReservaDeUnaCamaParaLaFecha(new DateTime(2020, 09, 17), new DateTime(2020, 10, 17));
+            var listadoDeSeptiembre = await _repository.ListarMensuales(9);
+            var listadoDeOctubre = await _repository.ListarMensuales(10);
+            var listadoDeAgosto = await _repository.ListarMensuales(8);
+
+            listadoDeSeptiembre.Count().Should().Be(1);
+            listadoDeOctubre.Count().Should().Be(1);
+            listadoDeAgosto.Count().Should().Be(0);
+        }
+
+        [Test]
+        public async Task ListarMensuales_ListaReservaQueContieneDiasDelMes_MesesIncluidos()
+        {
+            var reservaId = AgregarReservaDeUnaCamaParaLaFecha(new DateTime(2020, 08, 17), new DateTime(2020, 10, 17));
+            var listadoDeSeptiembre = await _repository.ListarMensuales(9);
+            var listadoDeOctubre = await _repository.ListarMensuales(10);
+            var listadoDeAgosto = await _repository.ListarMensuales(8);
+            var listadoDeJulio = await _repository.ListarMensuales(7);
+
+            listadoDeSeptiembre.Count().Should().Be(1);
+            listadoDeOctubre.Count().Should().Be(1);
+            listadoDeAgosto.Count().Should().Be(1);
+            listadoDeJulio.Count().Should().Be(0);
+        }
+
+        private int AgregarReservaDeUnaCamaParaLaFecha(DateTime desde, DateTime hasta)
+        {
+            var habitacion = new Habitacion {Nombre = "Azul"};
+            _context.Habitaciones.Add(habitacion);
+
+            var cama = new CamaIndividual { Nombre = "Azul", Habitacion = habitacion };
+            _context.CamasIndividuales.Add(cama);
+
+            var reserva = new Reserva { ANombreDe = "Elliot", Desde = desde, Hasta = hasta };
+            _context.Reservas.Add(reserva);
+
+            var reservaCama = new ReservaCama { Cama = cama, Reserva = reserva };
+            reserva.ReservaCamas = new List<ReservaCama> { reservaCama };
+            cama.ReservaCamas = new List<ReservaCama> { reservaCama };
+
+            _context.SaveChanges();
+
+            return reserva.Id;
         }
     }
 }
