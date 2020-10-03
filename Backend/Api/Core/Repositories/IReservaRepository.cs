@@ -6,6 +6,6 @@ namespace Api.Core.Repositories
 {
     public interface IReservaRepository : IABMRepository<Reserva>
     {
-        Task<IEnumerable<Reserva>> ListarMensuales(int mes);
+        Task<IEnumerable<Reserva>> ListarMensuales(int anio, int mes);
     }
 }

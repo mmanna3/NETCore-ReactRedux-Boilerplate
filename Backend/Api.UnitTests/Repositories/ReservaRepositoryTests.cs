@@ -44,9 +44,9 @@ namespace Api.UnitTests.Repositories
         public async Task ListarMensuales_ListaReservaQueContieneDiasDelMes_MesesConsecutivos()
         {
             var reservaId = AgregarReservaDeUnaCamaParaLaFecha(new DateTime(2020, 09, 17), new DateTime(2020, 10, 17));
-            var listadoDeSeptiembre = await _repository.ListarMensuales(9);
-            var listadoDeOctubre = await _repository.ListarMensuales(10);
-            var listadoDeAgosto = await _repository.ListarMensuales(8);
+            var listadoDeSeptiembre = await _repository.ListarMensuales(2020, 9);
+            var listadoDeOctubre = await _repository.ListarMensuales(2020, 10);
+            var listadoDeAgosto = await _repository.ListarMensuales(2020, 8);
 
             listadoDeSeptiembre.Count().Should().Be(1);
             listadoDeOctubre.Count().Should().Be(1);
@@ -57,10 +57,10 @@ namespace Api.UnitTests.Repositories
         public async Task ListarMensuales_ListaReservaQueContieneDiasDelMes_MesesIncluidos()
         {
             var reservaId = AgregarReservaDeUnaCamaParaLaFecha(new DateTime(2020, 08, 17), new DateTime(2020, 10, 17));
-            var listadoDeSeptiembre = await _repository.ListarMensuales(9);
-            var listadoDeOctubre = await _repository.ListarMensuales(10);
-            var listadoDeAgosto = await _repository.ListarMensuales(8);
-            var listadoDeJulio = await _repository.ListarMensuales(7);
+            var listadoDeSeptiembre = await _repository.ListarMensuales(2020, 9);
+            var listadoDeOctubre = await _repository.ListarMensuales(2020, 10);
+            var listadoDeAgosto = await _repository.ListarMensuales(2020, 8);
+            var listadoDeJulio = await _repository.ListarMensuales(2020, 7);
 
             listadoDeSeptiembre.Count().Should().Be(1);
             listadoDeOctubre.Count().Should().Be(1);

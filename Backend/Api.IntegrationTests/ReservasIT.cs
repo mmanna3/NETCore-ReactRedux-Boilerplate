@@ -31,7 +31,7 @@ namespace Api.IntegrationTests
             var response = await CrearReserva(camaId);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            var consultaResponse = await ListarReservasMensuales(DESDE.Month);
+            var consultaResponse = await ListarReservasMensuales(DESDE.Year, DESDE.Month);
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
 
@@ -80,9 +80,9 @@ namespace Api.IntegrationTests
             return await _httpClient.PostAsJsonAsync(ENDPOINT, body);
         }
 
-        private async Task<HttpResponseMessage> ListarReservasMensuales(int mes)
+        private async Task<HttpResponseMessage> ListarReservasMensuales(int anio, int mes)
         {
-            return await _httpClient.GetAsync(ENDPOINT + $"/mensuales?mes={mes}");
+            return await _httpClient.GetAsync(ENDPOINT + $"/mensuales?mes={mes}&anio={anio}");
         }
     }
 }
