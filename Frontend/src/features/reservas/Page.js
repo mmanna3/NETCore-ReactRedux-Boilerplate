@@ -3,6 +3,7 @@ import { fetchReservas, reservasSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
 import {Button} from 'components/Buttons'
+import Tabla from './Tabla/Tabla'
 
 const ReservasPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ReservasPage = () => {
           <Button onClick={showModal} text="Cargar nueva" />
         </div>        
 
-      {tieneErrores? "Hubo un error." : (estaCargando ? "Cargando..." : datos.diasDelMes)}
+      {tieneErrores? "Hubo un error." : (estaCargando ? "Cargando..." : <Tabla datos={datos}/>)}
       
   
     </div>
