@@ -39,7 +39,7 @@ const ReservasPage = () => {
           <Button onClick={showModal} text="Cargar nueva" />
         </div>        
 
-      {tieneErrores? "Hubo un error." : (estaCargando ? "Cargando..." : <Tabla datos={datos}/>)}
+      {tieneErrores? "Hubo un error." : (estaCargando ? "Cargando..." : <Tabla datos={datos} mes="9"/>)}
       
   
     </div>
