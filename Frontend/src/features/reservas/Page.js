@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from 'react';
-import Table from 'components/Table'
+import React, { useState, useCallback, useEffect } from 'react';
 import { fetchReservas, reservasSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
@@ -10,15 +9,10 @@ const ReservasPage = () => {
   const { datos, estaCargando, tieneErrores } = useSelector(reservasSelector);
 
   const fetchData = useCallback(() => {
-    dispatch(fetchReservas());
+    dispatch(fetchReservas(2020, 9));
   }, [dispatch]);
 
-  const columnas = [
-    {
-      Header: 'Nombre',
-      accessor: 'nombre',
-    }
-  ]
+  useEffect(() => fetchData(), [fetchData]);
   
   const [IsModalVisible, setModalVisibility] = useState(false);
 
@@ -43,13 +37,10 @@ const ReservasPage = () => {
         <div className="buttons is-fullwidth is-pulled-right">
           <Button onClick={showModal} text="Cargar nueva" />
         </div>        
-        <Table  fetchData={fetchData}
-                selector={reservasSelector}
-                columnas={columnas}
-                datos={datos}
-                loading={estaCargando}
-                hasErrors={tieneErrores}
-        />
+
+      {tieneErrores? "Hubo un error." : (estaCargando ? "Cargando..." : datos.diasDelMes)}
+      
+  
     </div>
   )
 }
