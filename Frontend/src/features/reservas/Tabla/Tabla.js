@@ -5,7 +5,12 @@ const TablaReservas = ({datos, mes}) => {
 
   let filas = [];
   for (let i = 0; i < datos.diasDelMes; i++) {            
-    filas.push(<tr key={i}><td>{i+1}/{mes}</td></tr>);
+    filas.push( <tr key={i}>
+                  <td>{i+1}/{mes}</td>
+                  {datos.camas.map((cama) => 
+                    <td key={cama.id}></td>
+                  )}
+                </tr>);
   }
 
   //Esto está feo, arreglalo.
