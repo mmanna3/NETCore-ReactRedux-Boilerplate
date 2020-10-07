@@ -1,4 +1,5 @@
 import React from 'react';
+import Celda from './Celda/Celda'
 import Estilos from './Tabla.module.scss'
 
 const TablaReservas = ({datos, mes}) => {
@@ -7,8 +8,8 @@ const TablaReservas = ({datos, mes}) => {
   for (let i = 0; i < datos.diasDelMes; i++) {            
     filas.push( <tr key={i}>
                   <td>{i+1}/{mes}</td>
-                  {datos.camas.map((cama) => 
-                    <td key={cama.id}></td>
+                  {datos.camas.map((cama) =>                     
+                    <Celda key={cama.id} />
                   )}
                 </tr>);
   }
