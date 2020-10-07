@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Celda from './Celda/Celda'
 import Estilos from './Tabla.module.scss'
+import { useDispatch } from 'react-redux'
+import { inicializarTabla } from './slice'
 
 const TablaReservas = ({datos, mes}) => {
+
+  const dispatch = useDispatch();  
+  useEffect(() => {dispatch(inicializarTabla(10))}, [dispatch]);
 
   let filas = [];
   for (let i = 0; i < datos.diasDelMes; i++) {            
