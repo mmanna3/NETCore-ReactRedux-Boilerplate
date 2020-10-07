@@ -18,9 +18,6 @@ const TablaReservas = ({datos, mes}) => {
                   )}
                 </tr>);
   }
-
-  //Esto está feo, arreglalo.
-  if (datos.camas)
     
     return (
         <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
@@ -37,8 +34,6 @@ const TablaReservas = ({datos, mes}) => {
           </tbody>
         </table>
     )
-  else
-      return null;
 }
 
 export default TablaReservas;

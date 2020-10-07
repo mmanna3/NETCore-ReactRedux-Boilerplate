@@ -37,11 +37,10 @@ const ReservasPage = () => {
         <h1 className="title is-1">Reservas</h1>
         <div className="buttons is-fullwidth is-pulled-right">
           <Button onClick={showModal} text="Cargar nueva" />
-        </div>        
-
-      {tieneErrores? "Hubo un error." : (estaCargando ? "Cargando..." : <Tabla datos={datos} mes="9"/>)}
-      
-  
+        </div>
+        
+      {tieneErrores? "Hubo un error." : ((estaCargando || datos.length === 0) ? "Cargando..." : <Tabla datos={datos} mes="9"/>)}
+        
     </div>
   )
 }
