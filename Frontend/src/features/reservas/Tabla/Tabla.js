@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Celda from './Celda/Celda'
 import Estilos from './Tabla.module.scss'
 import { useDispatch } from 'react-redux'
@@ -8,7 +8,27 @@ import Encabezado from './Encabezado/Encabezado'
 const TablaReservas = ({datos, habitaciones, mes}) => {
 
   const dispatch = useDispatch();
-  useEffect(() => {dispatch(inicializarTabla(datos.diasDelMes));console.log(habitaciones)}, [dispatch, datos.diasDelMes, habitaciones]);
+  const [habitacionesConCamasUnificadas, setHabitacionesConCamasUnificadas] = useState([]);
+
+  useEffect(() => {
+    var camasIdsArray = [];
+    var habs = [];
+    for (let i = 0; i < habitaciones.length; i++) {
+      var habitacion = habitaciones[i];
+      var camasDeLaHabitacion = habitacion.camasIndividuales;
+      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasMatrimoniales);    
+      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta) => cucheta.abajo));
+      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta) => cucheta.arriba));    
+      habs.push({nombre: habitacion.nombre, camas: camasDeLaHabitacion});
+      camasIdsArray = camasIdsArray.concat(camasDeLaHabitacion.map((cama) => cama.id));
+    }
+    setHabitacionesConCamasUnificadas(habs);
+    
+    dispatch(inicializarTabla(datos.diasDelMes, camasIdsArray));
+
+    //¿Por quéeee?
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let filas = [];
   for (let i = 0; i < datos.diasDelMes; i++) {            
@@ -22,16 +42,7 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
     
     return (
         <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
-          <Encabezado habitaciones={habitaciones} />
-          
-          {/* <thead>
-            <tr>
-              <th>Día</th>
-              {datos.camas.map((cama) => 
-                <th key={cama.id}>{cama.nombre} - {cama.tipo}</th>
-              )}
-            </tr>          
-          </thead> */}
+          <Encabezado habitaciones={habitacionesConCamasUnificadas} />
           <tbody>
             {filas}
           </tbody>

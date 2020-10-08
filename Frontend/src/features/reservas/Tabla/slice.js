@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
   cantidadDeDias: 0,
+  camasIdsArray: []
 }
 
 const tablaDeReservasSlice = createSlice({
@@ -10,6 +11,7 @@ const tablaDeReservasSlice = createSlice({
   reducers: {
     inicializar: (state, { payload }) => {
       state.cantidadDeDias = payload.cantidadDeDias
+      state.camasIdsArray = payload.camasIdsArray
     },
     
   },
