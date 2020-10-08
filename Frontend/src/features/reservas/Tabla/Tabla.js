@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Celda from './Celda/Celda'
 import Estilos from './Tabla.module.scss'
-import { useDispatch } from 'react-redux'
-import { inicializarTabla } from './slice'
+import { useDispatch, useSelector } from 'react-redux'
+import { inicializarTabla, tablaDeReservasSelector } from './slice'
 import Encabezado from './Encabezado/Encabezado'
 
 const TablaReservas = ({datos, habitaciones, mes}) => {
 
   const dispatch = useDispatch();
   const [habitacionesConCamasUnificadas, setHabitacionesConCamasUnificadas] = useState([]);
+  const tablaDeReservas = useSelector(tablaDeReservasSelector);
 
   useEffect(() => {
     var camasIdsArray = [];
@@ -31,11 +32,11 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
   }, []);
 
   let filas = [];
-  for (let i = 0; i < datos.diasDelMes; i++) {            
-    filas.push( <tr key={i}>
-                  <td>{i+1}/{mes}</td>
-                  {datos.camas.map((cama) =>                     
-                    <Celda key={cama.id} />
+  for (let dia = 1; dia <= datos.diasDelMes; dia++) {            
+    filas.push( <tr key={dia}>
+                  <td>{dia}/{mes}</td>
+                  {tablaDeReservas.camasIdsArray.map((id) =>
+                    <Celda key={id} dia={dia} camaId={id}/>
                   )}
                 </tr>);
   }
