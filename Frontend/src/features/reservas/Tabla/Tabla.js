@@ -3,6 +3,7 @@ import Celda from './Celda/Celda'
 import Estilos from './Tabla.module.scss'
 import { useDispatch } from 'react-redux'
 import { inicializarTabla } from './slice'
+import Encabezado from './Encabezado/Encabezado'
 
 const TablaReservas = ({datos, habitaciones, mes}) => {
 
@@ -21,14 +22,16 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
     
     return (
         <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
-          <thead>
+          <Encabezado habitaciones={habitaciones} />
+          
+          {/* <thead>
             <tr>
               <th>Día</th>
               {datos.camas.map((cama) => 
                 <th key={cama.id}>{cama.nombre} - {cama.tipo}</th>
               )}
             </tr>          
-          </thead>
+          </thead> */}
           <tbody>
             {filas}
           </tbody>
