@@ -4,10 +4,10 @@ import Estilos from './Tabla.module.scss'
 import { useDispatch } from 'react-redux'
 import { inicializarTabla } from './slice'
 
-const TablaReservas = ({datos, mes}) => {
+const TablaReservas = ({datos, habitaciones, mes}) => {
 
-  const dispatch = useDispatch();  
-  useEffect(() => {dispatch(inicializarTabla(10))}, [dispatch]);
+  const dispatch = useDispatch();
+  useEffect(() => {dispatch(inicializarTabla(datos.diasDelMes));console.log(habitaciones)}, [dispatch, datos.diasDelMes, habitaciones]);
 
   let filas = [];
   for (let i = 0; i < datos.diasDelMes; i++) {            
