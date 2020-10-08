@@ -13,10 +13,14 @@ import ReservasPage from 'features/reservas/Page'
 import HabitacionesPage from 'features/habitaciones/Page'
 import CalendarioPage from 'features/calendario/Page'
 import LoginPage from 'features/login/Page'
-
 import Navbar from 'components/navbar/Navbar'
+import axios from 'axios';
 
 const App = () => {
+  //Para que se ejecute si se actualiza la página (con F5 o de otra forma)
+  let user = JSON.parse(localStorage.getItem('user'));
+  axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
+
   return (
     <Router>
       <Switch>
