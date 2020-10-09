@@ -109,10 +109,6 @@ namespace Api.Controllers.Mapping
                     opt => opt.MapFrom(src => src)
                 )
                 .ForMember(
-                    dest => dest.Camas,
-                    opt => opt.MapFrom(src => src.SelectMany(x => x.ReservaCamas).Select(r => r.Cama).Distinct())
-                )
-                .ForMember(
                     dest => dest.DiasDelMes,
                     opt => opt.MapFrom((src, dest, _, context) => DateTime.DaysInMonth(src.First().Hasta.Year, (int)context.Options.Items["mes"]))
                 );

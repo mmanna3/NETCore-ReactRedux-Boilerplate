@@ -64,8 +64,6 @@ namespace Api.UnitTests.Controllers
             var primeraReserva = reservasDTO.Reservas.First();
 
             reservasDTO.DiasDelMes.Should().Be(31);
-            reservasDTO.Camas.Should().HaveCount(2);
-            reservasDTO.Camas.Single(x => x.Nombre == "a").Tipo.Should().Be("Cucheta abajo");
 
             primeraReserva.DiaInicio.Should().Be(1);
             primeraReserva.DiaFin.Should().Be(31);

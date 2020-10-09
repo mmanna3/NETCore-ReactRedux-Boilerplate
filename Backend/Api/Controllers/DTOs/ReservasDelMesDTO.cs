@@ -6,7 +6,6 @@ namespace Api.Controllers.DTOs
     public class ReservasDelMesDTO
     {
         public List<ReservaParaConsultaMensualDTO> Reservas { get; set; }
-        public List<CamaDTO> Camas { get; set; }
         public int DiasDelMes { get; set; }
 
         public class ReservaParaConsultaMensualDTO
