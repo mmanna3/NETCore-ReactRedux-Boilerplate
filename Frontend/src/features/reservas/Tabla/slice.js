@@ -27,11 +27,18 @@ const tablaDeReservasSlice = createSlice({
     modificarCelda: (state, {payload}) => {
       state.tabla[payload.dia-1][`${payload.camaId}`] = payload.valor;
     },
-    
+    modificarPorReserva: (state, {payload}) => { 
+      
+      for (let dia = payload.diaInicio-1; dia <= payload.diaFin-1; dia++) {        
+        payload.camasIds.forEach(camaId => {
+          state.tabla[dia][`${camaId}`] = payload.aNombreDe; 
+        });
+      }      
+    },    
   },
 })
 
-export const { inicializar, modificarCelda } = tablaDeReservasSlice.actions
+export const { inicializar, modificarCelda, modificarPorReserva } = tablaDeReservasSlice.actions
 export const tablaDeReservasSelector = state => state.tablaDeReservas
 export default tablaDeReservasSlice.reducer
 
@@ -42,8 +49,17 @@ export function inicializarTabla(cantidadDeDias, camasIdsArray) {
 }
 
 export function actualizarCelda(dia, camaId, valor) {
-  debugger;
   return async dispatch => {
     dispatch(modificarCelda({dia, camaId, valor}));
   }
 }
+
+export function actualizarConReserva(reserva) {
+  return async dispatch => {
+    dispatch(modificarPorReserva(reserva));
+  }
+}
+
+
+
+
