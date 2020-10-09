@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Celda from './Celda/Celda'
 import Estilos from './Tabla.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { inicializarTabla, tablaDeReservasSelector } from './slice'
+import { inicializarTabla, tablaDeReservasSelector, actualizarCelda } from './slice'
 import Encabezado from './Encabezado/Encabezado'
 
 const TablaReservas = ({datos, habitaciones, mes}) => {
@@ -26,7 +26,7 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
     setHabitacionesConCamasUnificadas(habs);
     
     dispatch(inicializarTabla(datos.diasDelMes, camasIdsArray));
-
+    dispatch(actualizarCelda(1,20,"aaa"));
     //¿Por quéeee?
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

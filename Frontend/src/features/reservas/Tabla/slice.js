@@ -16,7 +16,7 @@ const tablaDeReservasSlice = createSlice({
 
       var celdaInicial = {};
       payload.camasIdsArray.forEach(camaId => {
-        celdaInicial[`${camaId}`] = "vacío";
+        celdaInicial[`${camaId}`] = "";
       });
 
       for(var i=0; i < payload.cantidadDeDias; i++) {
@@ -24,16 +24,26 @@ const tablaDeReservasSlice = createSlice({
       }
 
     },
+    modificarCelda: (state, {payload}) => {
+      state.tabla[payload.dia-1][`${payload.camaId}`] = payload.valor;
+    },
     
   },
 })
 
-export const { inicializar } = tablaDeReservasSlice.actions
+export const { inicializar, modificarCelda } = tablaDeReservasSlice.actions
 export const tablaDeReservasSelector = state => state.tablaDeReservas
 export default tablaDeReservasSlice.reducer
 
 export function inicializarTabla(cantidadDeDias, camasIdsArray) {
   return async dispatch => {
     dispatch(inicializar({cantidadDeDias, camasIdsArray}));
+  }
+}
+
+export function actualizarCelda(dia, camaId, valor) {
+  debugger;
+  return async dispatch => {
+    dispatch(modificarCelda({dia, camaId, valor}));
   }
 }
