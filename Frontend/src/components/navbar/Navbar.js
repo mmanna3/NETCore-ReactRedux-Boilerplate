@@ -2,11 +2,10 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import BotonCerrarSesion from './botonCerrarSesion/botonCerrarSesion';
 import styles from './Navbar.module.css'
+import { obtenerUsuarioLogueado } from 'features/login/servicio'
 
-const Navbar = () => {
-  
-  let user = JSON.parse(localStorage.getItem('user'));
-  let nombre = user.firstName;
+const Navbar = () => {    
+  let nombre = obtenerUsuarioLogueado().firstName;
 
   const [isBurguerActive, setIsBurguerActive] = useState('');
 

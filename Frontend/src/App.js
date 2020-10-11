@@ -7,20 +7,17 @@ import {
 } from 'react-router-dom'
 
 import 'utils/FontAwesomeLibrary';
-
 import HuespedesPage from 'features/huespedes/Page'
 import ReservasPage from 'features/reservas/Page'
 import HabitacionesPage from 'features/habitaciones/Page'
 import CalendarioPage from 'features/calendario/Page'
 import LoginPage from 'features/login/Page'
 import Navbar from 'components/navbar/Navbar'
-import axios from 'axios';
+import { siEstaLogueadoEnviarTokenEnTodosLosRequests, estaLogueado } from 'features/login/servicio'
 
 const App = () => {
-  //Para que se ejecute si se actualiza la página (con F5 o de otra forma)
-  let user = JSON.parse(localStorage.getItem('user'));
-  if (user && user.token)
-    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
+  
+  siEstaLogueadoEnviarTokenEnTodosLosRequests();
 
   return (
     <Router>
@@ -33,7 +30,7 @@ const App = () => {
 }
 
 const AuthRoutes = () => {
-  if (localStorage.getItem('user') == null)
+  if (estaLogueado())
     return <Redirect
               to={{
                 pathname: "/"

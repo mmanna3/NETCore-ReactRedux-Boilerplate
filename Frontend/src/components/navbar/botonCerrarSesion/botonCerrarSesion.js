@@ -1,9 +1,10 @@
 import React from 'react'
+import { eliminarUsuarioDeLocalStorage } from 'features/login/servicio'
 
 const BotonCerrarSesion = () => {
 
     function onClick() {
-        localStorage.removeItem('user');
+        eliminarUsuarioDeLocalStorage();        
     }
     
     return (
