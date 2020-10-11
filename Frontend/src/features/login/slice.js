@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { actualizarUsuarioEnLocalStorage } from 'features/login/servicio'
 
 export const initialState = {
   loading: false,
@@ -43,11 +44,8 @@ export function login(data, onSuccess) {
     dispatch(postInit(data));
 
     axios.post('/api/usuarios/autenticar', data)
-      .then((res) => {
-
-        localStorage.setItem('user', JSON.stringify(res.data));        
-        localStorage.getItem('user'); //Weird but necessary because sometimes it takes a while to refresh localStorage
-        
+      .then((res) => {        
+        actualizarUsuarioEnLocalStorage(res.data);        
         dispatch(postSuccess(res.data));
         onSuccess();
       })
