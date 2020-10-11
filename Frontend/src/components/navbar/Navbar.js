@@ -32,8 +32,8 @@ const Navbar = () => {
         <div id="navbarBasicExample" className={`navbar-menu ${isBurguerActive}`}>
           <div className="navbar-start">
               <Link className="navbar-item has-text-weight-medium" to="/habitaciones">Habitaciones</Link>
-              <Link className="navbar-item has-text-weight-medium" to="/huespedes">Huéspedes</Link>
-              <Link className="navbar-item has-text-weight-medium" to="/calendario">Calendario</Link>
+              {/* <Link className="navbar-item has-text-weight-medium" to="/huespedes">Huéspedes</Link>
+              <Link className="navbar-item has-text-weight-medium" to="/calendario">Calendario</Link> */}
               <Link className="navbar-item has-text-weight-medium" to="/reservas">Reservas</Link>
           </div>
 
