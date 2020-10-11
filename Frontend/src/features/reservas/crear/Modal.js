@@ -29,14 +29,13 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(desdeHasta[1])));
   }, [dispatch, desdeHasta]);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarCamas([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);      
+      actualizarCamas([{indiceGlobal:0, indice: 0, camasDisponibles:habitaciones[0].camas}]);      
   }, [habitaciones]);
 
   function onSuccess() {
-    actualizarDesdeHasta([new Date(), new Date()]);
-    actualizarCamas([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);
+    actualizarDesdeHasta([new Date(), new Date()]);    
     onSuccessfulSubmit();
     resetForm(resetOnChanged+1);
   }
