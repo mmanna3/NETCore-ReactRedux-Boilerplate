@@ -28,11 +28,9 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
     dispatch(inicializarTabla(datos.diasDelMes, camasIdsArray));
     
     datos.reservas.forEach(reserva => {     
-      dispatch(actualizarConReserva(reserva)); 
-      // dispatch(actualizarCelda(reserva.diaInicio,reserva.camasIds[0],reserva.aNombreDe));
+      dispatch(actualizarConReserva(reserva));
     });
 
-        
     //¿Por quéeee?
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
