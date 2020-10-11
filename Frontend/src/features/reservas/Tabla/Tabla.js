@@ -9,9 +9,11 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
 
   const dispatch = useDispatch();
   const [habitacionesConCamasUnificadas, setHabitacionesConCamasUnificadas] = useState([]);
+  const [filas, actualizarFilas] = useState([]);
   const tablaDeReservas = useSelector(tablaDeReservasSelector);
 
   useEffect(() => {
+
     var camasIdsArray = [];
     var habs = [];
     for (let i = 0; i < habitaciones.length; i++) {
@@ -23,36 +25,37 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
       habs.push({nombre: habitacion.nombre, camas: camasDeLaHabitacion});
       camasIdsArray = camasIdsArray.concat(camasDeLaHabitacion.map((cama) => cama.id));
     }
-    setHabitacionesConCamasUnificadas(habs);
-    
-    dispatch(inicializarTabla(datos.diasDelMes, camasIdsArray));
+    setHabitacionesConCamasUnificadas(habs);        
+
+    dispatch(inicializarTabla(datos.diasDelMes, camasIdsArray));    
     
     datos.reservas.forEach(reserva => {     
       dispatch(actualizarConReserva(reserva));
     });
 
-    //¿Por quéeee?
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [datos.diasDelMes, datos.reservas, dispatch, habitaciones]);
 
-  let filas = [];
-  for (let dia = 1; dia <= datos.diasDelMes; dia++) {            
-    filas.push( <tr key={dia}>
-                  <td>{dia}/{mes}</td>
-                  {tablaDeReservas.camasIdsArray.map((id) =>
-                    <Celda key={id} dia={dia} camaId={id}/>
-                  )}
-                </tr>);
-  }
-    
-    return (
-        <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
-          <Encabezado habitaciones={habitacionesConCamasUnificadas} />
-          <tbody>
-            {filas}
-          </tbody>
-        </table>
-    )
+  useEffect(() => {
+    let _filas = [];
+    for (let dia = 1; dia <= datos.diasDelMes; dia++) {
+      _filas.push( <tr key={dia}>
+                    <td>{dia}/{mes}</td>
+                    {tablaDeReservas.camasIdsArray.map((id) =>
+                      <Celda key={id} dia={dia} camaId={id}/>
+                    )}
+                  </tr>);
+    }
+    actualizarFilas(_filas);
+  }, [tablaDeReservas.camasIdsArray, datos.diasDelMes, mes]);
+
+  return (
+      <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
+        <Encabezado habitaciones={habitacionesConCamasUnificadas} />
+        <tbody>
+          {filas}
+        </tbody>
+      </table>
+  )
 }
 
 export default TablaReservas;
