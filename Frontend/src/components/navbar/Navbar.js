@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import BotonCerrarSesion from './botonCerrarSesion/botonCerrarSesion';
 import styles from './Navbar.module.css'
 
 const Navbar = () => {
@@ -43,12 +44,7 @@ const Navbar = () => {
                 <p className="button is-primary is-hidden-touch">
                   <span>¡Hola  </span><strong>{nombre}</strong>!
                 </p>
-                <a className="button is-primary is-hidden-touch is-inverted is-outlined" href="# ">
-                  Cerrar sesión
-                </a>
-                <a className="button is-primary is-hidden-desktop" href="# ">
-                  Cerrar sesión
-                </a>
+                <BotonCerrarSesion />
               </div>
             </div>
           </div>

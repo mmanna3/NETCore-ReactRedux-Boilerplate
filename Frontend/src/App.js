@@ -19,7 +19,8 @@ import axios from 'axios';
 const App = () => {
   //Para que se ejecute si se actualiza la página (con F5 o de otra forma)
   let user = JSON.parse(localStorage.getItem('user'));
-  axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
+  if (user && user.token)
+    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
 
   return (
     <Router>
