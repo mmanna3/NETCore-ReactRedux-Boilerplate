@@ -4,7 +4,7 @@ import { fetchHabitaciones, habitacionesSelector } from 'features/habitaciones/s
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
 import {Button} from 'components/Buttons'
-import Select from 'components/Select'
+import { SelectConLabelInline } from 'components/Select'
 import Tabla from './Tabla/Tabla'
 
 const ReservasPage = () => {
@@ -38,7 +38,7 @@ const ReservasPage = () => {
     <div className="container">
         <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         <h1 className="title is-1">Reservas</h1>
-        <Select defaultValue={mes} onChange={(e) => actualizarMes(e.target.value)}>
+        <SelectConLabelInline label="Mes" defaultValue={mes} onChange={(e) => actualizarMes(e.target.value)}>
           <option value="1">Enero</option>
           <option value="2">Febrero</option>
           <option value="3">Marzo</option>
@@ -51,7 +51,7 @@ const ReservasPage = () => {
           <option value="10">Octubre</option>
           <option value="11">Noviembre</option>
           <option value="12">Diciembre</option>
-        </Select>
+        </SelectConLabelInline>
         <div className="buttons is-fullwidth is-pulled-right">
           <Button onClick={showModal} text="Cargar nueva"/>          
         </div>

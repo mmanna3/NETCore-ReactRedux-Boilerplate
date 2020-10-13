@@ -9,3 +9,12 @@ export default function Select({ register, name, children, onChange, ccsClass, .
     </div>
   );
 }
+
+export function SelectConLabelInline({ register, name, children, onChange, ccsClass, label, ...otrosAtributos }) {
+  return (
+    <label>
+      <span style={{fontWeight: "bold",marginRight: "1em"}}>{label}</span>
+      <Select register={register} name={name} children={children} onChange={onChange} ccsClass={ccsClass} {...otrosAtributos}></Select>
+    </label>
+  );
+}
