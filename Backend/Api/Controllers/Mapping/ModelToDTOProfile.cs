@@ -96,7 +96,7 @@ namespace Api.Controllers.Mapping
                 )
                 .ForMember(
                     dest => dest.DiaFin,
-                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > (int)context.Options.Items["mes"] ? DateTime.DaysInMonth(src.Hasta.Year, (int)context.Options.Items["mes"]) : src.Hasta.Day)
+                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > (int)context.Options.Items["mes"] ? DateTime.DaysInMonth((int)context.Options.Items["anio"], (int)context.Options.Items["mes"]) : src.Hasta.Day)
                 )
                 .ForMember(
                     dest => dest.CamasIds,
@@ -110,7 +110,7 @@ namespace Api.Controllers.Mapping
                 )
                 .ForMember(
                     dest => dest.DiasDelMes,
-                    opt => opt.MapFrom((src, dest, _, context) => DateTime.DaysInMonth(src.First().Hasta.Year, (int)context.Options.Items["mes"]))
+                    opt => opt.MapFrom((src, dest, _, context) => DateTime.DaysInMonth((int)context.Options.Items["anio"], (int)context.Options.Items["mes"]))
                 );
 
             CreateMap<DateTime, string>().ConvertUsing(new DateTimeAStringConverter());

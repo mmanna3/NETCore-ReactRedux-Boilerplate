@@ -34,7 +34,11 @@ namespace Api.Controllers
         public async Task<ReservasDelMesDTO> ListarMensuales(int anio, int mes)
         {
             var reservas = await _service.ListarMensuales(anio, mes);
-            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op => op.Items["mes"] = mes);
+            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op =>
+            {
+                op.Items["mes"] = mes; 
+                op.Items["anio"] = anio;
+            });
 
             return reservaDTOs;
         }
