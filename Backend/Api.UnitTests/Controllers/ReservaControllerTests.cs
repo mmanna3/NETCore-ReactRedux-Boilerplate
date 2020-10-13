@@ -60,7 +60,11 @@ namespace Api.UnitTests.Controllers
         {
             DadaUnaListaDeReservas();
 
-            var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op => op.Items["mes"] = 8);
+            var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op =>
+            {
+                op.Items["mes"] = 8;
+                op.Items["anio"] = 2020;
+            });
             var primeraReserva = reservasDTO.Reservas.First();
 
             reservasDTO.DiasDelMes.Should().Be(31);
