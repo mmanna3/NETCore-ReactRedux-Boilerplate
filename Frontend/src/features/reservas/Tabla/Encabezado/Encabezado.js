@@ -1,19 +1,20 @@
 import React from 'react';
+import Estilos from './Encabezado.module.scss'
 
 const Encabezado = ({habitaciones}) => {
   
   return (
         <thead className="is-bordered">
           <tr>
-            <th rowSpan="2"></th>
+            <th rowSpan="2" className={Estilos.habitacion}></th>
             {habitaciones.map((habitacion, i) => 
-              <th key={i} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
+              <th key={i} className={Estilos.habitacion} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
             )}
           </tr>        
           <tr>
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
-                <th key={i}>{cama.nombre} - {cama.tipo} ({cama.id})</th>
+                <th key={i} className={Estilos.cama}>{cama.nombre} - {cama.tipo} ({cama.id})</th>
               )
             )}
           </tr>

@@ -1,0 +1,13 @@
+@import 'universal.scss';
+
+.habitacion {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+}
+
+.cama {
+  position: sticky;
+  top: 41px;
+  z-index: 12;
+}

@@ -38,8 +38,8 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
   useEffect(() => {
     let _filas = [];
     for (let dia = 1; dia <= datos.diasDelMes; dia++) {
-      _filas.push( <tr key={dia}>
-                    <td>{dia}/{mes}</td>
+      _filas.push( <tr key={dia}>                    
+                    <th className={Estilos.headcol}>{dia}/{mes}</th>
                     {tablaDeReservas.camasIdsArray.map((id) =>
                       <Celda key={id} dia={dia} camaId={id}/>
                     )}
@@ -49,12 +49,14 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
   }, [tablaDeReservas.camasIdsArray, datos.diasDelMes, mes]);
 
   return (
+    <div className={Estilos.contenedor}>
       <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
         <Encabezado habitaciones={habitacionesConCamasUnificadas} />
         <tbody>
           {filas}
         </tbody>
       </table>
+    </div>
   )
 }
 
