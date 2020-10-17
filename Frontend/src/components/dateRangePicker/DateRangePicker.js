@@ -4,11 +4,11 @@ import Styles from './DateRangePicker.module.scss'
 import Drp from '@wojtekmaj/react-daterange-picker'
 import {convertirAString} from 'utils/Fecha'
 
-const DateRangePicker = ({valor, actualizarValor}) => {    
+const DateRangePicker = ({valor, etiqueta, actualizarValor}) => {    
 
   return (
     <div className="field">
-      <label className="label">Desde - Hasta</label>
+      <label className="label">{etiqueta ? etiqueta : "Desde - Hasta"}</label>
       <div className="control">
         <Drp
           onChange={actualizarValor}

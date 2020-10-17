@@ -95,7 +95,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body minHeight="420px">
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
-        <DateRangePicker actualizarValor={actualizarDesdeHasta} valor={desdeHasta}/>
+        <DateRangePicker actualizarValor={actualizarDesdeHasta} etiqueta="Check in - Check out" valor={desdeHasta}/>
         <Label text="Camas"/>
 
         {
