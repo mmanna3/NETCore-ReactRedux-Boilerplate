@@ -39,7 +39,7 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
     let _filas = [];
     for (let dia = 1; dia <= datos.diasDelMes; dia++) {
       _filas.push( <tr key={dia}>                    
-                    <th className={Estilos.headcol}>{dia}/{mes}</th>
+                    <th className={Estilos.fecha}>{dia}/{mes}</th>
                     {tablaDeReservas.camasIdsArray.map((id) =>
                       <Celda key={id} dia={dia} camaId={id}/>
                     )}

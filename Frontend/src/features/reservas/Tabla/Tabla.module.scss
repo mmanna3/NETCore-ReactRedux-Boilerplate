@@ -1,61 +1,20 @@
 @import 'universal.scss';
 
-// .tabla thead tr th {
-//     border: 1px solid $primary-invert;
-//     background-color: $primary;
-//     color:$primary-invert;
-// }
-
-// .tabla {
-//     //border-collapse: separate;  //Para que al seleccionar las celdas, les pueda dar border-radius
-//     // border-radius: 10px;
-// }
-
-// table {
-//   border-collapse: separate;
-//   border-spacing: 0;
-//   border-top: 1px solid grey;
-// }
-
-// td, th {
-//   margin: 0;
-//   border: 1px solid grey;
-//   white-space: nowrap;
-//   border-top-width: 0px;
-// }
-
-// .contenedor {
-//   width: 500px;
-//   overflow-x: scroll;
-//   margin-left: 5em;
-//   overflow-y: visible;
-//   padding: 0;
-// }
-
-// .headcol {
-//   position: absolute;
-//   width: 5em;
-//   left: 0;
-//   top: auto;
-//   border-top-width: 1px;
-//   /*only relevant for first row*/
-//   margin-top: -1px;
-//   /*compensate for top border*/
-// }
-
-// .headcol:before {
-//   content: 'Row ';
-// }
-
-.contenedor{ width: 100%; height: 80vh; overflow: scroll;}
+.contenedor { 
+  width: 100%; 
+  height: 80vh; 
+  overflow: scroll;
+}
 
 .tabla thead tr th {
     border: 1px solid $primary-invert;
     background-color: $primary;
-    color:$primary-invert;
+    color: $primary-invert;
 }
 
-table{ text-align: center; }
+table { 
+  text-align: center; 
+}
 
 table th, table td {
   white-space: nowrap;
@@ -63,15 +22,7 @@ table th, table td {
   font-family: Arial;
 }
 
-table td:first-child{
-  position: sticky;
-  width: 100px;
-  left: 0;
-  z-index: 10;
-  background: #fff;
-}
-
-.headcol {
+.fecha {
   position: sticky;
   left: 0;
   z-index: 9;
