@@ -12,7 +12,7 @@ const Celda = ({dia, camaId}) => {
     }, [tabla, dia, camaId]); 
 
     return (
-        <td dia={dia} camaid={camaId}>{contenido}</td>
+        <td dia={dia} camaid={camaId}><div>{contenido}</div></td>
     )
 }
 

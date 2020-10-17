@@ -14,7 +14,11 @@ const Encabezado = ({habitaciones}) => {
           <tr>
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
-                <th key={i} className={Estilos.cama}>{cama.nombre} - {cama.tipo} ({cama.id})</th>
+                <th key={i} className={Estilos.cama}>
+                  <div>
+                    {cama.nombre} - {cama.tipo} ({cama.id})
+                  </div>
+                </th>
               )
             )}
           </tr>
