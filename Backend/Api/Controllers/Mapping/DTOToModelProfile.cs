@@ -64,6 +64,8 @@ namespace Api.Controllers.Mapping
                     {
                         reservaCama.Reserva = entity;
                     }
+
+                    entity.Hasta = entity.Hasta.AddDays(-1);
                 });
 
 
