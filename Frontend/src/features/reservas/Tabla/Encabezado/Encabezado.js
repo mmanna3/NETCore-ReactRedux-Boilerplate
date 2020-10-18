@@ -16,7 +16,7 @@ const Encabezado = ({habitaciones}) => {
               habitacion.camas.map((cama,i) =>
                 <th key={i} className={Estilos.cama}>
                   <div>
-                    {cama.nombre} - {cama.tipo} ({cama.id})
+                    {cama.nombre} - {cama.tipo}
                   </div>
                 </th>
               )
