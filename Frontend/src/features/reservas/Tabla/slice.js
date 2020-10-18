@@ -13,20 +13,10 @@ const tablaDeReservasSlice = createSlice({
     inicializar: (state, { payload }) => {
       state.diasArray = payload.diasArray;
       state.camasIdsArray = payload.camasIdsArray;
-      debugger;
       var celdaInicial = {};
 
-      payload.camasIdsArray.forEach(camaId => {
-        celdaInicial[`${camaId}`] = "";
-      });
-
-      payload.diasArray.forEach((dia) => state.tabla[`${dia}`] = celdaInicial)
-      
-      // for(var dia=0; dia < payload.diasArray; dia++) {
-      //   state.tabla[`${dia}`] = celdaInicial;
-      // }
-      debugger;
-
+      payload.camasIdsArray.forEach(camaId => celdaInicial[`${camaId}`] = "");
+      payload.diasArray.forEach(dia => state.tabla[`${dia}`] = celdaInicial);
     },
     modificarCelda: (state, {payload}) => {
       state.tabla[`${payload.dia}`][`${payload.camaId}`] = payload.valor;
