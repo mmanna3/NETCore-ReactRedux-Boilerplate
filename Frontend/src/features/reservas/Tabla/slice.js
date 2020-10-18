@@ -23,7 +23,7 @@ const tablaDeReservasSlice = createSlice({
     },
     modificarPorReserva: (state, {payload}) => { 
       
-      for (let dia = payload.diaInicio-1; dia <= payload.diaFin-1; dia++) {        
+      for (let dia = payload.diaInicio; dia <= payload.diaFin; dia++) {
         payload.camasIds.forEach(camaId => {
           state.tabla[`${dia}`][`${camaId}`] = payload.aNombreDe; 
         });

@@ -28,7 +28,17 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const habitaciones = habRequest.datos;
 
   useEffect(() => {
-    dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(desdeHasta[1])));
+    
+    function restarUnDiaAlHastaDelCalendarioPorqueElCheckoutNoLocuento() {
+      let milisegundosDeUnDia = (24*60*60*1000) * 1;
+      let resultado = new Date(desdeHasta[1]);
+      resultado.setTime(resultado.getTime() - milisegundosDeUnDia);
+      return resultado;
+    }
+    
+    let hasta = restarUnDiaAlHastaDelCalendarioPorqueElCheckoutNoLocuento();
+    debugger;
+    dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(hasta)));
     actualizarCantidadDeNoches(restarFechas(desdeHasta[1], desdeHasta[0]));
   }, [dispatch, desdeHasta, cantidadDeNoches]);
 
