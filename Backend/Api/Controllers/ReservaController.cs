@@ -63,6 +63,9 @@ namespace Api.Controllers
             if (dto.CamasIds.Count != dto.CamasIds.Distinct().Count())
                 throw new AppException("No puede reservarse dos veces la misma cama");
 
+            if (dto.Desde == dto.Hasta)
+                throw new AppException("Se debe seleccionar al menos una noche");
+
             var reserva = _mapper.Map<Reserva>(dto);
             var id = await _service.Crear(reserva);
 
