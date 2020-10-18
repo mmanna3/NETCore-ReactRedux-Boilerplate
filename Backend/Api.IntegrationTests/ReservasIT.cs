@@ -40,7 +40,7 @@ namespace Api.IntegrationTests
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
             reserva.DiaInicio.Should().Be(17);
-            reserva.DiaFin.Should().Be(18);
+            reserva.DiaFin.Should().Be(17);
             reserva.CamasIds.Should().HaveCount(1);
             reserva.CamasIds.First().Should().Be(camaId);
         }
@@ -65,7 +65,7 @@ namespace Api.IntegrationTests
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
             reserva.DiaInicio.Should().Be(DateTime.Today.Day - 1);
-            reserva.DiaFin.Should().Be(DateTime.Today.Day);
+            reserva.DiaFin.Should().Be(DateTime.Today.Day - 1);
             reserva.CamasIds.Should().HaveCount(1);
             reserva.CamasIds.First().Should().Be(camaId);
         }

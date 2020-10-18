@@ -50,7 +50,7 @@ namespace Api.UnitTests.Controllers
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
             reserva.Desde.Should().Be(DESDE);
-            reserva.Hasta.Should().Be(HASTA);
+            reserva.Hasta.Should().Be(HASTA.AddDays(-1));
             reserva.ReservaCamas.Should().HaveCount(1);
             reserva.ReservaCamas.First().CamaId.Should().Be(UN_CAMA_ID);
         }
