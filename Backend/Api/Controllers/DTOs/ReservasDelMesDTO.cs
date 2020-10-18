@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Api.Controllers.DTOs.Habitacion;
 
 namespace Api.Controllers.DTOs
 {
     public class ReservasDelMesDTO
     {
         public List<ReservaParaConsultaMensualDTO> Reservas { get; set; }
-        public int DiasDelMes { get; set; }
+        public string Desde { get; set; }
+        public string Hasta { get; set; }
 
         public class ReservaParaConsultaMensualDTO
         {

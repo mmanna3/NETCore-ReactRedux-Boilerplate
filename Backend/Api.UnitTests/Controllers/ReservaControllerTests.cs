@@ -59,15 +59,18 @@ namespace Api.UnitTests.Controllers
         public void MapeaCorrectamenteEnLaConsultaMensual()
         {
             DadaUnaListaDeReservas();
+            var desde = new DateTime(2020, 8, 1);
+            var hasta = new DateTime(2020, 8, 31);
 
             var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op =>
             {
-                op.Items["desde"] = new DateTime(2020, 8, 1);
-                op.Items["hasta"] = new DateTime(2020, 8, 31);
+                op.Items["desde"] = desde;
+                op.Items["hasta"] = hasta;
             });
             var primeraReserva = reservasDTO.Reservas.First();
 
-            reservasDTO.DiasDelMes.Should().Be(31);
+            reservasDTO.Desde.Should().Be(Utilidades.ConvertirFecha(desde));
+            reservasDTO.Hasta.Should().Be(Utilidades.ConvertirFecha(hasta));
 
             primeraReserva.DiaInicio.Should().Be(1);
             primeraReserva.DiaFin.Should().Be(31);

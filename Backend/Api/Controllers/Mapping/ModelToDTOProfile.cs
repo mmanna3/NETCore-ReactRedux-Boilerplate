@@ -109,9 +109,12 @@ namespace Api.Controllers.Mapping
                     opt => opt.MapFrom(src => src)
                 )
                 .ForMember(
-                    dest => dest.DiasDelMes,
-                    opt => opt.MapFrom((src, dest, _, context) => ((DateTime)context.Options.Items["hasta"]).Day)
-                    //opt => opt.MapFrom((src, dest, _, context) => DateTime.DaysInMonth((int)context.Options.Items["anio"], (int)context.Options.Items["mes"]))
+                    dest => dest.Desde,
+                    opt => opt.MapFrom((src, dest, _, context) => ((DateTime)context.Options.Items["desde"]))
+                )
+                .ForMember(
+                    dest => dest.Hasta,
+                    opt => opt.MapFrom((src, dest, _, context) => ((DateTime)context.Options.Items["hasta"]))
                 );
 
             CreateMap<DateTime, string>().ConvertUsing(new DateTimeAStringConverter());

@@ -56,6 +56,9 @@ namespace Api.IntegrationTests
             var consultaResponse = await ListarReservasActuales();
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
+            
+            reservasDelMes.Desde.Should().Be(Utilidades.ConvertirFecha(DateTime.Today.AddDays(-1)));
+            reservasDelMes.Hasta.Should().Be(Utilidades.ConvertirFecha(DateTime.Today.AddDays(15)));
 
             reservasDelMes.Reservas.Count().Should().Be(1);
             var reserva = reservasDelMes.Reservas.ToList().First();
