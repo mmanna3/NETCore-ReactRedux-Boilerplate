@@ -8,13 +8,13 @@ const Encabezado = ({habitaciones}) => {
           <tr>
             <th rowSpan="2" className={Estilos.interseccion}></th>
             {habitaciones.map((habitacion, i) => 
-              <th key={i} className={Estilos.habitacion} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
+              <th key={i} className={`has-text-weight-medium ${Estilos.habitacion}`} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
             )}
           </tr>        
           <tr>
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
-                <th key={i} className={Estilos.cama}>
+                <th key={i} className={`has-text-weight-medium ${Estilos.cama}`}>
                   <div>
                     {cama.nombre} - {cama.tipo}
                   </div>

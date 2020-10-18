@@ -67,7 +67,7 @@ const TablaReservas = ({datos, habitaciones}) => {
     tablaDeReservas.diaMesArray.forEach((diaMes) =>
       {
         _filas.push( <tr key={diaMes.dia}>                    
-                      <th className={Estilos.fecha}>{diaMes.dia}/{diaMes.mes}</th>
+                      <th className={`has-text-weight-medium ${Estilos.fecha}`}>{diaMes.dia}/{diaMes.mes}</th>
                       {tablaDeReservas.camasIdsArray.map((id) =>
                         <Celda key={id} dia={diaMes.dia} camaId={id}/>
                       )}
