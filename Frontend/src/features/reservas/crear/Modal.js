@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice'
 import {convertirAString, hoy, maniana, restarFechas} from 'utils/Fecha'
 import SelectCama from './SelectCama'
+import Estilos from './Modal.module.scss'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
@@ -96,9 +97,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Header title="Alta de reserva" onHide={hide} />
       <Body minHeight="420px">
         <ValidationSummary errors={validationErrors} />
-        <Input label="Huesped" name="aNombreDe" />
+        <Input label="Huésped" name="aNombreDe" />
         <DateRangePicker actualizarValor={actualizarDesdeHasta} etiqueta="Check in - Check out" valor={desdeHasta}/>
-        <Label text={`Noches: ${cantidadDeNoches}`}/>
+        <p className={Estilos.noches}><strong>Noches: </strong>{cantidadDeNoches}</p>
         <Label text="Camas"/>
 
         {
