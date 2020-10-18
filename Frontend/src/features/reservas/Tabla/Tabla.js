@@ -18,19 +18,21 @@ const TablaReservas = ({datos, habitaciones}) => {
     var _dias = [];
 
     function calcularDias(){      
-      
-      if (obtenerMes(datos.hasta) === obtenerMes(datos.desde)) {
-        for (let i = parseInt(obtenerDia(datos.desde)); i <= obtenerDia(datos.hasta); i++) {
-          _dias.push(i);
+      var mesDesde = obtenerMes(datos.desde);
+      var mesHasta = obtenerMes(datos.hasta);
+
+      if (mesDesde === mesHasta) {
+        for (let dia = parseInt(obtenerDia(datos.desde)); dia <= obtenerDia(datos.hasta); dia++) {
+          _dias.push({'dia': dia, 'mes': mesDesde});
         }    
-      } else {
+      } else {        
         var diasDelPrimerMes = new Date(obtenerAnio(datos.desde), obtenerMes(datos.desde), 0).getDate(); //dia 0 es el último día del mes anterior        
-        for (let i = parseInt(obtenerDia(datos.desde)); i <= diasDelPrimerMes; i++) {
-          _dias.push(i);
+        for (let dia = parseInt(obtenerDia(datos.desde)); dia <= diasDelPrimerMes; dia++) {
+          _dias.push({'dia': dia, 'mes': mesDesde});
         }
-        for (let i = 1; i <= parseInt(obtenerDia(datos.hasta)); i++) {
-          _dias.push(i);
-        }
+        for (let dia = 1; dia <= parseInt(obtenerDia(datos.hasta)); dia++) {
+          _dias.push({'dia': dia, 'mes': mesHasta});
+        }        
       }
     }
 
@@ -62,19 +64,19 @@ const TablaReservas = ({datos, habitaciones}) => {
   useEffect(() => {    
 
     let _filas = [];
-    tablaDeReservas.diasArray.forEach((dia) =>
+    tablaDeReservas.diaMesArray.forEach((diaMes) =>
       {
-        _filas.push( <tr key={dia}>                    
-                      <th className={Estilos.fecha}>{dia}</th>
+        _filas.push( <tr key={diaMes.dia}>                    
+                      <th className={Estilos.fecha}>{diaMes.dia}/{diaMes.mes}</th>
                       {tablaDeReservas.camasIdsArray.map((id) =>
-                        <Celda key={id} dia={dia} camaId={id}/>
+                        <Celda key={id} dia={diaMes.dia} camaId={id}/>
                       )}
                     </tr>);
       }
     );
         
     actualizarFilas(_filas);
-  }, [tablaDeReservas.camasIdsArray, tablaDeReservas.diasArray]);
+  }, [tablaDeReservas.camasIdsArray, tablaDeReservas.diaMesArray]);
 
   return (
     <div className={Estilos.contenedor}>

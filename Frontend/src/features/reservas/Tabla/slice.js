@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
-  diasArray: [],
+  diaMesArray: [],
   camasIdsArray: [],
   tabla: {},
 }
@@ -11,13 +11,12 @@ const tablaDeReservasSlice = createSlice({
   initialState,
   reducers: {
     inicializar: (state, { payload }) => {
-      state.diasArray = payload.diasArray;
+      state.diaMesArray = payload.diaMesArray;
       state.camasIdsArray = payload.camasIdsArray;
       var celdaInicial = {};
 
       payload.camasIdsArray.forEach(camaId => celdaInicial[`${camaId}`] = "");
-      payload.diasArray.forEach(dia => state.tabla[`${dia}`] = celdaInicial);
-      debugger;
+      payload.diaMesArray.forEach(diaMes => state.tabla[`${diaMes.dia}`] = celdaInicial);
     },
     modificarCelda: (state, {payload}) => {
       state.tabla[`${payload.dia}`][`${payload.camaId}`] = payload.valor;
@@ -37,9 +36,9 @@ export const { inicializar, modificarCelda, modificarPorReserva } = tablaDeReser
 export const tablaDeReservasSelector = state => state.tablaDeReservas
 export default tablaDeReservasSlice.reducer
 
-export function inicializarTabla(diasArray, camasIdsArray) {
+export function inicializarTabla(diaMesArray, camasIdsArray) {
   return async dispatch => {
-    dispatch(inicializar({diasArray, camasIdsArray}));
+    dispatch(inicializar({diaMesArray, camasIdsArray}));
   }
 }
 
