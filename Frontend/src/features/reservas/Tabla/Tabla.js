@@ -17,14 +17,14 @@ const TablaReservas = ({datos, habitaciones}) => {
 
     var _dias = [];
 
-    function calcularDias(){      
+    function calcularDias() {
       var mesDesde = obtenerMes(datos.desde);
       var mesHasta = obtenerMes(datos.hasta);
 
       if (mesDesde === mesHasta) {
         for (let dia = parseInt(obtenerDia(datos.desde)); dia <= obtenerDia(datos.hasta); dia++) {
           _dias.push({'dia': dia, 'mes': mesDesde});
-        }    
+        }
       } else {        
         var diasDelPrimerMes = new Date(obtenerAnio(datos.desde), obtenerMes(datos.desde), 0).getDate(); //dia 0 es el último día del mes anterior        
         for (let dia = parseInt(obtenerDia(datos.desde)); dia <= diasDelPrimerMes; dia++) {

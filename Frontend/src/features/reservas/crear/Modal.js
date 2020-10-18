@@ -8,14 +8,15 @@ import DateRangePicker from 'components/dateRangePicker/DateRangePicker'
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice'
-import {convertirAString} from 'utils/Fecha'
+import {convertirAString, hoy, maniana} from 'utils/Fecha'
 import SelectCama from './SelectCama'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
-  const [desdeHasta, actualizarDesdeHasta] = useState([new Date(), new Date()]);
+  debugger;
+  const [desdeHasta, actualizarDesdeHasta] = useState([hoy(), maniana()]);
   const [camas, actualizarCamas] = useState([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);
 
   const dispatch = useDispatch();

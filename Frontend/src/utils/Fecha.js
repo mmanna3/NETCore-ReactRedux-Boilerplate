@@ -17,3 +17,13 @@ export function obtenerDia(fechaString) {
 export function obtenerAnio(fechaString) {    
     return fechaString.slice(0, 4);
 }
+
+export function hoy() {
+    return new Date();
+}
+
+export function maniana() {
+    let maniana = new Date();
+    maniana.setDate(maniana.getDate() + 1);
+    return maniana;
+}
