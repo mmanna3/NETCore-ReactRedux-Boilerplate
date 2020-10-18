@@ -27,3 +27,13 @@ export function maniana() {
     maniana.setDate(maniana.getDate() + 1);
     return maniana;
 }
+
+export function restarFechas(b, a) {
+    
+    const _Milisegundos_por_dia = 1000 * 60 * 60 * 24;
+
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    return Math.floor((utc2 - utc1) / _Milisegundos_por_dia);
+}

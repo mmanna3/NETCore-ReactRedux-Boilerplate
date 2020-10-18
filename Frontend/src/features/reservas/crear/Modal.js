@@ -8,15 +8,15 @@ import DateRangePicker from 'components/dateRangePicker/DateRangePicker'
 import { crearReserva, cleanErrors, crearReservaSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice'
-import {convertirAString, hoy, maniana} from 'utils/Fecha'
+import {convertirAString, hoy, maniana, restarFechas} from 'utils/Fecha'
 import SelectCama from './SelectCama'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
-  debugger;
   const [desdeHasta, actualizarDesdeHasta] = useState([hoy(), maniana()]);
+  const [cantidadDeNoches, actualizarCantidadDeNoches] = useState(1);
   const [camas, actualizarCamas] = useState([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);
 
   const dispatch = useDispatch();
@@ -28,7 +28,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   useEffect(() => {
     dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(desdeHasta[1])));
-  }, [dispatch, desdeHasta]);
+    actualizarCantidadDeNoches(restarFechas(desdeHasta[1], desdeHasta[0]));
+  }, [dispatch, desdeHasta, cantidadDeNoches]);
 
   useEffect(() => {
     if (habitaciones.length > 0)
@@ -97,6 +98,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <ValidationSummary errors={validationErrors} />
         <Input label="Huesped" name="aNombreDe" />
         <DateRangePicker actualizarValor={actualizarDesdeHasta} etiqueta="Check in - Check out" valor={desdeHasta}/>
+        <Label text={`Noches: ${cantidadDeNoches}`}/>
         <Label text="Camas"/>
 
         {
