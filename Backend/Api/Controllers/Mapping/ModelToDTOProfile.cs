@@ -92,12 +92,11 @@ namespace Api.Controllers.Mapping
             CreateMap<Reserva, ReservasDelMesDTO.ReservaParaConsultaMensualDTO>()
                 .ForMember(
                     dest => dest.DiaInicio,
-                    opt => opt.MapFrom((src, dest, _, context) => src.Desde.Month < (int)context.Options.Items["mesInicial"] ? (int)context.Options.Items["diaInicial"] : src.Desde.Day)
+                    opt => opt.MapFrom((src, dest, _, context) => src.Desde.Month < ((DateTime)context.Options.Items["desde"]).Month ? ((DateTime)context.Options.Items["desde"]).Day : src.Desde.Day)
                 )
                 .ForMember(
                     dest => dest.DiaFin,
-                    //opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > (int)context.Options.Items["mesFinal"] ? DateTime.DaysInMonth((int)context.Options.Items["anio"], (int)context.Options.Items["mes"]) : src.Hasta.Day)
-                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > (int)context.Options.Items["mesFinal"] ? (int)context.Options.Items["diaFinal"] : src.Hasta.Day)
+                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > ((DateTime)context.Options.Items["hasta"]).Month ? ((DateTime)context.Options.Items["hasta"]).Day : src.Hasta.Day)
                 )
                 .ForMember(
                     dest => dest.CamasIds,
@@ -111,7 +110,7 @@ namespace Api.Controllers.Mapping
                 )
                 .ForMember(
                     dest => dest.DiasDelMes,
-                    opt => opt.MapFrom((src, dest, _, context) => (int)context.Options.Items["diaFinal"])
+                    opt => opt.MapFrom((src, dest, _, context) => ((DateTime)context.Options.Items["hasta"]).Day)
                     //opt => opt.MapFrom((src, dest, _, context) => DateTime.DaysInMonth((int)context.Options.Items["anio"], (int)context.Options.Items["mes"]))
                 );
 
