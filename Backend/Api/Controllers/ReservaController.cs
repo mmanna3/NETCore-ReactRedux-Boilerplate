@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Controllers.DTOs;
@@ -36,9 +37,20 @@ namespace Api.Controllers
             var reservas = await _service.ListarMensuales(anio, mes);
             var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op =>
             {
-                op.Items["mes"] = mes; 
-                op.Items["anio"] = anio;
+                op.Items["mesInicial"] = mes;
+                op.Items["mesFinal"] = mes;
+                op.Items["diaInicial"] = 1;
+                op.Items["diaFinal"] = DateTime.DaysInMonth(anio, mes);
             });
+
+            return reservaDTOs;
+        }
+
+        [HttpGet, Route("actuales")]
+        public async Task<ReservasDelMesDTO> ListarActuales()
+        {
+            var reservas = await _service.ListarActuales();
+            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas);
 
             return reservaDTOs;
         }

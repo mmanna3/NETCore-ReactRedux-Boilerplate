@@ -9,5 +9,6 @@ namespace Api.Core.Services.Interfaces
         Task<IEnumerable<Reserva>> Listar();
         Task<int> Crear(Reserva reserva);
         Task<IEnumerable<Reserva>> ListarMensuales(int anio, int mes);
+        Task<IEnumerable<Reserva>> ListarActuales();
     }
 }

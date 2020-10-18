@@ -54,6 +54,16 @@ namespace Api.UnitTests.Repositories
         }
 
         [Test]
+        public async Task ListarActuales_ListaCorrectamenteDesdeAyerHastaDentroDe15Dias()
+        {
+            AgregarReservaDeUnaCamaParaLaFecha(DateTime.Today.AddDays(-3), DateTime.Today.AddDays(1));
+            AgregarReservaDeUnaCamaParaLaFecha(DateTime.Today.AddDays(15), DateTime.Today.AddDays(16));
+            AgregarReservaDeUnaCamaParaLaFecha(DateTime.Today.AddDays(16), DateTime.Today.AddDays(17));
+            var listado = await _repository.ListarActuales();
+            listado.Count().Should().Be(2);
+        }
+
+        [Test]
         public async Task ListarMensuales_ListaReservaQueContieneDiasDelMes_MesesIncluidos()
         {
             var reservaId = AgregarReservaDeUnaCamaParaLaFecha(new DateTime(2020, 08, 17), new DateTime(2020, 10, 17));

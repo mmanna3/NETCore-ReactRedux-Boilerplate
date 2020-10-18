@@ -23,15 +23,37 @@ namespace Api.IntegrationTests
         private readonly DateTime HASTA = new DateTime(2020, 09, 18);
 
         [Test]
-        public async Task Crear_UnaReserva_Y_Listarla()
+        public async Task Crea_UnaReserva_Y_ApareceEnListadoMensual()
         {
 
             var camaId = await CrearHabitacionConUnaCama();
 
-            var response = await CrearReserva(camaId);
+            var response = await CrearReserva(camaId, DESDE, HASTA);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             var consultaResponse = await ListarReservasMensuales(DESDE.Year, DESDE.Month);
+            consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
+
+            reservasDelMes.Reservas.Count().Should().Be(1);
+            var reserva = reservasDelMes.Reservas.ToList().First();
+
+            reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
+            reserva.DiaInicio.Should().Be(17);
+            reserva.DiaFin.Should().Be(18);
+            reserva.CamasIds.Should().HaveCount(1);
+            reserva.CamasIds.First().Should().Be(camaId);
+        }
+
+        [Test]
+        public async Task Crea_UnaReserva_Y_ApareceEnListadoActual()
+        {
+            var camaId = await CrearHabitacionConUnaCama();
+
+            var response = await CrearReserva(camaId, DateTime.Today.AddDays(-1), DateTime.Today);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var consultaResponse = await ListarReservasActuales();
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
 
@@ -67,14 +89,14 @@ namespace Api.IntegrationTests
             return habitacionesDTO.First().CamasIndividuales.First().Id;
         }
 
-        private async Task<HttpResponseMessage> CrearReserva(int camaId)
+        private async Task<HttpResponseMessage> CrearReserva(int camaId, DateTime desde, DateTime hasta)
         {
             var body = new ReservaDTO
             {
                 ANombreDe = A_NOMBRE_DE,
                 CamasIds = new List<int?> { camaId },
-                Desde = Utilidades.ConvertirFecha(DESDE),
-                Hasta = Utilidades.ConvertirFecha(HASTA)
+                Desde = Utilidades.ConvertirFecha(desde),
+                Hasta = Utilidades.ConvertirFecha(hasta)
             };
 
             return await _httpClient.PostAsJsonAsync(ENDPOINT, body);
@@ -83,6 +105,11 @@ namespace Api.IntegrationTests
         private async Task<HttpResponseMessage> ListarReservasMensuales(int anio, int mes)
         {
             return await _httpClient.GetAsync(ENDPOINT + $"/mensuales?mes={mes}&anio={anio}");
+        }
+
+        private async Task<HttpResponseMessage> ListarReservasActuales()
+        {
+            return await _httpClient.GetAsync(ENDPOINT + "/actuales");
         }
     }
 }

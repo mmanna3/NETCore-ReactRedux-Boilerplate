@@ -62,8 +62,10 @@ namespace Api.UnitTests.Controllers
 
             var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op =>
             {
-                op.Items["mes"] = 8;
-                op.Items["anio"] = 2020;
+                op.Items["mesInicial"] = 8;
+                op.Items["mesFinal"] = 8;
+                op.Items["diaInicial"] = 1;
+                op.Items["diaFinal"] = DateTime.DaysInMonth(2020, 8);
             });
             var primeraReserva = reservasDTO.Reservas.First();
 

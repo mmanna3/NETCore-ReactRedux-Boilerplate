@@ -28,6 +28,11 @@ namespace Api.Core.Services
             return await _repository.ListarMensuales(anio, mes);
         }
 
+        public async Task<IEnumerable<Reserva>> ListarActuales()
+        {
+            return await _repository.ListarActuales();
+        }
+
         public async Task<int> Crear(Reserva reserva)
         {
             if (HayUnaCamaReservadaDosVeces(reserva))
