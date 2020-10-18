@@ -92,11 +92,11 @@ namespace Api.Controllers.Mapping
             CreateMap<Reserva, ReservasDelMesDTO.ReservaParaConsultaMensualDTO>()
                 .ForMember(
                     dest => dest.DiaInicio,
-                    opt => opt.MapFrom((src, dest, _, context) => src.Desde.Month < ((DateTime)context.Options.Items["desde"]).Month ? ((DateTime)context.Options.Items["desde"]).Day : src.Desde.Day)
+                    opt => opt.MapFrom((src, dest, _, context) => src.Desde < ((DateTime)context.Options.Items["desde"]) ? ((DateTime)context.Options.Items["desde"]).Day : src.Desde.Day)
                 )
                 .ForMember(
                     dest => dest.DiaFin,
-                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta.Month > ((DateTime)context.Options.Items["hasta"]).Month ? ((DateTime)context.Options.Items["hasta"]).Day : src.Hasta.Day)
+                    opt => opt.MapFrom((src, dest, _, context) => src.Hasta > ((DateTime)context.Options.Items["hasta"]) ? ((DateTime)context.Options.Items["hasta"]).Day : src.Hasta.Day)
                 )
                 .ForMember(
                     dest => dest.CamasIds,

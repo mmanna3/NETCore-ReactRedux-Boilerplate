@@ -37,10 +37,8 @@ namespace Api.Controllers
             var reservas = await _service.ListarMensuales(anio, mes);
             var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op =>
             {
-                op.Items["mesInicial"] = mes;
-                op.Items["mesFinal"] = mes;
-                op.Items["diaInicial"] = 1;
-                op.Items["diaFinal"] = DateTime.DaysInMonth(anio, mes);
+                op.Items["desde"] = new DateTime(anio, mes, 1);
+                op.Items["hasta"] = new DateTime(anio, mes, DateTime.DaysInMonth(anio, mes));
             });
 
             return reservaDTOs;
@@ -50,7 +48,11 @@ namespace Api.Controllers
         public async Task<ReservasDelMesDTO> ListarActuales()
         {
             var reservas = await _service.ListarActuales();
-            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas);
+            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op =>
+            {
+                op.Items["desde"] = DateTime.Today.AddDays(-1);
+                op.Items["hasta"] = DateTime.Today.AddDays(15);
+            });
 
             return reservaDTOs;
         }

@@ -77,30 +77,6 @@ namespace Api.UnitTests.Controllers
             primeraReserva.CamasIds.Skip(1).First().Should().Be(2);
         }
 
-        //[Test]
-        //public void ConsultaMensual_ReservasDistintoAnio()
-        //{
-        //    DadaUnaListaDeReservas();
-
-        //    var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op =>
-        //    {
-        //        op.Items["mesInicial"] = 8;
-        //        op.Items["mesFinal"] = 8;
-        //        op.Items["diaInicial"] = 1;
-        //        op.Items["diaFinal"] = DateTime.DaysInMonth(2020, 8);
-        //    });
-        //    var primeraReserva = reservasDTO.Reservas.First();
-
-        //    reservasDTO.DiasDelMes.Should().Be(31);
-
-        //    primeraReserva.DiaInicio.Should().Be(1);
-        //    primeraReserva.DiaFin.Should().Be(31);
-        //    primeraReserva.ANombreDe.Should().Be(A_NOMBRE_DE);
-        //    primeraReserva.CamasIds.Should().HaveCount(2);
-        //    primeraReserva.CamasIds.First().Should().Be(1);
-        //    primeraReserva.CamasIds.Skip(1).First().Should().Be(2);
-        //}
-
         private void DadaUnaListaDeReservas()
         {
             _unaListaDeReservas = new List<Reserva>();
@@ -110,8 +86,8 @@ namespace Api.UnitTests.Controllers
             
             var r1 = new Reserva
             {
-                Desde = DESDE,
-                Hasta = HASTA,
+                Desde = new DateTime(2020, 07, 17),
+                Hasta = new DateTime(2021, 1, 2),
                 ANombreDe = A_NOMBRE_DE,
                 ReservaCamas = new List<ReservaCama> { new ReservaCama{ Cama = cama1, CamaId = cama1.Id}, new ReservaCama{ Cama = cama2, CamaId = cama2.Id } }
             };
