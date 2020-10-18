@@ -58,7 +58,7 @@ const ReservasPage = () => {
         
       {/*Esto no está tan mal, pero igual está mal. */}
       <div>
-        {tieneErrores? "Hubo un error." : ((estaCargando || datos.length === 0 || habitaciones.datos === 0) ? "Cargando..." : <Tabla datos={datos} habitaciones={habitaciones.datos} mes={mes}/>)}
+        {tieneErrores? "Hubo un error." : ((estaCargando || datos.length === 0 || habitaciones.datos === 0) ? "Cargando..." : <Tabla datos={datos} habitaciones={habitaciones.datos} />)}
       </div>
     </div>
   )

@@ -4,8 +4,9 @@ import Estilos from './Tabla.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { inicializarTabla, tablaDeReservasSelector, actualizarConReserva } from './slice'
 import Encabezado from './Encabezado/Encabezado'
+import {obtenerAnio,obtenerMes,obtenerDia} from 'utils/Fecha'
 
-const TablaReservas = ({datos, habitaciones, mes}) => {
+const TablaReservas = ({datos, habitaciones}) => {
 
   const dispatch = useDispatch();
   const [habitacionesConCamasUnificadas, setHabitacionesConCamasUnificadas] = useState([]);
@@ -13,6 +14,28 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
   const tablaDeReservas = useSelector(tablaDeReservasSelector);
 
   useEffect(() => {
+
+    var _dias = [];
+
+    function calcularDias(){      
+      
+      if (obtenerMes(datos.hasta) === obtenerMes(datos.desde)) {
+        for (let i = parseInt(obtenerDia(datos.desde)); i <= obtenerDia(datos.hasta); i++) {
+          _dias.push(i);
+        }    
+      } else {
+        var diasDelPrimerMes = new Date(obtenerAnio(datos.desde), obtenerMes(datos.desde), 0).getDate(); //dia 0 es el último día del mes anterior
+        for (let i = obtenerDia(datos.desde) + 0; i <= diasDelPrimerMes; i++) {
+          _dias.push(i);
+        }
+        for (let i = 1; i <= obtenerDia(datos.hasta); i++) {
+          _dias.push(i);
+        }
+      }
+    }
+
+    calcularDias();
+
 
     var camasIdsArray = [];
     var habs = [];
@@ -26,27 +49,32 @@ const TablaReservas = ({datos, habitaciones, mes}) => {
       camasIdsArray = camasIdsArray.concat(camasDeLaHabitacion.map((cama) => cama.id));
     }
     setHabitacionesConCamasUnificadas(habs);        
-
-    dispatch(inicializarTabla(datos.diasDelMes, camasIdsArray));    
+    
+    
+    dispatch(inicializarTabla(_dias, camasIdsArray));
     
     datos.reservas.forEach(reserva => {     
       dispatch(actualizarConReserva(reserva));
     });
 
-  }, [datos.diasDelMes, datos.reservas, dispatch, habitaciones]);
+  }, [datos.desde, datos.hasta, datos.reservas, dispatch, habitaciones]);
 
-  useEffect(() => {
+  useEffect(() => {    
+
     let _filas = [];
-    for (let dia = 1; dia <= datos.diasDelMes; dia++) {
-      _filas.push( <tr key={dia}>                    
-                    <th className={Estilos.fecha}>{dia}/{mes}</th>
-                    {tablaDeReservas.camasIdsArray.map((id) =>
-                      <Celda key={id} dia={dia} camaId={id}/>
-                    )}
-                  </tr>);
-    }
+    tablaDeReservas.diasArray.forEach((dia) =>
+      {
+        _filas.push( <tr key={dia}>                    
+                      <th className={Estilos.fecha}>{dia}</th>
+                      {tablaDeReservas.camasIdsArray.map((id) =>
+                        <Celda key={id} dia={dia} camaId={id}/>
+                      )}
+                    </tr>);
+      }
+    );
+        
     actualizarFilas(_filas);
-  }, [tablaDeReservas.camasIdsArray, datos.diasDelMes, mes]);
+  }, [tablaDeReservas.camasIdsArray, tablaDeReservas.diasArray]);
 
   return (
     <div className={Estilos.contenedor}>

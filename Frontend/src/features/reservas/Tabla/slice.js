@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
-  cantidadDeDias: 0,
+  diasArray: [],
   camasIdsArray: [],
-  tabla: [],
+  tabla: {},
 }
 
 const tablaDeReservasSlice = createSlice({
@@ -11,27 +11,31 @@ const tablaDeReservasSlice = createSlice({
   initialState,
   reducers: {
     inicializar: (state, { payload }) => {
-      state.cantidadDeDias = payload.cantidadDeDias;
+      state.diasArray = payload.diasArray;
       state.camasIdsArray = payload.camasIdsArray;
-
+      debugger;
       var celdaInicial = {};
+
       payload.camasIdsArray.forEach(camaId => {
         celdaInicial[`${camaId}`] = "";
       });
 
-      for(var i=0; i < payload.cantidadDeDias; i++) {
-        state.tabla[i] = celdaInicial;
-      }
+      payload.diasArray.forEach((dia) => state.tabla[`${dia}`] = celdaInicial)
+      
+      // for(var dia=0; dia < payload.diasArray; dia++) {
+      //   state.tabla[`${dia}`] = celdaInicial;
+      // }
+      debugger;
 
     },
     modificarCelda: (state, {payload}) => {
-      state.tabla[payload.dia-1][`${payload.camaId}`] = payload.valor;
+      state.tabla[`${payload.dia}`][`${payload.camaId}`] = payload.valor;
     },
     modificarPorReserva: (state, {payload}) => { 
       
       for (let dia = payload.diaInicio-1; dia <= payload.diaFin-1; dia++) {        
         payload.camasIds.forEach(camaId => {
-          state.tabla[dia][`${camaId}`] = payload.aNombreDe; 
+          state.tabla[`${dia}`][`${camaId}`] = payload.aNombreDe; 
         });
       }      
     },    
@@ -42,9 +46,9 @@ export const { inicializar, modificarCelda, modificarPorReserva } = tablaDeReser
 export const tablaDeReservasSelector = state => state.tablaDeReservas
 export default tablaDeReservasSlice.reducer
 
-export function inicializarTabla(cantidadDeDias, camasIdsArray) {
+export function inicializarTabla(diasArray, camasIdsArray) {
   return async dispatch => {
-    dispatch(inicializar({cantidadDeDias, camasIdsArray}));
+    dispatch(inicializar({diasArray, camasIdsArray}));
   }
 }
 

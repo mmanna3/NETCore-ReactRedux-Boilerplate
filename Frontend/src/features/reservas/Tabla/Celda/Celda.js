@@ -8,7 +8,7 @@ const Celda = ({dia, camaId}) => {
     const [contenido, actualizarContenido] = useState('');
 
     useEffect(() => {
-        actualizarContenido(tabla[dia-1][`${camaId}`]);
+        actualizarContenido(tabla[`${dia}`][`${camaId}`]);
     }, [tabla, dia, camaId]); 
 
     return (
