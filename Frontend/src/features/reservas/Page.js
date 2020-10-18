@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { fetchReservasMensuales, reservasSelector } from './slice'
+import { fetchReservasMensuales, fetchReservasActuales, reservasSelector } from './slice'
 import { fetchHabitaciones, habitacionesSelector } from 'features/habitaciones/slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
@@ -52,8 +52,9 @@ const ReservasPage = () => {
           <option value="11">Noviembre</option>
           <option value="12">Diciembre</option>
         </SelectConLabelInline>
+        <Button onClick={()=> dispatch(fetchReservasActuales())} text="Vista actual"/>
         <div className="buttons is-fullwidth is-pulled-right">
-          <Button onClick={showModal} text="Cargar nueva"/>          
+          <Button onClick={showModal} text="Cargar nueva"/>
         </div>
         
       {/*Esto no está tan mal, pero igual está mal. */}
