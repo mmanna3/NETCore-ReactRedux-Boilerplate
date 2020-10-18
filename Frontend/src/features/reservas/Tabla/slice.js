@@ -17,6 +17,7 @@ const tablaDeReservasSlice = createSlice({
 
       payload.camasIdsArray.forEach(camaId => celdaInicial[`${camaId}`] = "");
       payload.diasArray.forEach(dia => state.tabla[`${dia}`] = celdaInicial);
+      debugger;
     },
     modificarCelda: (state, {payload}) => {
       state.tabla[`${payload.dia}`][`${payload.camaId}`] = payload.valor;

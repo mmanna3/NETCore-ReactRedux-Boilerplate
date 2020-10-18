@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { fetchReservas, reservasSelector } from './slice'
+import { fetchReservasMensuales, reservasSelector } from './slice'
 import { fetchHabitaciones, habitacionesSelector } from 'features/habitaciones/slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
@@ -15,7 +15,7 @@ const ReservasPage = () => {
   const [mes, actualizarMes] = useState(new Date().getMonth()+1);
 
   const fetchData = useCallback(() => {
-    dispatch(fetchReservas(2020, mes));
+    dispatch(fetchReservasMensuales(2020, mes));
     dispatch(fetchHabitaciones());
   }, [dispatch, mes]);
 
