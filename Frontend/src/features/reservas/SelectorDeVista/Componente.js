@@ -30,7 +30,7 @@ const SelectorDeVista = ({onFechaChanged, onDisabled }) => {
   }
 
   return (
-        <div className="field">
+        <div className="field is-pulled-left">
           <span className={Estilos.switch}>
             <input id="vistaMensual" type="checkbox" onClick={onSwitchClicked} name="vistaMensual" className="switch" />
             <label htmlFor="vistaMensual">Vista mensual</label>

@@ -39,13 +39,17 @@ const ReservasPage = () => {
         <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Reservas</h1>        
-        <SelectorDeVista 
-          onFechaChanged={(anio, mes) => dispatch(fetchReservasMensuales(anio, mes))}
-          onDisabled={() => dispatch(fetchReservasActuales())}
-        />
-
-        <div className="buttons is-fullwidth is-pulled-right">
-          <Button onClick={showModal} text="Cargar nueva"/>
+        
+        <div className="botonera is-fullwidth">
+                
+          <SelectorDeVista
+            onFechaChanged={(anio, mes) => dispatch(fetchReservasMensuales(anio, mes))}
+            onDisabled={() => dispatch(fetchReservasActuales())}
+          />
+          <div className="field is-pulled-right">
+            <Button onClick={showModal} text="Cargar nueva"/>
+          </div>
+        
         </div>
         
       {/*Esto no está tan mal, pero igual está mal. */}
