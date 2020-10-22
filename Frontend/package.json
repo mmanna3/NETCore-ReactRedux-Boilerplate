@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "1.2.5",
     "@wojtekmaj/react-daterange-picker": "^3.0.0",
     "axios": "^0.19.2",
+    "bulma-switch": "^2.0.0",
     "cypress-localstorage-commands": "^1.2.2",
     "history": "^5.0.0",
     "mutationobserver-shim": "^0.3.7",

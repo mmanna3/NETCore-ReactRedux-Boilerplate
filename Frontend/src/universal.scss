@@ -41,6 +41,7 @@ $blue: #3260a8; //Probar con más azules
 $primary: $blue;
 
 @import '../node_modules/bulma/bulma.sass';
+@import '../node_modules/bulma-switch/dist/css/bulma-switch.sass';
 
 .react-daterange-picker__calendar--open {
     z-index: 9;

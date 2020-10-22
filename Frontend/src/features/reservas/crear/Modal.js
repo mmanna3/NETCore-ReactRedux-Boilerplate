@@ -36,8 +36,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       return resultado;
     }
     
-    let hasta = restarUnDiaAlHastaDelCalendarioPorqueElCheckoutNoLocuento();
-    debugger;
+    let hasta = restarUnDiaAlHastaDelCalendarioPorqueElCheckoutNoLocuento();    
     dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(hasta)));
     actualizarCantidadDeNoches(restarFechas(desdeHasta[1], desdeHasta[0]));
   }, [dispatch, desdeHasta, cantidadDeNoches]);
