@@ -79,7 +79,7 @@ const TablaReservas = ({datos, habitaciones}) => {
           _filas.push( <tr key={diaMes.dia}>                    
                         <th className={`has-text-weight-medium ${Estilos.hoy}`}>HOY</th>
                         {tablaDeReservas.camasIdsArray.map((id) =>
-                          <Celda key={id} dia={diaMes.dia} camaId={id}/>
+                          <Celda key={id} dia={diaMes.dia} claseCss={Estilos.celdaHoy} camaId={id}/>
                         )}
                       </tr>);        
       }

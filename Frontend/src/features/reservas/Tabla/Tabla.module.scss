@@ -36,6 +36,13 @@ table td div, table th div {
   position: sticky;
   left: 0;
   z-index: 9;
-  background-color: $primary;
+  background-color: #5f9cfa;
   color: $primary-invert !important;
+}
+
+.celdaHoy {
+  // background-color: #9cd4ff;
+  //background-color: #a1d6ff;  
+  background-color: #d9e8ff;
+  //#d9e8ff
 }
