@@ -52,8 +52,10 @@ const HabitacionesPage = () => {
         <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
-        <div className="buttons is-fullwidth is-pulled-right">
-          <Button onClick={showModal} text="Cargar nueva" />
+        <div className="botonera">
+          <div className="is-pulled-right">
+            <Button onClick={showModal} text="Cargar nueva" />
+          </div>
         </div>        
         <Table  fetchData={fetchData} 
                 selector={habitacionesSelector} 
