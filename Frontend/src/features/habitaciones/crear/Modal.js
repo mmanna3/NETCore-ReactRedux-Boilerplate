@@ -2,11 +2,13 @@ import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input } from "components/Input";
 import { Button } from "components/Buttons";
+import { SelectConLabelInline } from "components/Select";
 import ValidationSummary from "components/ValidationSummary";
 import Label from "components/Label";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import SelectCama from './SelectCama';
+// import Checkbox from 'components/Checkbox';
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
@@ -106,7 +108,12 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
-        <Input label="Nombre de la habitación" name="nombre" />
+        <Input label="Nombre de la habitación" name="nombre" />        
+        <SelectConLabelInline label="Tipo" name="esPrivada">
+          <option value="true">Compartida</option>
+          <option value="false">Privada</option>
+        </SelectConLabelInline>
+        {/* <Checkbox label="Tiene baño" /> */}
         <Label text="Camas"/>
           {camas.map(cama => {
             return <SelectCama key={`${cama.globalIndex}`}
