@@ -31,3 +31,11 @@ table td div, table th div {
   z-index: 9;
   background: #ccc;
 }
+
+.hoy {
+  position: sticky;
+  left: 0;
+  z-index: 9;
+  background-color: $primary;
+  color: $primary-invert !important;
+}

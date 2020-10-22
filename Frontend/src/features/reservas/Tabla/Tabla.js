@@ -64,17 +64,27 @@ const TablaReservas = ({datos, habitaciones}) => {
   useEffect(() => {    
 
     let _filas = [];
+    var diaDeHoy = new Date().getDate();
+
     tablaDeReservas.diaMesArray.forEach((diaMes) =>
       {
-        _filas.push( <tr key={diaMes.dia}>                    
+        if (diaMes.dia !== diaDeHoy)
+          _filas.push( <tr key={diaMes.dia}>                    
                       <th className={`has-text-weight-medium ${Estilos.fecha}`}>{diaMes.dia}/{diaMes.mes}</th>
                       {tablaDeReservas.camasIdsArray.map((id) =>
                         <Celda key={id} dia={diaMes.dia} camaId={id}/>
                       )}
                     </tr>);
+        else
+          _filas.push( <tr key={diaMes.dia}>                    
+                        <th className={`has-text-weight-medium ${Estilos.hoy}`}>HOY</th>
+                        {tablaDeReservas.camasIdsArray.map((id) =>
+                          <Celda key={id} dia={diaMes.dia} camaId={id}/>
+                        )}
+                      </tr>);        
       }
-    );
-        
+    );        
+    
     actualizarFilas(_filas);
   }, [tablaDeReservas.camasIdsArray, tablaDeReservas.diaMesArray]);
 
