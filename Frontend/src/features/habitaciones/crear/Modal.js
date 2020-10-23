@@ -2,13 +2,13 @@ import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input } from "components/Input";
 import { Button } from "components/Buttons";
-import { SelectConLabelInline } from "components/Select";
+import Select from "components/Select";
 import ValidationSummary from "components/ValidationSummary";
 import Label from "components/Label";
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import SelectCama from './SelectCama';
-// import Checkbox from 'components/Checkbox';
+import SiNo from 'components/SiNo';
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
@@ -108,12 +108,26 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Header title="Crear habitación" onHide={hide} />
       <Body>
         <ValidationSummary errors={validationErrors} />
-        <Input label="Nombre de la habitación" name="nombre" />        
-        <SelectConLabelInline label="Tipo" name="esPrivada">
-          <option value="true">Compartida</option>
-          <option value="false">Privada</option>
-        </SelectConLabelInline>
-        {/* <Checkbox label="Tiene baño" /> */}
+        <Input label="Nombre" name="nombre" />
+        <div className="columns">
+          <div className="column">
+            <Label text="Tipo"/>
+            <Select name="esPrivada">
+              <option value="true">Compartida</option>
+              <option value="false">Privada</option>
+            </Select>            
+          </div>
+          <div className="column">
+            <SiNo name="tieneBanio" label="Tiene baño" />
+          </div>
+          <div className="column is-two-fifths">          
+            <Label text="Información adicional"/>
+            <textarea class="textarea" rows="3" placeholder="Ej.: tiene rampa para discapacitados"></textarea>
+          </div>
+        </div>
+
+
+        <div className="field">
         <Label text="Camas"/>
           {camas.map(cama => {
             return <SelectCama key={`${cama.globalIndex}`}
@@ -125,6 +139,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           })
           }          
           <Button text="Agregar cama" onClick={() => addCama()} style={{marginTop:"1em"}}/>
+          </div>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       

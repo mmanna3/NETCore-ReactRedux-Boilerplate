@@ -42,6 +42,7 @@ $primary: $blue;
 
 @import '../node_modules/bulma/bulma.sass';
 @import '../node_modules/bulma-switch/dist/css/bulma-switch.sass';
+@import '../node_modules/bulma-checkradio/dist/css/bulma-checkradio.sass';
 
 .react-daterange-picker__calendar--open {
     z-index: 9;
