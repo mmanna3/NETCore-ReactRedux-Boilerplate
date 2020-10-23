@@ -9,6 +9,7 @@ import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux'
 import SelectCama from './SelectCama';
 import SiNo from 'components/SiNo';
+import Textarea from 'components/Textarea';
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
@@ -109,20 +110,23 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
       <Body>
         <ValidationSummary errors={validationErrors} />
         <Input label="Nombre" name="nombre" />
+        
         <div className="columns">
           <div className="column">
             <Label text="Tipo"/>
             <Select name="esPrivada">
               <option value="true">Compartida</option>
               <option value="false">Privada</option>
-            </Select>            
+            </Select>
           </div>
           <div className="column">
             <SiNo name="tieneBanio" label="Tiene baño" />
           </div>
-          <div className="column is-two-fifths">          
-            <Label text="Información adicional"/>
-            <textarea class="textarea" rows="3" placeholder="Ej.: tiene rampa para discapacitados"></textarea>
+          <div className="column is-two-fifths">
+            <div className="field">
+              <Label text="Información adicional"/>
+              <Textarea rows="3" name="informacionAdicional" placeholder="Ej.: tiene rampa para discapacitados" />
+            </div>            
           </div>
         </div>
 
