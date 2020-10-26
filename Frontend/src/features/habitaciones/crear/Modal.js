@@ -115,8 +115,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           <div className="column">
             <Label text="Tipo"/>
             <Select name="esPrivada">
-              <option value="true">Compartida</option>
-              <option value="false">Privada</option>
+              <option value="false">Compartida</option>
+              <option value="true">Privada</option>
             </Select>
           </div>
           <div className="column">
