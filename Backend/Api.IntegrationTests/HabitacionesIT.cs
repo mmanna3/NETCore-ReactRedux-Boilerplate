@@ -33,6 +33,10 @@ namespace Api.IntegrationTests
             habitaciones.Count().Should().Be(1);
             var habitacion = habitaciones.ToList().First();
 
+            habitacion.EsPrivada.Should().BeTrue();
+            habitacion.TieneBanio.Should().BeTrue();
+            habitacion.InformacionAdicional.Should().Be("asd");
+
             habitacion.CamasMatrimoniales.Count.Should().Be(1);
             habitacion.CamasIndividuales.Count.Should().Be(1);
 
@@ -79,6 +83,9 @@ namespace Api.IntegrationTests
             var body = new HabitacionDTO
             {
                 Nombre = "Azul",
+                EsPrivada = true,
+                TieneBanio = true,
+                InformacionAdicional = "asd",
                 CamasIndividuales = new List<CamaDTO>
                 {
                     new CamaDTO

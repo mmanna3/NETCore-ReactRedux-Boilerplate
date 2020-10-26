@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Api.Controllers.DTOs;
 
 namespace Api.Core.Models
 {
@@ -9,6 +10,15 @@ namespace Api.Core.Models
     {
         [Required, MaxLength(12)]
         public string Nombre { get; set; }
+
+        [Required]
+        public bool TieneBanio { get; set; }
+
+        [Required]
+        public bool EsPrivada { get; set; }
+
+        [MaxLength(140)]
+        public string InformacionAdicional { get; set; }
 
         public ICollection<CamaIndividual> CamasIndividuales { get; set; }
         public ICollection<CamaMatrimonial> CamasMatrimoniales { get; set; }

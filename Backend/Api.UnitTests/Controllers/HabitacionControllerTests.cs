@@ -44,6 +44,10 @@ namespace Api.UnitTests.Controllers
             habitacion.CamasMatrimoniales.Count.Should().Be(1);
             habitacion.CamasIndividuales.Count.Should().Be(1);
             habitacion.CamasCuchetas.Count.Should().Be(1);
+
+            habitacion.EsPrivada.Should().BeTrue();
+            habitacion.TieneBanio.Should().BeTrue();
+            habitacion.InformacionAdicional.Should().Be("asd");
         }
 
         [Test]
@@ -52,6 +56,10 @@ namespace Api.UnitTests.Controllers
             DadaUnaListaDeHabitaciones();
 
             var habitacionesDTO = _mapper.Map<IEnumerable<HabitacionDTO>>(_unaListaDeHabitaciones).ToList();
+
+            habitacionesDTO.First().EsPrivada.Should().BeTrue();
+            habitacionesDTO.First().TieneBanio.Should().BeTrue();
+            habitacionesDTO.First().InformacionAdicional.Should().Be("asd");
 
             habitacionesDTO.First().CamasMatrimoniales.Count.Should().Be(1);
             habitacionesDTO.First().CamasIndividuales.Count.Should().Be(1);
@@ -65,6 +73,9 @@ namespace Api.UnitTests.Controllers
             var h1 = new Habitacion
             {
                 Nombre = "Azul",
+                EsPrivada = true,
+                TieneBanio = true,
+                InformacionAdicional = "asd",
                 CamasIndividuales = new List<CamaIndividual>
                 {
                     new CamaIndividual
@@ -103,6 +114,9 @@ namespace Api.UnitTests.Controllers
             _unaHabitacionDTO = new HabitacionDTO
             {
                 Nombre = "Azul",
+                EsPrivada = true,
+                TieneBanio = true,
+                InformacionAdicional = "asd",
                 CamasIndividuales = new List<CamaDTO>
                 {
                     new CamaDTO

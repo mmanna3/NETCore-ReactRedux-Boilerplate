@@ -6,7 +6,7 @@ namespace Api.Controllers.DTOs.Habitacion
     {
         public int Id { get; set; }
 
-        [YKNRequired, YKNStringLength(Maximo = 30)]
+        [YKNRequired, YKNStringLength(Maximo = 12)]
         public string Nombre { get; set; }
 
         [YKNRequired]
