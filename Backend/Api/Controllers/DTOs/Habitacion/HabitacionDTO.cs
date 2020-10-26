@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Api.Controllers.DTOs.Habitacion
 {
@@ -16,6 +17,7 @@ namespace Api.Controllers.DTOs.Habitacion
         public bool EsPrivada { get; set; }
 
         [YKNStringLength(Maximo = 140)]
+        [DisplayName("Información adicional")]
         public string InformacionAdicional { get; set; }
 
         public List<CamaDTO> CamasIndividuales { get; set; }
