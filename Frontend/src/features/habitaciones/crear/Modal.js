@@ -120,7 +120,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
             </Select>
           </div>
           <div className="column">
-            <SiNo name="tieneBanio" label="Tiene baño" />
+            <SiNo name="tieneBanio" label="Baño privado" />
           </div>
           <div className="column is-two-fifths">
             <div className="field">
