@@ -1,13 +1,15 @@
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Api.Controllers.DTOs.Usuario
 {
     public class AutenticarDTO
     {
-        [Required]
+        [YKNRequired]
+        [DisplayName("Usuario")]
         public string Username { get; set; }
 
-        [Required]
+        [YKNRequired]
+        [DisplayName("Contraseña")]
         public string Password { get; set; }
     }
 }
