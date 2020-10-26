@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Api.Controllers.DTOs;
 
 namespace Api.Core.Models
 {
