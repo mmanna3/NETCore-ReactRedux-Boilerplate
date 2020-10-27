@@ -1,6 +1,7 @@
 import React from 'react';   
 import Select from "components/Select";    
-import { Icon } from "components/Icon";    
+import { Icon } from "components/Icon";
+import Estilos from './SelectCama.module.scss'    
 
 const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}) => {
 
@@ -11,16 +12,18 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
         <div className="field is-expanded has-addons" style={{minWidth:"200px"}}>
           <span className="control">
             <span className="button is-static">
-              Hab.
+              Hab.             
             </span>
           </span>
           <span className="control is-expanded">
             <span className="control is-expanded">
-              <Select style={{minWidth:"180px"}} onChange={onHabitacionChange}>
+              <Select style={{minWidth:"180px"}} className={Estilos.iconoFa} onChange={onHabitacionChange}>
               {cargando ?
               <option>Cargando...</option> :
               habitaciones.map((habitacion, index) => {
-                return <option key={habitacion.id} value={index}>{habitacion.nombre} ({habitacion.cantidadDeLugaresLibres})</option>
+                return <option key={habitacion.id} value={index}>
+                            {habitacion.nombre} ({habitacion.cantidadDeLugaresLibres}) &#xf023;
+                       </option>
               })
               }
               </Select>
@@ -38,7 +41,7 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
             <span className="control is-expanded">
             {cama.camasDisponibles.length === 0 ?
             <Select style={{minWidth:"260px"}}>
-                <option>No tiene</option>               
+                <option>No tiene</option>
             </Select> :
             <Select name={`CamasIds[${cama.indiceGlobal}]`} style={{minWidth:"260px"}}>
               {cama.camasDisponibles.map((cama) => {

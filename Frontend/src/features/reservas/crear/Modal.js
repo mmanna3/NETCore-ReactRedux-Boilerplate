@@ -9,7 +9,7 @@ import { crearReserva, cleanErrors, crearReservaSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchHabitacionesConLugaresLibres, habitacionesSelector } from 'features/habitaciones/conLugaresLibresSlice'
 import {convertirAString, hoy, maniana, restarFechas} from 'utils/Fecha'
-import SelectCama from './SelectCama'
+import SelectCama from './SelectCama/SelectCama'
 import Estilos from './Modal.module.scss'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
