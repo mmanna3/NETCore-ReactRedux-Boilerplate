@@ -22,7 +22,7 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
               <option>Cargando...</option> :
               habitaciones.map((habitacion, index) => {
                 return <option key={habitacion.id} value={index}>
-                            {habitacion.nombre} ({habitacion.cantidadDeLugaresLibres}) &#xf023;
+                            {habitacion.nombre} ({habitacion.cantidadDeLugaresLibres}) {habitacion.esPrivada ? '\uf023' : ''}
                        </option>
               })
               }
