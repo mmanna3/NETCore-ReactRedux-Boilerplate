@@ -32,8 +32,8 @@ before_build:
   - cd Frontend
   - npm install
   - npm run build 
-  - npm install cypress --save-dev
-  - cypress run
+  - npm start & wait-on http://localhost:3000
+  - npm run cypress
   - cd ..  
   - ps: >-
       Copy-Item -Path "./Frontend/build" -Destination "./Backend/Api/ClientApp/build" -Recurse
