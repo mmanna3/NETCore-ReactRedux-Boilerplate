@@ -15,12 +15,12 @@ describe('Crear reservas', () => {
     })
 })
 
-before(() => {
-    cy.login();
-    cy.saveLocalStorage();
-  });
+// before(() => {
+//     cy.login();
+//     cy.saveLocalStorage();
+//   });
   
-beforeEach(() => {
-    cy.restoreLocalStorage();
-    cy.visit('/reservas')
-});
+// beforeEach(() => {
+//     cy.restoreLocalStorage();
+//     cy.visit('/reservas')
+// });

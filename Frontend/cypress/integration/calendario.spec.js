@@ -23,15 +23,15 @@ No puedo seleccionar en la misma reserva camas de distintas habitaciones
 
 
 
-before(() => {
-    cy.login();
-    cy.saveLocalStorage();
-  });
+// before(() => {
+//     cy.login();
+//     cy.saveLocalStorage();
+//   });
   
-beforeEach(() => {
-    cy.restoreLocalStorage();
-    cy.visit('/calendario')
-});
+// beforeEach(() => {
+//     cy.restoreLocalStorage();
+//     cy.visit('/calendario')
+// });
 
 describe('Poder reservar un día', () => {
 
