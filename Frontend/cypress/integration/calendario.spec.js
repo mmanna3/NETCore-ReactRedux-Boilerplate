@@ -21,6 +21,8 @@ No puedo seleccionar en la misma reserva camas de distintas habitaciones
 
 */
 
+
+
 before(() => {
     cy.login();
     cy.saveLocalStorage();
@@ -33,7 +35,7 @@ beforeEach(() => {
 
 describe('Poder reservar un día', () => {
 
-    it('Una cama', () => {
+    xit('Una cama', () => {
         getCeldaCypress({col: 0, row: 0})
             .click();
         
@@ -53,7 +55,7 @@ describe('Poder reservar un día', () => {
 
 describe('Poder reservar 3 días', () => {
 
-    it('Una cama', () => {
+    xit('Una cama', () => {
         seleccionarDesdeHasta({row:0,col:0},{row:2,col:0});
 
         queEstenSeleccionadasDesdeHasta({row:0,col:0},{row:2,col:0});

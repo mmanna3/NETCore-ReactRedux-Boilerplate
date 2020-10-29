@@ -6,9 +6,9 @@ describe('Login', () => {
         
         acceder();        
         
-        irAlCalendario();
+        irAHabitaciones();
 
-        cy.contains('h1', 'Calendario')
+        cy.contains('h1', 'Habitaciones')
             .should("be.visible")
     })
 })
@@ -26,7 +26,7 @@ const acceder = () => {
         .click();
 }
 
-const irAlCalendario = () => {
-    cy.contains('a', 'Calendario')
+const irAHabitaciones = () => {
+    cy.contains('a', 'Habitaciones')
     .click()
 }
