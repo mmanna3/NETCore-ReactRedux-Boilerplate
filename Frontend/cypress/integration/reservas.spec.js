@@ -2,7 +2,7 @@ import "cypress-localstorage-commands";
 
 describe('Crear reservas', () => {
 
-    it('Puede agregar renglones', () => {        
+    xit('Puede agregar renglones', () => {
 
         cy.contains('button', 'Cargar nueva')
             .click()
