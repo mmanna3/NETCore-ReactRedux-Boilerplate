@@ -30,10 +30,10 @@ before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
   - cd Frontend
-  - npm install
-  - npm run build 
-  - npm start & wait-on http://localhost:3000
+  - npm install 
+  - npm start & wait-on http://localhost:3000/
   - npm run cypress
+  - npm run build
   - cd ..  
   - ps: >-
       Copy-Item -Path "./Frontend/build" -Destination "./Backend/Api/ClientApp/build" -Recurse
