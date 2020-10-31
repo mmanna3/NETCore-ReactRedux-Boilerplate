@@ -79,7 +79,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     var renglonesCopia = renglones;
     for (let i = 0; i < renglones.length; i++)
       if (renglonesCopia[i].indice === indice) {
-        renglonesCopia[i].habitacionSeleccionada = habitacion.id;
+        renglonesCopia[i].habitacionSeleccionada = habitacion;
         renglonesCopia[i].camaSeleccionadaId = habitacion.camas[0].id;
         renglonesCopia[i].camasDisponibles = habitacion.camas;
         break;
