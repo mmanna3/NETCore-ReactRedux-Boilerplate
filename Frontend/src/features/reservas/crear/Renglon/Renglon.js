@@ -3,7 +3,7 @@ import Select from "components/Select";
 import { Icon } from "components/Icon";
 import Estilos from './Renglon.module.scss'    
 
-const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, onCamaChange, eliminar}) => {
+const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -25,7 +25,7 @@ const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, onCamaCha
                       >
               {cargando ?
               <option>Cargando...</option> :
-              habitaciones.map((habitacion) => {
+              renglon.habitacionesDisponibles.map((habitacion) => {
                 return <option key={habitacion.id} value={habitacion.id}>
                             {habitacion.nombre} ({habitacion.cantidadDeLugaresLibres}) {habitacion.esPrivada ? '\uf023' : ''}
                        </option>

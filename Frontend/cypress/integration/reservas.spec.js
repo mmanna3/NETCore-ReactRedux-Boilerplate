@@ -1,5 +1,7 @@
 import "cypress-localstorage-commands";
 
+//Caso cambio de fecha
+
 describe('Crear reservas', () => {   
 
     it('Puede agregar renglones', () => {

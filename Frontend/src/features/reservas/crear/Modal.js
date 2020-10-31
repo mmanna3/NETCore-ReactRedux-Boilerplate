@@ -15,9 +15,10 @@ import Estilos from './Modal.module.scss'
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   class RenglonData {
-    constructor(indice, camasDisponibles, habitacionSeleccionada, camaSeleccionadaId) {
+    constructor(indice, habitacionesDisponibles, camasDisponibles, habitacionSeleccionada, camaSeleccionadaId) {
       this.habitacionSeleccionada = habitacionSeleccionada;      
       this.indice = indice;
+      this.habitacionesDisponibles = habitacionesDisponibles;
       this.camasDisponibles = camasDisponibles;
 
       if (camaSeleccionadaId)
@@ -31,7 +32,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, actualizarDesdeHasta] = useState([hoy(), maniana()]);
   const [cantidadDeNoches, actualizarCantidadDeNoches] = useState(1);
-  const [renglones, actualizarRenglones] = useState([new RenglonData(0, [])]);
+  const [renglones, actualizarRenglones] = useState([new RenglonData(0, [], [])]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -56,7 +57,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   
   useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarRenglones([new RenglonData(0, habitaciones[0].camas)]);
+      actualizarRenglones([new RenglonData(0, habitaciones, habitaciones[0].camas)]);
     //PORQUE QUIERE QUE RENGLÓN SEA DEPENDENCIA Y SE ROMPE TODO SI LO PONGO
     // eslint-disable-next-line
   }, [habitaciones]);
@@ -102,7 +103,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     var ultimoRenglon = renglones.slice(-1).pop();
     var proximoIndice = ultimoRenglon.indice + 1;
     
-    actualizarRenglones([...renglones, new RenglonData(proximoIndice, habitaciones[0].camas)]);
+    actualizarRenglones([...renglones, new RenglonData(proximoIndice, habitaciones, habitaciones[0].camas)]);
   }
 
   function eliminarRenglon(indice) {
@@ -134,7 +135,6 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
             return <Renglon
               key={`${renglon.indice}`}
               renglon={renglon}
-              habitaciones={habitaciones}
               cargando={habitacionesCargando}
               onHabitacionChange={(e) => onHabitacionChange(renglon.indice, e.target.value)}
               onCamaChange={(e) => onCamaChange(renglon.indice, e.target.value)}
