@@ -45,24 +45,25 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
           <span className="control is-expanded">
             <span className="control is-expanded">
             {renglon.camasDisponibles.length === 0 ?
-            <Select style={{minWidth:"260px"}}>
-                <option>No tiene</option>
-            </Select> :
-            !renglon.habitacionSeleccionada?.esPrivada ?
-              <Select 
-                  name={`CamasIds[${renglon.indice}]`} 
-                  style={{minWidth:"260px"}}
-                  value={renglon.camaSeleccionadaId || ''}
-                  onChange={onCamaChange}>
-                {renglon.camasDisponibles.map((cama) => {
-                  return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
-                })}
+            
+              <Select style={{minWidth:"260px"}}>
+                  <option>No tiene</option>
               </Select> :
-              <Select 
-                name={`HabitacionesPrivadas[${renglon.indice}]`} 
-                style={{minWidth:"260px"}}>
-                  <option value={1}>PRIVADA</option>
-            </Select>
+              !renglon.habitacionSeleccionada?.esPrivada ?
+                <Select 
+                    name={`CamasIds[${renglon.indice}]`} 
+                    style={{minWidth:"260px"}}
+                    value={renglon.camaSeleccionadaId || ''}
+                    onChange={onCamaChange}>
+                      {renglon.camasDisponibles.map((cama) => {
+                        return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
+                      })}
+                </Select> :
+                <Select
+                  name={`HabitacionesPrivadas[${renglon.indice}]`}
+                  style={{minWidth:"260px"}}>
+                    <option value={renglon.habitacionSeleccionada.id}>Todas - Habitación privada</option>
+                </Select>
             }
             </span>
           </span>
