@@ -16,6 +16,42 @@ describe('Crear reservas', () => {
             .should('have.length', 2)
     })
 
+    it.only('Al cambiar la fecha, se reinician los renglones', () => {
+
+      cy.contains('button', 'Cargar nueva')
+          .click()
+
+      cy.contains('button', 'Agregar cama')
+          .click()
+
+      cy.get('[name="Habitacion[0]"]')
+          .select('2')
+
+      cy.get('[name="CamasIds[0]"]')
+          .select('28')
+
+      cy.get('.react-daterange-picker__calendar-button')
+         .click()
+      
+      cy.get('.react-calendar__navigation__next-button')
+         .click()
+
+      cy.get('.react-calendar__month-view__days__day').contains('11')
+         .click()
+      
+      cy.get('.react-calendar__month-view__days__day').contains('12')
+         .click()
+
+      cy.get('.button.is-static:visible:contains("Hab.")')
+         .should('have.length', 1)
+
+      cy.get('[name="Habitacion[0]"]')
+         .should('contain.value', 1)
+
+      cy.get('[name="CamasIds[0]"]')
+         .should('contain.value', 31)
+  })
+
     it('Al eliminar un renglón, se mantienen los datos de los de abajo', () => {
 
       cy.contains('button', 'Cargar nueva')
