@@ -48,14 +48,12 @@ before(() => {
   });
   
 beforeEach(() => {
-   cy.restoreLocalStorage();
-   cy.visit('/reservas')
+   cy.restoreLocalStorage();   
 
-   cy.server();
+   cy.server()
    cy.route({
       method: 'GET',
       url: '/api/habitaciones/conLugaresLibres**',
-      // url: '/api/habitaciones/conLugaresLibres?desde=2020-10-31&hasta=2020-10-31',
       response: [
         {
            "id":1,
@@ -109,5 +107,9 @@ beforeEach(() => {
            "cantidadDeLugaresLibres":4
         }
      ]
-    })
+    }).as('conLugaresLibres')
+    
+    cy.visit('/reservas')
+    
+    cy.wait('@conLugaresLibres')
 });
