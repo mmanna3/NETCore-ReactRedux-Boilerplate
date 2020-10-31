@@ -21,6 +21,7 @@ const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, eliminar}
                       name={`Habitacion[${renglon.indice}]`} 
                       className={Estilos.iconoFa} 
                       onChange={onHabitacionChange}
+                      value={renglon.habitacionSeleccionada || ''}
                       >
               {cargando ?
               <option>Cargando...</option> :

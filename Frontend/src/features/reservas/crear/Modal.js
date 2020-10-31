@@ -15,12 +15,12 @@ import Estilos from './Modal.module.scss'
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   class RenglonData {
-    constructor(indice, camasDisponibles) {
+    constructor(indice, camasDisponibles, habitacionSeleccionada) {
+      this.habitacionSeleccionada = habitacionSeleccionada;
       this.indice = indice;
       this.camasDisponibles = camasDisponibles;
     }
-  }
-  
+  }  
   
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
@@ -77,6 +77,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
     for (let i = 0; i < renglones.length; i++)
       if (camasCopia[i].indice === indice) {
+        camasCopia[i].habitacionSeleccionada = habitacion.id;
         camasCopia[i].camasDisponibles = habitacion.camas;
         break;
       }      

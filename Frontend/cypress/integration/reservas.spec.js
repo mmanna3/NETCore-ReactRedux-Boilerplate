@@ -34,8 +34,8 @@ describe('Crear reservas', () => {
       cy.get('#eliminar-renglon-1')
          .click()
       
-      // cy.get('[name="Habitacion[2]"]')
-      //    .should('contain.value', 2)
+      cy.get('[name="Habitacion[2]"]')
+         .should('contain.value', 2)
 
       // cy.get('[name="CamasIds[2]"]')
       //    .should('contain.value', 28)
