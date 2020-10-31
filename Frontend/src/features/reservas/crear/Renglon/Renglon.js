@@ -60,7 +60,7 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
                       })}
                 </Select> :
                 <Select
-                  name={`HabitacionesPrivadas[${renglon.indice}]`}
+                  name={`HabitacionesPrivadasIds[${renglon.indice}]`}
                   style={{minWidth:"260px"}}>
                     <option value={renglon.habitacionSeleccionada.id}>Todas - Habitación privada</option>
                 </Select>
