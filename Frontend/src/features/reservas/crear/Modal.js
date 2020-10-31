@@ -15,10 +15,15 @@ import Estilos from './Modal.module.scss'
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   class RenglonData {
-    constructor(indice, camasDisponibles, habitacionSeleccionada) {
-      this.habitacionSeleccionada = habitacionSeleccionada;
+    constructor(indice, camasDisponibles, habitacionSeleccionada, camaSeleccionadaId) {
+      this.habitacionSeleccionada = habitacionSeleccionada;      
       this.indice = indice;
       this.camasDisponibles = camasDisponibles;
+
+      if (camaSeleccionadaId)
+        this.camaSeleccionadaId = camaSeleccionadaId;
+      else if (camasDisponibles.length > 0)
+        this.camaSeleccionadaId = camasDisponibles[0].id;
     }
   }  
   
@@ -72,12 +77,25 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     actualizarCamasDisponibles(indice, hab);
   }
 
+  function onCamaChange(indice, id){
+    var camasCopia = renglones;
+
+    for (let i = 0; i < renglones.length; i++)
+      if (camasCopia[i].indice === indice) {
+        camasCopia[i].camaSeleccionadaId = id;
+        break;
+      }
+
+    actualizarRenglones([...camasCopia]);
+  }
+
   const actualizarCamasDisponibles = (indice, habitacion) => {
     var camasCopia = renglones;
 
     for (let i = 0; i < renglones.length; i++)
       if (camasCopia[i].indice === indice) {
         camasCopia[i].habitacionSeleccionada = habitacion.id;
+        camasCopia[i].camaSeleccionadaId = habitacion.camas[0].id;
         camasCopia[i].camasDisponibles = habitacion.camas;
         break;
       }      
@@ -124,6 +142,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
               habitaciones={habitaciones}
               cargando={habitacionesCargando}
               onHabitacionChange={(e) => onHabitacionChange(renglon.indice, e.target.value)}
+              onCamaChange={(e) => onCamaChange(renglon.indice, e.target.value)}
               eliminar={eliminarRenglon}
             />
           }

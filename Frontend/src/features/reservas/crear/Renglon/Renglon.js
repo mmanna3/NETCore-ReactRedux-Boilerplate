@@ -3,7 +3,7 @@ import Select from "components/Select";
 import { Icon } from "components/Icon";
 import Estilos from './Renglon.module.scss'    
 
-const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, eliminar}) => {
+const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, onCamaChange, eliminar}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -48,7 +48,11 @@ const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, eliminar}
             <Select style={{minWidth:"260px"}}>
                 <option>No tiene</option>
             </Select> :
-            <Select name={`CamasIds[${renglon.indice}]`} style={{minWidth:"260px"}}>
+            <Select 
+                name={`CamasIds[${renglon.indice}]`} 
+                style={{minWidth:"260px"}}
+                value={renglon.camaSeleccionadaId || ''}
+                onChange={onCamaChange}>
               {renglon.camasDisponibles.map((cama) => {
                 return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
               })}

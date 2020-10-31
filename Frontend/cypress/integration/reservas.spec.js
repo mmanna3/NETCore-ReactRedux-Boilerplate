@@ -37,8 +37,8 @@ describe('Crear reservas', () => {
       cy.get('[name="Habitacion[2]"]')
          .should('contain.value', 2)
 
-      // cy.get('[name="CamasIds[2]"]')
-      //    .should('contain.value', 28)
+      cy.get('[name="CamasIds[2]"]')
+         .should('contain.value', 28)
     })
 })
 
