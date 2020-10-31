@@ -17,7 +17,7 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
           </span>
           <span className="control is-expanded">
             <span className="control is-expanded">
-              <Select style={{minWidth:"180px"}} className={Estilos.iconoFa} onChange={onHabitacionChange}>
+              <Select style={{minWidth:"180px"}} name={`Habitacion[${cama.indiceGlobal}]`} className={Estilos.iconoFa} onChange={onHabitacionChange}>
               {cargando ?
               <option>Cargando...</option> :
               habitaciones.map((habitacion, index) => {
@@ -54,7 +54,7 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
         </div>
       </div>
 
-      <button className="button has-text-grey has-background-light" type="button" onClick={() => eliminar(cama.indiceGlobal)}>
+      <button className="button has-text-grey has-background-light" type="button" id={`eliminar-renglon-${cama.indiceGlobal}`} onClick={() => eliminar(cama.indiceGlobal)}>
         <Icon faCode="trash-alt" />
       </button>
 
