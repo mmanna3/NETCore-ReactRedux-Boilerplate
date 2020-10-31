@@ -73,34 +73,29 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   function onHabitacionChange(indice, id) {
-    var hab = habitaciones.find(hab => hab.id === parseInt(id));
-    actualizarCamasDisponibles(indice, hab);
+    var habitacion = habitaciones.find(hab => hab.id === parseInt(id));
+    
+    var renglonesCopia = renglones;
+    for (let i = 0; i < renglones.length; i++)
+      if (renglonesCopia[i].indice === indice) {
+        renglonesCopia[i].habitacionSeleccionada = habitacion.id;
+        renglonesCopia[i].camaSeleccionadaId = habitacion.camas[0].id;
+        renglonesCopia[i].camasDisponibles = habitacion.camas;
+        break;
+      }
+    actualizarRenglones([...renglonesCopia]);
   }
 
   function onCamaChange(indice, id){
-    var camasCopia = renglones;
+    var renglonesCopia = renglones;
 
     for (let i = 0; i < renglones.length; i++)
-      if (camasCopia[i].indice === indice) {
-        camasCopia[i].camaSeleccionadaId = id;
+      if (renglonesCopia[i].indice === indice) {
+        renglonesCopia[i].camaSeleccionadaId = id;
         break;
       }
 
-    actualizarRenglones([...camasCopia]);
-  }
-
-  const actualizarCamasDisponibles = (indice, habitacion) => {
-    var camasCopia = renglones;
-
-    for (let i = 0; i < renglones.length; i++)
-      if (camasCopia[i].indice === indice) {
-        camasCopia[i].habitacionSeleccionada = habitacion.id;
-        camasCopia[i].camaSeleccionadaId = habitacion.camas[0].id;
-        camasCopia[i].camasDisponibles = habitacion.camas;
-        break;
-      }      
-
-    actualizarRenglones([...camasCopia]);
+    actualizarRenglones([...renglonesCopia]);
   }
 
   function agregarRenglon() {
