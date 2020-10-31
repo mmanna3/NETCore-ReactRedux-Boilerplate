@@ -14,11 +14,19 @@ import Estilos from './Modal.module.scss'
 
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
+  class Renglon {
+    constructor(indiceGlobal, camasDisponibles) {
+      this.indiceGlobal = indiceGlobal;
+      this.camasDisponibles = camasDisponibles;
+    }
+  }
+  
+  
   const {loading, validationErrors} = useSelector(crearReservaSelector);
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, actualizarDesdeHasta] = useState([hoy(), maniana()]);
   const [cantidadDeNoches, actualizarCantidadDeNoches] = useState(1);
-  const [camas, actualizarCamas] = useState([{indiceGlobal:0, camasDisponibles:[]}]);
+  const [camas, actualizarCamas] = useState([new Renglon(0, [])]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -40,10 +48,12 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(fetchHabitacionesConLugaresLibres(convertirAString(desdeHasta[0]), convertirAString(hasta)));
     actualizarCantidadDeNoches(restarFechas(desdeHasta[1], desdeHasta[0]));
   }, [dispatch, desdeHasta, cantidadDeNoches]);
-
+  
   useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarCamas([{indiceGlobal:0, camasDisponibles:habitaciones[0].camas}]);
+      actualizarCamas([new Renglon(0, habitaciones[0].camas)]);
+    //PORQUE QUIERE QUE RENGLÓN SEA DEPENDENCIA
+    // eslint-disable-next-line
   }, [habitaciones]);
 
   function onSuccess() {
@@ -78,7 +88,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     var ultimaCama = camas.slice(-1).pop();
     var proximoIndiceGlobal = ultimaCama.indiceGlobal + 1;
     
-    actualizarCamas([...camas, {indiceGlobal: proximoIndiceGlobal, camasDisponibles: habitaciones[0].camas}]);
+    actualizarCamas([...camas, new Renglon(proximoIndiceGlobal, habitaciones[0].camas)]);
   }
 
   function eliminarCama(indiceGlobal) {
