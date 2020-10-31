@@ -1,6 +1,7 @@
 import "cypress-localstorage-commands";
 
-//Caso cambio de fecha
+//Que no se rompa en habitación sin camas
+//Que no se rompa en habitación privada
 
 describe('Crear reservas', () => {   
 
@@ -24,7 +25,7 @@ describe('Crear reservas', () => {
       cy.contains('button', 'Agregar cama')
           .click()
 
-      cy.get('[name="Habitacion[0]"]')
+      cy.get('#habitacion-renglon-0')
           .select('2')
 
       cy.get('[name="CamasIds[0]"]')
@@ -45,7 +46,7 @@ describe('Crear reservas', () => {
       cy.get('.button.is-static:visible:contains("Hab.")')
          .should('have.length', 1)
 
-      cy.get('[name="Habitacion[0]"]')
+      cy.get('#habitacion-renglon-0')
          .should('contain.value', 1)
 
       cy.get('[name="CamasIds[0]"]')
@@ -63,7 +64,7 @@ describe('Crear reservas', () => {
       cy.contains('button', 'Agregar cama')
          .click()
 
-      cy.get('[name="Habitacion[2]"]')
+      cy.get('#habitacion-renglon-2')
          .select('2')
       
       cy.get('[name="CamasIds[2]"]')
@@ -72,7 +73,7 @@ describe('Crear reservas', () => {
       cy.get('#eliminar-renglon-1')
          .click()
       
-      cy.get('[name="Habitacion[2]"]')
+      cy.get('#habitacion-renglon-2')
          .should('contain.value', 2)
 
       cy.get('[name="CamasIds[2]"]')

@@ -80,8 +80,10 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     for (let i = 0; i < renglones.length; i++)
       if (renglonesCopia[i].indice === indice) {
         renglonesCopia[i].habitacionSeleccionada = habitacion;
-        renglonesCopia[i].camaSeleccionadaId = habitacion.camas[0].id;
-        renglonesCopia[i].camasDisponibles = habitacion.camas;
+        renglonesCopia[i].camasDisponibles = habitacion.camas;        
+        if (habitacion.camas.length > 0)
+          renglonesCopia[i].camaSeleccionadaId = habitacion.camas[0].id;
+        
         break;
       }
     actualizarRenglones([...renglonesCopia]);

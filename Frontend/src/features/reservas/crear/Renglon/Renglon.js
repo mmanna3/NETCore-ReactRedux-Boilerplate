@@ -18,7 +18,7 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
           <span className="control is-expanded">
             <span className="control is-expanded">
               <Select style={{minWidth:"180px"}} 
-                      name={`Habitacion[${renglon.indice}]`} 
+                      id={`habitacion-renglon-${renglon.indice}`}
                       className={Estilos.iconoFa} 
                       onChange={onHabitacionChange}
                       value={renglon.habitacionSeleccionada?.id || ''}
@@ -48,14 +48,20 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
             <Select style={{minWidth:"260px"}}>
                 <option>No tiene</option>
             </Select> :
-            <Select 
-                name={`CamasIds[${renglon.indice}]`} 
-                style={{minWidth:"260px"}}
-                value={renglon.camaSeleccionadaId || ''}
-                onChange={onCamaChange}>
-              {renglon.camasDisponibles.map((cama) => {
-                return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
-              })}
+            !renglon.habitacionSeleccionada?.esPrivada ?
+              <Select 
+                  name={`CamasIds[${renglon.indice}]`} 
+                  style={{minWidth:"260px"}}
+                  value={renglon.camaSeleccionadaId || ''}
+                  onChange={onCamaChange}>
+                {renglon.camasDisponibles.map((cama) => {
+                  return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
+                })}
+              </Select> :
+              <Select 
+                name={`HabitacionesPrivadas[${renglon.indice}]`} 
+                style={{minWidth:"260px"}}>
+                  <option value={1}>PRIVADA</option>
             </Select>
             }
             </span>
