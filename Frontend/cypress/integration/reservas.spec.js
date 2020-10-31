@@ -16,7 +16,7 @@ describe('Crear reservas', () => {
             .should('have.length', 2)
     })
 
-    it.only('Al cambiar la fecha, se reinician los renglones', () => {
+    it('Al cambiar la fecha, se reinician los renglones', () => {
 
       cy.contains('button', 'Cargar nueva')
           .click()
