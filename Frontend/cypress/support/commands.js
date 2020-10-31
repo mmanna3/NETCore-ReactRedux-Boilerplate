@@ -25,18 +25,6 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add("login", () => { 
-    
-    cy.visit('/');
-    cy.request({
-        method: 'POST',
-        url: 'http://localhost:5000/api/usuarios/autenticar',
-        body: {
-            username: 'yo',
-            password: '123',
-        }
-      })
-      .then(res => {
-        localStorage.setItem('user', JSON.stringify(res.body));
-      })  
+Cypress.Commands.add("login", () => {
+  localStorage.setItem('user', JSON.stringify({"id":3,"username":"yo","firstName":"nombre","lastName":"apellido","token":"untokencualquiera"}));
 })
