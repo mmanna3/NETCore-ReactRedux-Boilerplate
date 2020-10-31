@@ -15,8 +15,8 @@ import Estilos from './Modal.module.scss'
 const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {  
 
   class Renglon {
-    constructor(indiceGlobal, camasDisponibles) {
-      this.indiceGlobal = indiceGlobal;
+    constructor(indice, camasDisponibles) {
+      this.indice = indice;
       this.camasDisponibles = camasDisponibles;
     }
   }
@@ -67,16 +67,16 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(cleanErrors());
   }
 
-  function onHabitacionChange(indiceGlobal, id) {
+  function onHabitacionChange(indice, id) {
     var hab = habitaciones.find(hab => hab.id === parseInt(id));
-    actualizarCamasDisponibles(indiceGlobal, hab);
+    actualizarCamasDisponibles(indice, hab);
   }
 
-  const actualizarCamasDisponibles = (indiceGlobal, habitacion) => {
+  const actualizarCamasDisponibles = (indice, habitacion) => {
     var camasCopia = renglones;
 
     for (let i = 0; i < renglones.length; i++)
-      if (camasCopia[i].indiceGlobal === indiceGlobal) {
+      if (camasCopia[i].indice === indice) {
         camasCopia[i].camasDisponibles = habitacion.camas;
         break;
       }      
@@ -84,17 +84,17 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     actualizarRenglones([...camasCopia]);
   }
 
-  function agregarCama() {
+  function agregarRenglon() {
     var ultimoRenglon = renglones.slice(-1).pop();
-    var proximoIndiceGlobal = ultimoRenglon.indiceGlobal + 1;
+    var proximoIndice = ultimoRenglon.indice + 1;
     
-    actualizarRenglones([...renglones, new Renglon(proximoIndiceGlobal, habitaciones[0].camas)]);
+    actualizarRenglones([...renglones, new Renglon(proximoIndice, habitaciones[0].camas)]);
   }
 
-  function eliminarCama(indiceGlobal) {
+  function eliminarRenglon(indice) {
     if (renglones.length > 1) {
-      var camasSinLaBorrada = renglones.filter(cama => cama.indiceGlobal !== indiceGlobal);
-      actualizarRenglones(camasSinLaBorrada);
+      var renglonSinElBorrado = renglones.filter(renglon => renglon.indice !== indice);
+      actualizarRenglones(renglonSinElBorrado);
     }      
   };
 
@@ -118,12 +118,12 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
           renglones.map((renglon) => {
             
             return <SelectCama
-              key={`${renglon.indiceGlobal}`}
+              key={`${renglon.indice}`}
               renglon={renglon}
               habitaciones={habitaciones}
               cargando={habitacionesCargando}
-              onHabitacionChange={(e) => onHabitacionChange(renglon.indiceGlobal, e.target.value)}
-              eliminar={eliminarCama}
+              onHabitacionChange={(e) => onHabitacionChange(renglon.indice, e.target.value)}
+              eliminar={eliminarRenglon}
             />
           }
           )
@@ -133,7 +133,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         
         
 
-        <Button text="Agregar cama" onClick={agregarCama} style={{marginTop:"1em"}}/>
+        <Button text="Agregar cama" onClick={agregarRenglon} style={{marginTop:"1em"}}/>
       </Body>
       <FooterAcceptCancel onCancel={hide} loading={loading} />
       

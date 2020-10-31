@@ -18,7 +18,7 @@ const SelectCama = ({renglon, habitaciones, cargando, onHabitacionChange, elimin
           <span className="control is-expanded">
             <span className="control is-expanded">
               <Select style={{minWidth:"180px"}} 
-                      name={`Habitacion[${renglon.indiceGlobal}]`} 
+                      name={`Habitacion[${renglon.indice}]`} 
                       className={Estilos.iconoFa} 
                       onChange={onHabitacionChange}
                       >
@@ -47,7 +47,7 @@ const SelectCama = ({renglon, habitaciones, cargando, onHabitacionChange, elimin
             <Select style={{minWidth:"260px"}}>
                 <option>No tiene</option>
             </Select> :
-            <Select name={`CamasIds[${renglon.indiceGlobal}]`} style={{minWidth:"260px"}}>
+            <Select name={`CamasIds[${renglon.indice}]`} style={{minWidth:"260px"}}>
               {renglon.camasDisponibles.map((cama) => {
                 return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
               })}
@@ -58,7 +58,7 @@ const SelectCama = ({renglon, habitaciones, cargando, onHabitacionChange, elimin
         </div>
       </div>
 
-      <button className="button has-text-grey has-background-light" type="button" id={`eliminar-renglon-${renglon.indiceGlobal}`} onClick={() => eliminar(renglon.indiceGlobal)}>
+      <button className="button has-text-grey has-background-light" type="button" id={`eliminar-renglon-${renglon.indice}`} onClick={() => eliminar(renglon.indice)}>
         <Icon faCode="trash-alt" />
       </button>
 
