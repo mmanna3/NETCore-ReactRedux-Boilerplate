@@ -26,7 +26,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, actualizarDesdeHasta] = useState([hoy(), maniana()]);
   const [cantidadDeNoches, actualizarCantidadDeNoches] = useState(1);
-  const [camas, actualizarCamas] = useState([new Renglon(0, [])]);
+  const [renglones, actualizarRenglones] = useState([new Renglon(0, [])]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -51,8 +51,8 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   
   useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarCamas([new Renglon(0, habitaciones[0].camas)]);
-    //PORQUE QUIERE QUE RENGLÓN SEA DEPENDENCIA
+      actualizarRenglones([new Renglon(0, habitaciones[0].camas)]);
+    //PORQUE QUIERE QUE RENGLÓN SEA DEPENDENCIA Y SE ROMPE TODO SI LO PONGO
     // eslint-disable-next-line
   }, [habitaciones]);
 
@@ -73,28 +73,28 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   }
 
   const actualizarCamasDisponibles = (indiceGlobal, habitacion) => {
-    var camasCopia = camas;
+    var camasCopia = renglones;
 
-    for (let i = 0; i < camas.length; i++)
+    for (let i = 0; i < renglones.length; i++)
       if (camasCopia[i].indiceGlobal === indiceGlobal) {
         camasCopia[i].camasDisponibles = habitacion.camas;
         break;
       }      
 
-    actualizarCamas([...camasCopia]);
+    actualizarRenglones([...camasCopia]);
   }
 
   function agregarCama() {
-    var ultimaCama = camas.slice(-1).pop();
-    var proximoIndiceGlobal = ultimaCama.indiceGlobal + 1;
+    var ultimoRenglon = renglones.slice(-1).pop();
+    var proximoIndiceGlobal = ultimoRenglon.indiceGlobal + 1;
     
-    actualizarCamas([...camas, new Renglon(proximoIndiceGlobal, habitaciones[0].camas)]);
+    actualizarRenglones([...renglones, new Renglon(proximoIndiceGlobal, habitaciones[0].camas)]);
   }
 
   function eliminarCama(indiceGlobal) {
-    if (camas.length > 1) {
-      var camasSinLaBorrada = camas.filter(cama => cama.indiceGlobal !== indiceGlobal);
-      actualizarCamas(camasSinLaBorrada);
+    if (renglones.length > 1) {
+      var camasSinLaBorrada = renglones.filter(cama => cama.indiceGlobal !== indiceGlobal);
+      actualizarRenglones(camasSinLaBorrada);
     }      
   };
 
@@ -115,14 +115,14 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         <Label text="Camas"/>
 
         {
-          camas.map((cama) => {
+          renglones.map((renglon) => {
             
             return <SelectCama
-              key={`${cama.indiceGlobal}`}
-              renglon={cama}
+              key={`${renglon.indiceGlobal}`}
+              renglon={renglon}
               habitaciones={habitaciones}
               cargando={habitacionesCargando}
-              onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e.target.value)}
+              onHabitacionChange={(e) => onHabitacionChange(renglon.indiceGlobal, e.target.value)}
               eliminar={eliminarCama}
             />
           }
