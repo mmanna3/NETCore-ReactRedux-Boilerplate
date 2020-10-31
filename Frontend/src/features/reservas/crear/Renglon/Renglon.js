@@ -1,9 +1,9 @@
 import React from 'react';   
 import Select from "components/Select";    
 import { Icon } from "components/Icon";
-import Estilos from './SelectCama.module.scss'    
+import Estilos from './Renglon.module.scss'    
 
-const SelectCama = ({renglon, habitaciones, cargando, onHabitacionChange, eliminar}) => {
+const Renglon = ({renglon, habitaciones, cargando, onHabitacionChange, eliminar}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -66,4 +66,4 @@ const SelectCama = ({renglon, habitaciones, cargando, onHabitacionChange, elimin
   )
 }
 
-export default SelectCama;
+export default Renglon;
