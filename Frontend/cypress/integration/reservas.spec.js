@@ -14,7 +14,7 @@ describe('Crear reservas', () => {
             .should('have.length', 2)
     })
 
-    it('Al eliminar un renglón, se mantienen los datos de los de abajo', () => {
+    it.only('Al eliminar un renglón, se mantienen los datos de los de abajo', () => {
 
       cy.contains('button', 'Cargar nueva')
          .click()
@@ -26,7 +26,7 @@ describe('Crear reservas', () => {
          .click()
 
       cy.get('[name="Habitacion[2]"]')
-         .select('1')
+         .select('2')
       
       cy.get('[name="CamasIds[2]"]')
          .select('28')
@@ -34,12 +34,12 @@ describe('Crear reservas', () => {
       cy.get('#eliminar-renglon-1')
          .click()
       
-   //    cy.get('[name="Habitacion[2]"]')
-   //       .should('contain.value', 1)
+      // cy.get('[name="Habitacion[2]"]')
+      //    .should('contain.value', 2)
 
-   //    cy.get('[name="CamasIds[2]"]')
-   //       .should('contain.value', 28)
-   //  })
+      // cy.get('[name="CamasIds[2]"]')
+      //    .should('contain.value', 28)
+    })
 })
 
 before(() => {    

@@ -57,8 +57,9 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
     dispatch(cleanErrors());
   }
 
-  function onHabitacionChange(indiceGlobal, e) {
-    actualizarCamasDisponibles(indiceGlobal, habitaciones[e.target.value]);
+  function onHabitacionChange(indiceGlobal, id) {
+    var hab = habitaciones.find(hab => hab.id === parseInt(id));
+    actualizarCamasDisponibles(indiceGlobal, hab);
   }
 
   const actualizarCamasDisponibles = (indiceGlobal, habitacion) => {
@@ -119,7 +120,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
               cama={cama}
               habitaciones={habitaciones}
               cargando={habitacionesCargando}
-              onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e)}
+              onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e.target.value)}
               eliminar={eliminarCama}
             />
           }

@@ -20,8 +20,8 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
               <Select style={{minWidth:"180px"}} name={`Habitacion[${cama.indiceGlobal}]`} className={Estilos.iconoFa} onChange={onHabitacionChange}>
               {cargando ?
               <option>Cargando...</option> :
-              habitaciones.map((habitacion, index) => {
-                return <option key={habitacion.id} value={index}>
+              habitaciones.map((habitacion) => {
+                return <option key={habitacion.id} value={habitacion.id}>
                             {habitacion.nombre} ({habitacion.cantidadDeLugaresLibres}) {habitacion.esPrivada ? '\uf023' : ''}
                        </option>
               })
