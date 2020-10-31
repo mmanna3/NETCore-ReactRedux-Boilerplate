@@ -18,7 +18,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const [resetOnChanged, resetForm] = React.useState(0);
   const [desdeHasta, actualizarDesdeHasta] = useState([hoy(), maniana()]);
   const [cantidadDeNoches, actualizarCantidadDeNoches] = useState(1);
-  const [camas, actualizarCamas] = useState([{indiceGlobal:0, indice: 0, camasDisponibles:[]}]);
+  const [camas, actualizarCamas] = useState([{indiceGlobal:0, camasDisponibles:[]}]);
 
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
@@ -43,7 +43,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
 
   useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarCamas([{indiceGlobal:0, indice: 0, camasDisponibles:habitaciones[0].camas}]);      
+      actualizarCamas([{indiceGlobal:0, camasDisponibles:habitaciones[0].camas}]);
   }, [habitaciones]);
 
   function onSuccess() {
@@ -77,24 +77,16 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   function agregarCama() {
     var ultimaCama = camas.slice(-1).pop();
     var proximoIndiceGlobal = ultimaCama.indiceGlobal + 1;
-    var proximoIndice = ultimaCama.indice + 1;
     
-    actualizarCamas([...camas, {indiceGlobal: proximoIndiceGlobal, indice: proximoIndice, camasDisponibles: habitaciones[0].camas}]);
+    actualizarCamas([...camas, {indiceGlobal: proximoIndiceGlobal, camasDisponibles: habitaciones[0].camas}]);
   }
 
   function eliminarCama(indiceGlobal) {
     if (camas.length > 1) {
       var camasSinLaBorrada = camas.filter(cama => cama.indiceGlobal !== indiceGlobal);
-      actualizarIndices(camasSinLaBorrada);
       actualizarCamas(camasSinLaBorrada);
     }      
   };
-
-  function actualizarIndices(camas){
-    for (let i = 0; i < camas.length; i++)
-      if (camas[i].indice !== i)
-        camas[i].indice = i;
-  }
 
   return (
     <ModalForm
@@ -117,7 +109,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
             
             return <SelectCama
               key={`${cama.indiceGlobal}`}
-              cama={cama}
+              renglon={cama}
               habitaciones={habitaciones}
               cargando={habitacionesCargando}
               onHabitacionChange={(e) => onHabitacionChange(cama.indiceGlobal, e.target.value)}

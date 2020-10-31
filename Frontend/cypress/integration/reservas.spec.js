@@ -14,7 +14,7 @@ describe('Crear reservas', () => {
             .should('have.length', 2)
     })
 
-    it.only('Al eliminar un renglón, se mantienen los datos de los de abajo', () => {
+    it('Al eliminar un renglón, se mantienen los datos de los de abajo', () => {
 
       cy.contains('button', 'Cargar nueva')
          .click()

@@ -3,7 +3,7 @@ import Select from "components/Select";
 import { Icon } from "components/Icon";
 import Estilos from './SelectCama.module.scss'    
 
-const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}) => {
+const SelectCama = ({renglon, habitaciones, cargando, onHabitacionChange, eliminar}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -17,7 +17,11 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
           </span>
           <span className="control is-expanded">
             <span className="control is-expanded">
-              <Select style={{minWidth:"180px"}} name={`Habitacion[${cama.indiceGlobal}]`} className={Estilos.iconoFa} onChange={onHabitacionChange}>
+              <Select style={{minWidth:"180px"}} 
+                      name={`Habitacion[${renglon.indiceGlobal}]`} 
+                      className={Estilos.iconoFa} 
+                      onChange={onHabitacionChange}
+                      >
               {cargando ?
               <option>Cargando...</option> :
               habitaciones.map((habitacion) => {
@@ -39,12 +43,12 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
           </span>
           <span className="control is-expanded">
             <span className="control is-expanded">
-            {cama.camasDisponibles.length === 0 ?
+            {renglon.camasDisponibles.length === 0 ?
             <Select style={{minWidth:"260px"}}>
                 <option>No tiene</option>
             </Select> :
-            <Select name={`CamasIds[${cama.indiceGlobal}]`} style={{minWidth:"260px"}}>
-              {cama.camasDisponibles.map((cama) => {
+            <Select name={`CamasIds[${renglon.indiceGlobal}]`} style={{minWidth:"260px"}}>
+              {renglon.camasDisponibles.map((cama) => {
                 return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
               })}
             </Select>
@@ -54,7 +58,7 @@ const SelectCama = ({cama, habitaciones, cargando, onHabitacionChange, eliminar}
         </div>
       </div>
 
-      <button className="button has-text-grey has-background-light" type="button" id={`eliminar-renglon-${cama.indiceGlobal}`} onClick={() => eliminar(cama.indiceGlobal)}>
+      <button className="button has-text-grey has-background-light" type="button" id={`eliminar-renglon-${renglon.indiceGlobal}`} onClick={() => eliminar(renglon.indiceGlobal)}>
         <Icon faCode="trash-alt" />
       </button>
 
