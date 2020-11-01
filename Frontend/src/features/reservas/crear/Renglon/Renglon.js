@@ -46,7 +46,7 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
             <span className="control is-expanded">
             {renglon.camasDisponibles.length === 0 ?
             
-              <Select style={{minWidth:"260px"}}>
+              <Select style={{minWidth:"260px"}} id={`renglon-sin-camas-${renglon.indice}`}>
                   <option>No tiene</option>
               </Select> :
               !renglon.habitacionSeleccionada?.esPrivada ?

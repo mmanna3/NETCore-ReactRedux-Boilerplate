@@ -79,6 +79,18 @@ describe('Crear reservas', () => {
       cy.get('[name="CamasIds[2]"]')
          .should('contain.value', 28)
     })
+
+    it('Al seleccionar una habitación sin camas disponibles, figura la leyenda "No tiene"', () => {
+
+      cy.contains('button', 'Cargar nueva')
+         .click()
+
+      cy.get('#habitacion-renglon-0')
+         .select('4')
+      
+      cy.get('#renglon-sin-camas-0')
+         .should('contain.value', 'No tiene')
+    })
 })
 
 before(() => {    
@@ -144,7 +156,32 @@ beforeEach(() => {
               }
            ],
            "cantidadDeLugaresLibres":4
-        }
+        },
+        {
+         "id":3,
+         "nombre":"Priv",
+         "esPrivada":true,
+         "camas":[
+            {
+               "id":50,
+               "nombre":"Matri",
+               "tipo":"Matrimimonial"
+            },
+            {
+               "id":60,
+               "nombre":"1",
+               "tipo":"Individual"
+            }
+         ],
+         "cantidadDeLugaresLibres":3
+      },
+      {
+         "id":4,
+         "nombre":"Vacía",
+         "esPrivada":false,
+         "camas":[],
+         "cantidadDeLugaresLibres":0
+      },
      ]
     }).as('conLugaresLibres')
     
