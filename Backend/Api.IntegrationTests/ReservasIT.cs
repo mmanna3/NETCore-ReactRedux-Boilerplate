@@ -64,8 +64,8 @@ namespace Api.IntegrationTests
             var reserva = reservasDelMes.Reservas.ToList().First();
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
-            reserva.DiaInicio.Should().Be(DateTime.Today.Day - 1);
-            reserva.DiaFin.Should().Be(DateTime.Today.Day - 1);
+            reserva.DiaInicio.Should().Be(DateTime.Today.AddDays(-1).Day);
+            reserva.DiaFin.Should().Be(DateTime.Today.AddDays(-1).Day);
             reserva.CamasIds.Should().HaveCount(1);
             reserva.CamasIds.First().Should().Be(camaId);
         }
