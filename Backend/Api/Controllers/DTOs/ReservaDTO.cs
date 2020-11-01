@@ -14,6 +14,6 @@ namespace Api.Controllers.DTOs
         public string Desde { get; set; }
         public string Hasta { get; set; }
         public List<int?> CamasIds { get; set; }
-        public List<List<int?>> CamasDeHabitacionesPrivadasIds { get; set; }
+        public List<List<int>> CamasDeHabitacionesPrivadasIds { get; set; }
     }
 }

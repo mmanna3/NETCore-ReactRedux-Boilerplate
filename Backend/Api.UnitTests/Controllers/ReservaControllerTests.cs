@@ -51,8 +51,12 @@ namespace Api.UnitTests.Controllers
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
             reserva.Desde.Should().Be(DESDE);
             reserva.Hasta.Should().Be(HASTA.AddDays(-1));
-            reserva.ReservaCamas.Should().HaveCount(1);
-            reserva.ReservaCamas.First().CamaId.Should().Be(UN_CAMA_ID);
+            reserva.ReservaCamas.Should().HaveCount(4);
+
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == UN_CAMA_ID);
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == 100);
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == 200);
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == 400);
         }
 
         [Test]
@@ -109,12 +113,21 @@ namespace Api.UnitTests.Controllers
 
         private void DadaUnaReservaDto()
         {
+            var listaDeCamasDeHabitacionPrivada1 = new List<int> {100, 200};
+            var listaDeCamasDeHabitacionPrivada2 = new List<int> {400};
+
+            var camasDeHabitacionesPrivadasIds = new List<List<int>>
+            {
+                listaDeCamasDeHabitacionPrivada1, null, listaDeCamasDeHabitacionPrivada2
+            };
+
             _unaReservaDto = new ReservaDTO
             {
                 ANombreDe = A_NOMBRE_DE,
-                CamasIds = new List<int?>{UN_CAMA_ID},
+                CamasIds = new List<int?>{null, UN_CAMA_ID},
                 Desde = Utilidades.ConvertirFecha(DESDE),
-                Hasta = Utilidades.ConvertirFecha(HASTA)
+                Hasta = Utilidades.ConvertirFecha(HASTA),
+                CamasDeHabitacionesPrivadasIds = camasDeHabitacionesPrivadasIds
             };
         }
     }

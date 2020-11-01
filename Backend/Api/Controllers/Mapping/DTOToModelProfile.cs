@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Api.Controllers.DTOs;
 using Api.Controllers.DTOs.Habitacion;
@@ -6,6 +7,7 @@ using Api.Controllers.DTOs.Usuario;
 using Api.Core;
 using AutoMapper;
 using Api.Core.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Controllers.Mapping
 {
@@ -56,7 +58,7 @@ namespace Api.Controllers.Mapping
             CreateMap<ReservaDTO, Reserva>()
                 .ForMember(
                     m => m.ReservaCamas,
-                    dto => dto.MapFrom(x => x.CamasIds.Where(c => c != null))
+                    dto => dto.MapFrom(x => UnificarCamasIds(x))
                 )
                 .AfterMap((model, entity) =>
                 {
@@ -74,6 +76,18 @@ namespace Api.Controllers.Mapping
                     m => m.CamaId,
                     dto => dto.MapFrom(x => x)
                 );
+        }
+
+        private static List<int> UnificarCamasIds(ReservaDTO dto)
+        {
+            var resultado = new List<int>();
+            resultado.AddRange(dto.CamasIds.Where(c => c != null).Select(x => (int)x).ToList());
+
+            foreach (var idsDeCamasDeUnaHabitacionPrivada in dto.CamasDeHabitacionesPrivadasIds)
+                if (idsDeCamasDeUnaHabitacionPrivada != null)
+                    resultado.AddRange(idsDeCamasDeUnaHabitacionPrivada);
+
+            return resultado;
         }
 
         public class StringADateTimeConverter : ITypeConverter<string, DateTime>
