@@ -1,5 +1,6 @@
 import React from 'react';   
-import Select from "components/Select";    
+import Select from "components/Select";
+import {Input} from "components/Input"
 import { Icon } from "components/Icon";
 import Estilos from './Renglon.module.scss'    
 
@@ -59,11 +60,19 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
                         return <option key={cama.id} value={cama.id}>{cama.tipo} - {cama.nombre}</option>
                       })}
                 </Select> :
+                <>
                 <Select
-                  name={`HabitacionesPrivadasIds[${renglon.indice}]`}
+                  id={`habitacion-privada-renglon-${renglon.indice}`}
                   style={{minWidth:"260px"}}>
                     <option value={renglon.habitacionSeleccionada.id}>Todas - Habitación privada</option>
                 </Select>
+                {renglon.camasDisponibles.map((cama, i) => {
+                  return <Input style={{display: 'none'}}
+                                name={`CamasDeHabitacionesPrivadasIds[${renglon.indice}][${i}]`}
+                                defaultValue={cama.id}
+                          />
+                })}
+                </>
             }
             </span>
           </span>

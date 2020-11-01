@@ -1,7 +1,6 @@
 import "cypress-localstorage-commands";
 
-//Que no se rompa en habitación sin camas
-//Que no se rompa en habitación privada
+//Si la primera que figura es una privada, no anda.
 
 describe('Crear reservas', () => {   
 
@@ -92,7 +91,7 @@ describe('Crear reservas', () => {
          .should('contain.value', 'No tiene')
     })
 
-    it('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {
+    it.only('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {
 
       cy.contains('button', 'Cargar nueva')
          .click()
@@ -100,10 +99,10 @@ describe('Crear reservas', () => {
       cy.get('#habitacion-renglon-0')
          .select('3')
       
-      cy.get('[name="HabitacionesPrivadasIds[0]"]')
+      cy.get('#habitacion-privada-renglon-0')
          .should('contain.value', 3)
 
-      cy.get('[name="HabitacionesPrivadasIds[0]"]')
+      cy.get('#habitacion-privada-renglon-0')
          .should('contain.text', 'Todas - Habitación privada')
     })
 })
