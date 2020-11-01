@@ -27,7 +27,7 @@ describe('Crear reservas', () => {
          .should('contain.value', 1)
 
          cy.get('#renglon-sin-camas-0')
-         .should('contain.value', 'No tiene')
+         .should('contain.value', 'No tiene en esta fecha')
     })
 })
 

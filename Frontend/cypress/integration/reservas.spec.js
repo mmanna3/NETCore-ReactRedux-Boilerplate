@@ -89,7 +89,7 @@ describe('Crear reservas', () => {
          .select('4')
       
       cy.get('#renglon-sin-camas-0')
-         .should('contain.value', 'No tiene')
+         .should('contain.value', 'No tiene en esta fecha')
     })
 
     it('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {

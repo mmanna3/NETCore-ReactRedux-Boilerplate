@@ -48,7 +48,7 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
             {renglon.camasDisponibles.length === 0 ?
             
               <Select style={{minWidth:"260px"}} id={`renglon-sin-camas-${renglon.indice}`}>
-                  <option>No tiene</option>
+                  <option>No tiene en esta fecha</option>
               </Select> :
               !renglon.habitacionSeleccionada?.esPrivada ?
                 <Select 
