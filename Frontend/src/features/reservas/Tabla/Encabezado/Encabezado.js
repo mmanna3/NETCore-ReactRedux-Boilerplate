@@ -8,7 +8,7 @@ const Encabezado = ({habitaciones}) => {
           <tr>
             <th rowSpan="2" className={Estilos.interseccion}></th>
             {habitaciones.map((habitacion, i) => 
-              <th key={i} className={`has-text-weight-medium ${Estilos.habitacion}`} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre}</th>
+              <th key={i} className={`has-text-weight-medium ${Estilos.habitacion}`} colSpan={habitacion.camas.length}>Habitación {habitacion.nombre} {habitacion.esPrivada ? '\uf023' : ''}</th>
             )}
           </tr>        
           <tr>

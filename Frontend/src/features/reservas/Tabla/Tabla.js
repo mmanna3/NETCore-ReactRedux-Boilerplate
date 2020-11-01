@@ -47,7 +47,7 @@ const TablaReservas = ({datos, habitaciones}) => {
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasMatrimoniales);    
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta) => cucheta.abajo));
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta) => cucheta.arriba));    
-      habs.push({nombre: habitacion.nombre, camas: camasDeLaHabitacion});
+      habs.push({nombre: habitacion.nombre, esPrivada: habitacion.esPrivada, camas: camasDeLaHabitacion});
       camasIdsArray = camasIdsArray.concat(camasDeLaHabitacion.map((cama) => cama.id));
     }
     setHabitacionesConCamasUnificadas(habs);        
