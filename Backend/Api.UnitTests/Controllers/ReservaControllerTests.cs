@@ -60,6 +60,38 @@ namespace Api.UnitTests.Controllers
         }
 
         [Test]
+        public void MapeaCorrectamente_SiNoHayCamasDeHabitacionesPrivadas()
+        {
+            DadoUnaReservaDtoSinCamasDeHabitacionesPrivadas();
+
+            var reserva = _mapper.Map<Reserva>(_unaReservaDto);
+
+            reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
+            reserva.Desde.Should().Be(DESDE);
+            reserva.Hasta.Should().Be(HASTA.AddDays(-1));
+            reserva.ReservaCamas.Should().HaveCount(1);
+
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == UN_CAMA_ID);
+        }
+
+        [Test]
+        public void MapeaCorrectamente_SiSoloHayCamasDeHabitacionesPrivadas()
+        {
+            DadoUnaReservaDtoSoloConCamasDeHabitacionesPrivadas();
+
+            var reserva = _mapper.Map<Reserva>(_unaReservaDto);
+
+            reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
+            reserva.Desde.Should().Be(DESDE);
+            reserva.Hasta.Should().Be(HASTA.AddDays(-1));
+            reserva.ReservaCamas.Should().HaveCount(3);
+
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == 100);
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == 200);
+            reserva.ReservaCamas.Should().Contain(x => x.CamaId == 400);
+        }
+
+        [Test]
         public void MapeaCorrectamenteEnLaConsultaMensual()
         {
             DadaUnaListaDeReservas();
@@ -125,6 +157,36 @@ namespace Api.UnitTests.Controllers
             {
                 ANombreDe = A_NOMBRE_DE,
                 CamasIds = new List<int?>{null, UN_CAMA_ID},
+                Desde = Utilidades.ConvertirFecha(DESDE),
+                Hasta = Utilidades.ConvertirFecha(HASTA),
+                CamasDeHabitacionesPrivadasIds = camasDeHabitacionesPrivadasIds
+            };
+        }
+
+        private void DadoUnaReservaDtoSinCamasDeHabitacionesPrivadas()
+        {
+            _unaReservaDto = new ReservaDTO
+            {
+                ANombreDe = A_NOMBRE_DE,
+                CamasIds = new List<int?> { null, UN_CAMA_ID },
+                Desde = Utilidades.ConvertirFecha(DESDE),
+                Hasta = Utilidades.ConvertirFecha(HASTA)
+            };
+        }        
+        
+        private void DadoUnaReservaDtoSoloConCamasDeHabitacionesPrivadas()
+        {
+            var listaDeCamasDeHabitacionPrivada1 = new List<int> { 100, 200 };
+            var listaDeCamasDeHabitacionPrivada2 = new List<int> { 400 };
+
+            var camasDeHabitacionesPrivadasIds = new List<List<int>>
+            {
+                listaDeCamasDeHabitacionPrivada1, null, listaDeCamasDeHabitacionPrivada2
+            };
+
+            _unaReservaDto = new ReservaDTO
+            {
+                ANombreDe = A_NOMBRE_DE,
                 Desde = Utilidades.ConvertirFecha(DESDE),
                 Hasta = Utilidades.ConvertirFecha(HASTA),
                 CamasDeHabitacionesPrivadasIds = camasDeHabitacionesPrivadasIds

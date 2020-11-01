@@ -81,11 +81,13 @@ namespace Api.Controllers.Mapping
         private static List<int> UnificarCamasIds(ReservaDTO dto)
         {
             var resultado = new List<int>();
-            resultado.AddRange(dto.CamasIds.Where(c => c != null).Select(x => (int)x).ToList());
+            if (dto.CamasIds != null)
+                resultado.AddRange(dto.CamasIds.Where(c => c != null).Select(x => (int)x).ToList());
 
-            foreach (var idsDeCamasDeUnaHabitacionPrivada in dto.CamasDeHabitacionesPrivadasIds)
-                if (idsDeCamasDeUnaHabitacionPrivada != null)
-                    resultado.AddRange(idsDeCamasDeUnaHabitacionPrivada);
+            if (dto.CamasDeHabitacionesPrivadasIds != null)
+                foreach (var idsDeCamasDeUnaHabitacionPrivada in dto.CamasDeHabitacionesPrivadasIds)
+                    if (idsDeCamasDeUnaHabitacionPrivada != null)
+                        resultado.AddRange(idsDeCamasDeUnaHabitacionPrivada);
 
             return resultado;
         }
