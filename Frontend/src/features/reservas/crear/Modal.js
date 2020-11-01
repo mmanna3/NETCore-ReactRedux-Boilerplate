@@ -57,7 +57,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   
   useEffect(() => {
     if (habitaciones.length > 0)
-      actualizarRenglones([new RenglonData(0, habitaciones, habitaciones[0].camas)]);
+      actualizarRenglones([new RenglonData(0, habitaciones, habitaciones[0].camas, habitaciones[0])]);
     //PORQUE QUIERE QUE RENGLÓN SEA DEPENDENCIA Y SE ROMPE TODO SI LO PONGO
     // eslint-disable-next-line
   }, [habitaciones]);

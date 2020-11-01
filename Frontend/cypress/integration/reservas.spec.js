@@ -1,7 +1,5 @@
 import "cypress-localstorage-commands";
 
-//Si la primera que figura es una privada, no anda.
-
 describe('Crear reservas', () => {   
 
     it('Puede agregar renglones', () => {
@@ -91,7 +89,7 @@ describe('Crear reservas', () => {
          .should('contain.value', 'No tiene')
     })
 
-    it.only('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {
+    it('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {
 
       cy.contains('button', 'Cargar nueva')
          .click()
