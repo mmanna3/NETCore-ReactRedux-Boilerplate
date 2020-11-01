@@ -80,7 +80,7 @@ describe('Crear reservas', () => {
          .should('contain.value', 28)
     })
 
-    it('Al seleccionar una habitación sin camas disponibles, figura la leyenda "No tiene"', () => {
+    it('Al seleccionar una habitación sin camas disponibles, figura la leyenda correspondiente', () => {
 
       cy.contains('button', 'Cargar nueva')
          .click()
@@ -90,6 +90,21 @@ describe('Crear reservas', () => {
       
       cy.get('#renglon-sin-camas-0')
          .should('contain.value', 'No tiene')
+    })
+
+    it('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {
+
+      cy.contains('button', 'Cargar nueva')
+         .click()
+
+      cy.get('#habitacion-renglon-0')
+         .select('3')
+      
+      cy.get('[name="HabitacionesPrivadasIds[0]"]')
+         .should('contain.value', 3)
+
+      cy.get('[name="HabitacionesPrivadasIds[0]"]')
+         .should('contain.text', 'Todas - Habitación privada')
     })
 })
 
