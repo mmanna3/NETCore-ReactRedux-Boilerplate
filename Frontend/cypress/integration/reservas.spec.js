@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+import { isToken } from "typescript";
 
 describe('Crear reservas', () => {   
 
@@ -14,7 +15,7 @@ describe('Crear reservas', () => {
             .should('have.length', 2)
     })
 
-    it('Al cambiar la fecha, se reinician los renglones', () => {
+    it.only('Al cambiar la fecha, se reinician los renglones', () => {
 
       cy.contains('button', 'Cargar nueva')
           .click()
@@ -40,6 +41,8 @@ describe('Crear reservas', () => {
       cy.get('.react-calendar__month-view__days__day').contains('12')
          .click()
 
+      cy.wait('@conLugaresLibres')
+      
       cy.get('.button.is-static:visible:contains("Hab.")')
          .should('have.length', 1)
 
