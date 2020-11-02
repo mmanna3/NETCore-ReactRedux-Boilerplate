@@ -40,29 +40,21 @@ const HabitacionesPage = () => {
     }
   ]
   
-  const [SeMuestraModalDeCreacion, mostrarUOcultarModalDeCreacion] = useState(false);
+  const [seMuestraModalDeCreacion, mostrarModalDeCreacion] = useState(false);
 
   function cerrarModalDeCreacionYRefrescarTabla() {
-    ocultarModalDeCreacion();
+    mostrarModalDeCreacion(false);
     fetchData();
-  }
-
-  function ocultarModalDeCreacion(){
-    mostrarUOcultarModalDeCreacion(false);
-  }
-
-  function mostrarModalDeCreacion(){
-    mostrarUOcultarModalDeCreacion(true);
   }
 
   return (
     <div className="container">
-        <Crear isVisible={SeMuestraModalDeCreacion} onHide={ocultarModalDeCreacion} onSuccessfulSubmit={cerrarModalDeCreacionYRefrescarTabla}></Crear>
+        <Crear isVisible={seMuestraModalDeCreacion} onHide={() => mostrarModalDeCreacion(false)} onSuccessfulSubmit={cerrarModalDeCreacionYRefrescarTabla}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="botonera">
           <div className="is-pulled-right">
-            <Button onClick={mostrarModalDeCreacion} text="Cargar nueva" />
+            <Button onClick={() => mostrarModalDeCreacion(true)} text="Cargar nueva" />
           </div>
         </div>        
         <Table  fetchData={fetchData} 
