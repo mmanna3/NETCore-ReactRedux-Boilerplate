@@ -27,6 +27,18 @@ namespace Api.Persistence.Repositories
                                     .ToListAsync();
         }
 
+        public override async Task<Habitacion> ObtenerPorId(int id)
+        {
+            return await _context.Habitaciones
+                .Include(x => x.CamasIndividuales)
+                .Include(x => x.CamasCuchetas)
+                    .ThenInclude(x => x.Abajo)
+                .Include(x => x.CamasCuchetas)
+                    .ThenInclude(x => x.Arriba)
+                .Include(x => x.CamasMatrimoniales)
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<Habitacion>> ListarConCamasLibres()
         {
             return await _context.Habitaciones

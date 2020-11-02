@@ -24,7 +24,7 @@ namespace Api.Persistence.Repositories
             _context.Set<TModel>().Add(reserva);
         }
 
-        public async Task<TModel> ObtenerPorId(int id)
+        public virtual async Task<TModel> ObtenerPorId(int id)
         {
             return await _context.Set<TModel>().SingleOrDefaultAsync(x => x.Id == id);
         }

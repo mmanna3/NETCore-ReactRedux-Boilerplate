@@ -31,9 +31,12 @@ namespace Api.Controllers
         }
 
         [HttpGet, Route("{id}")]
-        public async Task<HabitacionDTO> Detalle(int id)
+        public async Task<HabitacionDTO> ObtenerPorId(int id)
         {
-            return new HabitacionDTO{Nombre = "afff" };
+            var habitacion = await _habitacionService.ObtenerPorId(id);
+            var habitacionDTO = _mapper.Map<HabitacionDTO>(habitacion);
+
+            return habitacionDTO;
         }
 
         [HttpGet, Route("conLugaresLibres")]

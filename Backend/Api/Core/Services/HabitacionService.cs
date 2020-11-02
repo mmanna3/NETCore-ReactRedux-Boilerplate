@@ -28,6 +28,11 @@ namespace Api.Core.Services
             return await _habitacionRepository.ListarConCamasLibres();
         }
 
+        public async Task<Habitacion> ObtenerPorId(int id)
+        {
+            return await _habitacionRepository.ObtenerPorId(id);
+        }
+
         public async Task<int> CrearAsync(Habitacion habitacion)
         {
             if (HayCamasSinNombre(habitacion))

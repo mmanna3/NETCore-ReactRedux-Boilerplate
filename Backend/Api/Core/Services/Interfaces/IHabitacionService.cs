@@ -10,5 +10,6 @@ namespace Api.Core.Services.Interfaces
         Task<int> CrearAsync(Habitacion category);
         Task ModificarAsync(int id, Habitacion habitacion);
         Task<IEnumerable<Habitacion>> ListarConLugaresLibres();
+        Task<Habitacion> ObtenerPorId(int id);
     }
 }

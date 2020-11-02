@@ -46,16 +46,25 @@ namespace Api.IntegrationTests
         }
 
         [Test]
-        public async Task ConsultaDetalleCorrectamente()
+        public async Task ObtienePorIdCorrectamente()
         {
-            //var response = await CrearUnaHabitacion();
-            //response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var response = await CrearUnaHabitacion();
+            var habitacionId = await response.Content.ReadAsAsync<int>();
 
-            var consultarHabitacionesResponse = await _httpClient.GetAsync($"{ENDPOINT}/1");
+            var consultarHabitacionesResponse = await _httpClient.GetAsync($"{ENDPOINT}/{habitacionId}");
             consultarHabitacionesResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             var habitacion = await consultarHabitacionesResponse.Content.ReadAsAsync<HabitacionDTO>();
 
-            habitacion.Nombre.Should().Be("afff");
+            habitacion.EsPrivada.Should().BeTrue();
+            habitacion.TieneBanio.Should().BeTrue();
+            habitacion.InformacionAdicional.Should().Be("asd");
+
+            habitacion.CamasMatrimoniales.Count.Should().Be(1);
+            habitacion.CamasIndividuales.Count.Should().Be(1);
+
+            habitacion.CamasCuchetas.Count.Should().Be(1);
+            habitacion.CamasCuchetas.First().Abajo.Should().NotBeNull();
+            habitacion.CamasCuchetas.First().Arriba.Should().NotBeNull();
         }
 
         [Test]
