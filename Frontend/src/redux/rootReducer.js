@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux'
 
+//Para Matías del futuro:
+//Hoy opino que todos estos archivos deberían estar en la misma carpeta.
+//Pensalo.
+
 import habitacionesReducer from 'features/habitaciones/slice'
 import habitacionesConLugaresLibresReducer from 'features/habitaciones/conLugaresLibresSlice'
 import crearHabitacionReducer from 'features/habitaciones/crear/slice'
+import obtenerHabitacionPorIdReducer from 'features/habitaciones/detalle/slice'
 
 import huespedesReducer from 'features/huespedes/slice'
 import crearHuespedReducer from 'features/huespedes/crear/slice'
@@ -21,6 +26,8 @@ import crearReservaReducer from 'features/reservas/crear/slice'
 import loginReducer from 'features/login/slice'
 
 
+
+
 const rootReducer = combineReducers({
   login: loginReducer,
   
@@ -37,7 +44,8 @@ const rootReducer = combineReducers({
   reservasDelMes: reservasDelMesReducer,
 
   reservas: reservasReducer,
-  crearReserva: crearReservaReducer
+  crearReserva: crearReservaReducer,
+  obtenerHabitacionPorId: obtenerHabitacionPorIdReducer,
 });
 
 export default rootReducer;
