@@ -30,6 +30,12 @@ namespace Api.Controllers
             return habitacionesDTO;
         }
 
+        [HttpGet, Route("{id}")]
+        public async Task<HabitacionDTO> Detalle(int id)
+        {
+            return new HabitacionDTO{Nombre = "afff" };
+        }
+
         [HttpGet, Route("conLugaresLibres")]
         public async Task<IEnumerable<HabitacionParaReservaDTO>> ListarConLugaresLibres(DateTime desde, DateTime hasta)
         {

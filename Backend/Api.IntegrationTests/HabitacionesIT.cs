@@ -46,6 +46,19 @@ namespace Api.IntegrationTests
         }
 
         [Test]
+        public async Task ConsultaDetalleCorrectamente()
+        {
+            //var response = await CrearUnaHabitacion();
+            //response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var consultarHabitacionesResponse = await _httpClient.GetAsync($"{ENDPOINT}/1");
+            consultarHabitacionesResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            var habitacion = await consultarHabitacionesResponse.Content.ReadAsAsync<HabitacionDTO>();
+
+            habitacion.Nombre.Should().Be("afff");
+        }
+
+        [Test]
         public async Task ListaConLugaresLibresCorrectamente()
         {
             await CrearUnaHabitacion();
