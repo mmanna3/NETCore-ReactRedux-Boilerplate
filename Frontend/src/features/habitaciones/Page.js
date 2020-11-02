@@ -30,6 +30,14 @@ const HabitacionesPage = () => {
       Header: 'Camas individuales',
       accessor: 'camasIndividuales.length',
     },
+    {
+      width: 300,
+      Header: "",
+      accessor: "id",
+      Cell: ({ cell }) => (
+        <Button onClick={e => console.log(e.target.value)} value={cell.row.values.id} text="Ver detalle" />
+      )
+    }
   ]
   
   const [IsModalVisible, setModalVisibility] = useState(false);
