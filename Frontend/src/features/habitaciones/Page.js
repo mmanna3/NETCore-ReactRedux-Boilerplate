@@ -40,29 +40,29 @@ const HabitacionesPage = () => {
     }
   ]
   
-  const [IsModalVisible, setModalVisibility] = useState(false);
+  const [SeMuestraModalDeCreacion, mostrarUOcultarModalDeCreacion] = useState(false);
 
-  function closeModalAndRefreshTable() {
-    hideModal();
+  function cerrarModalDeCreacionYRefrescarTabla() {
+    ocultarModalDeCreacion();
     fetchData();
   }
 
-  function hideModal(){
-    setModalVisibility(false);
+  function ocultarModalDeCreacion(){
+    mostrarUOcultarModalDeCreacion(false);
   }
 
-  function showModal(){
-    setModalVisibility(true);
-  }  
+  function mostrarModalDeCreacion(){
+    mostrarUOcultarModalDeCreacion(true);
+  }
 
   return (
     <div className="container">
-        <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
+        <Crear isVisible={SeMuestraModalDeCreacion} onHide={ocultarModalDeCreacion} onSuccessfulSubmit={cerrarModalDeCreacionYRefrescarTabla}></Crear>
         
         <h1 className="title is-1">Habitaciones</h1>
         <div className="botonera">
           <div className="is-pulled-right">
-            <Button onClick={showModal} text="Cargar nueva" />
+            <Button onClick={mostrarModalDeCreacion} text="Cargar nueva" />
           </div>
         </div>        
         <Table  fetchData={fetchData} 
