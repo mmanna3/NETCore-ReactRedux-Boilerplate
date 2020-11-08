@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback} from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
-import { Input } from "components/Input"
+import Display from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -25,8 +25,14 @@ const Detalle = ({isVisible, onHide, id}) => {
       >
         <Header title="Detalle de habitación" onHide={onHide} />
         <Body>
-          <Input label="Id" defaultValue={datos.id} />
-          <Input label="Nombre" defaultValue={datos.nombre} />
+          <div className="columns">
+            <div className="column">
+              <Display label="Nombre" defaultValue={datos.nombre} />
+            </div>
+            <div className="column">
+              <Display label="Tiene baño" defaultValue={datos.tieneBanio} />
+            </div>          
+          </div>
         </Body>
         <FooterAcceptCancel onCancel={onHide} />
         
