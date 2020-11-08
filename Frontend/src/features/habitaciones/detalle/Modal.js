@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback} from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
-import Display, { SiNo, DisplayList } from "components/display/Display"
+import Display, { SiNo, DisplayLista, DisplayTextarea } from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import ESTADOS from 'redux/estadosFetch'
@@ -55,22 +55,28 @@ const Detalle = ({isVisible, onHide, id}) => {
           </div>
           <div className="columns">
             <div className="column">
-              <DisplayList label={`Camas Indiv. (${datos.camasIndividuales.length})`} 
-                           lista={datos.camasIndividuales} 
-                           rows={rowsDelTextAreaDeCamas} 
-                           prop="nombre" />
+              <DisplayLista label={`Camas Indiv. (${datos.camasIndividuales.length})`} 
+                            lista={datos.camasIndividuales} 
+                            rows={rowsDelTextAreaDeCamas} 
+                            prop="nombre" />
             </div>
             <div className="column">
-              <DisplayList label={`Camas Matrim. (${datos.camasMatrimoniales.length})`} 
-                           lista={datos.camasMatrimoniales} 
-                           rows={rowsDelTextAreaDeCamas} 
-                           prop="nombre" />
+              <DisplayLista label={`Camas Matrim. (${datos.camasMatrimoniales.length})`} 
+                            lista={datos.camasMatrimoniales} 
+                            rows={rowsDelTextAreaDeCamas} 
+                            prop="nombre" />
             </div>
             <div className="column">
-              <DisplayList label={`Camas Cuchetas (${datos.camasCuchetas.length})`} 
-                           lista={datos.camasCuchetas} 
-                           rows={rowsDelTextAreaDeCamas} 
-                           prop="nombre" />
+              <DisplayLista label={`Camas Cuchetas (${datos.camasCuchetas.length})`} 
+                            lista={datos.camasCuchetas} 
+                            rows={rowsDelTextAreaDeCamas} 
+                            prop="nombre" />
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column">
+              <DisplayTextarea label="Información adicional" 
+                               valor={datos.informacionAdicional} />
             </div>
           </div>
         </Body>

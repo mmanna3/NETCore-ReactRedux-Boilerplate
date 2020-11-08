@@ -29,7 +29,7 @@ export function SiNo({ label, valor }) {
   )
 }
 
-export function DisplayList({ label, lista, prop, rows }) {
+export function DisplayLista({ label, lista, prop, rows }) {
   
   var valor = "";
   
@@ -44,6 +44,18 @@ export function DisplayList({ label, lista, prop, rows }) {
       <label className="label">{label}</label>
       <div className="control">
         <textarea style={{height:'auto'}} readOnly rows={rows} className={`${Estilos.display} input`} defaultValue={valor} />
+      </div>
+    </div>
+  )
+}
+
+export function DisplayTextarea({ label, valor }) {
+ 
+  return (
+    <div className="field">
+      <label className="label">{label}</label>
+      <div className="control">
+        <textarea style={{height:'auto'}} readOnly className={`${Estilos.display} input`} defaultValue={valor} />
       </div>
     </div>
   )
