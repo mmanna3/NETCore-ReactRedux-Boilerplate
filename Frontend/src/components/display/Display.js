@@ -43,7 +43,7 @@ export function DisplayLista({ label, lista, prop, rows }) {
     <div className="field">
       <label className="label">{label}</label>
       <div className="control">
-        <textarea style={{height:'auto'}} readOnly rows={rows} className={`${Estilos.display} input`} defaultValue={valor} />
+        <textarea readOnly rows={rows} className={`${Estilos.textarea} input`} defaultValue={valor} />
       </div>
     </div>
   )
@@ -55,7 +55,7 @@ export function DisplayTextarea({ label, valor }) {
     <div className="field">
       <label className="label">{label}</label>
       <div className="control">
-        <textarea style={{height:'auto'}} readOnly className={`${Estilos.display} input`} defaultValue={valor} />
+        <textarea readOnly className={`${Estilos.textarea} input`} defaultValue={valor} />
       </div>
     </div>
   )
