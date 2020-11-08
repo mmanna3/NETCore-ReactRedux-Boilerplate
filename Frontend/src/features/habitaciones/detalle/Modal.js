@@ -3,20 +3,20 @@ import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
 import Display, {SiNo} from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
+import ESTADOS from 'redux/estadosFetch'
 
 const Detalle = ({isVisible, onHide, id}) => {
 
   const dispatch = useDispatch();
-  const { datos, estaCargando, tieneErrores } = useSelector(obtenerHabitacionPorIdSelector);
+  const { datos, estado } = useSelector(obtenerHabitacionPorIdSelector);
 
   const fetchData = useCallback(() => {
-    if (id)
       dispatch(obtenerHabitacionPorId(id))
   }, [dispatch, id]);
 
   useEffect(() => fetchData(), [fetchData]);
 
-  if (id && !estaCargando && !tieneErrores) {
+  if (estado === ESTADOS.exitoso) {
     
     var esPrivada = {
       true: "Privada",
