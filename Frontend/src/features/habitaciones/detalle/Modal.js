@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback} from 'react'
-import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
+import { Modal, Body, Header, FooterAcceptCancel } from 'components/Modal'
 import Display, { SiNo, DisplayLista, DisplayTextarea } from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,7 +36,7 @@ const Detalle = ({isVisible, onHide, id}) => {
     const rowsDelTextAreaDeCamas = calcularMaximoDeCamas() + 1;
 
     return (
-      <ModalForm
+      <Modal
           isVisible={isVisible}
           onHide={onHide}
       >
@@ -82,7 +82,7 @@ const Detalle = ({isVisible, onHide, id}) => {
         </Body>
         <FooterAcceptCancel onCancel={onHide} />
         
-      </ModalForm> 
+      </Modal> 
     )
   }
   return <></>
