@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback} from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
-import Display from "components/display/Display"
+import Display, {SiNo} from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -17,7 +17,12 @@ const Detalle = ({isVisible, onHide, id}) => {
   useEffect(() => fetchData(), [fetchData]);
 
   if (id && !estaCargando && !tieneErrores) {
-   
+    
+    var esPrivada = {
+      true: "Privada",
+      false: "Compartida"
+    }
+
     return (
       <ModalForm
           isVisible={isVisible}
@@ -27,11 +32,14 @@ const Detalle = ({isVisible, onHide, id}) => {
         <Body>
           <div className="columns">
             <div className="column">
-              <Display label="Nombre" defaultValue={datos.nombre} />
+              <Display label="Nombre" valor={datos.nombre} />
             </div>
             <div className="column">
-              <Display label="Tiene baño" defaultValue={datos.tieneBanio} />
-            </div>          
+              <Display label="Tipo" valor={esPrivada[datos.esPrivada]} />
+            </div>
+            <div className="column">
+              <SiNo label="Tiene baño" valor={datos.tieneBanio} />
+            </div>
           </div>
         </Body>
         <FooterAcceptCancel onCancel={onHide} />
