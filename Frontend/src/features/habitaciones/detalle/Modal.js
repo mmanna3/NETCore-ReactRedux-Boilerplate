@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback} from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
-import Display, {SiNo} from "components/display/Display"
+import Display, { SiNo, DisplayList } from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import ESTADOS from 'redux/estadosFetch'
@@ -39,6 +39,17 @@ const Detalle = ({isVisible, onHide, id}) => {
             </div>
             <div className="column">
               <SiNo label="Tiene baño" valor={datos.tieneBanio} />
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column">
+              <DisplayList label="Camas Ind." lista={datos.camasIndividuales} prop="nombre" />
+            </div>
+            <div className="column">
+              <DisplayList label="Camas Matrim." lista={datos.camasMatrimoniales} prop="nombre" />
+            </div>
+            <div className="column">
+              <DisplayList label="Camas Cuchetas" lista={datos.camasCuchetas} prop="nombre" />
             </div>
           </div>
         </Body>

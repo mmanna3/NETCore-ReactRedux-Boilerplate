@@ -41,7 +41,7 @@ const Table = ({fetchData, columnas, datos, estado}) => {
     })}
   </tbody>
   ); 
-  debugger;
+
   if (estado === ESTADOS.huboError) return <p>Hubo un error.</p>
 
   return (
