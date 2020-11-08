@@ -1,10 +1,11 @@
-import React from 'react';   
-import Select from "components/Select";
+import React from 'react'  
+import Select from "components/Select"
 import {Input} from "components/Input"
-import { Icon } from "components/Icon";
+import { Icon } from "components/Icon"
 import Estilos from './Renglon.module.scss'    
+import ESTADOS from 'redux/estadosFetch'
 
-const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}) => {
+const Renglon = ({renglon, estado, onHabitacionChange, onCamaChange, eliminar}) => {
 
   return (
     <div className="field field-body is-grouped">
@@ -24,7 +25,7 @@ const Renglon = ({renglon, cargando, onHabitacionChange, onCamaChange, eliminar}
                       onChange={onHabitacionChange}
                       value={renglon.habitacionSeleccionada?.id || ''}
                       >
-              {cargando ?
+              {estado === ESTADOS.cargando ?
               <option>Cargando...</option> :
               renglon.habitacionesDisponibles.map((habitacion) => {
                 return <option key={habitacion.id} value={habitacion.id}>

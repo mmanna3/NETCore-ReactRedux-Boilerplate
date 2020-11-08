@@ -38,7 +38,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
   const onSubmit = data => dispatch(crearReserva(data, onSuccess));
 
   const habRequest = useSelector(habitacionesSelector);
-  const habitacionesCargando = habRequest.estaCargando;
+  const habitacionesEstado = habRequest.estado;
   const habitaciones = habRequest.datos;
 
   useEffect(() => {
@@ -137,7 +137,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
             return <Renglon
               key={`${renglon.indice}`}
               renglon={renglon}
-              cargando={habitacionesCargando}
+              estado={habitacionesEstado}
               onHabitacionChange={(e) => onHabitacionChange(renglon.indice, e.target.value)}
               onCamaChange={(e) => onCamaChange(renglon.indice, e.target.value)}
               eliminar={eliminarRenglon}

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useTable } from 'react-table'
+import ESTADOS from 'redux/estadosFetch'
 
-const Table = ({fetchData, columnas, datos, loading, hasErrors}) => {
+const Table = ({fetchData, columnas, datos, estado}) => {
 
   useEffect(() => fetchData(), [fetchData]);
 
@@ -40,8 +41,8 @@ const Table = ({fetchData, columnas, datos, loading, hasErrors}) => {
     })}
   </tbody>
   ); 
-  
-  if (hasErrors) return <p>Hubo un error.</p>
+  debugger;
+  if (estado === ESTADOS.huboError) return <p>Hubo un error.</p>
 
   return (
     <table {...getTableProps()} className="table is-striped is-hoverable is-bordered is-fullwidth">
@@ -56,7 +57,7 @@ const Table = ({fetchData, columnas, datos, loading, hasErrors}) => {
           </tr>
         ))}
       </thead>
-      {( loading ? (<tbody><tr><td>Cargando...</td></tr></tbody>) : bodyConDatos)}
+      {( estado === ESTADOS.cargando ? (<tbody><tr><td>Cargando...</td></tr></tbody>) : bodyConDatos)}
     </table>
   )  
 }

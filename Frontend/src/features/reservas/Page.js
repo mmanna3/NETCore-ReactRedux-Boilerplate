@@ -6,10 +6,11 @@ import Crear from './crear/Modal'
 import {Button} from 'components/Buttons'
 import SelectorDeVista from './SelectorDeVista/Componente'
 import Tabla from './Tabla/Tabla'
+import ESTADOS from 'redux/estadosFetch'
 
 const ReservasPage = () => {
   const dispatch = useDispatch();
-  const { datos, estaCargando, tieneErrores } = useSelector(reservasSelector);
+  const { datos, estado } = useSelector(reservasSelector);
   const habitaciones = useSelector(habitacionesSelector);
   const [IsModalVisible, setModalVisibility] = useState(false);
 
@@ -50,11 +51,12 @@ const ReservasPage = () => {
             <Button onClick={showModal} text="Cargar nueva"/>
           </div>
         
-        </div>
-        
-      {/*Esto no está tan mal, pero igual está mal. */}
+        </div>        
       <div>
-        {tieneErrores? "Hubo un error." : ((estaCargando || datos.length === 0 || habitaciones.datos === 0) ? "Cargando..." : <Tabla datos={datos} habitaciones={habitaciones.datos} />)}
+        {estado === ESTADOS.huboError ? "Hubo un error." : 
+          estado === ESTADOS.cargando ? "Cargando..." :
+            estado === ESTADOS.exitoso ? <Tabla datos={datos} habitaciones={habitaciones.datos} /> :
+              <></>}
       </div>
     </div>
   )
