@@ -60,6 +60,14 @@ export const FooterAcceptCancel = ({onCancel, loading}) => {
   );
 }
 
+export const FooterVolver = ({onClick}) => {
+  return (
+    <Footer>
+      <button type="button" className="button is-primary" onClick={onClick}>Volver</button>
+    </Footer>
+  );
+}
+
 export const Body = ({children, minHeight}) => {
   return (
     <section className="modal-card-body" style={{width: 'inherit', minHeight: minHeight}}>

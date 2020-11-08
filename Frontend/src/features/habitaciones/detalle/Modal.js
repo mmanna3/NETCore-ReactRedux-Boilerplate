@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback} from 'react'
-import { Modal, Body, Header, FooterAcceptCancel } from 'components/Modal'
+import { Modal, Body, Header, FooterVolver } from 'components/Modal'
 import Display, { SiNo, DisplayLista, DisplayTextarea } from "components/display/Display"
 import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -80,7 +80,7 @@ const Detalle = ({isVisible, onHide, id}) => {
             </div>
           </div>
         </Body>
-        <FooterAcceptCancel onCancel={onHide} />
+        <FooterVolver onClick={onHide} />
         
       </Modal> 
     )
