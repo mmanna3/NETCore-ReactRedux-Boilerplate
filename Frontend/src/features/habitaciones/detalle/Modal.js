@@ -23,6 +23,18 @@ const Detalle = ({isVisible, onHide, id}) => {
       false: "Compartida"
     }
 
+    function calcularMaximoDeCamas() {
+      var maximo = datos.camasMatrimoniales.length;
+      if (datos.camasIndividuales.length > datos.camasMatrimoniales.length)
+        maximo = datos.camasIndividuales.length;
+      if (datos.camasCuchetas.length > datos.camasIndividuales.length)
+        maximo = datos.camasIndividuales.length;
+
+      return maximo;
+    }
+
+    const rowsDelTextAreaDeCamas = calcularMaximoDeCamas() + 1;
+
     return (
       <ModalForm
           isVisible={isVisible}
@@ -43,13 +55,22 @@ const Detalle = ({isVisible, onHide, id}) => {
           </div>
           <div className="columns">
             <div className="column">
-              <DisplayList label="Camas Ind." lista={datos.camasIndividuales} prop="nombre" />
+              <DisplayList label={`Camas Indiv. (${datos.camasIndividuales.length})`} 
+                           lista={datos.camasIndividuales} 
+                           rows={rowsDelTextAreaDeCamas} 
+                           prop="nombre" />
             </div>
             <div className="column">
-              <DisplayList label="Camas Matrim." lista={datos.camasMatrimoniales} prop="nombre" />
+              <DisplayList label={`Camas Matrim. (${datos.camasMatrimoniales.length})`} 
+                           lista={datos.camasMatrimoniales} 
+                           rows={rowsDelTextAreaDeCamas} 
+                           prop="nombre" />
             </div>
             <div className="column">
-              <DisplayList label="Camas Cuchetas" lista={datos.camasCuchetas} prop="nombre" />
+              <DisplayList label={`Camas Cuchetas (${datos.camasCuchetas.length})`} 
+                           lista={datos.camasCuchetas} 
+                           rows={rowsDelTextAreaDeCamas} 
+                           prop="nombre" />
             </div>
           </div>
         </Body>

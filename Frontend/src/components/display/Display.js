@@ -29,20 +29,21 @@ export function SiNo({ label, valor }) {
   )
 }
 
-export function DisplayList({ label, lista, prop }) {
+export function DisplayList({ label, lista, prop, rows }) {
   
   var valor = "";
   
   lista.forEach(e => {
     valor += `• ${e[prop] + String.fromCharCode(13, 10)}`;
-  });  
+  });
+  
+
   
   return (
     <div className="field">
       <label className="label">{label}</label>
       <div className="control">
-        {/* Que le pueda pasar la cantidad de rows */}
-        <textarea style={{height:'auto'}} readOnly rows={lista.length + 1} className={`${Estilos.display} input`} defaultValue={valor} />
+        <textarea style={{height:'auto'}} readOnly rows={rows} className={`${Estilos.display} input`} defaultValue={valor} />
       </div>
     </div>
   )
