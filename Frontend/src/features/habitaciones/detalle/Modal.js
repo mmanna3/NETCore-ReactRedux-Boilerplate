@@ -11,8 +11,9 @@ const Detalle = ({isVisible, onHide, id}) => {
   const { datos, estado } = useSelector(obtenerHabitacionPorIdSelector);
 
   const fetchData = useCallback(() => {
+    if (isVisible)  
       dispatch(obtenerHabitacionPorId(id))
-  }, [dispatch, id]);
+  }, [dispatch, isVisible, id]);
 
   useEffect(() => fetchData(), [fetchData]);
 
