@@ -2,8 +2,8 @@ import React from 'react';
 import Estilos from './Encabezado.module.scss'
 import { Icon } from "components/Icon";
 
-const Encabezado = ({habitaciones}) => {
-  
+const Encabezado = ({habitaciones, mostrarDetalle}) => {
+
   return (
         <thead className="is-bordered">
           <tr>
@@ -11,7 +11,10 @@ const Encabezado = ({habitaciones}) => {
             {habitaciones.map((habitacion, i) => 
               <th key={i} className={`has-text-weight-medium ${Estilos.habitacion}`} colSpan={habitacion.camas.length}>
                 Habitación {habitacion.nombre} {habitacion.esPrivada ? '\uf023' : ''}
-                <button className={`button is-primary is-inverted is-small ${Estilos.iconoInfo}`}>
+                <button type="button"
+                        className={`button is-primary is-inverted is-small ${Estilos.iconoInfo}`}
+                        onClick={() => mostrarDetalle(habitacion.id)}>
+
                   <Icon faCode="info-circle" size="2x" />
                 </button>
               </th>

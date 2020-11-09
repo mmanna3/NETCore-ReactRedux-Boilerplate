@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { inicializarTabla, tablaDeReservasSelector, actualizarConReserva } from './slice'
 import Encabezado from './Encabezado/Encabezado'
 import {obtenerAnio,obtenerMes,obtenerDia} from 'utils/Fecha'
+import Detalle from "features/habitaciones/detalle/Modal"
 
 const TablaReservas = ({datos, habitaciones}) => {
 
@@ -47,7 +48,7 @@ const TablaReservas = ({datos, habitaciones}) => {
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasMatrimoniales);    
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta) => cucheta.abajo));
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta) => cucheta.arriba));    
-      habs.push({nombre: habitacion.nombre, esPrivada: habitacion.esPrivada, camas: camasDeLaHabitacion});
+      habs.push({nombre: habitacion.nombre, id: habitacion.id, esPrivada: habitacion.esPrivada, camas: camasDeLaHabitacion});
       camasIdsArray = camasIdsArray.concat(camasDeLaHabitacion.map((cama) => cama.id));
     }
     setHabitacionesConCamasUnificadas(habs);        
@@ -88,15 +89,28 @@ const TablaReservas = ({datos, habitaciones}) => {
     actualizarFilas(_filas);
   }, [tablaDeReservas.camasIdsArray, tablaDeReservas.diaMesArray]);
 
+
+  const [seMuestraModalDeDetalle, mostrarModalDeDetalle] = useState(false);
+  const [idSeleccionadoParaDetalle, cambiarIdSeleccionadoParaDetalle] = useState(null);
+
+  function mostrarDetalle(id) {
+    cambiarIdSeleccionadoParaDetalle(id);
+    mostrarModalDeDetalle(true);
+  }
+
   return (
-    <div className={Estilos.contenedor}>
-      <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
-        <Encabezado habitaciones={habitacionesConCamasUnificadas} />
-        <tbody>
-          {filas}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <Detalle id={idSeleccionadoParaDetalle} isVisible={seMuestraModalDeDetalle} onHide={() => mostrarModalDeDetalle(false)}></Detalle>
+      <div className={Estilos.contenedor}>
+        <table className={`table is-hoverable is-bordered is-fullwidth ${Estilos.tabla}`}>
+          <Encabezado habitaciones={habitacionesConCamasUnificadas} 
+                      mostrarDetalle={mostrarDetalle}/>
+          <tbody>
+            {filas}
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 
