@@ -8,5 +8,6 @@ namespace Api.Core.Repositories
     {
         Task<IEnumerable<Reserva>> ListarMensuales(int anio, int mes);
         Task<IEnumerable<Reserva>> ListarActuales();
+        Task<IEnumerable<Reserva>> ListarCheckoutsDeHoy();
     }
 }

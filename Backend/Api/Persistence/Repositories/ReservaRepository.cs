@@ -38,5 +38,14 @@ namespace Api.Persistence.Repositories
                 .Where(x => x.Desde <= DateTime.Today.AddDays(15) && x.Hasta >= DateTime.Today.AddDays(-1))
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Reserva>> ListarCheckoutsDeHoy()
+        {
+            return await _context.Reservas
+                .Include(x => x.ReservaCamas)
+                .ThenInclude(x => x.Cama)
+                .Where(x => x.Hasta == DateTime.Today.AddDays(-1))
+                .ToListAsync();
+        }
     }
 }

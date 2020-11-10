@@ -70,6 +70,25 @@ namespace Api.IntegrationTests
             reserva.CamasIds.First().Should().Be(camaId);
         }
 
+        [Test]
+        public async Task Lista_Correctamente_CheckoutsDeHoy()
+        {
+            var camaId = await CrearHabitacionConUnaCama();
+
+            await CrearReserva(camaId, DateTime.Today.AddDays(-2), DateTime.Today.AddDays(-1));
+
+            var consultaResponse = await ListarCheckoutsDeHoy();
+            consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            var reservasConCheckoutHoy = await consultaResponse.Content.ReadAsAsync<List<ReservaDTO>>();
+
+            reservasConCheckoutHoy.Count().Should().Be(1);
+            var reserva = reservasConCheckoutHoy.ToList().First();
+
+            reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
+            reserva.CamasIds.Should().HaveCount(1);
+            reserva.CamasIds.First().Should().Be(camaId);
+        }
+
         private async Task<int> CrearHabitacionConUnaCama()
         {
             var body = new HabitacionDTO
@@ -113,6 +132,11 @@ namespace Api.IntegrationTests
         private async Task<HttpResponseMessage> ListarReservasActuales()
         {
             return await _httpClient.GetAsync(ENDPOINT + "/actuales");
+        }
+
+        private async Task<HttpResponseMessage> ListarCheckoutsDeHoy()
+        {
+            return await _httpClient.GetAsync(ENDPOINT + "/checkoutsDeHoy");
         }
     }
 }

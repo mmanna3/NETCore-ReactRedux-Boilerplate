@@ -31,6 +31,15 @@ namespace Api.Controllers
             return reservaDTOs;
         }
 
+        [HttpGet, Route("checkoutsDeHoy")]
+        public async Task<IEnumerable<ReservaDTO>> ListarCheckoutsDeHoy()
+        {
+            var reservas = await _service.ListarCheckoutsDeHoy();
+            var reservaDTOs = _mapper.Map<IEnumerable<ReservaDTO>>(reservas);
+
+            return reservaDTOs;
+        }
+
         [HttpGet, Route("mensuales")]
         public async Task<ReservasDelMesDTO> ListarMensuales(int anio, int mes)
         {

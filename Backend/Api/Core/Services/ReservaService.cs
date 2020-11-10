@@ -33,6 +33,11 @@ namespace Api.Core.Services
             return await _repository.ListarActuales();
         }
 
+        public async Task<IEnumerable<Reserva>> ListarCheckoutsDeHoy()
+        {
+            return await _repository.ListarCheckoutsDeHoy();
+        }
+
         public async Task<int> Crear(Reserva reserva)
         {
             if (HayUnaCamaReservadaDosVeces(reserva))
