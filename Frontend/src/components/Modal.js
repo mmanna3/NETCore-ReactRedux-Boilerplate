@@ -70,7 +70,7 @@ export const FooterVolver = ({onClick}) => {
 
 export const Body = ({children, minHeight}) => {
   return (
-    <section className="modal-card-body" style={{width: 'inherit', minHeight: minHeight}}>
+    <section className="modal-card-body" style={{width: 'inherit', minHeight: minHeight, maxHeight: '480px'}}>
       <div className="content">
         {children}
       </div>

@@ -124,7 +124,7 @@ const Crear = ({isVisible, onHide, onSuccessfulSubmit}) => {
         minWidth="680px"
     >
       <Header title="Alta de reserva" onHide={hide} />
-      <Body minHeight="420px">
+      <Body minHeight="460px">
         <ValidationSummary errors={validationErrors} />
         <Input label="Huésped" name="aNombreDe" />
         <DateRangePicker actualizarValor={actualizarDesdeHasta} etiqueta="Check in - Check out" valor={desdeHasta}/>
