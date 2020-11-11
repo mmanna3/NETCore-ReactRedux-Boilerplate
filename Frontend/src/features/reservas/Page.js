@@ -41,6 +41,7 @@ const ReservasPage = () => {
         
         <h1 className="title is-1">Reservas</h1>        
         
+        {/* ESTO DEBERÍA ESTAR HECHO CON LOS BULMA LEVEL, DESPUÉS CHUSMEALOS */}
         <div className="botonera is-fullwidth">
                 
           <SelectorDeVista
