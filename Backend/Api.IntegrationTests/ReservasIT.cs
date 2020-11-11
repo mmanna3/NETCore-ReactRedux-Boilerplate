@@ -75,7 +75,7 @@ namespace Api.IntegrationTests
         {
             var camaId = await CrearHabitacionConUnaCama();
 
-            await CrearReserva(camaId, DateTime.Today.AddDays(-2), DateTime.Today.AddDays(-1));
+            await CrearReserva(camaId, DateTime.Today.AddDays(-3), DateTime.Today);
 
             var consultaResponse = await ListarCheckoutsDeHoy();
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);

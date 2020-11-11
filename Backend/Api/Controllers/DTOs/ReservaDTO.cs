@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Api.Controllers.DTOs.Habitacion;
 
 namespace Api.Controllers.DTOs
 {
@@ -11,7 +10,11 @@ namespace Api.Controllers.DTOs
         [YKNRequired, YKNStringLength(Maximo = 30)]
         [DisplayName("Huésped")]
         public string ANombreDe { get; set; }
+
+        //Primera noche
         public string Desde { get; set; }
+        
+        //Día en el que hace checkout (no puede ser igual a Desde) ¿Vas a hacer refactor?
         public string Hasta { get; set; }
         public List<int?> CamasIds { get; set; }
         public List<List<int>> CamasDeHabitacionesPrivadasIds { get; set; }
