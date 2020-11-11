@@ -32,10 +32,10 @@ namespace Api.Controllers
         }
 
         [HttpGet, Route("checkoutsDeHoy")]
-        public async Task<IEnumerable<ReservaDTO>> ListarCheckoutsDeHoy()
+        public async Task<IEnumerable<CheckoutsDeHoyDTO>> ListarCheckoutsDeHoy()
         {
             var reservas = await _service.ListarCheckoutsDeHoy();
-            var reservaDTOs = _mapper.Map<IEnumerable<ReservaDTO>>(reservas);
+            var reservaDTOs = _mapper.Map<IEnumerable<CheckoutsDeHoyDTO>>(reservas);
 
             return reservaDTOs;
         }

@@ -79,14 +79,12 @@ namespace Api.IntegrationTests
 
             var consultaResponse = await ListarCheckoutsDeHoy();
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            var reservasConCheckoutHoy = await consultaResponse.Content.ReadAsAsync<List<ReservaDTO>>();
+            var reservasConCheckoutHoy = await consultaResponse.Content.ReadAsAsync<List<CheckoutsDeHoyDTO>>();
 
             reservasConCheckoutHoy.Count().Should().Be(1);
             var reserva = reservasConCheckoutHoy.ToList().First();
 
             reserva.ANombreDe.Should().Be(A_NOMBRE_DE);
-            reserva.CamasIds.Should().HaveCount(1);
-            reserva.CamasIds.First().Should().Be(camaId);
         }
 
         private async Task<int> CrearHabitacionConUnaCama()

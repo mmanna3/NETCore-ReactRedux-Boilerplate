@@ -89,6 +89,8 @@ namespace Api.Controllers.Mapping
                     opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.CamaId))
                 );
 
+            CreateMap<Reserva, CheckoutsDeHoyDTO>();
+
             CreateMap<Reserva, ReservasDelMesDTO.ReservaParaConsultaMensualDTO>()
                 .ForMember(
                     dest => dest.DiaInicio,
