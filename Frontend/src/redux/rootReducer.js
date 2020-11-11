@@ -21,6 +21,7 @@ import tablaDeReservas from 'features/reservas/Tabla/slice'
 
 import reservasReducer from 'features/reservas/slice'
 import crearReservaReducer from 'features/reservas/crear/slice'
+import checkoutsDeHoy from 'features/reservas/CheckoutsDeHoy/slice'
 
 
 import loginReducer from 'features/login/slice'
@@ -46,6 +47,7 @@ const rootReducer = combineReducers({
   reservas: reservasReducer,
   crearReserva: crearReservaReducer,
   obtenerHabitacionPorId: obtenerHabitacionPorIdReducer,
+  checkoutsDeHoy: checkoutsDeHoy,
 });
 
 export default rootReducer;

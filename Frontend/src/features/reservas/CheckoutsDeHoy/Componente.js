@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useCallback, useEffect} from 'react'
+import { fetchCheckoutsDeHoy, checkoutsDeHoySelector } from './slice'
+import { useDispatch, useSelector } from 'react-redux'
 // import Estilos from './Componente.module.scss'
 
 const CheckoutsDeHoy = () => {
+
+  const dispatch = useDispatch();
+  const { datos, estado } = useSelector(checkoutsDeHoySelector);
+
+  const fetchData = useCallback(() => {
+    dispatch(fetchCheckoutsDeHoy())
+  }, [dispatch]);
+
+  useEffect(() => fetchData(), [fetchData]);
 
   return (
     <div class="notification is-primary is-light">
