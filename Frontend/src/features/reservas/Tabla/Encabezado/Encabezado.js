@@ -24,7 +24,7 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
             <th rowSpan="2" className={Estilos.interseccion}></th>
             {habitaciones.map((habitacion, i) => 
               <th key={i} className={`has-text-weight-medium ${Estilos.habitacion}`} colSpan={habitacion.camas.length}>
-                Habitación {habitacion.nombre} {habitacion.esPrivada ? '\uf023' : ''}
+                {habitacion.nombre} {habitacion.esPrivada ? '\uf023' : ''}
                 <button type="button"
                         className={`button is-primary is-inverted is-small ${Estilos.iconoInfo}`}
                         onClick={() => mostrarDetalle(habitacion.id)}>
@@ -37,11 +37,8 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
           <tr>
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
-                <th key={i} className={`has-text-weight-medium ${Estilos.cama}`}>
-                  <div>                    
-                      <img className={Estilos[`${estilosIconoCama[cama.tipo]}`]} src={`images/icons/camas/${iconosCamas[cama.tipo]}.svg`} alt="a" style={{width:'30px !important'}}/>                    
-                    {/* {cama.nombre} */}
-                  </div>
+                <th key={i} className={`has-text-weight-medium ${Estilos.cama}`}>                  
+                  <img className={Estilos[`${estilosIconoCama[cama.tipo]}`]} src={`images/icons/camas/${iconosCamas[cama.tipo]}.svg`} alt={cama.tipo}/>
                 </th>
               )
             )}

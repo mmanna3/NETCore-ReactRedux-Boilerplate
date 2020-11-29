@@ -17,8 +17,10 @@
 
 .cama {
   position: sticky;
-  top: 41px;
+  top: 51px;
   z-index: 12;
+  padding-top: 20px !important;
+  padding-bottom: 12px !important;
 }
 
 .iconoInfo {
@@ -42,5 +44,5 @@
 
 .iconoCamaCucheta {
   @extend .iconoCamaIndividual;
-  height: 30px;
+  height: 32px;
 }
