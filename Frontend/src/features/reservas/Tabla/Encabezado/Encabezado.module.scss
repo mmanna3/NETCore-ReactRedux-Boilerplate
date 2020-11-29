@@ -27,3 +27,20 @@
   padding-top: 4px;
   border-radius: 50% !important;
 }
+
+.iconoCamaIndividual {
+  height: 23px;
+  filter: brightness(0) invert(1);
+  margin-left: 6px;
+  color: white;
+}
+
+.iconoCamaMatrimonial {
+  @extend .iconoCamaIndividual;
+  height: 27px;
+}
+
+.iconoCamaCucheta {
+  @extend .iconoCamaIndividual;
+  height: 30px;
+}

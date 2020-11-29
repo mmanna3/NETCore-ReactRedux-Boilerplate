@@ -4,6 +4,20 @@ import { Icon } from "components/Icon";
 
 const Encabezado = ({habitaciones, mostrarDetalle}) => {
 
+  var iconosCamas = {
+    Individual: 'individual',
+    Matrimimonial: 'matrimonial',
+    'Cucheta Abajo': 'cucheta-abajo',
+    'Cucheta Arriba': 'cucheta-arriba',    
+  }
+
+  var estilosIconoCama = {
+    Individual: 'iconoCamaIndividual',
+    Matrimimonial: 'iconoCamaMatrimonial',
+    'Cucheta Abajo': 'iconoCamaCucheta',
+    'Cucheta Arriba': 'iconoCamaCucheta',    
+  }
+
   return (
         <thead className="is-bordered">
           <tr>
@@ -24,8 +38,9 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
                 <th key={i} className={`has-text-weight-medium ${Estilos.cama}`}>
-                  <div>
-                    {cama.nombre} - {cama.tipo}
+                  <div>                    
+                      <img className={Estilos[`${estilosIconoCama[cama.tipo]}`]} src={`images/icons/camas/${iconosCamas[cama.tipo]}.svg`} alt="a" style={{width:'30px !important'}}/>                    
+                    {/* {cama.nombre} */}
                   </div>
                 </th>
               )
