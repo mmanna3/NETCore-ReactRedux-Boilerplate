@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react'
 import { fetchCheckoutsDeHoy, checkoutsDeHoySelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import ESTADOS from 'redux/estadosFetch'
-import Estilos from './Componente.module.scss'
+import { BotonSalir } from 'components/botones/botones'
 
 const CheckoutsDeHoy = () => {
 
@@ -20,9 +20,8 @@ const CheckoutsDeHoy = () => {
 
   if (visible)
     return (
-      <div className="notification is-primary is-light">
-        <button className={`delete ${Estilos.botonSalir}`} onClick={() => mostrar(false)}></button>
-
+      <div className="notification is-primary is-light">        
+        <BotonSalir onClick={() => mostrar(false)} />
         {estado === ESTADOS.huboError ? "Hubo un error." : 
             estado === ESTADOS.cargando ? "Cargando..." :
               estado === ESTADOS.exitoso ? 

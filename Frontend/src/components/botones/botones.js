@@ -1,4 +1,5 @@
 import React from "react";
+import Estilos from './botones.module.scss'
 
 export function SubmitButton({ text, loading }) {
   if (!loading)
@@ -9,4 +10,8 @@ export function SubmitButton({ text, loading }) {
 
 export function Button({ text, clases, ...otrosAtributos }) {
   return <button className={`button is-primary has-text-weight-medium ${clases}`} type="button" {...otrosAtributos}>{text}</button>
+}
+
+export function BotonSalir({ onClick }) {
+  return <button className={`delete ${Estilos.botonSalir}`} type="button" aria-label="close" onClick={onClick}></button>
 }

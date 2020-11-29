@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal'
 import { Input } from "components/Input"
-import {Button} from "components/Buttons"
+import {Button} from "components/botones/botones"
 import Label from "components/Label"
 import ValidationSummary from "components/ValidationSummary"
 import DateRangePicker from 'components/dateRangePicker/DateRangePicker'

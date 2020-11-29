@@ -3,7 +3,7 @@ import { fetchReservasMensuales, fetchReservasActuales, reservasSelector } from 
 import { fetchHabitaciones, habitacionesSelector } from 'features/habitaciones/slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
-import {Button} from 'components/Buttons'
+import {Button} from 'components/botones/botones'
 import SelectorDeVista from './SelectorDeVista/Componente'
 import Tabla from './Tabla/Tabla'
 import ESTADOS from 'redux/estadosFetch'

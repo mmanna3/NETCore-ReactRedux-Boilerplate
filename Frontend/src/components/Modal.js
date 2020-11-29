@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from "components/Form";
-import {SubmitButton} from "components/Buttons";
+import {SubmitButton, BotonSalir} from "components/botones/botones";
 
 export const Modal = ({children, onHide, isVisible, minWidth}) => {  
 
@@ -34,7 +34,7 @@ export const Header = ({title, onHide}) => {
   return (
     <header className="modal-card-head">
     <p className="modal-card-title">{title}</p>
-    <button type="button" className="delete" aria-label="close" onClick={onHide}></button>
+    <BotonSalir onClick={onHide} />
   </header>
   );
 }

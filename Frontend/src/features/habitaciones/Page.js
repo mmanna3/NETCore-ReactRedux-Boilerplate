@@ -4,7 +4,7 @@ import { fetchHabitaciones, habitacionesSelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import Crear from './crear/Modal'
 import Detalle from './detalle/Modal'
-import {Button} from 'components/Buttons'
+import {Button} from 'components/botones/botones'
 
 
 const HabitacionesPage = () => {

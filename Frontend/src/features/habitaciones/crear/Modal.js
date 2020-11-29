@@ -1,7 +1,7 @@
 import React from 'react';
 import { ModalForm, Body, Header, FooterAcceptCancel } from 'components/Modal';
 import { Input } from "components/Input";
-import { Button } from "components/Buttons";
+import { Button } from "components/botones/botones";
 import Select from "components/Select";
 import ValidationSummary from "components/ValidationSummary";
 import Label from "components/Label";
