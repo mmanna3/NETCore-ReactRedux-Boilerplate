@@ -2,7 +2,6 @@ import React, {useCallback, useEffect} from 'react'
 import { fetchCheckoutsDeHoy, checkoutsDeHoySelector } from './slice'
 import { useDispatch, useSelector } from 'react-redux'
 import ESTADOS from 'redux/estadosFetch'
-// import Estilos from './Componente.module.scss'
 
 const CheckoutsDeHoy = () => {
 

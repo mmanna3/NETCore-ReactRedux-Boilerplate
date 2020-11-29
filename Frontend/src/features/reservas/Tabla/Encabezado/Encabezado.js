@@ -1,6 +1,5 @@
 import React from 'react';
 import Estilos from './Encabezado.module.scss'
-import { Icon } from "components/Icon";
 
 const Encabezado = ({habitaciones, mostrarDetalle}) => {
 
@@ -23,14 +22,10 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
           <tr>
             <th rowSpan="2" className={Estilos.interseccion}></th>
             {habitaciones.map((habitacion, i) => 
-              <th key={i} className={`has-text-weight-medium ${Estilos.habitacion}`} colSpan={habitacion.camas.length}>
-                {habitacion.nombre} {habitacion.esPrivada ? '\uf023' : ''}
-                <button type="button"
-                        className={`button is-primary is-inverted is-small ${Estilos.iconoInfo}`}
-                        onClick={() => mostrarDetalle(habitacion.id)}>
-
-                  <Icon faCode="info-circle" size="2x" />
-                </button>
+              <th key={i} className={`has-text-weight-medium has-text-centered ${Estilos.habitacionContainer}`} colSpan={habitacion.camas.length}>
+                <div className={Estilos.habitacion} onClick={() => mostrarDetalle(habitacion.id)}>
+                  {habitacion.nombre} {habitacion.esPrivada ? '\uf023' : ''}
+                </div>                
               </th>
             )}
           </tr>        

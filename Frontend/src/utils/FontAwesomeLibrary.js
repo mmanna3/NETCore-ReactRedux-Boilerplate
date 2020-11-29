@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrashAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faInfo } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faTrashAlt);
-library.add(faInfoCircle);
+library.add(faInfo);
