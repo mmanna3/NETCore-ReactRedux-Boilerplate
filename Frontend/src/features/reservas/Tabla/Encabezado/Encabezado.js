@@ -1,5 +1,6 @@
 import React from 'react';
 import Estilos from './Encabezado.module.scss'
+import Tooltip from "react-tooltip"
 
 const Encabezado = ({habitaciones, mostrarDetalle}) => {
 
@@ -33,11 +34,12 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
                 <th key={i} className={`has-text-weight-medium ${Estilos.cama}`}>                  
-                  <img className={Estilos[`${estilosIconoCama[cama.tipo]}`]} src={`images/icons/camas/${iconosCamas[cama.tipo]}.svg`} alt={cama.tipo}/>
+                  <img data-tip={`Cama '${cama.nombre}' - ${cama.tipo}`} className={Estilos[`${estilosIconoCama[cama.tipo]}`]} src={`images/icons/camas/${iconosCamas[cama.tipo]}.svg`} alt={cama.tipo}/>
+                  <Tooltip className={Estilos.tooltipCama} place="top" effect="solid" />
                 </th>
               )
             )}
-          </tr>
+          </tr>          
         </thead>
   )
 }
