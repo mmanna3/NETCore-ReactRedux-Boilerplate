@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   function onSuccess() {    
     siEstaLogueadoEnviarTokenEnTodosLosRequests();
-    history.push("/habitaciones");
+    history.push("/reservas");
   }
 
   return (
