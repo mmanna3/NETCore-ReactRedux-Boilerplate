@@ -1,3 +1,4 @@
+# Yo creo que éste habría que revisarlo. Hoy no tuve ganas.
 cd ..
 dotnet restore ./Backend/Api.sln --verbosity m
 cd Frontend

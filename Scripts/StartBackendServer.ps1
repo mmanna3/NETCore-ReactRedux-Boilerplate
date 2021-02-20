@@ -1,1 +1,2 @@
-cd ../Backend/Api;dotnet run
+Set-Location "${PSScriptRoot}/../Backend/Api"
+dotnet run
