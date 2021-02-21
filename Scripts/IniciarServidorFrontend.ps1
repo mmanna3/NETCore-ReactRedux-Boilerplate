@@ -1,2 +1,2 @@
 Set-Location "${PSScriptRoot}/../Frontend"
-npm start
+yarn start
