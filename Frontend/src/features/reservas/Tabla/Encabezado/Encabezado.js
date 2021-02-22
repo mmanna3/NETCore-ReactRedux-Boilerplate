@@ -33,7 +33,7 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
           <tr>
             {habitaciones.map((habitacion) => 
               habitacion.camas.map((cama,i) =>
-                <th key={i} className={`has-text-weight-medium ${Estilos.cama}`}>                  
+                <th key={i} className={`${Estilos.cama}`}>                  
                   <img data-tip={`Cama '${cama.nombre}' - ${cama.tipo}`} className={Estilos[`${estilosIconoCama[cama.tipo]}`]} src={`images/icons/camas/${iconosCamas[cama.tipo]}.svg`} alt={cama.tipo}/>
                   <Tooltip className={Estilos.tooltipCama} place="top" effect="solid" />
                 </th>

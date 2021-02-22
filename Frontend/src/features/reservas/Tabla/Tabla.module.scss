@@ -22,7 +22,8 @@ table th, table td {
 }
 
 table td div, table th div {
-  width: 150px;
+  min-width: 25px;
+  max-width: fit-content;
 }
 
 .fecha {
