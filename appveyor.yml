@@ -29,10 +29,11 @@ install:
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./Backend/Api.sln --verbosity m
+  - npm install --global yarn
   - cd Frontend
-  - npm install
-  - npm run test-ci
-  - npm run build
+  - yarn install
+  - yarn run test-ci
+  - yarn run build
   - cd ..  
   - ps: >-
       Copy-Item -Path "./Frontend/build" -Destination "./Backend/Api/ClientApp/build" -Recurse
