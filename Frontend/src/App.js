@@ -10,7 +10,6 @@ import 'utils/FontAwesomeLibrary';
 import HuespedesPage from 'features/huespedes/Page'
 import ReservasPage from 'features/reservas/Page'
 import HabitacionesPage from 'features/habitaciones/Page'
-import CalendarioPage from 'features/calendario/Page'
 import LoginPage from 'features/login/Page'
 import Navbar from 'components/navbar/Navbar'
 import { siEstaLogueadoEnviarTokenEnTodosLosRequests, estaLogueado } from 'features/login/servicio'
@@ -43,7 +42,6 @@ const AuthRoutes = () => {
       <Route exact path="/habitaciones" component={HabitacionesPage} />
       <Route exact path="/huespedes" component={HuespedesPage} />
       <Route exact path="/reservas" component={ReservasPage} />
-      <Route exact path="/calendario" component={CalendarioPage} />
     </div>
 )};
 

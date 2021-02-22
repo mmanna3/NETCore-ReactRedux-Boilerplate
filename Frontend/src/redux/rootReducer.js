@@ -12,10 +12,6 @@ import obtenerHabitacionPorIdReducer from 'features/habitaciones/detalle/slice'
 import huespedesReducer from 'features/huespedes/slice'
 import crearHuespedReducer from 'features/huespedes/crear/slice'
 
-//Borrar esto
-import reservasDelMesReducer from 'features/calendario/reservasDelMes/slice'
-
-
 
 import tablaDeReservas from 'features/reservas/Tabla/slice'
 
@@ -40,9 +36,6 @@ const rootReducer = combineReducers({
   crearHuesped: crearHuespedReducer,
 
   tablaDeReservas: tablaDeReservas,
-
-  //Y esto
-  reservasDelMes: reservasDelMesReducer,
 
   reservas: reservasReducer,
   crearReserva: crearReservaReducer,
