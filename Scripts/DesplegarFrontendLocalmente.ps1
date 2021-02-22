@@ -1,6 +1,5 @@
-# Yo creo que éste habría que revisarlo. Hoy no tuve ganas.
-
-Set-Location ..
+$carpetaActual = $PSScriptRoot
+Set-Location ${carpetaActual}\..
 dotnet restore ./Backend/Api.sln --verbosity m
 Set-Location Frontend
 yarn install
