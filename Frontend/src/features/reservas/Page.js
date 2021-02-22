@@ -37,7 +37,7 @@ const ReservasPage = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container is-fluid">
         <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
         
         <h1 className="title is-1">Reservas</h1>        
