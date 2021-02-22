@@ -9,7 +9,7 @@ export function SubmitButton({ text, loading }) {
 }
 
 export function Button({ text, clases, ...otrosAtributos }) {
-  return <button className={`button is-primary has-text-weight-medium ${clases}`} type="button" {...otrosAtributos}>{text}</button>
+  return <button className={`button is-primary ${clases}`} type="button" {...otrosAtributos}>{text}</button>
 }
 
 export function BotonSalir({ onClick }) {
