@@ -21,12 +21,24 @@ beforeEach(() => {
    cy.restoreLocalStorage();   
 
    cy.server()
-   
+
+   cy.intercept('/api/habitaciones', { fixture: 'habitaciones/2-habitaciones-5-camas.json' }).as('habitaciones')   
+
+
+   //No entiendo por qué no puedo escribir esto con INTERCEPT
    cy.route({
-      method: 'GET',
-      url: '/api/habitaciones',
-      response: require('./../../mocks/habitaciones/2-habitaciones-5-camas')
-    }).as('habitaciones')
+   method: 'GET',
+   url: '/api/habitaciones/conLugaresLibres**',
+   response: [
+      {
+         "id":1,
+         "nombre":"Roja",
+         "esPrivada":true,
+         "camas":[],
+         "cantidadDeLugaresLibres":0
+      }
+   ]
+    }).as('conLugaresLibres')
 
     var hoy = new Date();
     hoy.setHours(0);
@@ -36,14 +48,9 @@ beforeEach(() => {
     diaDentroDe30dias.setDate(diaDentroDe30dias.getDate() + 30);
     var diaDentroDe30diasString = diaDentroDe30dias.toISOString().slice(0,10);
 
-    cy.route({
-      method: 'GET',
-      url: '/api/reservas/actuales',
-      response: {"reservas":[{"diaInicio": hoy.getDate(),"diaFin": hoy.getDate(),"aNombreDe":"Elliot","camasIds":[1,2]}],"desde":hoyString,"hasta":diaDentroDe30diasString}
-    }).as('reservasActuales')
+    cy.intercept('/api/reservas/actuales', {"reservas":[{"diaInicio": hoy.getDate(),"diaFin": hoy.getDate(),"aNombreDe":"Elliot","camasIds":[1,2]}],"desde":hoyString,"hasta":diaDentroDe30diasString}).as('reservasActuales')
 
     cy.visit('/reservas')
     
-    cy.wait('@habitaciones')
-    cy.wait('@reservasActuales')
+    cy.wait(['@habitaciones','@reservasActuales','@conLugaresLibres'])
 });
