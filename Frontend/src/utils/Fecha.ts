@@ -1,4 +1,4 @@
-export function convertirAString(objetoDate) {
+export function convertirAString(objetoDate: any) {
     
     //Si son las 23.59.99999 (como en el hasta del daterangepicker), al pasar a ISOString redondea a un día más
     objetoDate.setHours(0);
@@ -6,15 +6,15 @@ export function convertirAString(objetoDate) {
     return objetoDate.toISOString().slice(0,10);
 }
 
-export function obtenerMes(fechaString) {    
+export function obtenerMes(fechaString: any) {    
     return fechaString.slice(5, 7);
 }
 
-export function obtenerDia(fechaString) {    
+export function obtenerDia(fechaString: any) {    
     return fechaString.slice(8);
 }
 
-export function obtenerAnio(fechaString) {    
+export function obtenerAnio(fechaString: any) {    
     return fechaString.slice(0, 4);
 }
 
@@ -28,7 +28,7 @@ export function maniana() {
     return maniana;
 }
 
-export function restarFechas(b, a) {
+export function restarFechas(b: any, a: any) {
     
     const _Milisegundos_por_dia = 1000 * 60 * 60 * 24;
 
