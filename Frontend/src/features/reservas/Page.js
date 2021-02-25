@@ -38,7 +38,8 @@ const ReservasPage = () => {
 
   return (
     <div className="container is-fluid">
-        <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>
+        {/* HAY QUE SACAR EL ISVISIBLE DEL MODAL, ME PARECE O AL MENOS REPENSARLO */}
+        {IsModalVisible && <Crear isVisible={IsModalVisible} onHide={hideModal} onSuccessfulSubmit={closeModalAndRefreshTable}></Crear>}
         
         <h1 className="title is-1">Reservas</h1>        
         
