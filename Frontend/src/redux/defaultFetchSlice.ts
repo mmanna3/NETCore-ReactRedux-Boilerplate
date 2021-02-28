@@ -7,7 +7,7 @@ const initialState = {
   datos: [],
 }
 
-export const createSlice = (nombre) => 
+export const createSlice = (nombre: string) => 
   createSliceRTK({
     name: nombre,
     initialState,
@@ -25,10 +25,10 @@ export const createSlice = (nombre) =>
     },
   });
 
-export function fetchFunc(endpoint, actions, onSuccessCallback) {
+export function fetchFunc(endpoint: string, actions: any, onSuccessCallback: () => void) {
   const { fetchInit, fetchSuccess, fetchFailure } = actions
   
-  return async dispatch => {
+  return async (dispatch: any) => {
     dispatch(fetchInit());
 
     axios.get('/api'+endpoint)
