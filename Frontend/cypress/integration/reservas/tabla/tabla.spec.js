@@ -18,7 +18,7 @@ before(() => {
   });
 
 function numeroDelDiaDeHoy(){
-   return new Date().getDate();
+   return new  Date().getDate();
 }
 
 function hoyString(){
@@ -38,8 +38,8 @@ beforeEach(() => {
 
    cy.intercept('/api/habitaciones', { fixture: 'habitaciones/2-habitaciones-5-camas.json' }).as('habitaciones') 
 
-    cy.intercept('/api/reservas/actuales', 
-    {
+   cy.intercept('/api/reservas/actuales', 
+   {
       "reservas":[
          {
             "diaInicio": numeroDelDiaDeHoy(),
