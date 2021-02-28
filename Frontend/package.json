@@ -43,7 +43,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "cy:run": "cypress run",
+    "cypress-run": "cypress run",
     "test": "react-scripts test --env=jsdom",
     "test-ci": "start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject",

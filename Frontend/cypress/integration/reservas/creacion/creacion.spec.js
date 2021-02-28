@@ -4,14 +4,16 @@ describe('Crear reservas', () => {
 
     it('Puede agregar renglones', () => {
 
-        cy.contains('button', 'Cargar nueva')
-            .click()
+      cy.contains('button', 'Cargar nueva')
+         .click()
 
-        cy.contains('button', 'Agregar cama')
-            .click()
+      cy.wait('@conLugaresLibres')
+      
+      cy.contains('button', 'Agregar cama')
+         .click()
 
-        cy.get('.button.is-static:visible:contains("Hab.")')
-            .should('have.length', 2)
+      cy.get('.button.is-static:visible:contains("Hab.")')
+         .should('have.length', 2)
     })
 
     it('Al cambiar la fecha, se reinician los renglones', () => {
@@ -199,7 +201,5 @@ beforeEach(() => {
      ]
     }).as('conLugaresLibres')
     
-    cy.visit('/reservas')
-    
-    cy.wait('@conLugaresLibres')
+    cy.visit('/reservas')    
 });
