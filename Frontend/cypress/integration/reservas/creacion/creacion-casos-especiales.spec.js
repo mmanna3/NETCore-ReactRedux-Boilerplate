@@ -9,6 +9,8 @@ describe('Crear reservas', () => {
       cy.contains('button', 'Cargar nueva')
          .click()
       
+      cy.wait('@conLugaresLibres')
+
       cy.get('#habitacion-privada-renglon-0')
          .should('contain.value', 1)
 
@@ -78,8 +80,6 @@ function mockearSoloUnaHabitacionPrivada(){
     }).as('conLugaresLibres')
     
     cy.visit('/reservas')
-    
-    cy.wait('@conLugaresLibres')
 }
 
 function mockearSoloUnaHabitacionSinCamas(){
@@ -98,7 +98,5 @@ function mockearSoloUnaHabitacionSinCamas(){
      ]
     }).as('conLugaresLibres')
     
-    cy.visit('/reservas')
-    
-    cy.wait('@conLugaresLibres')
+    cy.visit('/reservas')        
 }
