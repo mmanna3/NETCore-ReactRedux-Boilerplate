@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+import habitaciones from '../../../mocks/habitaciones/2-habitaciones-5-camas'
 
 describe('Mostrar reservas', () => {   
 
@@ -36,7 +37,7 @@ function diaDentroDe30DiasString(){
 beforeEach(() => {
    cy.restoreLocalStorage();
 
-   cy.intercept('/api/habitaciones', { fixture: 'habitaciones/2-habitaciones-5-camas.json' }).as('habitaciones') 
+   cy.intercept('/api/habitaciones', habitaciones).as('habitaciones') 
 
    cy.intercept('/api/reservas/actuales', 
    {

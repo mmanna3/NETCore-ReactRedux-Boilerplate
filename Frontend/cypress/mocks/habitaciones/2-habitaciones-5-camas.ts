@@ -1,6 +1,6 @@
 import { IHabitacion } from '../../../src/interfaces/habitacion';
 
-const b: IHabitacion[] = [
+const habitaciones: IHabitacion[] = [
     {
         id: 1,
         nombre: "Azul",
@@ -61,4 +61,4 @@ const b: IHabitacion[] = [
     }    
 ]
 
-export default b;
+export default habitaciones;
