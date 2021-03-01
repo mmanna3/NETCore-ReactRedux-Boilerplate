@@ -1,7 +1,13 @@
+export enum CamaTipo {
+  Individual = "Individual",
+  Matrimonial = "Matrimonial",
+  CuchetaArriba = "Cucheta Arriba",
+  CuchetaAbajo = "Cucheta Abajo"
+}
 interface ICama {
   id: number,
   nombre: string,
-  tipo: string //Pasar a enum
+  tipo: CamaTipo
 }
 
 interface ICamaCucheta {

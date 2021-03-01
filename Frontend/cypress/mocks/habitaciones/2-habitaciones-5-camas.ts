@@ -1,4 +1,4 @@
-import { IHabitacion } from '../../../src/interfaces/habitacion';
+import { IHabitacion, CamaTipo } from '../../../src/interfaces/habitacion';
 
 const habitaciones: IHabitacion[] = [
     {
@@ -11,7 +11,7 @@ const habitaciones: IHabitacion[] = [
             {
                 id: 1,
                 nombre: "1",
-                tipo: "Individual"
+                tipo: CamaTipo.Individual
             }
         ],
         camasCuchetas: [],
@@ -19,7 +19,7 @@ const habitaciones: IHabitacion[] = [
             {
                 id: 2,
                 nombre: "Matri",
-                tipo: "Matrimimonial"
+                tipo: CamaTipo.Matrimonial
             }
         ]
     },
@@ -33,12 +33,12 @@ const habitaciones: IHabitacion[] = [
             {
                 id: 5,
                 nombre: "1",
-                tipo: "Individual"
+                tipo: CamaTipo.Individual
             },
             {
                 id: 6,
                 nombre: "2",
-                tipo: "Individual"
+                tipo: CamaTipo.Individual
             }
         ],
         camasCuchetas: [
@@ -48,12 +48,12 @@ const habitaciones: IHabitacion[] = [
                 abajo: {
                     id: 3,
                     nombre: "Cucheta",
-                    tipo: "Cucheta Abajo"
+                    tipo: CamaTipo.CuchetaAbajo
                 },
                 arriba: {
                     id: 4,
                     nombre: "Cucheta",
-                    tipo: "Cucheta Arriba"
+                    tipo: CamaTipo.CuchetaArriba
                 }
             }
         ],
