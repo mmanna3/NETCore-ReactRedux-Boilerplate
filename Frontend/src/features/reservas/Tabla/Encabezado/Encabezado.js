@@ -6,14 +6,14 @@ const Encabezado = ({habitaciones, mostrarDetalle}) => {
 
   var iconosCamas = {
     Individual: 'individual',
-    Matrimimonial: 'matrimonial',
+    Matrimonial: 'matrimonial',
     'Cucheta Abajo': 'cucheta-abajo',
     'Cucheta Arriba': 'cucheta-arriba',    
   }
 
   var estilosIconoCama = {
     Individual: 'iconoCamaIndividual',
-    Matrimimonial: 'iconoCamaMatrimonial',
+    Matrimonial: 'iconoCamaMatrimonial',
     'Cucheta Abajo': 'iconoCamaCucheta',
     'Cucheta Arriba': 'iconoCamaCucheta',    
   }

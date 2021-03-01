@@ -1,5 +1,6 @@
 import "cypress-localstorage-commands";
 import habitaciones from '../../../mocks/habitaciones/2-habitaciones-5-camas'
+import * as paginaReservas from '../../../pageObjectModels/reservas/pagina.POM'
 
 describe('Mostrar reservas', () => {   
 
@@ -8,7 +9,7 @@ describe('Mostrar reservas', () => {
         cy.contains('h1', 'Reservas')
             .should('have.length', 1)   
          
-         cy.get(`[dia="${numeroDelDiaDeHoy()}"][camaId="1"]`)
+         paginaReservas.obtenerCelda(numeroDelDiaDeHoy(), 1)
             .should('contain', 'Elliot')
     })
 })

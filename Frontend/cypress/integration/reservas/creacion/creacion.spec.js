@@ -1,13 +1,11 @@
 import "cypress-localstorage-commands";
+import * as paginaReservas from "../../../pageObjectModels/reservas/pagina.POM"
 
 describe('Crear reservas', () => {   
 
     it('Puede agregar renglones', () => {
 
-      cy.contains('button', 'Cargar nueva')
-         .click()
-
-      cy.wait('@conLugaresLibres')
+      paginaReservas.abrirModalCargarNueva();
       
       cy.contains('button', 'Agregar cama')
          .click()

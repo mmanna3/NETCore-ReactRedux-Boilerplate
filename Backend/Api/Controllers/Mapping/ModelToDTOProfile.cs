@@ -32,7 +32,7 @@ namespace Api.Controllers.Mapping
             CreateMap<CamaMatrimonial, CamaDTO>()
                 .ForMember(
                     dest => dest.Tipo,
-                    opt => opt.MapFrom(src => "Matrimimonial")
+                    opt => opt.MapFrom(src => "Matrimonial")
                 );
 
             CreateMap<CamaCuchetaDeAbajo, CamaDTO>()
