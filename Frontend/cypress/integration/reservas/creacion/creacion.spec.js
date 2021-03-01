@@ -3,9 +3,7 @@ import * as paginaReservas from "../../../pageObjectModels/reservas/pagina.POM"
 
 describe('Crear reservas', () => {   
 
-    it('Puede agregar renglones', () => {
-
-      paginaReservas.abrirModalCargarNueva();
+    it('Puede agregar renglones', () => {      
       
       cy.contains('button', 'Agregar cama')
          .click()
@@ -15,9 +13,6 @@ describe('Crear reservas', () => {
     })
 
     it('Al cambiar la fecha, se reinician los renglones', () => {
-
-      cy.contains('button', 'Cargar nueva')
-          .click()
 
       cy.contains('button', 'Agregar cama')
           .click()
@@ -54,9 +49,6 @@ describe('Crear reservas', () => {
 
     it('Al eliminar un renglón, se mantienen los datos de los de abajo', () => {
 
-      cy.contains('button', 'Cargar nueva')
-         .click()
-
       cy.contains('button', 'Agregar cama')
          .click()
 
@@ -81,9 +73,6 @@ describe('Crear reservas', () => {
 
     it('Al seleccionar una habitación sin camas disponibles, figura la leyenda correspondiente', () => {
 
-      cy.contains('button', 'Cargar nueva')
-         .click()
-
       cy.get('#habitacion-renglon-0')
          .select('4')
       
@@ -92,9 +81,6 @@ describe('Crear reservas', () => {
     })
 
     it('Al seleccionar una habitación privada, figura la leyenda correspondiente', () => {
-
-      cy.contains('button', 'Cargar nueva')
-         .click()
 
       cy.get('#habitacion-renglon-0')
          .select('3')
@@ -199,5 +185,7 @@ beforeEach(() => {
      ]
     }).as('conLugaresLibres')
     
-    cy.visit('/reservas')    
+    cy.visit('/reservas')
+
+    paginaReservas.abrirModalCargarNueva();
 });

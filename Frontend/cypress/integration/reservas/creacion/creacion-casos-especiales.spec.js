@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+import * as paginaReservas from "../../../pageObjectModels/reservas/pagina.POM"
 
 describe('Crear reservas', () => {   
 
@@ -6,10 +7,7 @@ describe('Crear reservas', () => {
 
       mockearSoloUnaHabitacionPrivada();
 
-      cy.contains('button', 'Cargar nueva')
-         .click()
-      
-      cy.wait('@conLugaresLibres')
+      paginaReservas.abrirModalCargarNueva();
 
       cy.get('#habitacion-privada-renglon-0')
          .should('contain.value', 1)
@@ -22,8 +20,7 @@ describe('Crear reservas', () => {
 
       mockearSoloUnaHabitacionSinCamas();
       
-      cy.contains('button', 'Cargar nueva')
-         .click()
+      paginaReservas.abrirModalCargarNueva();
       
       cy.get('#habitacion-renglon-0')
          .should('contain.value', 1)
