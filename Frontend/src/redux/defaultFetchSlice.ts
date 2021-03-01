@@ -25,13 +25,13 @@ export const createSlice = (nombre: string) =>
     },
   });
 
-export function fetchFunc(endpoint: string, actions: any, onSuccessCallback: () => void) {
+export function fetchFunc<T>(endpoint: string, actions: any, onSuccessCallback?: () => void) {
   const { fetchInit, fetchSuccess, fetchFailure } = actions
   
   return async (dispatch: any) => {
     dispatch(fetchInit());
 
-    axios.get('/api'+endpoint)
+    axios.get<T[]>('/api'+endpoint)
     .then((res) => {      
       dispatch(fetchSuccess(res.data));
       typeof onSuccessCallback === 'function' && onSuccessCallback();
