@@ -44,6 +44,8 @@ $primary: $blue;
 @import '../node_modules/bulma-switch/dist/css/bulma-switch.sass';
 @import '../node_modules/bulma-checkradio/dist/css/bulma-checkradio.sass';
 
+/* INICIO: DateRangePicker */
+
 .react-daterange-picker__calendar--open {
     z-index: 9;
     top: 0px !important;
@@ -66,6 +68,8 @@ abbr {
 .react-calendar__month-view__days__day--weekend {
     color: $blue;
 }
+
+/* FIN: DateRangePicker */
 
 .botonera {
     height: 30px;
