@@ -44,6 +44,7 @@ beforeEach(() => {
    {
       "reservas":[
          {
+            "id": 1,
             "diaInicio": numeroDelDiaDeHoy(),
             "diaFin": numeroDelDiaDeHoy(),
             "aNombreDe": "Elliot",

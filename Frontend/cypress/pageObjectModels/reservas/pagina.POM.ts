@@ -1,5 +1,5 @@
 export function obtenerCelda(dia: number, camaId: number) { 
-    return cy.get(`[dia="${dia}"][camaId="${camaId}"]`)
+    return cy.get(`[data-dia="${dia}"][data-cama-id="${camaId}"]`)
 }
 
 export function abrirModalCargarNueva() {
