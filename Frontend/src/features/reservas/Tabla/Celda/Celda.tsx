@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { tablaDeReservasSelector } from 'features/reservas/Tabla/slice'
 import { useSelector } from 'react-redux'
 import { IReserva } from 'interfaces/reserva';
+// import * as Estilos from './Celda.module.scss'
 
 export interface IParams {
     dia: number;
@@ -16,12 +17,39 @@ const Celda = ({dia, camaId, claseCss}: IParams) => {
 
     const {tabla} = useSelector(tablaDeReservasSelector);
     const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
+    const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
 
+    interface IColor {
+        numero: number,
+        claseCss: string,        
+    }
+    
+    //No creo que esta sea la forma óprima, pero después lo cambiaremos
+    const colores : IColor[] = [
+        { numero: 1, claseCss: "colorUno"},
+        { numero: 2, claseCss: "colorDos"},
+        { numero: 3, claseCss: "colorTres"},
+        { numero: 4, claseCss: "colorCuatro" }, //{ numero: 4, claseCss: Estilos.colorCuatro },
+        { numero: 5, claseCss: "colorCinco"},
+        { numero: 6, claseCss: "colorSeis"},
+        { numero: 7, claseCss: "colorSiete"},
+        { numero: 8, claseCss: "colorOcho"},
+        { numero: 9, claseCss: "colorNueve"},
+        { numero: 0, claseCss: "colorCero"},
+    ];
+    
     useEffect(() => {
-        actualizarContenido(tabla[`${dia}`][`${camaId}`]);
-    }, [tabla, dia, camaId]); 
+        var contenido = tabla[`${dia}`][`${camaId}`];
+        actualizarContenido(contenido);
+        if (contenido)
+            debugger;
 
-    return (<td className={claseCss} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId}>
+        var codigoColorSegunTerminacionDelId = contenido.id % 10;
+        actualizarClaseCssColor(colores.find(i => i.numero === codigoColorSegunTerminacionDelId)?.claseCss);
+
+    }, [tabla, dia, camaId, colores]);
+
+    return (<td className={`${claseCss} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId}>
                 <div>
                     {contenido.aNombreDe}
                 </div>

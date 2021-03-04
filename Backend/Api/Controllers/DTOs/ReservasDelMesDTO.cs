@@ -10,6 +10,7 @@ namespace Api.Controllers.DTOs
 
         public class ReservaParaConsultaMensualDTO
         {
+	        public int Id { get; set; }
             public int DiaInicio { get; set; }
             public int DiaFin { get; set; }
             public string ANombreDe { get; set; }
