@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { tablaDeReservasSelector } from 'features/reservas/Tabla/slice'
 import { useSelector } from 'react-redux'
 import { IReserva } from 'interfaces/reserva';
-import estilos from './Celda.module.scss'
+// import * as Estilos from './Celda.module.scss'
 
 export interface IParams {
     dia: number;
@@ -26,16 +26,16 @@ const Celda = ({dia, camaId, claseCss}: IParams) => {
     
     //No creo que esta sea la forma óprima, pero después lo cambiaremos
     const colores : IColor[] = [
-        { numero: 1, claseCss: estilos.colorUno },
-        { numero: 2, claseCss: estilos.colorDos },
-        { numero: 3, claseCss: estilos.colorTres },
-        { numero: 4, claseCss: estilos.colorCuatro },
-        { numero: 5, claseCss: estilos.colorCinco },
-        { numero: 6, claseCss: estilos.colorSeis },
-        { numero: 7, claseCss: estilos.colorSiete },
-        { numero: 8, claseCss: estilos.colorOcho },
-        { numero: 9, claseCss: estilos.colorNueve },
-        { numero: 0, claseCss: estilos.colorCero },
+        { numero: 1, claseCss: "colorUno"},
+        { numero: 2, claseCss: "colorDos"},
+        { numero: 3, claseCss: "colorTres"},
+        { numero: 4, claseCss: "colorCuatro" }, //{ numero: 4, claseCss: Estilos.colorCuatro },
+        { numero: 5, claseCss: "colorCinco"},
+        { numero: 6, claseCss: "colorSeis"},
+        { numero: 7, claseCss: "colorSiete"},
+        { numero: 8, claseCss: "colorOcho"},
+        { numero: 9, claseCss: "colorNueve"},
+        { numero: 0, claseCss: "colorCero"},
     ];
     
     useEffect(() => {
