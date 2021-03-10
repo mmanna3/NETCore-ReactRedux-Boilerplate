@@ -1,5 +1,9 @@
 @import 'universal.scss';
 
+.esHoy {
+  filter: drop-shadow(1px 7px 3px black);
+}
+
 .colorCero {
   background-color: $azul-marino;
 }

@@ -8,16 +8,17 @@ import estilos from './Celda.module.scss'
 export interface IParams {
     dia: number;
     camaId: number;
-    claseCss: string;
+    esHoy: boolean;
 }
 
-const Celda = ({dia, camaId, claseCss}: IParams) => {
+const Celda = ({dia, camaId, esHoy}: IParams) => {
     
     //Creo que no debería pasarle la claseCss, es medio sucio, mejor decile si es HOY o no
 
     const {tabla} = useSelector(tablaDeReservasSelector);
     const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
     const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
+    const [claseCssEsHoy, actualizarClaseCssEsHoy] = useState<string | undefined>(esHoy ? estilos.esHoy : "");
             
     const colores = new Map<number,string>([
         [0, estilos.colorCero],
@@ -43,7 +44,7 @@ const Celda = ({dia, camaId, claseCss}: IParams) => {
 
     }, [tabla, dia, camaId, colores]);
 
-    return (<td className={`${claseCss} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId}>
+    return (<td className={`${claseCssEsHoy} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId}>
                 <div>
                     {/* {contenido.aNombreDe} */}
                 </div>
