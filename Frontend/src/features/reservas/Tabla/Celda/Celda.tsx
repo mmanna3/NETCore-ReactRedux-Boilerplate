@@ -18,25 +18,19 @@ const Celda = ({dia, camaId, claseCss}: IParams) => {
     const {tabla} = useSelector(tablaDeReservasSelector);
     const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
     const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
-
-    interface IColor {
-        numero: number,
-        claseCss: string,        
-    }
-    
-    //No creo que esta sea la forma óprima, pero después lo cambiaremos
-    const colores : IColor[] = [
-        { numero: 1, claseCss: estilos.colorCero },
-        { numero: 2, claseCss: estilos.colorDos },
-        { numero: 3, claseCss: estilos.colorTres },
-        { numero: 4, claseCss: estilos.colorCuatro }, //{ numero: 4, claseCss: Estilos.colorCuatro },
-        { numero: 5, claseCss: estilos.colorCinco },
-        { numero: 6, claseCss: estilos.colorSeis },
-        { numero: 7, claseCss: estilos.colorSiete },
-        { numero: 8, claseCss: estilos.colorOcho },
-        { numero: 9, claseCss: estilos.colorNueve },
-        { numero: 0, claseCss: estilos.colorCero },
-    ];
+            
+    const colores = new Map<number,string>([
+        [0, estilos.colorCero],
+        [1, estilos.colorUno],
+        [2, estilos.colorDos],
+        [3, estilos.colorTres],
+        [4, estilos.colorCuatro],
+        [5, estilos.colorCinco],
+        [6, estilos.colorSeis],
+        [7, estilos.colorSiete],
+        [8, estilos.colorOcho],
+        [9, estilos.colorNueve],
+    ]);    
     
     useEffect(() => {
         var contenido = tabla[`${dia}`][`${camaId}`];
@@ -45,7 +39,7 @@ const Celda = ({dia, camaId, claseCss}: IParams) => {
             debugger;
 
         var codigoColorSegunTerminacionDelId = contenido.id % 10;
-        actualizarClaseCssColor(colores.find(i => i.numero === codigoColorSegunTerminacionDelId)?.claseCss);
+        actualizarClaseCssColor(colores.get(codigoColorSegunTerminacionDelId));
 
     }, [tabla, dia, camaId, colores]);
 
