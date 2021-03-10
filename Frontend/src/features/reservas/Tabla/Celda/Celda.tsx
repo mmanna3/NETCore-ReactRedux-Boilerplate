@@ -11,15 +11,14 @@ export interface IParams {
     esHoy: boolean;
 }
 
-const Celda = ({dia, camaId, esHoy}: IParams) => {
-    
-    //Creo que no debería pasarle la claseCss, es medio sucio, mejor decile si es HOY o no
+const Celda = ({dia, camaId, esHoy}: IParams) => {    
 
     const {tabla} = useSelector(tablaDeReservasSelector);
     const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
     const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
-    const [claseCssEsHoy, actualizarClaseCssEsHoy] = useState<string | undefined>(esHoy ? estilos.esHoy : "");
-            
+    
+    const claseCssEsHoy = useState<string | undefined>(esHoy ? estilos.esHoy : "");
+
     const colores = new Map<number,string>([
         [0, estilos.colorCero],
         [1, estilos.colorUno],
@@ -36,8 +35,6 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
     useEffect(() => {
         var contenido = tabla[`${dia}`][`${camaId}`];
         actualizarContenido(contenido);
-        if (contenido)
-            debugger;
 
         var codigoColorSegunTerminacionDelId = contenido.id % 10;
         actualizarClaseCssColor(colores.get(codigoColorSegunTerminacionDelId));
