@@ -45,7 +45,7 @@ const Celda = ({dia, camaId, claseCss}: IParams) => {
 
     return (<td className={`${claseCss} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId}>
                 <div>
-                    {contenido.aNombreDe}
+                    {/* {contenido.aNombreDe} */}
                 </div>
             </td>);
     

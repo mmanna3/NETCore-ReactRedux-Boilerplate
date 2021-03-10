@@ -1,41 +1,41 @@
 @import 'universal.scss';
 
 .colorCero {
-  background-color: red;
+  background-color: $azul-marino;
 }
 
 .colorUno {
-  background-color: blue;
+  background-color: $azul;
 }
 
 .colorDos {
-  background-color: grey;
+  background-color: $verde-agua;
 }
 
 .colorTres {
-  background-color: green;
+  background-color: $celeste;
 }
 
 .colorCuatro {
-  background-color: yellow;
+  background-color: $amarillo;
 }
 
 .colorCinco {
-  background-color: yellowgreen;
+  background-color: $verde;
 }
 
 .colorSeis {
-  background-color: pink;
+  background-color: $purpura;
 }
 
 .colorSiete {
-  background-color: purple;
+  background-color: $bordo;
 }
 
 .colorOcho {
-  background-color: orange;
+  background-color: $naraja;
 }
 
 .colorNueve {
-  background-color: olivedrab;
+  background-color: $fucsia;
 }
