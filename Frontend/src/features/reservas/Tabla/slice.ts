@@ -28,8 +28,8 @@ const tablaDeReservasSlice = createSlice({
         payload.camasIds.forEach((camaId: any) => {
           state.tabla[`${dia}`][`${camaId}`] = payload; 
         });
-      }      
-    },    
+      }
+    },
   },
 })
 
@@ -52,6 +52,11 @@ export function actualizarCelda(dia: number, camaId: number, valor: any) {
 export function actualizarConReserva(reserva: IReserva) {
   return async (dispatch: IDispatch) => {
     dispatch(modificarPorReserva(reserva));
+  }
+}
+export function seleccionarTodasLasCeldasDeLaReserva(reservaId: number) {
+  return async (dispatch: IDispatch) => {
+    // dispatch(_seleccionarTodasLasCeldasDeLaReserva(reservaId));
   }
 }
 

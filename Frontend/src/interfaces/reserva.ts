@@ -1,4 +1,5 @@
 export interface IReserva {
-    id: number;
+    id: number,
     aNombreDe: string,
+    estaSeleccionada: boolean
 }

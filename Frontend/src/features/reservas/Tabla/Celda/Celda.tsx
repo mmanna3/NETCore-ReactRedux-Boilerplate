@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react';
-import { tablaDeReservasSelector } from 'features/reservas/Tabla/slice'
-import { useSelector } from 'react-redux'
+import { tablaDeReservasSelector, seleccionarTodasLasCeldasDeLaReserva } from 'features/reservas/Tabla/slice'
+import { useSelector, useDispatch } from 'react-redux'
 import { IReserva } from 'interfaces/reserva';
 import estilos from './Celda.module.scss'
 
@@ -13,7 +13,7 @@ export interface IParams {
 
 const Celda = ({dia, camaId, esHoy}: IParams) => {    
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const {tabla} = useSelector(tablaDeReservasSelector);
     const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
     const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
@@ -34,7 +34,8 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
     ]);    
     
     const onMouseOver = () => {
-        // dispatch()
+        console.log(contenido.id);
+        dispatch(seleccionarTodasLasCeldasDeLaReserva(contenido.id));
     }
 
     useEffect(() => {
