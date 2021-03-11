@@ -13,6 +13,7 @@ export interface IParams {
 
 const Celda = ({dia, camaId, esHoy}: IParams) => {    
 
+    // const dispatch = useDispatch();
     const {tabla} = useSelector(tablaDeReservasSelector);
     const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
     const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
@@ -32,6 +33,10 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
         [9, estilos.colorNueve],
     ]);    
     
+    const onMouseOver = () => {
+        // dispatch()
+    }
+
     useEffect(() => {
         var contenido = tabla[`${dia}`][`${camaId}`];
         actualizarContenido(contenido);
@@ -41,7 +46,7 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
 
     }, [tabla, dia, camaId, colores]);
 
-    return (<td className={`${claseCssEsHoy} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId}>
+    return (<td className={`${claseCssEsHoy} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId} onMouseOver={onMouseOver}>
                 <div>
                     {/* {contenido.aNombreDe} */}
                 </div>
