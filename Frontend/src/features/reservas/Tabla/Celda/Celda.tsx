@@ -2,8 +2,8 @@ import * as React from 'react'
 import { useState, useEffect } from 'react';
 import { tablaDeReservasSelector, seleccionarTodasLasCeldasDeLaReserva } from 'features/reservas/Tabla/slice'
 import { useSelector, useDispatch } from 'react-redux'
-import { IReserva } from 'interfaces/reserva';
 import estilos from './Celda.module.scss'
+import { ReservaParaConsultaMensualDTO } from 'interfaces/reservasDelMes';
 
 export interface IParams {
     dia: number;
@@ -15,7 +15,7 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
 
     const dispatch = useDispatch();
     const {tabla} = useSelector(tablaDeReservasSelector);
-    const [contenido, actualizarContenido] = useState<IReserva>({} as IReserva);
+    const [contenido, actualizarContenido] = useState<ReservaParaConsultaMensualDTO>({} as ReservaParaConsultaMensualDTO);
     const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>("");
     
     const claseCssEsHoy = useState<string | undefined>(esHoy ? estilos.esHoy : "");

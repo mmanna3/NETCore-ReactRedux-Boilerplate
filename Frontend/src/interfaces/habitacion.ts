@@ -4,7 +4,7 @@ export enum CamaTipo {
   CuchetaArriba = "Cucheta Arriba",
   CuchetaAbajo = "Cucheta Abajo"
 }
-interface ICama {
+export interface ICama {
   id: number,
   nombre: string,
   tipo: CamaTipo

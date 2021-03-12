@@ -6,17 +6,29 @@ import { inicializarTabla, tablaDeReservasSelector, actualizarConReserva } from 
 import Encabezado from './Encabezado/Encabezado'
 import {obtenerAnio,obtenerMes,obtenerDia} from 'utils/Fecha'
 import Detalle from "features/habitaciones/detalle/Modal"
+import { IReservasDelMes, IHabitacionParaTablaReservas, ReservaParaConsultaMensualDTO } from 'interfaces/reservasDelMes';
+import { IHabitacion } from 'interfaces/habitacion';
 
-const TablaReservas = ({datos, habitaciones}) => {
+interface IParams {
+  datos: IReservasDelMes,
+  habitaciones: IHabitacion[]
+}
+
+interface IDiaMes {
+  dia: number,
+  mes: number
+}
+
+const TablaReservas = ({datos, habitaciones}: IParams) => {
 
   const dispatch = useDispatch();
-  const [habitacionesConCamasUnificadas, setHabitacionesConCamasUnificadas] = useState([]);
+  const [habitacionesConCamasUnificadas, setHabitacionesConCamasUnificadas] = useState<IHabitacionParaTablaReservas[]>([]);
   const [filas, actualizarFilas] = useState([]);
   const tablaDeReservas = useSelector(tablaDeReservasSelector);
 
   useEffect(() => {
 
-    var _dias = [];
+    var _dias: IDiaMes[] = [];
 
     function calcularDias() {
       var mesDesde = obtenerMes(datos.desde);
@@ -24,15 +36,15 @@ const TablaReservas = ({datos, habitaciones}) => {
 
       if (mesDesde === mesHasta) {
         for (let dia = parseInt(obtenerDia(datos.desde)); dia <= obtenerDia(datos.hasta); dia++) {
-          _dias.push({'dia': dia, 'mes': mesDesde});
+          _dias.push({dia: dia, mes: mesDesde});
         }
       } else {        
         var diasDelPrimerMes = new Date(obtenerAnio(datos.desde), obtenerMes(datos.desde), 0).getDate(); //dia 0 es el último día del mes anterior        
         for (let dia = parseInt(obtenerDia(datos.desde)); dia <= diasDelPrimerMes; dia++) {
-          _dias.push({'dia': dia, 'mes': mesDesde});
+          _dias.push({dia: dia, mes: mesDesde});
         }
         for (let dia = 1; dia <= parseInt(obtenerDia(datos.hasta)); dia++) {
-          _dias.push({'dia': dia, 'mes': mesHasta});
+          _dias.push({dia: dia, mes: mesHasta});
         }        
       }
     }
@@ -40,7 +52,7 @@ const TablaReservas = ({datos, habitaciones}) => {
     calcularDias();
 
 
-    var camasIdsArray = [];
+    var camasIdsArray: number[] = [];
     var habs = [];
     for (let i = 0; i < habitaciones.length; i++) {
       var habitacion = habitaciones[i];
@@ -56,7 +68,7 @@ const TablaReservas = ({datos, habitaciones}) => {
     
     dispatch(inicializarTabla(_dias, camasIdsArray));
     
-    datos.reservas.forEach(reserva => {     
+    datos.reservas.forEach((reserva: ReservaParaConsultaMensualDTO) => {
       dispatch(actualizarConReserva(reserva));
     });
 
@@ -64,7 +76,7 @@ const TablaReservas = ({datos, habitaciones}) => {
 
   useEffect(() => {    
 
-    let _filas = [];
+    let _filas: any = [];
     var diaDeHoy = new Date().getDate();
 
     tablaDeReservas.diaMesArray.forEach((diaMes) =>
@@ -73,14 +85,14 @@ const TablaReservas = ({datos, habitaciones}) => {
           _filas.push( <tr key={diaMes.dia}>                    
                       <th className={`has-text-weight-medium ${Estilos.fecha}`}>{diaMes.dia}/{diaMes.mes}</th>
                       {tablaDeReservas.camasIdsArray.map((id) =>
-                        <Celda key={id} dia={diaMes.dia} camaId={id}/>
+                        <Celda key={id} dia={diaMes.dia} camaId={id} esHoy={false}/>
                       )}
                     </tr>);
         else
           _filas.push( <tr key={diaMes.dia}>                    
                         <th className={`has-text-weight-medium ${Estilos.hoy}`}>HOY</th>
                         {tablaDeReservas.camasIdsArray.map((id) =>
-                          <Celda key={id} dia={diaMes.dia} esHoy={true} camaId={id}/>
+                          <Celda key={id} dia={diaMes.dia} camaId={id} esHoy={true} />
                         )}
                       </tr>);        
       }
@@ -91,9 +103,9 @@ const TablaReservas = ({datos, habitaciones}) => {
 
 
   const [seMuestraModalDeDetalle, mostrarModalDeDetalle] = useState(false);
-  const [idSeleccionadoParaDetalle, cambiarIdSeleccionadoParaDetalle] = useState(null);
+  const [idSeleccionadoParaDetalle, cambiarIdSeleccionadoParaDetalle] = useState<number|undefined>();
 
-  function mostrarDetalle(id) {
+  function mostrarDetalle(id: number) {
     cambiarIdSeleccionadoParaDetalle(id);
     mostrarModalDeDetalle(true);
   }
