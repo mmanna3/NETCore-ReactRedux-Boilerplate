@@ -34,7 +34,6 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
     ]);    
     
     const onMouseOver = () => {
-        console.log(contenido.id);
         dispatch(seleccionarTodasLasCeldasDeLaReserva(contenido.id));
     }
 
@@ -47,7 +46,8 @@ const Celda = ({dia, camaId, esHoy}: IParams) => {
 
     }, [tabla, dia, camaId, colores]);
 
-    return (<td className={`${claseCssEsHoy} ${claseCssColor}`} data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId} onMouseOver={onMouseOver}>
+    return (<td className={`${claseCssEsHoy} ${claseCssColor} ${contenido.estaSeleccionada ? estilos.estaSeleccionada : ""}`} 
+                data-reserva-id={contenido.id} data-dia={dia} data-cama-id={camaId} onMouseOver={onMouseOver}>
                 <div>
                     {/* {contenido.aNombreDe} */}
                 </div>

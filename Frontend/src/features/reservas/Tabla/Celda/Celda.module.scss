@@ -4,6 +4,10 @@
   filter: drop-shadow(1px 7px 3px black);
 }
 
+.estaSeleccionada {
+  filter: brightness(40%);
+}
+
 .colorCero {
   background-color: $azul-marino;
 }

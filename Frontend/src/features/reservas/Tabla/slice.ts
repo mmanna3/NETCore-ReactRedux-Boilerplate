@@ -29,10 +29,22 @@ const tablaDeReservasSlice = createSlice({
         });
       }
     },
+    _seleccionarTodasLasCeldasDeLaReserva: (state, {payload}) => { 
+      Object.entries(state.tabla).forEach(([dia, camaIds]) => {
+        Object.entries(camaIds).forEach(([camaId, celda]) => {
+          if (celda.id === payload)
+            celda.estaSeleccionada = true;
+          else 
+            celda.estaSeleccionada = false;
+        });
+      });
+
+      
+    },
   },
 })
 
-export const { inicializar, modificarCelda, modificarPorReserva } = tablaDeReservasSlice.actions
+export const { inicializar, modificarCelda, modificarPorReserva, _seleccionarTodasLasCeldasDeLaReserva } = tablaDeReservasSlice.actions
 export const tablaDeReservasSelector = (state: any) : IInitialState => state.tablaDeReservas
 export default tablaDeReservasSlice.reducer
 
@@ -55,7 +67,7 @@ export function actualizarConReserva(reserva: ReservaParaConsultaMensualDTO) {
 }
 export function seleccionarTodasLasCeldasDeLaReserva(reservaId: number) {
   return async (dispatch: IDispatch) => {
-    // dispatch(_seleccionarTodasLasCeldasDeLaReserva(reservaId));
+    dispatch(_seleccionarTodasLasCeldasDeLaReserva(reservaId));
   }
 }
 
@@ -66,8 +78,8 @@ interface IInitialState {
 }
 
 export interface ITabla {
-  [key: string]: {
-    [key: string]: ReservaParaConsultaMensualDTO
+  [dia: string]: {
+    [camaId: string]: ReservaParaConsultaMensualDTO
   };
 }
 

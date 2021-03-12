@@ -8,6 +8,7 @@ export interface IReservasDelMes {
 
 export interface ReservaParaConsultaMensualDTO
 {
+    estaSeleccionada: boolean;
     id: number,
     diaInicio: number,
     diaFin: number,
