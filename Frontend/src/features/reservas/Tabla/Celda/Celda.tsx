@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { tablaDeReservasSelector, seleccionarTodasLasCeldasDeLaReserva } from 'features/reservas/Tabla/slice';
 import { useSelector, useDispatch } from 'react-redux';
 import estilos from './Celda.module.scss';
@@ -11,7 +11,7 @@ export interface IParams {
   esHoy: boolean;
 }
 
-const Celda = ({ dia, camaId, esHoy }: IParams): React.ReactElement => {
+const Celda = ({ dia, camaId, esHoy }: IParams): ReactElement => {
   const dispatch = useDispatch();
   const { tabla } = useSelector(tablaDeReservasSelector);
   const [contenido, actualizarContenido] = useState<ReservaParaConsultaMensualDTO>({} as ReservaParaConsultaMensualDTO);
