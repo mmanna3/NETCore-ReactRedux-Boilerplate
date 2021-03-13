@@ -11,13 +11,13 @@ export interface IParams {
   esHoy: boolean;
 }
 
-const Celda = ({ dia, camaId, esHoy }: IParams): ReactElement => {
+const Celda = ({ dia, camaId }: IParams): ReactElement => {
   const dispatch = useDispatch();
   const { tabla } = useSelector(tablaDeReservasSelector);
   const [contenido, actualizarContenido] = useState<ReservaParaConsultaMensualDTO>({} as ReservaParaConsultaMensualDTO);
   const [claseCssColor, actualizarClaseCssColor] = useState<string | undefined>('');
 
-  const claseCssEsHoy = useState<string | undefined>(esHoy ? estilos.esHoy : '');
+  // const claseCssEsHoy = useState<string | undefined>(esHoy ? estilos.esHoy : '');
 
   const colores = new Map<number, string>([
     [0, estilos.colorCero],
@@ -46,7 +46,7 @@ const Celda = ({ dia, camaId, esHoy }: IParams): ReactElement => {
 
   return (
     <td
-      className={`${claseCssEsHoy} ${claseCssColor} ${contenido.estaSeleccionada ? estilos.estaSeleccionada : ''}`}
+      className={`${claseCssColor} ${contenido.estaSeleccionada ? estilos.estaSeleccionada : ''}`}
       data-reserva-id={contenido.id}
       data-dia={dia}
       data-cama-id={camaId}
