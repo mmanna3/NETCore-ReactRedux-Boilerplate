@@ -14,6 +14,8 @@
   },
   "rules": {
     "@typescript-eslint/interface-name-prefix": "always",
+    "@typescript-eslint/disable-react-display-name": "off",
+    "react/display-name": 0,
     // "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-object-literal-type-assertion": "off",
     "prettier/prettier": "error",
