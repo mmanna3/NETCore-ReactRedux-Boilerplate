@@ -19,8 +19,8 @@ namespace Api.IntegrationTests
 
         private const string A_NOMBRE_DE = "Un nombre";
         private const string CAMA_TIPO = "Individual";
-        private readonly DateTime DESDE = new DateTime(2020, 09, 17);
-        private readonly DateTime HASTA = new DateTime(2020, 09, 18);
+        private readonly DateTime _desde = new DateTime(2020, 09, 17);
+        private readonly DateTime _hasta = new DateTime(2020, 09, 18);
 
         [Test]
         public async Task Crea_UnaReserva_Y_ApareceEnListadoMensual()
@@ -28,12 +28,12 @@ namespace Api.IntegrationTests
 
             var camaId = await CrearHabitacionConUnaCama();
 
-            var response = await CrearReserva(camaId, DESDE, HASTA);
+            var response = await CrearReserva(camaId, _desde, _hasta);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            var consultaResponse = await ListarReservasMensuales(DESDE.Year, DESDE.Month);
+            var consultaResponse = await ListarReservasMensuales(_desde.Year, _desde.Month);
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
+            var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelPeriodoDTO>();
 
             reservasDelMes.Reservas.Count().Should().Be(1);
             var reserva = reservasDelMes.Reservas.ToList().First();
@@ -55,7 +55,7 @@ namespace Api.IntegrationTests
 
             var consultaResponse = await ListarReservasActuales();
             consultaResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-            var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelMesDTO>();
+            var reservasDelMes = await consultaResponse.Content.ReadAsAsync<ReservasDelPeriodoDTO>();
             
             reservasDelMes.Desde.Should().Be(Utilidades.ConvertirFecha(DateTime.Today.AddDays(-1)));
             reservasDelMes.Hasta.Should().Be(Utilidades.ConvertirFecha(DateTime.Today.AddDays(15)));

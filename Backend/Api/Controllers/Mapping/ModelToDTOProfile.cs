@@ -91,7 +91,7 @@ namespace Api.Controllers.Mapping
 
             CreateMap<Reserva, CheckoutsDeHoyDTO>();
 
-            CreateMap<Reserva, ReservasDelMesDTO.ReservaParaConsultaMensualDTO>()
+            CreateMap<Reserva, ReservasDelPeriodoDTO.ReservaResumenDTO>()
                 .ForMember(
                     dest => dest.DiaInicio,
                     opt => opt.MapFrom((src, dest, _, context) => src.Desde < ((DateTime)context.Options.Items["desde"]) ? ((DateTime)context.Options.Items["desde"]).Day : src.Desde.Day)
@@ -105,7 +105,7 @@ namespace Api.Controllers.Mapping
                     opt => opt.MapFrom(src => src.ReservaCamas.Select(x => x.CamaId))
                 );
 
-            CreateMap<IEnumerable<Reserva>, ReservasDelMesDTO>()
+            CreateMap<IEnumerable<Reserva>, ReservasDelPeriodoDTO>()
                 .ForMember(
                     dest => dest.Reservas,
                     opt => opt.MapFrom(src => src)

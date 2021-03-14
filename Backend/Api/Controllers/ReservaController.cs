@@ -41,10 +41,10 @@ namespace Api.Controllers
         }
 
         [HttpGet, Route("mensuales")]
-        public async Task<ReservasDelMesDTO> ListarMensuales(int anio, int mes)
+        public async Task<ReservasDelPeriodoDTO> ListarMensuales(int anio, int mes)
         {
             var reservas = await _service.ListarMensuales(anio, mes);
-            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op =>
+            var reservaDTOs = _mapper.Map<ReservasDelPeriodoDTO>(reservas, op =>
             {
                 op.Items["desde"] = new DateTime(anio, mes, 1);
                 op.Items["hasta"] = new DateTime(anio, mes, DateTime.DaysInMonth(anio, mes));
@@ -54,10 +54,10 @@ namespace Api.Controllers
         }
 
         [HttpGet, Route("actuales")]
-        public async Task<ReservasDelMesDTO> ListarActuales()
+        public async Task<ReservasDelPeriodoDTO> ListarActuales()
         {
             var reservas = await _service.ListarActuales();
-            var reservaDTOs = _mapper.Map<ReservasDelMesDTO>(reservas, op =>
+            var reservaDTOs = _mapper.Map<ReservasDelPeriodoDTO>(reservas, op =>
             {
                 op.Items["desde"] = DateTime.Today.AddDays(-1);
                 op.Items["hasta"] = DateTime.Today.AddDays(15);

@@ -98,7 +98,7 @@ namespace Api.UnitTests.Controllers
             var desde = new DateTime(2020, 8, 1);
             var hasta = new DateTime(2020, 8, 31);
 
-            var reservasDTO = _mapper.Map<ReservasDelMesDTO>(_unaListaDeReservas, op =>
+            var reservasDTO = _mapper.Map<ReservasDelPeriodoDTO>(_unaListaDeReservas, op =>
             {
                 op.Items["desde"] = desde;
                 op.Items["hasta"] = hasta;

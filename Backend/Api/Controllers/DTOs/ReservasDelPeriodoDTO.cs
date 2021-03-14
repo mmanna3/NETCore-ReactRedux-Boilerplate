@@ -2,13 +2,13 @@
 
 namespace Api.Controllers.DTOs
 {
-    public class ReservasDelMesDTO
+    public class ReservasDelPeriodoDTO
     {
-        public List<ReservaParaConsultaMensualDTO> Reservas { get; set; }
+        public List<ReservaResumenDTO> Reservas { get; set; }
         public string Desde { get; set; }
         public string Hasta { get; set; }
 
-        public class ReservaParaConsultaMensualDTO
+        public class ReservaResumenDTO
         {
 	        public int Id { get; set; }
             public int DiaInicio { get; set; }
