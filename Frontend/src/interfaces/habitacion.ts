@@ -4,26 +4,26 @@ export enum CamaTipo {
   CuchetaArriba = 'Cucheta Arriba',
   CuchetaAbajo = 'Cucheta Abajo',
 }
-export interface ICama {
+export interface CamaDTO {
   id: number;
   nombre: string;
   tipo: CamaTipo;
 }
 
-interface ICamaCucheta {
+interface CamaCuchetaDTO {
   id: number;
   nombre: string;
-  abajo: ICama;
-  arriba: ICama;
+  abajo: CamaDTO;
+  arriba: CamaDTO;
 }
 
-export interface IHabitacion {
+export interface HabitacionDTO {
   id: number;
   nombre: string;
   tieneBanio: boolean;
   esPrivada: boolean;
   informacionAdicional: string;
-  camasIndividuales: ICama[];
-  camasCuchetas: ICamaCucheta[];
-  camasMatrimoniales: ICama[];
+  camasIndividuales: CamaDTO[];
+  camasCuchetas: CamaCuchetaDTO[];
+  camasMatrimoniales: CamaDTO[];
 }

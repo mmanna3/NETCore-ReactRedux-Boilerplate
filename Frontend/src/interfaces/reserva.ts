@@ -1,8 +1,23 @@
-export interface IReserva {
+import { CamaDTO } from './habitacion';
+
+export interface ReservasDelPeriodoDTO {
+  desde: string;
+  hasta: string;
+  reservas: ReservaResumenDTO[];
+}
+
+export interface ReservaResumenDTO {
+  estaSeleccionada: boolean; //Este atributo no viene del backend
   id: number;
-  aNombreDe: string;
   diaInicio: number;
   diaFin: number;
-  camasIds: number[];
-  estaSeleccionada: boolean; //Es igual a IReservaParaConsultaMensualDTO salvo por esta property. RE FAC TOR   BRO
+  aNombreDe: string;
+  CamasIds: number[];
+}
+
+export interface IHabitacionParaTablaReservas {
+  id: number;
+  nombre: string;
+  esPrivada: boolean;
+  camas: CamaDTO[];
 }

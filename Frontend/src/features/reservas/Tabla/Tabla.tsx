@@ -6,12 +6,12 @@ import { inicializarTabla, tablaDeReservasSelector, actualizarConReserva } from 
 import Encabezado from './Encabezado/Encabezado';
 import { obtenerAnio, obtenerMes, obtenerDia } from 'utils/Fecha';
 import Detalle from 'features/habitaciones/detalle/Modal';
-import { IReservasDelMes, IHabitacionParaTablaReservas, ReservaParaConsultaMensualDTO } from 'interfaces/reservasDelMes';
-import { ICama, IHabitacion } from 'interfaces/habitacion';
+import { ReservasDelPeriodoDTO, IHabitacionParaTablaReservas, ReservaResumenDTO } from 'interfaces/reserva';
+import { CamaDTO, HabitacionDTO } from 'interfaces/habitacion';
 
 interface IParams {
-  datos: IReservasDelMes;
-  habitaciones: IHabitacion[];
+  datos: ReservasDelPeriodoDTO;
+  habitaciones: HabitacionDTO[];
 }
 
 interface IDiaMes {
@@ -55,8 +55,8 @@ const TablaReservas = ({ datos, habitaciones }: IParams): ReactElement => {
       var habitacion = habitaciones[i];
       var camasDeLaHabitacion = habitacion.camasIndividuales;
       camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasMatrimoniales);
-      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta): ICama => cucheta.abajo));
-      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta): ICama => cucheta.arriba));
+      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta): CamaDTO => cucheta.abajo));
+      camasDeLaHabitacion = camasDeLaHabitacion.concat(habitacion.camasCuchetas.map((cucheta): CamaDTO => cucheta.arriba));
       habs.push({
         nombre: habitacion.nombre,
         id: habitacion.id,
@@ -69,7 +69,7 @@ const TablaReservas = ({ datos, habitaciones }: IParams): ReactElement => {
 
     dispatch(inicializarTabla(_dias, camasIdsArray));
 
-    datos.reservas.forEach((reserva: ReservaParaConsultaMensualDTO): void => {
+    datos.reservas.forEach((reserva: ReservaResumenDTO): void => {
       dispatch(actualizarConReserva(reserva));
     });
   }, [datos.desde, datos.hasta, datos.reservas, dispatch, habitaciones]);

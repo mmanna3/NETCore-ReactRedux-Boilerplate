@@ -1,13 +1,13 @@
-import { createSlice, fetchFunc } from 'redux/defaultFetchSlice'
-import { IHabitacion } from 'interfaces/habitacion'
+import { createSlice, fetchFunc } from 'redux/defaultFetchSlice';
+import { HabitacionDTO } from 'interfaces/habitacion';
 
 const nombre = 'habitaciones';
 const slice = createSlice(nombre);
 
-export const habitacionesSelector = (state: any) => state[nombre]
-export default slice.reducer
+export const habitacionesSelector = (state: any) => state[nombre];
+export default slice.reducer;
 
 export function fetchHabitaciones() {
   const endpoint = '/habitaciones';
-  return fetchFunc<IHabitacion>(endpoint, slice.actions);
+  return fetchFunc<HabitacionDTO>(endpoint, slice.actions);
 }
