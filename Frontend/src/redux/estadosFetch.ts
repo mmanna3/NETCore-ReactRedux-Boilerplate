@@ -2,7 +2,7 @@ const ESTADOS = {
   cargando: 'cargando',
   inactivo: 'inactivo',
   exitoso: 'exitoso',
-  huboError: 'huboError' 
-}
+  huboError: 'huboError',
+};
 
 export default ESTADOS;
