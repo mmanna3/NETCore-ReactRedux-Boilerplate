@@ -8,7 +8,7 @@ import Label from 'components/Label';
 import SelectCama from './SelectCama';
 import SiNo from 'components/SiNo';
 import Textarea from 'components/Textarea';
-import { useHabitacionStore } from './useHabitacionesStore';
+import useStore from './useStore';
 
 interface IProps {
   isVisible: boolean;
@@ -27,7 +27,7 @@ const Crear = ({ isVisible, onHide, onSuccessfulSubmit }: IProps): ReactElement 
   const [resetOnChanged, resetForm] = React.useState(0);
   const [camas, setCamas] = React.useState<IRenglonCama[]>([{ index: 0, tipo: 'Individuales', globalIndex: 0, value: {} }]);
 
-  const { loading, validationErrors, cleanErrors, agregarHabitacion } = useHabitacionStore();
+  const { loading, validationErrors, cleanErrors, agregarHabitacion } = useStore.habitaciones();
 
   function onSuccess(): void {
     onSuccessfulSubmit();
