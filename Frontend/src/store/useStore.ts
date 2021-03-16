@@ -1,4 +1,4 @@
-import { useHabitacionStore } from './api/habitacion/crear/useHabitacionStore';
+import useCrearHabitacion from './api/habitacion/crear/useCrearHabitacion';
 
 interface IStore {
   habitaciones: {
@@ -8,7 +8,7 @@ interface IStore {
 
 const store: IStore = {
   habitaciones: {
-    crear: useHabitacionStore,
+    crear: useCrearHabitacion,
   },
 };
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { crearHabitacion, cleanErrors, crearHabitacionSelector } from './slice';
 
-export function useHabitacionStore(): any {
+export function useCrearHabitacion(): any {
   const dispatch = useDispatch();
   const { loading, validationErrors } = useSelector(crearHabitacionSelector);
 
@@ -19,3 +19,5 @@ export function useHabitacionStore(): any {
     cleanErrors: limpiarErrores,
   };
 }
+
+export default useCrearHabitacion;
