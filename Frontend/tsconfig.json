@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "rendererOptions": {
+            "sass": {
+              "includePaths": ["src"]
+            }
+          }
+        }
+      }
     ],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,7 +28,5 @@
     "jsx": "preserve",
     "baseUrl": "src"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
