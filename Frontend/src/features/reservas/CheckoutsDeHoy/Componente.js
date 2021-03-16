@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { fetchCheckoutsDeHoy, checkoutsDeHoySelector } from './slice';
 import { useDispatch, useSelector } from 'react-redux';
-import ESTADOS from 'redux/estadosFetch';
+import ESTADOS from 'store/estadosFetch';
 import { BotonSalir } from 'components/botones/botones';
 
 const CheckoutsDeHoy = () => {

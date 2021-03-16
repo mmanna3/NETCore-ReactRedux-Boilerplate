@@ -1,4 +1,4 @@
-import { createSlice, fetchFunc } from 'redux/defaultFetchSlice';
+import { createSlice, fetchFunc } from 'store/defaultFetchSlice';
 import { HabitacionDTO } from 'interfaces/habitacion';
 import { AxiosResponse } from 'axios';
 import { Dispatch } from '@reduxjs/toolkit';

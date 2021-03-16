@@ -1,48 +1,32 @@
-import React, { useEffect } from 'react'
-import { useTable } from 'react-table'
-import ESTADOS from 'redux/estadosFetch'
+import React, { useEffect } from 'react';
+import { useTable } from 'react-table';
+import ESTADOS from 'store/estadosFetch';
 
-const Table = ({fetchData, columnas, datos, estado}) => {
-
+const Table = ({ fetchData, columnas, datos, estado }) => {
   useEffect(() => fetchData(), [fetchData]);
 
-  const data = React.useMemo(
-    () => datos, [datos]
-  )
+  const data = React.useMemo(() => datos, [datos]);
 
-  const columns = React.useMemo(
-    () => columnas, [columnas]
-  )
+  const columns = React.useMemo(() => columnas, [columnas]);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data })
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
-  const bodyConDatos = 
-  (
+  const bodyConDatos = (
     <tbody {...getTableBodyProps()}>
-    {rows.map(row => {
-      prepareRow(row)
-      return (
-        <tr {...row.getRowProps()}>                
-          {row.cells.map(cell => {
-            return (
-              <td {...cell.getCellProps()}>
-                {cell.render('Cell')}
-              </td>
-            )
-          })}
-        </tr>
-      )
-    })}
-  </tbody>
-  ); 
+      {rows.map(row => {
+        prepareRow(row);
+        return (
+          <tr {...row.getRowProps()}>
+            {row.cells.map(cell => {
+              return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+            })}
+          </tr>
+        );
+      })}
+    </tbody>
+  );
 
-  if (estado === ESTADOS.huboError) return <p>Hubo un error.</p>
+  if (estado === ESTADOS.huboError) return <p>Hubo un error.</p>;
 
   return (
     <table {...getTableProps()} className="table is-striped is-hoverable is-bordered is-fullwidth">
@@ -57,9 +41,17 @@ const Table = ({fetchData, columnas, datos, estado}) => {
           </tr>
         ))}
       </thead>
-      {( estado === ESTADOS.cargando ? (<tbody><tr><td>Cargando...</td></tr></tbody>) : bodyConDatos)}
+      {estado === ESTADOS.cargando ? (
+        <tbody>
+          <tr>
+            <td>Cargando...</td>
+          </tr>
+        </tbody>
+      ) : (
+        bodyConDatos
+      )}
     </table>
-  )  
-}
+  );
+};
 
-export default Table
+export default Table;

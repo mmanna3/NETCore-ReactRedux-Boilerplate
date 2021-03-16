@@ -1,18 +1,17 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
+import React from 'react';
+import { render } from 'react-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 
-import App from './App'
-import rootReducer from 'redux/rootReducer'
+import App from './App';
+import rootReducer from 'store/rootReducer';
 import './universal.scss';
 
-
-export const store = configureStore({ reducer: rootReducer })
+export const store = configureStore({ reducer: rootReducer });
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')
-)
+);
