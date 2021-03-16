@@ -8,7 +8,7 @@ import Label from 'components/Label';
 import SelectCama from './SelectCama';
 import SiNo from 'components/SiNo';
 import Textarea from 'components/Textarea';
-import useStore from 'store/useStore';
+import useStore from 'store/store';
 
 interface IProps {
   isVisible: boolean;

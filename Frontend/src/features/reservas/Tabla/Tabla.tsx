@@ -2,7 +2,7 @@ import React, { useEffect, useState, ReactElement } from 'react';
 import Celda from './Celda/Celda';
 import Estilos from './Tabla.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { inicializarTabla, tablaDeReservasSelector, actualizarConReserva } from './slice';
+import { inicializarTabla, tablaDeReservasSelector, actualizarConReserva } from 'store/app/tablaDeReservas/slice';
 import Encabezado from './Encabezado/Encabezado';
 import { obtenerAnio, obtenerMes, obtenerDia } from 'utils/Fecha';
 import Detalle from 'features/habitaciones/detalle/Modal';

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { fetchCheckoutsDeHoy, checkoutsDeHoySelector } from './slice';
+import { fetchCheckoutsDeHoy, checkoutsDeHoySelector } from '../../../store/api/reserva/checkoutsDeHoy/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import ESTADOS from 'store/estadosFetch';
 import { BotonSalir } from 'components/botones/botones';

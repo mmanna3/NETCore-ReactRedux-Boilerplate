@@ -1,6 +1,6 @@
 import React, { useState, useCallback, ReactElement } from 'react';
 import Table from 'components/Table';
-import { fetchHabitaciones, habitacionesSelector } from './slice';
+import { fetchHabitaciones, habitacionesSelector } from '../../store/api/habitacion/listar/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import Crear from './crear/Modal';
 import Detalle from './detalle/Modal';

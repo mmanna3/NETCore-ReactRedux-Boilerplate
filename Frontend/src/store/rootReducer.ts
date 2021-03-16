@@ -4,21 +4,21 @@ import { combineReducers } from 'redux';
 //Hoy opino que todos estos archivos deberían estar en la misma carpeta.
 //Pensalo.
 
-import habitacionesReducer from 'features/habitaciones/slice';
-import habitacionesConLugaresLibresReducer from 'features/habitaciones/conLugaresLibresSlice';
+import habitacionesReducer from 'store/api/habitacion/listar/slice';
+import habitacionesConLugaresLibresReducer from 'store/api/habitacion/listarConLugaresLibres/conLugaresLibresSlice';
 import crearHabitacionReducer from 'store/api/habitacion/crear/slice';
-import obtenerHabitacionPorIdReducer from 'features/habitaciones/detalle/slice';
+import obtenerHabitacionPorIdReducer from 'store/api/habitacion/obtenerPorId/slice';
 
-import huespedesReducer from 'features/huespedes/slice';
-import crearHuespedReducer from 'features/huespedes/crear/slice';
+import huespedesReducer from 'store/api/huespedes/listar/slice';
+import crearHuespedReducer from 'store/api/huespedes/crear/slice';
 
-import tablaDeReservas from 'features/reservas/Tabla/slice';
+import tablaDeReservas from 'store/app/tablaDeReservas/slice';
 
-import reservasReducer from 'features/reservas/slice';
-import crearReservaReducer from 'features/reservas/crear/slice';
-import checkoutsDeHoy from 'features/reservas/CheckoutsDeHoy/slice';
+import reservasReducer from 'store/api/reserva/listar/slice';
+import crearReservaReducer from 'store/api/reserva/crear/slice';
+import checkoutsDeHoy from 'store/api/reserva/checkoutsDeHoy/slice';
 
-import loginReducer from 'features/login/slice';
+import loginReducer from 'store/api/usuario/autenticar/slice';
 
 const rootReducer = combineReducers({
   login: loginReducer,

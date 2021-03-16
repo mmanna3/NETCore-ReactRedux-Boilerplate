@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { Modal, Body, Header, FooterVolver } from 'components/Modal';
 import Display, { SiNo, DisplayLista, DisplayTextarea } from 'components/display/Display';
-import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from './slice';
+import { obtenerHabitacionPorId, obtenerHabitacionPorIdSelector } from '../../../store/api/habitacion/obtenerPorId/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import ESTADOS from 'store/estadosFetch';
 
