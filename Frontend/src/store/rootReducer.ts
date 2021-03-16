@@ -6,7 +6,7 @@ import { combineReducers } from 'redux';
 
 import habitacionesReducer from 'features/habitaciones/slice';
 import habitacionesConLugaresLibresReducer from 'features/habitaciones/conLugaresLibresSlice';
-import crearHabitacionReducer from 'features/habitaciones/crear/slice';
+import crearHabitacionReducer from 'store/api/habitacion/crear/slice';
 import obtenerHabitacionPorIdReducer from 'features/habitaciones/detalle/slice';
 
 import huespedesReducer from 'features/huespedes/slice';
